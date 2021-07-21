@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,26 @@
 		60CBECB126A84E3A0020703D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CBECB026A84E3A0020703D /* ContentView.swift */; };
 		60CBECB326A84E3B0020703D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60CBECB226A84E3B0020703D /* Assets.xcassets */; };
 		60CBECB626A84E3B0020703D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60CBECB526A84E3B0020703D /* Preview Assets.xcassets */; };
+		60CBECC026A84F730020703D /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60CBECBF26A84F730020703D /* CloudKit.framework */; };
+		60CBECC426A8500C0020703D /* SetupCard Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CBECC326A8500C0020703D /* SetupCard Screen.swift */; };
+		60CBECC626A8501E0020703D /* UserPreferenceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CBECC526A8501E0020703D /* UserPreferenceModel.swift */; };
+		60CBECC826A850330020703D /* ListTypeSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CBECC726A850330020703D /* ListTypeSetupView.swift */; };
+		60CBECCA26A850570020703D /* NotificationPermessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CBECC926A850570020703D /* NotificationPermessionView.swift */; };
+		60CBECCC26A8506B0020703D /* iCloudSyncView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CBECCB26A8506B0020703D /* iCloudSyncView.swift */; };
+		60CBECCE26A850840020703D /* TermsandConditionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CBECCD26A850840020703D /* TermsandConditionView.swift */; };
+		60CBECD126A850E70020703D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 60CBECD026A850E70020703D /* Lottie */; };
+		60CBECD426A8510E0020703D /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CBECD326A8510E0020703D /* LottieView.swift */; };
+		60CBECD826A851780020703D /* SwipeUpLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 60CBECD626A851780020703D /* SwipeUpLottie.json */; };
+		60CBECD926A851780020703D /* GoingofPlaneLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 60CBECD726A851780020703D /* GoingofPlaneLottie.json */; };
+		60CBECDC26A851CB0020703D /* DrawingCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CBECDB26A851CB0020703D /* DrawingCanvasView.swift */; };
+		60CBECDE26A851E20020703D /* DrawingCanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CBECDD26A851E20020703D /* DrawingCanvasViewController.swift */; };
+		60CBECE226A852050020703D /* DrawingCanvasCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 60CBECE026A852050020703D /* DrawingCanvasCoreDataModel.xcdatamodeld */; };
+		60CBECE526A852440020703D /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CBECE426A852440020703D /* Persistance.swift */; };
+		60CBECE726A8525E0020703D /* TodayCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CBECE626A8525E0020703D /* TodayCanvasView.swift */; };
+		60CBECE926A8527E0020703D /* CalendarReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CBECE826A8527E0020703D /* CalendarReminderView.swift */; };
+		60CBECEB26A852930020703D /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CBECEA26A852930020703D /* PlaceholderView.swift */; };
+		60CBECED26A852A70020703D /* AddNewCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CBECEC26A852A70020703D /* AddNewCanvasView.swift */; };
+		60CBECEF26A852BA0020703D /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CBECEE26A852BA0020703D /* DrawingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +40,26 @@
 		60CBECB226A84E3B0020703D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		60CBECB526A84E3B0020703D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		60CBECB726A84E3B0020703D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		60CBECBD26A84E4D0020703D /* ToDoToday.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ToDoToday.entitlements; sourceTree = "<group>"; };
+		60CBECBF26A84F730020703D /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		60CBECC326A8500C0020703D /* SetupCard Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SetupCard Screen.swift"; sourceTree = "<group>"; };
+		60CBECC526A8501E0020703D /* UserPreferenceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferenceModel.swift; sourceTree = "<group>"; };
+		60CBECC726A850330020703D /* ListTypeSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTypeSetupView.swift; sourceTree = "<group>"; };
+		60CBECC926A850570020703D /* NotificationPermessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermessionView.swift; sourceTree = "<group>"; };
+		60CBECCB26A8506B0020703D /* iCloudSyncView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudSyncView.swift; sourceTree = "<group>"; };
+		60CBECCD26A850840020703D /* TermsandConditionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsandConditionView.swift; sourceTree = "<group>"; };
+		60CBECD326A8510E0020703D /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		60CBECD626A851780020703D /* SwipeUpLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SwipeUpLottie.json; sourceTree = "<group>"; };
+		60CBECD726A851780020703D /* GoingofPlaneLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GoingofPlaneLottie.json; sourceTree = "<group>"; };
+		60CBECDB26A851CB0020703D /* DrawingCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DrawingCanvasView.swift; path = ToDoToday/Extensions/DrawingCanvasView.swift; sourceTree = SOURCE_ROOT; };
+		60CBECDD26A851E20020703D /* DrawingCanvasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingCanvasViewController.swift; sourceTree = "<group>"; };
+		60CBECE126A852050020703D /* DrawingCanvas.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DrawingCanvas.xcdatamodel; sourceTree = "<group>"; };
+		60CBECE426A852440020703D /* Persistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistance.swift; sourceTree = "<group>"; };
+		60CBECE626A8525E0020703D /* TodayCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCanvasView.swift; sourceTree = "<group>"; };
+		60CBECE826A8527E0020703D /* CalendarReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarReminderView.swift; sourceTree = "<group>"; };
+		60CBECEA26A852930020703D /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
+		60CBECEC26A852A70020703D /* AddNewCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCanvasView.swift; sourceTree = "<group>"; };
+		60CBECEE26A852BA0020703D /* DrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +67,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60CBECC026A84F730020703D /* CloudKit.framework in Frameworks */,
+				60CBECD126A850E70020703D /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +80,7 @@
 			children = (
 				60CBECAD26A84E3A0020703D /* ToDoToday */,
 				60CBECAC26A84E3A0020703D /* Products */,
+				60CBECBE26A84F730020703D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -52,6 +95,10 @@
 		60CBECAD26A84E3A0020703D /* ToDoToday */ = {
 			isa = PBXGroup;
 			children = (
+				60CBECD226A851050020703D /* Extensions */,
+				60CBECC226A84FDC0020703D /* Reminder Calendar Type Views */,
+				60CBECC126A84FD70020703D /* Setup Views and Models */,
+				60CBECBD26A84E4D0020703D /* ToDoToday.entitlements */,
 				60CBECAE26A84E3A0020703D /* ToDoTodayApp.swift */,
 				60CBECB026A84E3A0020703D /* ContentView.swift */,
 				60CBECB226A84E3B0020703D /* Assets.xcassets */,
@@ -67,6 +114,85 @@
 				60CBECB526A84E3B0020703D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		60CBECBE26A84F730020703D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				60CBECBF26A84F730020703D /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		60CBECC126A84FD70020703D /* Setup Views and Models */ = {
+			isa = PBXGroup;
+			children = (
+				60CBECD526A8516C0020703D /* Lottie Animations */,
+				60CBECC326A8500C0020703D /* SetupCard Screen.swift */,
+				60CBECC526A8501E0020703D /* UserPreferenceModel.swift */,
+				60CBECC726A850330020703D /* ListTypeSetupView.swift */,
+				60CBECC926A850570020703D /* NotificationPermessionView.swift */,
+				60CBECCB26A8506B0020703D /* iCloudSyncView.swift */,
+				60CBECCD26A850840020703D /* TermsandConditionView.swift */,
+			);
+			path = "Setup Views and Models";
+			sourceTree = "<group>";
+		};
+		60CBECC226A84FDC0020703D /* Reminder Calendar Type Views */ = {
+			isa = PBXGroup;
+			children = (
+				60CBECE326A852390020703D /* Data Manager */,
+				60CBECDF26A851F30020703D /* Model */,
+				60CBECDA26A851B50020703D /* View Controller UIKit */,
+				60CBECE626A8525E0020703D /* TodayCanvasView.swift */,
+				60CBECE826A8527E0020703D /* CalendarReminderView.swift */,
+				60CBECEA26A852930020703D /* PlaceholderView.swift */,
+				60CBECEC26A852A70020703D /* AddNewCanvasView.swift */,
+				60CBECEE26A852BA0020703D /* DrawingView.swift */,
+			);
+			path = "Reminder Calendar Type Views";
+			sourceTree = "<group>";
+		};
+		60CBECD226A851050020703D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				60CBECD326A8510E0020703D /* LottieView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		60CBECD526A8516C0020703D /* Lottie Animations */ = {
+			isa = PBXGroup;
+			children = (
+				60CBECD726A851780020703D /* GoingofPlaneLottie.json */,
+				60CBECD626A851780020703D /* SwipeUpLottie.json */,
+			);
+			path = "Lottie Animations";
+			sourceTree = "<group>";
+		};
+		60CBECDA26A851B50020703D /* View Controller UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				60CBECDB26A851CB0020703D /* DrawingCanvasView.swift */,
+				60CBECDD26A851E20020703D /* DrawingCanvasViewController.swift */,
+			);
+			path = "View Controller UIKit";
+			sourceTree = "<group>";
+		};
+		60CBECDF26A851F30020703D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				60CBECE026A852050020703D /* DrawingCanvasCoreDataModel.xcdatamodeld */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		60CBECE326A852390020703D /* Data Manager */ = {
+			isa = PBXGroup;
+			children = (
+				60CBECE426A852440020703D /* Persistance.swift */,
+			);
+			path = "Data Manager";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -85,6 +211,9 @@
 			dependencies = (
 			);
 			name = ToDoToday;
+			packageProductDependencies = (
+				60CBECD026A850E70020703D /* Lottie */,
+			);
 			productName = ToDoToday;
 			productReference = 60CBECAB26A84E3A0020703D /* ToDoToday.app */;
 			productType = "com.apple.product-type.application";
@@ -112,6 +241,9 @@
 				Base,
 			);
 			mainGroup = 60CBECA226A84E3A0020703D;
+			packageReferences = (
+				60CBECCF26A850E70020703D /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = 60CBECAC26A84E3A0020703D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,6 +259,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				60CBECB626A84E3B0020703D /* Preview Assets.xcassets in Resources */,
+				60CBECD926A851780020703D /* GoingofPlaneLottie.json in Resources */,
+				60CBECD826A851780020703D /* SwipeUpLottie.json in Resources */,
 				60CBECB326A84E3B0020703D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,8 +272,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60CBECCA26A850570020703D /* NotificationPermessionView.swift in Sources */,
+				60CBECE926A8527E0020703D /* CalendarReminderView.swift in Sources */,
+				60CBECE526A852440020703D /* Persistance.swift in Sources */,
+				60CBECDE26A851E20020703D /* DrawingCanvasViewController.swift in Sources */,
 				60CBECB126A84E3A0020703D /* ContentView.swift in Sources */,
+				60CBECD426A8510E0020703D /* LottieView.swift in Sources */,
+				60CBECC426A8500C0020703D /* SetupCard Screen.swift in Sources */,
 				60CBECAF26A84E3A0020703D /* ToDoTodayApp.swift in Sources */,
+				60CBECDC26A851CB0020703D /* DrawingCanvasView.swift in Sources */,
+				60CBECE726A8525E0020703D /* TodayCanvasView.swift in Sources */,
+				60CBECC826A850330020703D /* ListTypeSetupView.swift in Sources */,
+				60CBECCC26A8506B0020703D /* iCloudSyncView.swift in Sources */,
+				60CBECCE26A850840020703D /* TermsandConditionView.swift in Sources */,
+				60CBECED26A852A70020703D /* AddNewCanvasView.swift in Sources */,
+				60CBECE226A852050020703D /* DrawingCanvasCoreDataModel.xcdatamodeld in Sources */,
+				60CBECEF26A852BA0020703D /* DrawingView.swift in Sources */,
+				60CBECEB26A852930020703D /* PlaceholderView.swift in Sources */,
+				60CBECC626A8501E0020703D /* UserPreferenceModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +417,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ToDoToday/ToDoToday.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ToDoToday/Preview Content\"";
 				DEVELOPMENT_TEAM = P69D93MRT6;
@@ -279,6 +430,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.NoedeLaCroix.ToDoToday;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -289,6 +441,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ToDoToday/ToDoToday.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ToDoToday/Preview Content\"";
 				DEVELOPMENT_TEAM = P69D93MRT6;
@@ -301,6 +454,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.NoedeLaCroix.ToDoToday;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -328,6 +482,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		60CBECCF26A850E70020703D /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		60CBECD026A850E70020703D /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 60CBECCF26A850E70020703D /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		60CBECE026A852050020703D /* DrawingCanvasCoreDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				60CBECE126A852050020703D /* DrawingCanvas.xcdatamodel */,
+			);
+			currentVersion = 60CBECE126A852050020703D /* DrawingCanvas.xcdatamodel */;
+			path = DrawingCanvasCoreDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 60CBECA326A84E3A0020703D /* Project object */;
 }
