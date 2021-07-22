@@ -8,6 +8,23 @@
 import SwiftUI
 
 
+class eventTimeClass {
+    var eventDue:Date
+    
+    init() {
+        self.eventDue = Date()
+        
+    }
+}
+
+extension eventTimeClass: Equatable {
+    static func == (lhs: eventTimeClass, rhs: eventTimeClass) -> Bool {
+        return lhs.eventDue == rhs.eventDue
+    }
+    
+    
+}
+
 struct AddNewCanvasView: View {
     
     @Environment (\.managedObjectContext) var viewContext
@@ -15,11 +32,30 @@ struct AddNewCanvasView: View {
     
     @State private var canvasTitle = ""
     
+    
+    @State private var eventTime = Date()
+    
+    @State private var eventtimeclass = eventTimeClass()
+    
+    @State var showPopupAlert: Bool = false
+    
     var body: some View {
         NavigationView{
             Form{
                 Section{
                     TextField("Canvas Title", text: $canvasTitle)
+                }
+                
+                Section {
+                    DatePicker("Time of event", selection: $eventtimeclass.eventDue, displayedComponents: .hourAndMinute).onChange(of: eventtimeclass.eventDue, perform: {value in
+                        if eventtimeclass.eventDue.timeIntervalSince(Date()) < 0 {
+                            print("Event due is trying to be put in the past")
+                            eventtimeclass.eventDue = Date().addingTimeInterval(3600)
+                            showPopupAlert.toggle()
+                        }
+                    })
+                }.alert(isPresented: $showPopupAlert) {
+                    Alert(title: Text("Well if your trying to set a due date in the past you are late"))
                 }
             }
             .navigationViewStyle(StackNavigationViewStyle())
@@ -32,6 +68,7 @@ struct AddNewCanvasView: View {
                 if !canvasTitle.isEmpty{
                     let drawing = DrawingCanvas(context: viewContext)
                     drawing.title = canvasTitle
+                    drawing.timeEvent = eventtimeclass.eventDue
                     drawing.id = UUID()
                     
                     do {
