@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		60689B5826AB24E000ED426F /* HoursView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60689B5726AB24DF00ED426F /* HoursView.swift */; };
 		60CBECAF26A84E3A0020703D /* ToDoTodayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CBECAE26A84E3A0020703D /* ToDoTodayApp.swift */; };
 		60CBECB126A84E3A0020703D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CBECB026A84E3A0020703D /* ContentView.swift */; };
 		60CBECB326A84E3B0020703D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60CBECB226A84E3B0020703D /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		60689B5726AB24DF00ED426F /* HoursView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursView.swift; sourceTree = "<group>"; };
 		60CBECAB26A84E3A0020703D /* ToDoToday.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoToday.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60CBECAE26A84E3A0020703D /* ToDoTodayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTodayApp.swift; sourceTree = "<group>"; };
 		60CBECB026A84E3A0020703D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				60CBECEA26A852930020703D /* PlaceholderView.swift */,
 				60CBECEC26A852A70020703D /* AddNewCanvasView.swift */,
 				60CBECEE26A852BA0020703D /* DrawingView.swift */,
+				60689B5726AB24DF00ED426F /* HoursView.swift */,
 			);
 			path = "Reminder Calendar Type Views";
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				60CBECE926A8527E0020703D /* CalendarReminderView.swift in Sources */,
 				60CBECE526A852440020703D /* Persistance.swift in Sources */,
 				60CBECDE26A851E20020703D /* DrawingCanvasViewController.swift in Sources */,
+				60689B5826AB24E000ED426F /* HoursView.swift in Sources */,
 				60CBECB126A84E3A0020703D /* ContentView.swift in Sources */,
 				60CBECD426A8510E0020703D /* LottieView.swift in Sources */,
 				60CBECC426A8500C0020703D /* SetupCard Screen.swift in Sources */,

@@ -67,6 +67,10 @@ struct AddNewCanvasView: View {
             }), trailing: Button(action: {
                 if !canvasTitle.isEmpty{
                     let drawing = DrawingCanvas(context: viewContext)
+                    let date: Date = (Calendar.current.date(bySettingHour: 0, minute: 0, second: 0 , of: Date())!)
+                    
+                    let timediff = Int(eventtimeclass.eventDue.timeIntervalSince(date))
+                    print("TIME DIFFERENCE OF \(timediff)")
                     drawing.title = canvasTitle
                     drawing.timeEvent = eventtimeclass.eventDue
                     drawing.id = UUID()
