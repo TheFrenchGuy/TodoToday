@@ -39,6 +39,8 @@ struct AddNewCanvasView: View {
     
     @State var showPopupAlert: Bool = false
     
+    @Binding var AddedNewCanvas: Bool
+    
     var body: some View {
         NavigationView{
             Form{
@@ -76,6 +78,7 @@ struct AddNewCanvasView: View {
                     drawing.id = UUID()
                     
                     do {
+                        AddedNewCanvas.toggle()
                         try viewContext.save()
                     }
                     catch{
@@ -91,10 +94,10 @@ struct AddNewCanvasView: View {
     }
 }
 
-struct AddNewCanvasView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddNewCanvasView()
-    }
-}
+//struct AddNewCanvasView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddNewCanvasView()
+//    }
+//}
 
 

@@ -34,6 +34,7 @@
 		60CBECEF26A852BA0020703D /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CBECEE26A852BA0020703D /* DrawingView.swift */; };
 		60E2E64926A85E4500B1BAA6 /* undismissableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E2E64826A85E4500B1BAA6 /* undismissableVC.swift */; };
 		60E2E64B26A85E8E00B1BAA6 /* DisableModalDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E2E64A26A85E8E00B1BAA6 /* DisableModalDismiss.swift */; };
+		60E5F35926AD8F1100F1E609 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E5F35826AD8F1100F1E609 /* CalendarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		60CBECEE26A852BA0020703D /* DrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
 		60E2E64826A85E4500B1BAA6 /* undismissableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = undismissableVC.swift; sourceTree = "<group>"; };
 		60E2E64A26A85E8E00B1BAA6 /* DisableModalDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisableModalDismiss.swift; sourceTree = "<group>"; };
+		60E5F35826AD8F1100F1E609 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 				60CBECEC26A852A70020703D /* AddNewCanvasView.swift */,
 				60CBECEE26A852BA0020703D /* DrawingView.swift */,
 				60689B5726AB24DF00ED426F /* HoursView.swift */,
+				60E5F35826AD8F1100F1E609 /* CalendarView.swift */,
 			);
 			path = "Reminder Calendar Type Views";
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				60CBECDE26A851E20020703D /* DrawingCanvasViewController.swift in Sources */,
 				60689B5826AB24E000ED426F /* HoursView.swift in Sources */,
 				60CBECB126A84E3A0020703D /* ContentView.swift in Sources */,
+				60E5F35926AD8F1100F1E609 /* CalendarView.swift in Sources */,
 				60CBECD426A8510E0020703D /* LottieView.swift in Sources */,
 				60CBECC426A8500C0020703D /* SetupCard Screen.swift in Sources */,
 				60CBECAF26A84E3A0020703D /* ToDoTodayApp.swift in Sources */,
@@ -451,6 +455,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.NoedeLaCroix.ToDoToday;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -475,6 +480,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.NoedeLaCroix.ToDoToday;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

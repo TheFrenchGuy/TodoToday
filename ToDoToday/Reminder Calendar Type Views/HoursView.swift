@@ -23,53 +23,70 @@ struct HoursView: View {
     let fileManager = FileManager.default
     let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     
+    @State var AddedNewCanvas: Bool = false
+    @Binding var RefreshList: Bool
     var body: some View {
-        HStack {
-            
-                Text(ShowTime)
-                ForEach(drawings){drawing in
-                    if !ArrayHourUUID.isEmpty {
-                        ForEach(ArrayHourUUID, id: \.uuidString) { TimeUUID in
-                            if TimeUUID == drawing.id {
-                    
-                        HStack () {
-                            if getWallpaperFromUserDefaults() != nil {
-                                Image(uiImage: fetchImage(imageName: String("\(drawing.id)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit().frame(width: 100, height: 100)
+        GeometryReader { bounds in
+            HStack {
+                
+                    Text(ShowTime)
+                    ForEach(drawings){drawing in
+                        if !ArrayHourUUID.isEmpty {
+                            ForEach(ArrayHourUUID, id: \.self) { TimeUUID in
+                                
+                                if TimeUUID == drawing.id {
+                        
+                            HStack () {
+                                
+                                
+                                
 
-                            }
+                                Button(action: { test.toggle(); print("Keyboard shortcut pressed")}) {
+    //                                Text("Tap here").keyboardShortcut("l", modifiers: .command)
+                                    if getWallpaperFromUserDefaults() != nil {
+                                        Image(uiImage: fetchImage(imageName: String("\(drawing.id)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit().frame(width: 150, height: 150)
+                                            .keyboardShortcut("l", modifiers: .command)
 
-                            Button(action: { test.toggle(); print("Keyboard shortcut pressed")}) { Text("Tap here")}.keyboardShortcut("l", modifiers: .command)
-                            Text("Canvas, \(drawing.id ?? UUID()), \(drawing.title ?? "NO TITLE ")").sheet(isPresented: self.$test) {
-                                DrawingView(isVisible: $test, id: drawing.id, data: drawing.canvasData, title: drawing.title)
-                            }
-                            
-                            Text("\(drawing.timeEvent ?? Date())")
+                                    
+                                }
+                                    Text("Drawing \(drawing.title ?? "NO TITLE")")
+                                   
 
-                        }.contextMenu { Button(action: {
-                            viewContext.delete(drawing)
-                            deleteImage(imageName: String("\(drawing.id)"))
-                            do {
-                                try self.viewContext.save()
-                            } catch {
-                                print(error)
+                                    }
+                                    .sheet(isPresented: self.$test) {
+                                        DrawingView(isVisible: $test, id: drawing.id, data: drawing.canvasData, title: drawing.title).onDisappear() { print("DISMISS"); RefreshList.toggle()}
+                                    }
+                                
+    //                            Text("\(drawing.timeEvent ?? Date())")
+
+                            }.contextMenu { Button(action: {
+                                viewContext.delete(drawing)
+                                deleteImage(imageName: String("\(drawing.id)"))
+                                do {
+                                    try self.viewContext.save()
+                                    print("DELETED ITEM")
+                                } catch {
+                                    print(error)
+                                }
+                            }) {
+                                Text("Delete me")
                             }
-                        }) {
-                            Text("Delete me")
+                                
+                            }
+                            }
+                            }
                         }
-                            
-                        }
-                        }
-                        }
+
                     }
+                    .onDelete(perform: deleteItem)
 
-                }
-                .onDelete(perform: deleteItem)
-
-                .foregroundColor(.blue)
-                .sheet(isPresented: $showSheet, content: {
-                    AddNewCanvasView().environment(\.managedObjectContext, viewContext)
-                })
-            
+                    .foregroundColor(.blue)
+                    .sheet(isPresented: $showSheet, content: {
+                        AddNewCanvasView(AddedNewCanvas: $AddedNewCanvas).environment(\.managedObjectContext, viewContext)
+                    })
+                
+            }.frame(height: 200)
+            Divider()
         }
     }
     func deleteItem(at offset: IndexSet) {
@@ -79,6 +96,7 @@ struct HoursView: View {
             deleteImage(imageName: String("\(drawings[index].id)"))
             do{
                 try viewContext.save()
+                print("DELETED ITEM")
             }
             catch{
                 print(error)

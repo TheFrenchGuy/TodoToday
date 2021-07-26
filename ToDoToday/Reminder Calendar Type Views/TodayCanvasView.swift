@@ -85,6 +85,9 @@ struct TodayCanvasView: View {
     @State var tenpm: [UUID] = []
     @State var elevenpm: [UUID] = []
     
+    @State var AddedNewCanvas: Bool = false
+    
+    
 
     var body: some View {
         ZStack {
@@ -103,8 +106,12 @@ struct TodayCanvasView: View {
                             })
                             .foregroundColor(.blue)
                             .sheet(isPresented: $showSheet, content: {
-                                AddNewCanvasView().environment(\.managedObjectContext, viewContext)
+                                AddNewCanvasView(AddedNewCanvas: $AddedNewCanvas).environment(\.managedObjectContext, viewContext).onChange(of: AddedNewCanvas) {newValue in getHoursByHoursTabs()
+                                    print("UPDATED TABLE")
+                                }
                             })
+                          
+                            
                         } else {
                             
                             VStack {
@@ -118,12 +125,16 @@ struct TodayCanvasView: View {
                                 })
                                 .foregroundColor(.blue)
                                 .sheet(isPresented: $showSheet, content: {
-                                    AddNewCanvasView().environment(\.managedObjectContext, viewContext)
-                                })
+                                    AddNewCanvasView(AddedNewCanvas: $AddedNewCanvas).environment(\.managedObjectContext, viewContext)
                                 
-                                HoursView(ArrayHourUUID: $sixpm, ShowTime: "6pm")
-                                Divider()
-                                HoursView(ArrayHourUUID: $sevenpm, ShowTime: "7pm")
+                                })
+                              //  .onChange(of: self.AddedNewCanvas) {getHoursByHoursTabs()}
+                                
+
+                                CalendarView(midnight: $midnight, oneam: $oneam, twoam: $twoam, threeam: $threeam, fouram: $fouram, fiveam: $fiveam, sixam: $sixam, sevenam: $sevenam, eightam: $eightam, nineam: $nineam, tenam: $tenam, elevenam: $elevenam, twelveam: $twelveam, onepm: $onepm, twopm: $twopm, threepm: $threepm, fourpm: $fourpm, fivepm: $fivepm, sixpm: $sixpm, sevenpm: $sevenpm, eightpm: $eightpm, ninepm: $ninepm, tenpm: $tenpm, elevenpm: $elevenpm, RefreshList: $AddedNewCanvas).onAppear() {
+                                
+                                    print("6PM LENGHT UUID : \(sixpm.count)")}
+                                
                                 
 //                                List {
 //                                    ForEach(drawings){drawing in
@@ -175,6 +186,8 @@ struct TodayCanvasView: View {
 //                                    })
 //                                }
 
+                                        }.onChange(of: AddedNewCanvas) {newValue in getHoursByHoursTabs()
+                                            print("UPDATED TABLE")
                                         }
 
                     
@@ -259,41 +272,41 @@ struct TodayCanvasView: View {
         do {
             let result = try viewContext.fetch(req)
             
-//            self.dataHoursUUID.midnight.removeAll()
-//            self.dataHoursUUID.oneam.removeAll()
-//            self.dataHoursUUID.twoam.removeAll()
-//            self.dataHoursUUID.threeam.removeAll()
-//            self.dataHoursUUID.fouram.removeAll()
-//
-//            self.dataHoursUUID.fiveam.removeAll()
-//
-//            self.dataHoursUUID.sixam.removeAll()
-//            self.dataHoursUUID.sevenam.removeAll()
-//            self.dataHoursUUID.eightam.removeAll()
-//
-//            self.dataHoursUUID.nineam.removeAll()
-//
-//            self.dataHoursUUID.tenam.removeAll()
-//            self.dataHoursUUID.elevenam.removeAll()
-//
-//            self.dataHoursUUID.twelveam.removeAll()
-//
-//            self.dataHoursUUID.onepm.removeAll()
-//            self.dataHoursUUID.twopm.removeAll()
-//
-//            self.dataHoursUUID.threepm.removeAll()
-//            self.dataHoursUUID.fourpm.removeAll()
-//
-//            self.dataHoursUUID.fivepm.removeAll()
-//
-//            self.dataHoursUUID.sixpm.removeAll()
-//            self.dataHoursUUID.sevenpm.removeAll()
-//            self.dataHoursUUID.eightpm.removeAll()
-//
-//            self.dataHoursUUID.ninepm.removeAll()
-//
-//            self.dataHoursUUID.tenpm.removeAll()
-//            self.dataHoursUUID.elevenpm.removeAll()
+            self.midnight.removeAll()
+            self.oneam.removeAll()
+            self.twoam.removeAll()
+            self.threeam.removeAll()
+            self.fouram.removeAll()
+
+            self.fiveam.removeAll()
+
+            self.sixam.removeAll()
+            self.sevenam.removeAll()
+            self.eightam.removeAll()
+
+            self.nineam.removeAll()
+
+            self.tenam.removeAll()
+            self.elevenam.removeAll()
+
+            self.twelveam.removeAll()
+
+            self.onepm.removeAll()
+            self.twopm.removeAll()
+
+            self.threepm.removeAll()
+            self.fourpm.removeAll()
+
+            self.fivepm.removeAll()
+
+            self.sixpm.removeAll()
+            self.sevenpm.removeAll()
+            self.eightpm.removeAll()
+
+            self.ninepm.removeAll()
+
+            self.tenpm.removeAll()
+            self.elevenpm.removeAll()
             
             for i in result as! [NSManagedObject] {
                 let id = i.value(forKey: "id") as! UUID

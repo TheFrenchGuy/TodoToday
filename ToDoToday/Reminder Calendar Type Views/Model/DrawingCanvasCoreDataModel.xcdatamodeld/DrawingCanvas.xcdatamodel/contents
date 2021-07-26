@@ -4,7 +4,7 @@
         <attribute name="canvasData" optional="YES" attributeType="Binary"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="timeEvent" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String" spotlightIndexingEnabled="YES"/>
     </entity>
     <elements>
         <element name="DrawingCanvas" positionX="-63" positionY="-18" width="128" height="89"/>
