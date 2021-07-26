@@ -25,14 +25,21 @@ struct HoursView: View {
     
     @State var AddedNewCanvas: Bool = false
     @Binding var RefreshList: Bool
+    
+    @State var currentUUID: UUID = UUID()
+    @State var currentTitle: String = ""
+    @State var currentData: Data?
+    
     var body: some View {
         GeometryReader { bounds in
-            HStack {
+            ScrollView(.horizontal) {
+            LazyHStack {
                 
                     Text(ShowTime)
+                ForEach(ArrayHourUUID, id: \.self) { TimeUUID in
                     ForEach(drawings){drawing in
                         if !ArrayHourUUID.isEmpty {
-                            ForEach(ArrayHourUUID, id: \.self) { TimeUUID in
+                           
                                 
                                 if TimeUUID == drawing.id {
                         
@@ -41,7 +48,11 @@ struct HoursView: View {
                                 
                                 
 
-                                Button(action: { test.toggle(); print("Keyboard shortcut pressed")}) {
+                                Button(action: { test.toggle(); print("Keyboard shortcut pressed"); currentUUID = drawing.id!
+                                    currentTitle = drawing.title! ;
+                                    currentData = drawing.canvasData! ;
+                                    
+                                }) {
     //                                Text("Tap here").keyboardShortcut("l", modifiers: .command)
                                     if getWallpaperFromUserDefaults() != nil {
                                         Image(uiImage: fetchImage(imageName: String("\(drawing.id)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit().frame(width: 150, height: 150)
@@ -54,12 +65,13 @@ struct HoursView: View {
 
                                     }
                                     .sheet(isPresented: self.$test) {
-                                        DrawingView(isVisible: $test, id: drawing.id, data: drawing.canvasData, title: drawing.title).onDisappear() { print("DISMISS"); RefreshList.toggle()}
+                                        DrawingView(isVisible: $test, id: currentUUID, data: currentData, title: currentTitle).onDisappear() { print("DISMISS"); RefreshList.toggle()}
                                     }
                                 
     //                            Text("\(drawing.timeEvent ?? Date())")
 
-                            }.contextMenu { Button(action: {
+                            }.onAppear(perform: {currentUUID = drawing.id!})
+                            .contextMenu { Button(action: {
                                 viewContext.delete(drawing)
                                 deleteImage(imageName: String("\(drawing.id)"))
                                 do {
@@ -74,7 +86,8 @@ struct HoursView: View {
                                 
                             }
                             }
-                            }
+                        }
+                          
                         }
 
                     }
@@ -84,6 +97,7 @@ struct HoursView: View {
                     .sheet(isPresented: $showSheet, content: {
                         AddNewCanvasView(AddedNewCanvas: $AddedNewCanvas).environment(\.managedObjectContext, viewContext)
                     })
+            }
                 
             }.frame(height: 200)
             Divider()
