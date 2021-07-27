@@ -9,33 +9,40 @@ import SwiftUI
 import CoreData
 import Combine
 
+class HourOfDay: ObservableObject {
+    @State var midnight: [UUID] = []
+    @Published var oneam: [UUID] = []
+    @Published var twoam: [UUID] = []
+    @Published var threeam: [UUID] = []
+    @Published var fouram: [UUID] = []
+    @Published var fiveam: [UUID] = []
+    @Published var sixam: [UUID] = []
+    @Published var sevenam: [UUID] = []
+    @Published var eightam: [UUID] = []
+    @Published var nineam: [UUID] = []
+    @Published var tenam: [UUID] = []
+    @Published var elevenam: [UUID] = []
+    @Published var twelveam: [UUID] = []
+    @Published var onepm: [UUID] = []
+    @Published var twopm: [UUID] = []
+    @Published var threepm: [UUID] = []
+    @Published var fourpm: [UUID] = []
+    @Published var fivepm: [UUID] = []
+    
+   
+    @Published var sixpm: [UUID] = []
+    @Published var sevenpm: [UUID] = []
+    @Published var eightpm: [UUID] = []
+    @Published var ninepm: [UUID] = []
+    @Published var tenpm: [UUID] = []
+    @Published var elevenpm: [UUID] = []
+    
+    
+}
 
-//class DataHoursUUID {
-//    @State var midnight: [UUID] = []
-//    var oneam: [UUID] = []
-//    var twoam: [UUID] = []
-//    var threeam: [UUID] = []
-//    var fouram: [UUID] = []
-//    var fiveam: [UUID] = []
-//    var sixam: [UUID] = []
-//    var sevenam: [UUID] = []
-//    var eightam: [UUID] = []
-//    var nineam: [UUID] = []
-//    var tenam: [UUID] = []
-//    var elevenam: [UUID] = []
-//    var twelveam: [UUID] = []
-//    var onepm: [UUID] = []
-//    var twopm: [UUID] = []
-//    var threepm: [UUID] = []
-//    var fourpm: [UUID] = []
-//    var fivepm: [UUID] = []
-//    @State var sixpm: [UUID] = []
-//    var sevenpm: [UUID] = []
-//    var eightpm: [UUID] = []
-//    var ninepm: [UUID] = []
-//    var tenpm: [UUID] = []
-//    var elevenpm: [UUID] = []
-//}
+public class Order: ObservableObject{
+    @Published var test: String = "NOT CHANGED"
+}
 
 extension Array: Identifiable where Element: Hashable {
    public var id: Self { self }
@@ -53,6 +60,8 @@ struct TodayCanvasView: View {
     @State private var test = false
     
     
+    @ObservedObject var order = Order()
+    @StateObject var hourOfDay = HourOfDay()
     
     let fileManager = FileManager.default
     let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -87,15 +96,14 @@ struct TodayCanvasView: View {
     
     @State var AddedNewCanvas: Bool = false
     
-    
 
     var body: some View {
         ZStack {
             GeometryReader { bounds in
                 VStack{
-                        if drawings.count == 0 { //MARK: WILL NEED TO IMPLEMENT WHEN THERE ARE NOT DRAWINGS FOR THAT DAY 
+                        if drawings.count == 0 { //MARK: WILL NEED TO IMPLEMENT WHEN THERE ARE NOT DRAWINGS FOR THAT DAY
                             PlaceholderView()
-                            
+
                             Button(action: {
                                 self.showSheet.toggle()
                             }, label: {
@@ -107,10 +115,10 @@ struct TodayCanvasView: View {
                             .foregroundColor(.blue)
                             .sheet(isPresented: $showSheet, content: {
                                 AddNewCanvasView(AddedNewCanvas: $AddedNewCanvas).environment(\.managedObjectContext, viewContext)
-                                    
+
                             })
-                          
-                            
+
+
                         } else {
                             
                             VStack {
@@ -128,73 +136,26 @@ struct TodayCanvasView: View {
                                 
                                 })
                               //  .onChange(of: self.AddedNewCanvas) {getHoursByHoursTabs()}
+                                    }
                                 
 //
-                                CalendarView(midnight: $midnight, oneam: $oneam, twoam: $twoam, threeam: $threeam, fouram: $fouram, fiveam: $fiveam, sixam: $sixam, sevenam: $sevenam, eightam: $eightam, nineam: $nineam, tenam: $tenam, elevenam: $elevenam, twelveam: $twelveam, onepm: $onepm, twopm: $twopm, threepm: $threepm, fourpm: $fourpm, fivepm: $fivepm, sixpm: $sixpm, sevenpm: $sevenpm, eightpm: $eightpm, ninepm: $ninepm, tenpm: $tenpm, elevenpm: $elevenpm, RefreshList: $AddedNewCanvas).onChange(of: AddedNewCanvas) {newValue in getHoursByHoursTabs()
+                            
+//                                CalendarView(midnight: $midnight, oneam: $oneam, twoam: $twoam, threeam: $threeam, fouram: $fouram, fiveam: $fiveam, sixam: $sixam, sevenam: $sevenam, eightam: $eightam, nineam: $nineam, tenam: $tenam, elevenam: $elevenam, twelveam: $twelveam, onepm: $onepm, twopm: $twopm, threepm: $threepm, fourpm: $fourpm, fivepm: $fivepm, sixpm: $sixpm, sevenpm: $sevenpm, eightpm: $eightpm, ninepm: $ninepm, tenpm: $tenpm, elevenpm: $elevenpm, RefreshList: $AddedNewCanvas)
+                            CalendarView(RefreshList: $AddedNewCanvas)
+                                
+                                    
+                                    .onChange(of: AddedNewCanvas) {newValue in getHoursByHoursTabs()
                                     print("UPDATED TABLE")
-                                }
+                                        }.onAppear(perform: {self.getHoursByHoursTabs()})
                                 
-                                
-//                                List {
-//                                    ForEach(drawings){drawing in
-//                                      //  if !sixpm.isEmpty {
-//                                          //  if drawing.id == dataHoursUUID.twopm[0] {
-//                                            HStack () {
-//                                                if getWallpaperFromUserDefaults() != nil {
-//                                                    Image(uiImage: fetchImage(imageName: String("\(drawing.id)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit().frame(width: 100, height: 100)
-//
-//                                                }
-//
-//                                                Button(action: { test.toggle(); print("Keyboard shortcut pressed")}) { Text("Tap here")}.keyboardShortcut("l", modifiers: .command)
-//                                                Text("Canvas, \(drawing.id ?? UUID()), \(drawing.title ?? "NO TITLE ")").sheet(isPresented: self.$test) {
-//                                                    DrawingView(isVisible: $test, id: drawing.id, data: drawing.canvasData, title: drawing.title)
-//                                                }
-//
-//                                                Text("\(drawing.timeEvent ?? Date())")
-//
-//                                            }.contextMenu { Button(action: {
-//                                                viewContext.delete(drawing)
-//                                                deleteImage(imageName: String("\(drawing.id)"))
-//                                                do {
-//                                                    try self.viewContext.save()
-//                                                } catch {
-//                                                    print(error)
-//                                                }
-//                                            }) {
-//                                                Text("Delete me")
-//                                            }
-//
-//                                            }
-//                                          //  }
-//                                      //  }
-//
-//                                    }
-//                                    .onDelete(perform: deleteItem)
-//
-////                                    Button(action: {
-////                                        self.showSheet.toggle()
-////                                    }, label: {
-////                                        HStack{
-////                                            Image(systemName: "plus")
-////                                            Text("Add Canvas")
-////                                        }
-////                                    })
-////                                    .foregroundColor(.blue)
-////                                    .sheet(isPresented: $showSheet, content: {
-////                                        AddNewCanvasView().environment(\.managedObjectContext, viewContext)
-////                                    })
-//                                }
-
-                            }.onAppear(perform: {self.getHoursByHoursTabs()})
-
-                    
+                            
                     
                     
                 }
                 }.frame(width: bounds.size.width, height: bounds.size.height)
-                    .onAppear(perform: {self.getHoursByHoursTabs()})
+                    .onAppear(perform: {self.getHoursByHoursTabs(); order.test = "CHANGED"})
         }
-        }
+        }.environmentObject(hourOfDay)
     
         
     }
@@ -260,6 +221,7 @@ struct TodayCanvasView: View {
     
     
     func getHoursByHoursTabs() {
+        self.hourOfDay.objectWillChange.send()
   //     Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
             print("RUNNING")
         let date: Date = (Calendar.current.date(bySettingHour: 0, minute: 0, second: 0 , of: Date())!)
@@ -305,6 +267,43 @@ struct TodayCanvasView: View {
             self.tenpm.removeAll()
             self.elevenpm.removeAll()
             
+            
+            self.hourOfDay.midnight.removeAll()
+            self.hourOfDay.oneam.removeAll()
+            self.hourOfDay.twoam.removeAll()
+            self.hourOfDay.threeam.removeAll()
+            self.hourOfDay.fouram.removeAll()
+
+            self.hourOfDay.fiveam.removeAll()
+
+            self.hourOfDay.sixam.removeAll()
+            self.hourOfDay.sevenam.removeAll()
+            self.hourOfDay.eightam.removeAll()
+
+            self.hourOfDay.nineam.removeAll()
+
+            self.hourOfDay.tenam.removeAll()
+            self.hourOfDay.elevenam.removeAll()
+
+            self.hourOfDay.twelveam.removeAll()
+
+            self.hourOfDay.onepm.removeAll()
+            self.twopm.removeAll()
+
+            self.hourOfDay.threepm.removeAll()
+            self.hourOfDay.fourpm.removeAll()
+
+            self.hourOfDay.fivepm.removeAll()
+
+            self.hourOfDay.sixpm.removeAll()
+            self.hourOfDay.sevenpm.removeAll()
+            self.hourOfDay.eightpm.removeAll()
+
+            self.hourOfDay.ninepm.removeAll()
+
+            self.hourOfDay.tenpm.removeAll()
+            self.hourOfDay.elevenpm.removeAll()
+            
             for i in result as! [NSManagedObject] {
                 let id = i.value(forKey: "id") as! UUID
                 let timeEvent = i.value(forKey: "timeEvent") as? Date ?? Date()
@@ -315,123 +314,123 @@ struct TodayCanvasView: View {
                 if timediff < 86400 && timediff >= 0 {
                     if timediff >= 0 && timediff < 3600 {
                        print("Drank at 0am")
-                        self.midnight.append(id)
+                        self.hourOfDay.midnight.append(id)
                         
                     }
                     
                     else if timediff >= 3600 && timediff < 7200 {
                        
-                        self.oneam.append(id)
+                        self.hourOfDay.oneam.append(id)
                          
                     }
                     
                     else if timediff >= 7200 && timediff < 10800 {
                         print("Drank at 2am")
                         
-                        self.twoam.append(id)
+                        self.hourOfDay.twoam.append(id)
                         
                     }
                     
                     else if timediff >= 10800 && timediff < 14400{
                         print("Drank at 3am")
-                        self.threeam.append(id)
+                        self.hourOfDay.threeam.append(id)
                     }
                     
                     else if timediff >= 14400 && timediff < 18000 {
                         print("Drank at 4am")
-                        self.fouram.append(id)
+                        self.hourOfDay.fouram.append(id)
                     }
                     
                     else if timediff >= 18000 && timediff < 21600 {
                         print("Drank at 5am")
-                        self.fiveam.append(id)
+                        self.hourOfDay.fiveam.append(id)
                          
                     }
                     
                     else if timediff >= 21600 && timediff < 25200 {
                         print("Drank at 6am")
-                        self.sixam.append(id)
+                        self.hourOfDay.sixam.append(id)
                         
                     }
                     
                     else if timediff >= 25200 && timediff < 28800 {
                         print("Drank at 7am")
-                        self.sevenam.append(id)
+                        self.hourOfDay.sevenam.append(id)
                         
                     }
                     
                     else if timediff >= 28800 && timediff < 32400 {
                         print("Drank at 8am")
-                        self.eightam.append(id)
+                        self.hourOfDay.eightam.append(id)
                         
                     }
                     
                     else if timediff >= 32400 && timediff < 36000 {
                         print("Drank at 9am")
-                        self.nineam.append(id)
+                        self.hourOfDay.nineam.append(id)
                         
                     }
                     
                     else if timediff >= 36000 && timediff < 39600 {
                         print("Drank at 10am")
-                        self.tenam.append(id)
+                        self.hourOfDay.tenam.append(id)
                          
                     }
                     
                     else if timediff >= 39600 && timediff < 43200 {
                         print("Drank at 11am")
-                        self.elevenam.append(id)
+                        self.hourOfDay.elevenam.append(id)
                         
                     }
                     
                     
                     else if timediff >= 43200 && timediff < 46800 {
                         print("Drank at 12am")
-                        self.twelveam.append(id)
+                        self.hourOfDay.twelveam.append(id)
                         
                     }
                     
                     else if timediff >= 46800 && timediff < 50400 {
                         print("Drank at 1pm")
-                        self.onepm.append(id)
+                        self.hourOfDay.onepm.append(id)
                             
                     }
                     
                     else if timediff >= 50400 && timediff < 54000 {
                         print("Drank at 2pm")
-                        
-                        if !twopm.isEmpty {
-                            print("ITEMS AT 2PM \(self.twopm[0])")
-                        }
-                        self.twopm.append(id)
+                        self.hourOfDay.twopm.append(id)
                     }
                     
                     else if timediff >= 54000 && timediff < 57600 {
                         print("Drank at 3pm")
-                        self.threepm.append(id)
+                        self.hourOfDay.threepm.append(id)
                          
                     }
                     
                     else if timediff >= 57600 && timediff < 61200 {
                         print("Drank at 4pm")
-                        self.fourpm.append(id)
+                        self.hourOfDay.fourpm.append(id)
                          
                     }
                     
                     else if timediff >= 61200 && timediff < 64800 {
                         print("Drank at 5pm")
                         self.fivepm.append(id)
+                        hourOfDay.fivepm = self.fivepm
+                        hourOfDay.objectWillChange.send()
+                        
+                        print(hourOfDay.fivepm.count)
                          
                     }
                     
                     else if timediff >= 64800 && timediff < 68400 {
                         print("Drank at 6pm")
-                        self.sixpm.append(id)
+                        self.hourOfDay.sixpm.append(id)
                     }
                     
                     else if timediff >= 68400 && timediff < 72000 {
                         print("Drank at 7pm")
-                        self.sevenpm.append(id)
+                        self.hourOfDay.sevenpm.append(id)
                        
                         
                     }
@@ -439,31 +438,33 @@ struct TodayCanvasView: View {
                     
                     else if timediff >= 72000 && timediff < 75600 {
                         print("Drank at 8pm")
-                        self.eightpm.append(id)
+                        self.hourOfDay.eightpm.append(id)
                         
                     }
                     
                     else if timediff >= 75600 && timediff < 79200 {
                         print("Drank at 9pm")
-                        self.ninepm.append(id)
+                        self.hourOfDay.ninepm.append(id)
                        
                     }
                     
                     else if timediff >= 79200 && timediff < 82800 {
                         print("Drank at 10pm")
-                        self.tenpm.append(id)
+                        self.hourOfDay.tenpm.append(id)
                         
                     }
                     
                     else if timediff >= 82800 && timediff < 86400 {
                         print("Drank at 11pm")
-                        self.elevenpm.append(id)
+                        self.hourOfDay.elevenpm.append(id)
                         
                          
                     }
                 }
                 
+                
             }
+            print("ARRAY SIZE: \(hourOfDay.fivepm.count)")
         } catch {
             print(error.localizedDescription)
         }
@@ -474,12 +475,61 @@ struct TodayCanvasView: View {
 }
 
 
-struct TodayCanvas_Previews: PreviewProvider {
-    static var previews: some View {
-        TodayCanvasView()
-    }
-}
+//struct TodayCanvas_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TodayCanvasView()
+//    }
+//}
 
 
 
 
+//                                List {
+//                                    ForEach(drawings){drawing in
+//                                      //  if !sixpm.isEmpty {
+//                                          //  if drawing.id == dataHoursUUID.twopm[0] {
+//                                            HStack () {
+//                                                if getWallpaperFromUserDefaults() != nil {
+//                                                    Image(uiImage: fetchImage(imageName: String("\(drawing.id)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit().frame(width: 100, height: 100)
+//
+//                                                }
+//
+//                                                Button(action: { test.toggle(); print("Keyboard shortcut pressed")}) { Text("Tap here")}.keyboardShortcut("l", modifiers: .command)
+//                                                Text("Canvas, \(drawing.id ?? UUID()), \(drawing.title ?? "NO TITLE ")").sheet(isPresented: self.$test) {
+//                                                    DrawingView(isVisible: $test, id: drawing.id, data: drawing.canvasData, title: drawing.title)
+//                                                }
+//
+//                                                Text("\(drawing.timeEvent ?? Date())")
+//
+//                                            }.contextMenu { Button(action: {
+//                                                viewContext.delete(drawing)
+//                                                deleteImage(imageName: String("\(drawing.id)"))
+//                                                do {
+//                                                    try self.viewContext.save()
+//                                                } catch {
+//                                                    print(error)
+//                                                }
+//                                            }) {
+//                                                Text("Delete me")
+//                                            }
+//
+//                                            }
+//                                          //  }
+//                                      //  }
+//
+//                                    }
+//                                    .onDelete(perform: deleteItem)
+//
+////                                    Button(action: {
+////                                        self.showSheet.toggle()
+////                                    }, label: {
+////                                        HStack{
+////                                            Image(systemName: "plus")
+////                                            Text("Add Canvas")
+////                                        }
+////                                    })
+////                                    .foregroundColor(.blue)
+////                                    .sheet(isPresented: $showSheet, content: {
+////                                        AddNewCanvasView().environment(\.managedObjectContext, viewContext)
+////                                    })
+//                                }

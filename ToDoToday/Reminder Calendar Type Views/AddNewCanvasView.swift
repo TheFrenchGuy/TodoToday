@@ -111,7 +111,7 @@ struct AddNewCanvasView: View {
                     do {
                         AddedNewCanvas.toggle()
                         try viewContext.save()
-                        try viewContext.refreshAllObjects()
+                      //  try viewContext.refreshAllObjects()
                         
                     }
                     catch{

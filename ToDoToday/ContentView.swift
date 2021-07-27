@@ -13,7 +13,7 @@ struct ContentView: View {
     @ObservedObject var userPreference = UserPreference()
     @State var test = "Test"
     @State var firstlaunch = UserDefaults.standard.value(forKey: "firstlaunch") as? Bool ?? true
-    
+
     
     var body: some View {
         if firstlaunch {

@@ -19,6 +19,9 @@ struct DrawingView: View {
     @State var title:String?
     var body: some View {
         VStack{
+            if id?.uuidString == "" {
+            Text("NO UUID STRING ASSIGNED \(title ?? "NO TITLE")")
+            }
             Text("\(id ?? UUID()), \(title ?? "NO TITLE")")
             DrawingCanvasView(data: data ?? Data(), id: id ?? UUID())
                 .environment(\.managedObjectContext, viewContext)
