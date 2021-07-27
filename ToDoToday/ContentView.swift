@@ -61,7 +61,7 @@ struct ContentView: View {
     }
     
     func scheduleNotification() {
-        print("test")
+        print("test") //MARK: YET TO IMPLEMENT WHEN NOTIFICATIONS WILL BE DISPLAYED ON SCREEN 
 //        let hours = Calendar.current.component(.hour, from: date)
 //        let minutes = Calendar.current.component(.minute, from: date)
 //

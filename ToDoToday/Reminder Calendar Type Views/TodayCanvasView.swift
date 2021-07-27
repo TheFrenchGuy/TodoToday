@@ -93,7 +93,7 @@ struct TodayCanvasView: View {
         ZStack {
             GeometryReader { bounds in
                 VStack{
-                        if drawings.count == 0 {
+                        if drawings.count == 0 { //MARK: WILL NEED TO IMPLEMENT WHEN THERE ARE NOT DRAWINGS FOR THAT DAY 
                             PlaceholderView()
                             
                             Button(action: {
@@ -101,14 +101,13 @@ struct TodayCanvasView: View {
                             }, label: {
                                 HStack{
                                     Image(systemName: "plus")
-                                    Text("Add Canvas")
+                                    Text("Add Canvas !!!")
                                 }
                             })
                             .foregroundColor(.blue)
                             .sheet(isPresented: $showSheet, content: {
-                                AddNewCanvasView(AddedNewCanvas: $AddedNewCanvas).environment(\.managedObjectContext, viewContext).onChange(of: AddedNewCanvas) {newValue in getHoursByHoursTabs()
-                                    print("UPDATED TABLE")
-                                }
+                                AddNewCanvasView(AddedNewCanvas: $AddedNewCanvas).environment(\.managedObjectContext, viewContext)
+                                    
                             })
                           
                             
@@ -130,15 +129,15 @@ struct TodayCanvasView: View {
                                 })
                               //  .onChange(of: self.AddedNewCanvas) {getHoursByHoursTabs()}
                                 
-
-                                CalendarView(midnight: $midnight, oneam: $oneam, twoam: $twoam, threeam: $threeam, fouram: $fouram, fiveam: $fiveam, sixam: $sixam, sevenam: $sevenam, eightam: $eightam, nineam: $nineam, tenam: $tenam, elevenam: $elevenam, twelveam: $twelveam, onepm: $onepm, twopm: $twopm, threepm: $threepm, fourpm: $fourpm, fivepm: $fivepm, sixpm: $sixpm, sevenpm: $sevenpm, eightpm: $eightpm, ninepm: $ninepm, tenpm: $tenpm, elevenpm: $elevenpm, RefreshList: $AddedNewCanvas).onAppear() {
-                                
-                                    print("6PM LENGHT UUID : \(sixpm.count)")}
+//
+                                CalendarView(midnight: $midnight, oneam: $oneam, twoam: $twoam, threeam: $threeam, fouram: $fouram, fiveam: $fiveam, sixam: $sixam, sevenam: $sevenam, eightam: $eightam, nineam: $nineam, tenam: $tenam, elevenam: $elevenam, twelveam: $twelveam, onepm: $onepm, twopm: $twopm, threepm: $threepm, fourpm: $fourpm, fivepm: $fivepm, sixpm: $sixpm, sevenpm: $sevenpm, eightpm: $eightpm, ninepm: $ninepm, tenpm: $tenpm, elevenpm: $elevenpm, RefreshList: $AddedNewCanvas).onChange(of: AddedNewCanvas) {newValue in getHoursByHoursTabs()
+                                    print("UPDATED TABLE")
+                                }
                                 
                                 
 //                                List {
 //                                    ForEach(drawings){drawing in
-//                                        if !sixpm.isEmpty {
+//                                      //  if !sixpm.isEmpty {
 //                                          //  if drawing.id == dataHoursUUID.twopm[0] {
 //                                            HStack () {
 //                                                if getWallpaperFromUserDefaults() != nil {
@@ -167,28 +166,26 @@ struct TodayCanvasView: View {
 //
 //                                            }
 //                                          //  }
-//                                        }
+//                                      //  }
 //
 //                                    }
 //                                    .onDelete(perform: deleteItem)
 //
-//                                    Button(action: {
-//                                        self.showSheet.toggle()
-//                                    }, label: {
-//                                        HStack{
-//                                            Image(systemName: "plus")
-//                                            Text("Add Canvas")
-//                                        }
-//                                    })
-//                                    .foregroundColor(.blue)
-//                                    .sheet(isPresented: $showSheet, content: {
-//                                        AddNewCanvasView().environment(\.managedObjectContext, viewContext)
-//                                    })
+////                                    Button(action: {
+////                                        self.showSheet.toggle()
+////                                    }, label: {
+////                                        HStack{
+////                                            Image(systemName: "plus")
+////                                            Text("Add Canvas")
+////                                        }
+////                                    })
+////                                    .foregroundColor(.blue)
+////                                    .sheet(isPresented: $showSheet, content: {
+////                                        AddNewCanvasView().environment(\.managedObjectContext, viewContext)
+////                                    })
 //                                }
 
-                                        }.onChange(of: AddedNewCanvas) {newValue in getHoursByHoursTabs()
-                                            print("UPDATED TABLE")
-                                        }
+                            }.onAppear(perform: {self.getHoursByHoursTabs()})
 
                     
                     

@@ -105,6 +105,7 @@
 		60CBECAD26A84E3A0020703D /* ToDoToday */ = {
 			isa = PBXGroup;
 			children = (
+				60CBECC526A8501E0020703D /* UserPreferenceModel.swift */,
 				60CBECD226A851050020703D /* Extensions */,
 				60CBECC226A84FDC0020703D /* Reminder Calendar Type Views */,
 				60CBECC126A84FD70020703D /* Setup Views and Models */,
@@ -139,7 +140,6 @@
 			children = (
 				60CBECD526A8516C0020703D /* Lottie Animations */,
 				60CBECC326A8500C0020703D /* SetupCard Screen.swift */,
-				60CBECC526A8501E0020703D /* UserPreferenceModel.swift */,
 				60CBECC726A850330020703D /* ListTypeSetupView.swift */,
 				60CBECC926A850570020703D /* NotificationPermessionView.swift */,
 				60CBECCB26A8506B0020703D /* iCloudSyncView.swift */,

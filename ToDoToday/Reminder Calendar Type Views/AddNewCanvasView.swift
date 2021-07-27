@@ -111,13 +111,17 @@ struct AddNewCanvasView: View {
                     do {
                         AddedNewCanvas.toggle()
                         try viewContext.save()
-                        showingCanvas.toggle()
+                        try viewContext.refreshAllObjects()
+                        
                     }
                     catch{
                         print(error)
+                        print("ERROR COULDNT ADD ITEM")
                     }
                     
                     //self.presentationMode.wrappedValue.dismiss()
+                    
+                    showingCanvas.toggle()
                 }
             }, label: {
                 Text("Next")
