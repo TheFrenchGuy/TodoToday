@@ -9,90 +9,20 @@ import SwiftUI
 import CoreData
 import Combine
 
-class HourOfDay: ObservableObject {
-    @State var midnight: [UUID] = []
-    @Published var oneam: [UUID] = []
-    @Published var twoam: [UUID] = []
-    @Published var threeam: [UUID] = []
-    @Published var fouram: [UUID] = []
-    @Published var fiveam: [UUID] = []
-    @Published var sixam: [UUID] = []
-    @Published var sevenam: [UUID] = []
-    @Published var eightam: [UUID] = []
-    @Published var nineam: [UUID] = []
-    @Published var tenam: [UUID] = []
-    @Published var elevenam: [UUID] = []
-    @Published var twelveam: [UUID] = []
-    @Published var onepm: [UUID] = []
-    @Published var twopm: [UUID] = []
-    @Published var threepm: [UUID] = []
-    @Published var fourpm: [UUID] = []
-    @Published var fivepm: [UUID] = []
-    
-   
-    @Published var sixpm: [UUID] = []
-    @Published var sevenpm: [UUID] = []
-    @Published var eightpm: [UUID] = []
-    @Published var ninepm: [UUID] = []
-    @Published var tenpm: [UUID] = []
-    @Published var elevenpm: [UUID] = []
-    
-    
-}
-
-public class Order: ObservableObject{
-    @Published var test: String = "NOT CHANGED"
-}
-
-extension Array: Identifiable where Element: Hashable {
-   public var id: Self { self }
-}
-
 struct TodayCanvasView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(entity: DrawingCanvas.entity(), sortDescriptors: []) var drawings: FetchedResults<DrawingCanvas>
-//    @State var dataHoursUUID = DataHoursUUID()
     
     
     @State private var showSheet = false
     @State private var test = false
     
-    
-    @ObservedObject var order = Order()
     @StateObject var hourOfDay = HourOfDay()
     
     let fileManager = FileManager.default
     let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-    
-
-    
-    
-    @State var midnight: [UUID] = []
-    @State var oneam: [UUID] = []
-    @State var twoam: [UUID] = []
-    @State var threeam: [UUID] = []
-    @State var fouram: [UUID] = []
-    @State var fiveam: [UUID] = []
-    @State var sixam: [UUID] = []
-    @State var sevenam: [UUID] = []
-    @State var eightam: [UUID] = []
-    @State var nineam: [UUID] = []
-    @State var tenam: [UUID] = []
-    @State var elevenam: [UUID] = []
-    @State var twelveam: [UUID] = []
-    @State var onepm: [UUID] = []
-    @State var twopm: [UUID] = []
-    @State var threepm: [UUID] = []
-    @State var fourpm: [UUID] = []
-    @State var fivepm: [UUID] = []
-    @State var sixpm: [UUID] = []
-    @State var sevenpm: [UUID] = []
-    @State var eightpm: [UUID] = []
-    @State var ninepm: [UUID] = []
-    @State var tenpm: [UUID] = []
-    @State var elevenpm: [UUID] = []
     
     @State var AddedNewCanvas: Bool = false
     
@@ -135,12 +65,9 @@ struct TodayCanvasView: View {
                                     AddNewCanvasView(AddedNewCanvas: $AddedNewCanvas).environment(\.managedObjectContext, viewContext)
                                 
                                 })
-                              //  .onChange(of: self.AddedNewCanvas) {getHoursByHoursTabs()}
                                     }
                                 
-//
-                            
-//                                CalendarView(midnight: $midnight, oneam: $oneam, twoam: $twoam, threeam: $threeam, fouram: $fouram, fiveam: $fiveam, sixam: $sixam, sevenam: $sevenam, eightam: $eightam, nineam: $nineam, tenam: $tenam, elevenam: $elevenam, twelveam: $twelveam, onepm: $onepm, twopm: $twopm, threepm: $threepm, fourpm: $fourpm, fivepm: $fivepm, sixpm: $sixpm, sevenpm: $sevenpm, eightpm: $eightpm, ninepm: $ninepm, tenpm: $tenpm, elevenpm: $elevenpm, RefreshList: $AddedNewCanvas)
+
                             CalendarView(RefreshList: $AddedNewCanvas)
                                 
                                     
@@ -153,7 +80,7 @@ struct TodayCanvasView: View {
                     
                 }
                 }.frame(width: bounds.size.width, height: bounds.size.height)
-                    .onAppear(perform: {self.getHoursByHoursTabs(); order.test = "CHANGED"})
+                    .onAppear(perform: {self.getHoursByHoursTabs()})
         }
         }.environmentObject(hourOfDay)
     
@@ -222,7 +149,7 @@ struct TodayCanvasView: View {
     
     func getHoursByHoursTabs() {
         self.hourOfDay.objectWillChange.send()
-  //     Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+  
             print("RUNNING")
         let date: Date = (Calendar.current.date(bySettingHour: 0, minute: 0, second: 0 , of: Date())!)
         var viewContext: NSManagedObjectContext { PersistenceController.shared.container.viewContext } //remove error from '+entityForName: nil is not a legal NSManagedObjectContext parameter searching for entity name
@@ -231,41 +158,7 @@ struct TodayCanvasView: View {
         do {
             let result = try viewContext.fetch(req)
             
-            self.midnight.removeAll()
-            self.oneam.removeAll()
-            self.twoam.removeAll()
-            self.threeam.removeAll()
-            self.fouram.removeAll()
-
-            self.fiveam.removeAll()
-
-            self.sixam.removeAll()
-            self.sevenam.removeAll()
-            self.eightam.removeAll()
-
-            self.nineam.removeAll()
-
-            self.tenam.removeAll()
-            self.elevenam.removeAll()
-
-            self.twelveam.removeAll()
-
-            self.onepm.removeAll()
-            self.twopm.removeAll()
-
-            self.threepm.removeAll()
-            self.fourpm.removeAll()
-
-            self.fivepm.removeAll()
-
-            self.sixpm.removeAll()
-            self.sevenpm.removeAll()
-            self.eightpm.removeAll()
-
-            self.ninepm.removeAll()
-
-            self.tenpm.removeAll()
-            self.elevenpm.removeAll()
+            
             
             
             self.hourOfDay.midnight.removeAll()
@@ -288,7 +181,7 @@ struct TodayCanvasView: View {
             self.hourOfDay.twelveam.removeAll()
 
             self.hourOfDay.onepm.removeAll()
-            self.twopm.removeAll()
+            self.hourOfDay.twopm.removeAll()
 
             self.hourOfDay.threepm.removeAll()
             self.hourOfDay.fourpm.removeAll()
@@ -415,11 +308,9 @@ struct TodayCanvasView: View {
                     
                     else if timediff >= 61200 && timediff < 64800 {
                         print("Drank at 5pm")
-                        self.fivepm.append(id)
-                        hourOfDay.fivepm = self.fivepm
+                        self.hourOfDay.fivepm.append(id)
                         hourOfDay.objectWillChange.send()
                         
-                        print(hourOfDay.fivepm.count)
                          
                     }
                     
@@ -469,7 +360,6 @@ struct TodayCanvasView: View {
             print(error.localizedDescription)
         }
         
-      //  }
     }
     
 }

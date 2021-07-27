@@ -46,10 +46,12 @@ struct DrawingCanvasView: UIViewControllerRepresentable {
                 }
                 catch{
                     print(error)
+                    
                 }
             }
             catch{
                 print(error)
+               
             }
         }
         

@@ -21,11 +21,12 @@ struct DrawingView: View {
         VStack{
             if id?.uuidString == "" {
             Text("NO UUID STRING ASSIGNED \(title ?? "NO TITLE")")
+            } else {
+                Text("\(id ?? UUID()), \(title ?? "NO TITLE")")
+                DrawingCanvasView(data: data ?? Data(), id: id ?? UUID())
+                    .environment(\.managedObjectContext, viewContext)
+                    .navigationBarTitle(title ?? "Untitled",displayMode: .inline)
             }
-            Text("\(id ?? UUID()), \(title ?? "NO TITLE")")
-            DrawingCanvasView(data: data ?? Data(), id: id ?? UUID())
-                .environment(\.managedObjectContext, viewContext)
-                .navigationBarTitle(title ?? "Untitled",displayMode: .inline)
             
             Button(action: {self.isVisible = false}) { Text("Dismiss me")}
         }
