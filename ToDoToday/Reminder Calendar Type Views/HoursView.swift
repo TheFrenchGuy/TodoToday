@@ -17,7 +17,6 @@ struct HoursView: View {
 
     @FetchRequest(entity: DrawingCanvas.entity(), sortDescriptors: []) var drawings: FetchedResults<DrawingCanvas>
 
-    @State private var showSheet = false
    
     @Binding var ArrayHourUUID: [UUID]
     var ShowTime: String
@@ -35,6 +34,7 @@ struct HoursView: View {
     @State var currentUUID: UUID? = UUID()
     @State var currentTitle: String = "NOT LOADED"
     @State var currentData: Data?
+    @State var currentTask: String = "NO DESCRIPTION"
     
     var body: some View {
         ZStack {
@@ -48,50 +48,71 @@ struct HoursView: View {
                                         
                                         
                                         if TimeUUID == drawing.id {
-                                
-                                            LazyHStack (){
-                                        
-                                        
-                                        
-                                            Button(action: {
-                                                fetchProperties(canvasUUID: drawing.id ?? UUID(), index: index);
-                                                test.toggle();
-                                                print("Keyboard shortcut pressed");
-                                            }) {
-                                                if getWallpaperFromUserDefaults() != nil {
-                                                    Image(uiImage: fetchImage(imageName: String("\(drawing.id)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit().frame(width: 150, height: 150)
-                                                        .keyboardShortcut("l", modifiers: .command)
-
+                                            
+                                            
+                                            switch(drawing.typeRem) {
+                                                case TypeReminder.drawing.rawValue:
+                                                    LazyHStack (){
                                                 
-                                            }
-                                                Text("Drawing \(drawing.title ?? "NO TITLE")")
-                                               
+                                                
+                                                
+                                                    Button(action: {
+                                                        fetchProperties(canvasUUID: drawing.id ?? UUID(), index: index);
+                                                        test.toggle();
+                                                        print("Keyboard shortcut pressed");
+                                                    }) {
+                                                        if getWallpaperFromUserDefaults() != nil {
+                                                            Image(uiImage: fetchImage(imageName: String("\(drawing.id)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit().frame(width: 150, height: 150)
+                                                                .keyboardShortcut("l", modifiers: .command)
 
-                                            }
-                                                .sheet(isPresented: self.$test) {
-                                                    DrawingView(isVisible: $test, id: currentUUID ?? UUID(), data: currentData, title: currentTitle)
-                                                        .onDisappear() { print("DISMISS"); RefreshList.toggle()}
+                                                        
+                                                    }
+                                                        Text("Drawing \(drawing.title ?? "NO TITLE")")
+                                                       
+
+                                                    }
+                                                        .sheet(isPresented: self.$test) {
+                                                            DrawingView(isVisible: $test, id: currentUUID ?? UUID(), data: currentData, title: currentTitle)
+                                                                .onDisappear() { print("DISMISS"); RefreshList.toggle()}
+                                                            
+                                                        }
+                                                        
+                                                    
+                        //                            Text("\(drawing.timeEvent ?? Date())")
+
+                                                }
+                                                .contextMenu { Button(action: {
+                                                        viewContext.delete(drawing)
+                                                        deleteImage(imageName: String("\(drawing.id)"))
+                                                        do {
+                                                            try self.viewContext.save()
+                                                            print("DELETED ITEM")
+                                                        } catch {
+                                                            print(error)
+                                                        }
+                                                    }) {
+                                                        Text("Delete me")
+                                                    }
                                                     
                                                 }
                                                 
-                                            
-                //                            Text("\(drawing.timeEvent ?? Date())")
-
-                                        }
-                                        .contextMenu { Button(action: {
-                                                viewContext.delete(drawing)
-                                                deleteImage(imageName: String("\(drawing.id)"))
-                                                do {
-                                                    try self.viewContext.save()
-                                                    print("DELETED ITEM")
-                                                } catch {
-                                                    print(error)
-                                                }
-                                            }) {
-                                                Text("Delete me")
+                                                //MARK: To be implemented
+                                                case TypeReminder.typed.rawValue:
+                                                    TypeReminderView(title: drawing.title ?? "NO TITLE", text: drawing.taskDescription ?? "NO DESCRIPTION", remUUID: drawing.id ?? UUID())
+//                                                    .onAppear(perform: {currentTitle = drawing.title ?? "NO TITLE"; currentTask = drawing.taskDescription ?? "NO DESCRIPTION"})
+                                                
+                                                case TypeReminder.image.rawValue:
+                                                    Text("Image Reminder")
+                                                
+                                                case TypeReminder.audio.rawValue:
+                                                    Text("Audio Reminder")
+                                                
+                                                default:
+                                                    Text("Other type")
+                                                
                                             }
+                                
                                             
-                                        }
                                             
                                     
                                     }
@@ -108,10 +129,8 @@ struct HoursView: View {
                             
                             .onDelete(perform: deleteItem)
                             
-                            .foregroundColor(.blue)
-                            .sheet(isPresented: $showSheet, content: {
-                                AddNewCanvasView(AddedNewCanvas: $AddedNewCanvas).environment(\.managedObjectContext, viewContext)
-                            })
+                            //.foregroundColor(.blue)
+                            
                     }
                     
                 }.frame(height: 200)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6025514726B30AD500D9F764 /* Type Reminder View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6025514626B30AD500D9F764 /* Type Reminder View.swift */; };
 		6028CAFF26AEEACD0062E189 /* InitialCanvasDrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6028CAFE26AEEACD0062E189 /* InitialCanvasDrawingView.swift */; };
 		60689B5826AB24E000ED426F /* HoursView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60689B5726AB24DF00ED426F /* HoursView.swift */; };
 		60C2DF6826B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2DF6626B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6025514626B30AD500D9F764 /* Type Reminder View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Type Reminder View.swift"; sourceTree = "<group>"; };
 		6028CAFE26AEEACD0062E189 /* InitialCanvasDrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialCanvasDrawingView.swift; sourceTree = "<group>"; };
 		60689B5726AB24DF00ED426F /* HoursView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursView.swift; sourceTree = "<group>"; };
 		60C2DF6626B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrawingCanvas+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -97,6 +99,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6025514426B2D9F900D9F764 /* Adding New Reminder  */ = {
+			isa = PBXGroup;
+			children = (
+				60CBECEC26A852A70020703D /* AddNewCanvasView.swift */,
+				6028CAFE26AEEACD0062E189 /* InitialCanvasDrawingView.swift */,
+			);
+			path = "Adding New Reminder ";
+			sourceTree = "<group>";
+		};
+		6025514526B2DA1900D9F764 /* Initial Views */ = {
+			isa = PBXGroup;
+			children = (
+				60CBECEA26A852930020703D /* PlaceholderView.swift */,
+			);
+			path = "Initial Views";
+			sourceTree = "<group>";
+		};
 		60CBECA226A84E3A0020703D = {
 			isa = PBXGroup;
 			children = (
@@ -163,18 +182,18 @@
 		60CBECC226A84FDC0020703D /* Reminder Calendar Type Views */ = {
 			isa = PBXGroup;
 			children = (
+				6025514526B2DA1900D9F764 /* Initial Views */,
+				6025514426B2D9F900D9F764 /* Adding New Reminder  */,
 				60D0EC9926B094B9001E98EE /* Classes */,
 				60CBECE326A852390020703D /* Data Manager */,
 				60CBECDF26A851F30020703D /* Model */,
 				60CBECDA26A851B50020703D /* View Controller UIKit */,
 				60CBECE626A8525E0020703D /* TodayCanvasView.swift */,
 				60CBECE826A8527E0020703D /* CalendarReminderView.swift */,
-				60CBECEA26A852930020703D /* PlaceholderView.swift */,
-				60CBECEC26A852A70020703D /* AddNewCanvasView.swift */,
 				60CBECEE26A852BA0020703D /* DrawingView.swift */,
 				60689B5726AB24DF00ED426F /* HoursView.swift */,
-				6028CAFE26AEEACD0062E189 /* InitialCanvasDrawingView.swift */,
 				60E5F35826AD8F1100F1E609 /* CalendarView.swift */,
+				6025514626B30AD500D9F764 /* Type Reminder View.swift */,
 			);
 			path = "Reminder Calendar Type Views";
 			sourceTree = "<group>";
@@ -333,6 +352,7 @@
 				60CBECC426A8500C0020703D /* SetupCard Screen.swift in Sources */,
 				60C2DF6B26B2CC8900347CE8 /* TypeReminder.swift in Sources */,
 				60CBECAF26A84E3A0020703D /* ToDoTodayApp.swift in Sources */,
+				6025514726B30AD500D9F764 /* Type Reminder View.swift in Sources */,
 				60CBECDC26A851CB0020703D /* DrawingCanvasView.swift in Sources */,
 				60D0EC9B26B094D0001E98EE /* HourOfDay.swift in Sources */,
 				60CBECE726A8525E0020703D /* TodayCanvasView.swift in Sources */,

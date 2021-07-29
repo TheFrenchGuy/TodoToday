@@ -51,6 +51,7 @@ struct CalendarView: View {
                         }
                         else if number == 8 {
                             HoursView(ArrayHourUUID: $hourOfDay.twopm, ShowTime: "2pm", RefreshList: $RefreshList).frame(height: 200)
+                         
                         }
                         else if number == 9 {
                             HoursView(ArrayHourUUID: $hourOfDay.threepm, ShowTime: "3pm", RefreshList: $RefreshList).frame(height: 200)

@@ -53,11 +53,14 @@ struct AddNewCanvasView: View {
     
     
     @State private var showingCanvas: Bool = false
+    @State private var showingTypeInterface: Bool = false
     
     
     @State private var typeReminder = TypeReminder.drawing
     @State private var initialUUID: UUID = UUID()
     
+    
+    @State private var REMDescription: String = ""
     var body: some View {
         ZStack {
             
@@ -80,6 +83,14 @@ struct AddNewCanvasView: View {
                     }
                 }
                 
+                
+                if typeReminder.rawValue == TypeReminder.typed.rawValue {
+                    Section {
+                 
+                        TextField("What your reminder / event", text: $REMDescription)
+                    }
+                }
+                
                 Section {
                     DatePicker("Time of event", selection: $eventtimeclass.eventDue, displayedComponents: .hourAndMinute).onChange(of: eventtimeclass.eventDue, perform: {value in
                         if eventtimeclass.eventDue.timeIntervalSince(Date()) < 0 {
@@ -98,8 +109,11 @@ struct AddNewCanvasView: View {
                 
                 
                 
+                
+                
             }
                 NavigationLink(destination: InitialCanvasDrawingView(id: initialUUID, title: canvasTitle), isActive: $showingCanvas) {EmptyView()}.hidden(showingCanvas)
+                NavigationLink(destination: Text("TYPING REMINDER VIEW"), isActive: $showingTypeInterface) {EmptyView()}.hidden(showingTypeInterface)
             }
             .navigationViewStyle(StackNavigationViewStyle())
             .navigationTitle(Text("Add New Canvas"))
@@ -109,7 +123,7 @@ struct AddNewCanvasView: View {
                 Image(systemName: "xmark")
             }), trailing:
                                     Button(action: {
-                if !canvasTitle.isEmpty{
+                if !canvasTitle.isEmpty && typeReminder.rawValue == TypeReminder.drawing.rawValue{
                     let drawing = DrawingCanvas(context: viewContext)
                     let date: Date = (Calendar.current.date(bySettingHour: 0, minute: 0, second: 0 , of: Date())!)
                     
@@ -136,6 +150,36 @@ struct AddNewCanvasView: View {
                     
                     showingCanvas.toggle()
                 }
+                
+                else if !canvasTitle.isEmpty && typeReminder.rawValue == TypeReminder.typed.rawValue && !REMDescription.isEmpty{
+                    let drawing = DrawingCanvas(context: viewContext)
+                    let date: Date = (Calendar.current.date(bySettingHour: 0, minute: 0, second: 0 , of: Date())!)
+                    
+                    let timediff = Int(eventtimeclass.eventDue.timeIntervalSince(date))
+                    print("TIME DIFFERENCE OF \(timediff)")
+                    drawing.title = canvasTitle
+                    drawing.timeEvent = eventtimeclass.eventDue
+                    drawing.id = UUID()
+                    drawing.typeRem = typeReminder.rawValue
+                    drawing.taskDescription = REMDescription
+                    initialUUID = drawing.id!
+                    
+                    do {
+                        AddedNewCanvas.toggle()
+                        try viewContext.save()
+                      //  try viewContext.refreshAllObjects()
+                        
+                    }
+                    catch{
+                        print(error)
+                        print("ERROR COULDNT ADD ITEM")
+                    }
+                    
+                    self.presentationMode.wrappedValue.dismiss()
+                    
+//                    showingTypeInterface.toggle()
+                }
+                
             }, label: {
                 Text("Next")
             }))
