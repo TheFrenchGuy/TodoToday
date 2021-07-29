@@ -55,6 +55,7 @@ struct AddNewCanvasView: View {
     @State private var showingCanvas: Bool = false
     
     
+    @State private var typeReminder = TypeReminder.drawing
     @State private var initialUUID: UUID = UUID()
     
     var body: some View {
@@ -66,6 +67,17 @@ struct AddNewCanvasView: View {
                 Section{
                     TextField("Canvas Title", text: $canvasTitle)
                     
+                }
+                
+                Section {
+                    VStack(alignment: .leading, spacing: 10) {
+                    Text("Type of reminder:")
+                        Picker("What type of reminder will it be", selection: $typeReminder, content: {
+                            ForEach(TypeReminder.allCases, content: { typeRem in
+                                Text(typeRem.rawValue)
+                            })
+                        }).pickerStyle(SegmentedPickerStyle())
+                    }
                 }
                 
                 Section {
@@ -106,6 +118,7 @@ struct AddNewCanvasView: View {
                     drawing.title = canvasTitle
                     drawing.timeEvent = eventtimeclass.eventDue
                     drawing.id = UUID()
+                    drawing.typeRem = typeReminder.rawValue
                     initialUUID = drawing.id!
                     
                     do {

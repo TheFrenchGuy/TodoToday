@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		6028CAFF26AEEACD0062E189 /* InitialCanvasDrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6028CAFE26AEEACD0062E189 /* InitialCanvasDrawingView.swift */; };
 		60689B5826AB24E000ED426F /* HoursView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60689B5726AB24DF00ED426F /* HoursView.swift */; };
+		60C2DF6826B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2DF6626B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift */; };
+		60C2DF6926B2CACD00347CE8 /* DrawingCanvas+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2DF6726B2CACD00347CE8 /* DrawingCanvas+CoreDataProperties.swift */; };
+		60C2DF6B26B2CC8900347CE8 /* TypeReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2DF6A26B2CC8900347CE8 /* TypeReminder.swift */; };
 		60CBECAF26A84E3A0020703D /* ToDoTodayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CBECAE26A84E3A0020703D /* ToDoTodayApp.swift */; };
 		60CBECB126A84E3A0020703D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CBECB026A84E3A0020703D /* ContentView.swift */; };
 		60CBECB326A84E3B0020703D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60CBECB226A84E3B0020703D /* Assets.xcassets */; };
@@ -44,6 +47,9 @@
 /* Begin PBXFileReference section */
 		6028CAFE26AEEACD0062E189 /* InitialCanvasDrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialCanvasDrawingView.swift; sourceTree = "<group>"; };
 		60689B5726AB24DF00ED426F /* HoursView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursView.swift; sourceTree = "<group>"; };
+		60C2DF6626B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrawingCanvas+CoreDataClass.swift"; sourceTree = "<group>"; };
+		60C2DF6726B2CACD00347CE8 /* DrawingCanvas+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrawingCanvas+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		60C2DF6A26B2CC8900347CE8 /* TypeReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeReminder.swift; sourceTree = "<group>"; };
 		60CBECAB26A84E3A0020703D /* ToDoToday.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoToday.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60CBECAE26A84E3A0020703D /* ToDoTodayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTodayApp.swift; sourceTree = "<group>"; };
 		60CBECB026A84E3A0020703D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -206,6 +212,9 @@
 			isa = PBXGroup;
 			children = (
 				60CBECE026A852050020703D /* DrawingCanvasCoreDataModel.xcdatamodeld */,
+				60C2DF6626B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift */,
+				60C2DF6726B2CACD00347CE8 /* DrawingCanvas+CoreDataProperties.swift */,
+				60C2DF6A26B2CC8900347CE8 /* TypeReminder.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -319,14 +328,17 @@
 				60689B5826AB24E000ED426F /* HoursView.swift in Sources */,
 				60CBECB126A84E3A0020703D /* ContentView.swift in Sources */,
 				60E5F35926AD8F1100F1E609 /* CalendarView.swift in Sources */,
+				60C2DF6826B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift in Sources */,
 				60CBECD426A8510E0020703D /* LottieView.swift in Sources */,
 				60CBECC426A8500C0020703D /* SetupCard Screen.swift in Sources */,
+				60C2DF6B26B2CC8900347CE8 /* TypeReminder.swift in Sources */,
 				60CBECAF26A84E3A0020703D /* ToDoTodayApp.swift in Sources */,
 				60CBECDC26A851CB0020703D /* DrawingCanvasView.swift in Sources */,
 				60D0EC9B26B094D0001E98EE /* HourOfDay.swift in Sources */,
 				60CBECE726A8525E0020703D /* TodayCanvasView.swift in Sources */,
 				60CBECC826A850330020703D /* ListTypeSetupView.swift in Sources */,
 				60D0EC9F26B095BA001E98EE /* ForEach with Index Localisations.swift in Sources */,
+				60C2DF6926B2CACD00347CE8 /* DrawingCanvas+CoreDataProperties.swift in Sources */,
 				60CBECCC26A8506B0020703D /* iCloudSyncView.swift in Sources */,
 				60CBECCE26A850840020703D /* TermsandConditionView.swift in Sources */,
 				6028CAFF26AEEACD0062E189 /* InitialCanvasDrawingView.swift in Sources */,

@@ -53,7 +53,6 @@ struct HoursView: View {
                                         
                                         
                                         
-
                                             Button(action: {
                                                 fetchProperties(canvasUUID: drawing.id ?? UUID(), index: index);
                                                 test.toggle();

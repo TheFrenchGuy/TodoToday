@@ -11,32 +11,10 @@ import SwiftUI
 
 
 struct CalendarView: View {
-//    @Binding var midnight: [UUID]
-//    @Binding var oneam: [UUID]
-//    @Binding var twoam: [UUID]
-//    @Binding var threeam: [UUID]
-//    @Binding var fouram: [UUID]
-//    @Binding var fiveam: [UUID]
-//    @Binding var sixam: [UUID]
-//    @Binding var sevenam: [UUID]
-//    @Binding var eightam: [UUID]
-//    @Binding var nineam: [UUID]
-//    @Binding var tenam: [UUID]
-//    @Binding var elevenam: [UUID]
-//    @Binding var twelveam: [UUID]
-//    @Binding var onepm: [UUID]
-//    @Binding var twopm: [UUID]
-//    @Binding var threepm: [UUID]
-//    @Binding var fourpm: [UUID]
-//    @Binding var fivepm: [UUID]
-//    @Binding var sixpm: [UUID]
-//    @Binding var sevenpm: [UUID]
-//    @Binding var eightpm: [UUID]
-//    @Binding var ninepm: [UUID]
-//    @Binding var tenpm: [UUID]
-//    @Binding var elevenpm: [UUID]
-    
     @Binding var RefreshList: Bool
+    
+    @FetchRequest(entity: DrawingCanvas.entity(), sortDescriptors: []) var drawings: FetchedResults<DrawingCanvas>
+    
     
     @EnvironmentObject var hourOfDay: HourOfDay
     
@@ -47,7 +25,6 @@ struct CalendarView: View {
                     ForEach(1...24, id: \.self) {number in
                         
                         if number == 1 {
-                        
                             HoursView(ArrayHourUUID: $hourOfDay.sevenam, ShowTime: "7am", RefreshList: $RefreshList).frame(height: 200)
                             
                             
