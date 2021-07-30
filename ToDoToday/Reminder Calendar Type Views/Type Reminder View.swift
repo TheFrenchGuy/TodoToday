@@ -10,10 +10,12 @@ import SwiftUI
 class updatedTaskDesClass {
     var newTaskDesc: String
     var newTaskTitle: String
+    var newTaskUUID: UUID
     
     init() {
         self.newTaskDesc = ""
         self.newTaskTitle = ""
+        self.newTaskUUID = UUID()
     }
 }
 
@@ -21,7 +23,6 @@ extension updatedTaskDesClass: Equatable {
     static func == (lhs: updatedTaskDesClass, rhs: updatedTaskDesClass) -> Bool {
        
         return lhs.newTaskDesc == rhs.newTaskDesc
-        return lhs.newTaskTitle == rhs.newTaskTitle
         
     }
     

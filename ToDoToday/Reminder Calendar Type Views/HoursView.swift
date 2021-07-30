@@ -96,14 +96,36 @@ struct HoursView: View {
                                                     
                                                 }
                                                 
-                                                //MARK: To be implemented
+                                                
                                                 case TypeReminder.typed.rawValue:
-                                                    TypeReminderView(title: drawing.title ?? "NO TITLE", text: drawing.taskDescription ?? "NO DESCRIPTION", remUUID: drawing.id ?? UUID())
+                                                TypeReminderView(title: drawing.title ?? "NO TITLE", text: drawing.taskDescription ?? "NO DESCRIPTION", remUUID: drawing.id ?? UUID()) .contextMenu { Button(action:{
+                                                    viewContext.delete(drawing)
+                                                    do {
+                                                        try self.viewContext.save()
+                                                        print("DELETED ITEM")
+                                                    } catch {
+                                                        print(error)
+                                                    }
+                                                }) {
+                                                    Text("Delete me")
+                                                }}
+                                                
 //                                                    .onAppear(perform: {currentTitle = drawing.title ?? "NO TITLE"; currentTask = drawing.taskDescription ?? "NO DESCRIPTION"})
                                                 
                                                 case TypeReminder.image.rawValue:
-                                                    Text("Image Reminder")
-                                                
+                                                ImageReminderView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID()).contextMenu { Button(action:{
+                                                    viewContext.delete(drawing)
+                                                    deleteImage(imageName: String("\(drawing.id)"))
+                                                    do {
+                                                        try self.viewContext.save()
+                                                        print("DELETED ITEM")
+                                                    } catch {
+                                                        print(error)
+                                                    }
+                                                }) {
+                                                    Text("Delete me")
+                                                }}
+                                                //MARK: To be implemented
                                                 case TypeReminder.audio.rawValue:
                                                     Text("Audio Reminder")
                                                 
