@@ -65,6 +65,7 @@ struct AddNewCanvasView: View {
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State private var selectedImage: UIImage?
     @State private var isImagePickerDisplay = false
+    @State private var isCameraPickerDisplay = false
     
     
     let fileManager = FileManager.default
@@ -131,14 +132,34 @@ struct AddNewCanvasView: View {
                                             .cornerRadius(20)
                                             .padding(.horizontal)
                                         }
+                            
+                            Button(action: {
+                                            self.isCameraPickerDisplay = true
+                                        }) {
+                                            HStack {
+                                                Image(systemName: "camera.fill")
+                                                    .font(.system(size: 20))
+                                                    
+                                                Text("Camera")
+                                                    .font(.headline)
+                                            }
+                                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 50)
+                                            .background(Color.blue)
+                                            .foregroundColor(.white)
+                                            .cornerRadius(20)
+                                            .padding(.horizontal)
+                                        }
                         }.sheet(isPresented: self.$isImagePickerDisplay) {
 //                            ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image)
                             ImagePickerView(selectedImage: self.$selectedImage) { didSelectItem in
                                 isImagePickerDisplay = false
                             }
-                        }.onAppear(perform: {
-                           
-                        })
+                            
+                            
+                        }
+                        .sheet(isPresented: self.$isCameraPickerDisplay) {
+                            PhotoPicker(sourceType: .camera, selectedImage: self.$selectedImage)
+                        }
                 }
                 
                 Section {

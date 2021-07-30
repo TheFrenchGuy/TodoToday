@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		6025514726B30AD500D9F764 /* Type Reminder View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6025514626B30AD500D9F764 /* Type Reminder View.swift */; };
-		6025514A26B3F00E00D9F764 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6025514926B3F00E00D9F764 /* ImagePicker.swift */; };
 		6025514C26B4088000D9F764 /* ImageReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6025514B26B4088000D9F764 /* ImageReminderView.swift */; };
 		6028CAFF26AEEACD0062E189 /* InitialCanvasDrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6028CAFE26AEEACD0062E189 /* InitialCanvasDrawingView.swift */; };
+		6065754E26B45D0F00EA0F4D /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6065754D26B45D0F00EA0F4D /* ImagePicker.swift */; };
 		60689B5826AB24E000ED426F /* HoursView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60689B5726AB24DF00ED426F /* HoursView.swift */; };
 		60C2DF6826B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2DF6626B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift */; };
 		60C2DF6926B2CACD00347CE8 /* DrawingCanvas+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2DF6726B2CACD00347CE8 /* DrawingCanvas+CoreDataProperties.swift */; };
@@ -49,9 +49,9 @@
 
 /* Begin PBXFileReference section */
 		6025514626B30AD500D9F764 /* Type Reminder View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Type Reminder View.swift"; sourceTree = "<group>"; };
-		6025514926B3F00E00D9F764 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImagePicker.swift; path = ../../../../../../../../Applications/ImagePicker.swift; sourceTree = "<group>"; };
 		6025514B26B4088000D9F764 /* ImageReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageReminderView.swift; sourceTree = "<group>"; };
 		6028CAFE26AEEACD0062E189 /* InitialCanvasDrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialCanvasDrawingView.swift; sourceTree = "<group>"; };
+		6065754D26B45D0F00EA0F4D /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		60689B5726AB24DF00ED426F /* HoursView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursView.swift; sourceTree = "<group>"; };
 		60C2DF6626B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrawingCanvas+CoreDataClass.swift"; sourceTree = "<group>"; };
 		60C2DF6726B2CACD00347CE8 /* DrawingCanvas+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrawingCanvas+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -123,7 +123,7 @@
 		6025514826B3EFF000D9F764 /* Image Picker Views REM */ = {
 			isa = PBXGroup;
 			children = (
-				6025514926B3F00E00D9F764 /* ImagePicker.swift */,
+				6065754D26B45D0F00EA0F4D /* ImagePicker.swift */,
 				6025514B26B4088000D9F764 /* ImageReminderView.swift */,
 			);
 			path = "Image Picker Views REM";
@@ -363,11 +363,11 @@
 				6025514C26B4088000D9F764 /* ImageReminderView.swift in Sources */,
 				60E5F35926AD8F1100F1E609 /* CalendarView.swift in Sources */,
 				60C2DF6826B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift in Sources */,
-				6025514A26B3F00E00D9F764 /* ImagePicker.swift in Sources */,
 				60CBECD426A8510E0020703D /* LottieView.swift in Sources */,
 				60CBECC426A8500C0020703D /* SetupCard Screen.swift in Sources */,
 				60C2DF6B26B2CC8900347CE8 /* TypeReminder.swift in Sources */,
 				60CBECAF26A84E3A0020703D /* ToDoTodayApp.swift in Sources */,
+				6065754E26B45D0F00EA0F4D /* ImagePicker.swift in Sources */,
 				6025514726B30AD500D9F764 /* Type Reminder View.swift in Sources */,
 				60CBECDC26A851CB0020703D /* DrawingCanvasView.swift in Sources */,
 				60D0EC9B26B094D0001E98EE /* HourOfDay.swift in Sources */,
