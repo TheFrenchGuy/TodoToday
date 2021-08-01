@@ -40,6 +40,7 @@ struct AddNewCanvasView: View {
     @Environment (\.managedObjectContext) var viewContext
     @Environment (\.presentationMode) var presentationMode
     
+    
     @State private var canvasTitle = ""
     
     
@@ -75,6 +76,8 @@ struct AddNewCanvasView: View {
     
     @State var showPHLibAuth: Bool = false
 
+    
+    @StateObject private var audioRec = AudioRecorder()
     
     
     var body: some View {
@@ -160,6 +163,12 @@ struct AddNewCanvasView: View {
                         .sheet(isPresented: self.$isCameraPickerDisplay) {
                             PhotoPicker(sourceType: .camera, selectedImage: self.$selectedImage)
                         }
+                }
+                
+                
+                if typeReminder.rawValue == TypeReminder.audio.rawValue {
+                    AudioRecorderView()
+                    Text("\(audioRec.newURL)")
                 }
                 
                 Section {
@@ -250,31 +259,36 @@ struct AddNewCanvasView: View {
                     
 //                    showingTypeInterface.toggle()
                 }
-                    else if !canvasTitle.isEmpty && typeReminder.rawValue == TypeReminder.image.rawValue {
-                        let drawing = DrawingCanvas(context: viewContext)
-                        let date: Date = (Calendar.current.date(bySettingHour: 0, minute: 0, second: 0 , of: Date())!)
+                else if !canvasTitle.isEmpty && typeReminder.rawValue == TypeReminder.image.rawValue {
+                    let drawing = DrawingCanvas(context: viewContext)
+                    let date: Date = (Calendar.current.date(bySettingHour: 0, minute: 0, second: 0 , of: Date())!)
+                    
+                    let timediff = Int(eventtimeclass.eventDue.timeIntervalSince(date))
+                    print("TIME DIFFERENCE OF \(timediff)")
+                    drawing.title = canvasTitle
+                    drawing.timeEvent = eventtimeclass.eventDue
+                    drawing.id = initialUUID
+                    drawing.typeRem = typeReminder.rawValue
+                   
+                    print("Image saved as name: \(saveImage(image: self.selectedImage!, id: initialUUID) ?? "IMAGE SAVING ERRROR")") //DEBUG ONLY SINCE IT IS ALREADY PRINTED TO THE CONSOLE WHILE RUING THE FUNCTION
+                    
+                    do {
+                        AddedNewCanvas.toggle()
+                        try viewContext.save()
+                      //  try viewContext.refreshAllObjects()
                         
-                        let timediff = Int(eventtimeclass.eventDue.timeIntervalSince(date))
-                        print("TIME DIFFERENCE OF \(timediff)")
-                        drawing.title = canvasTitle
-                        drawing.timeEvent = eventtimeclass.eventDue
-                        drawing.id = initialUUID
-                        drawing.typeRem = typeReminder.rawValue
-                       
-                        print("Image saved as name: \(saveImage(image: self.selectedImage!, id: initialUUID) ?? "IMAGE SAVING ERRROR")") //DEBUG ONLY SINCE IT IS ALREADY PRINTED TO THE CONSOLE WHILE RUING THE FUNCTION
-                        
-                        do {
-                            AddedNewCanvas.toggle()
-                            try viewContext.save()
-                          //  try viewContext.refreshAllObjects()
-                            
-                        }
-                        catch{
-                            print(error)
-                            print("ERROR COULDNT ADD ITEM")
-                        }
-                        
-                        self.presentationMode.wrappedValue.dismiss()}
+                    }
+                    catch{
+                        print(error)
+                        print("ERROR COULDNT ADD ITEM")
+                    }
+                    
+                    self.presentationMode.wrappedValue.dismiss()}
+                
+                
+                else if !canvasTitle.isEmpty && typeReminder.rawValue == TypeReminder.audio.rawValue {
+                    
+                }
                     
                     
                     
@@ -284,6 +298,7 @@ struct AddNewCanvasView: View {
                 
         }
         }
+        .environmentObject(audioRec)
     }
     
     //MARK: Save the Canvas as an UIImage

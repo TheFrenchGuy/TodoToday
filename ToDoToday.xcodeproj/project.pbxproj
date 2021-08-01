@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6025514726B30AD500D9F764 /* Type Reminder View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6025514626B30AD500D9F764 /* Type Reminder View.swift */; };
+		6025514726B30AD500D9F764 /* TypeReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6025514626B30AD500D9F764 /* TypeReminderView.swift */; };
 		6025514C26B4088000D9F764 /* ImageReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6025514B26B4088000D9F764 /* ImageReminderView.swift */; };
 		6028CAFF26AEEACD0062E189 /* InitialCanvasDrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6028CAFE26AEEACD0062E189 /* InitialCanvasDrawingView.swift */; };
 		6065754E26B45D0F00EA0F4D /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6065754D26B45D0F00EA0F4D /* ImagePicker.swift */; };
+		6065755526B6BE7300EA0F4D /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6065755426B6BE7300EA0F4D /* AudioRecorder.swift */; };
+		6065755726B6BF0300EA0F4D /* AudioRecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6065755626B6BF0300EA0F4D /* AudioRecorderView.swift */; };
 		60689B5826AB24E000ED426F /* HoursView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60689B5726AB24DF00ED426F /* HoursView.swift */; };
 		60C2DF6826B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2DF6626B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift */; };
 		60C2DF6926B2CACD00347CE8 /* DrawingCanvas+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2DF6726B2CACD00347CE8 /* DrawingCanvas+CoreDataProperties.swift */; };
@@ -48,10 +50,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6025514626B30AD500D9F764 /* Type Reminder View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Type Reminder View.swift"; sourceTree = "<group>"; };
+		6025514626B30AD500D9F764 /* TypeReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeReminderView.swift; sourceTree = "<group>"; };
 		6025514B26B4088000D9F764 /* ImageReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageReminderView.swift; sourceTree = "<group>"; };
 		6028CAFE26AEEACD0062E189 /* InitialCanvasDrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialCanvasDrawingView.swift; sourceTree = "<group>"; };
 		6065754D26B45D0F00EA0F4D /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		6065755426B6BE7300EA0F4D /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
+		6065755626B6BF0300EA0F4D /* AudioRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderView.swift; sourceTree = "<group>"; };
 		60689B5726AB24DF00ED426F /* HoursView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursView.swift; sourceTree = "<group>"; };
 		60C2DF6626B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrawingCanvas+CoreDataClass.swift"; sourceTree = "<group>"; };
 		60C2DF6726B2CACD00347CE8 /* DrawingCanvas+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrawingCanvas+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -129,6 +133,31 @@
 			path = "Image Picker Views REM";
 			sourceTree = "<group>";
 		};
+		6065754F26B554D100EA0F4D /* Drawing Picker Views REM */ = {
+			isa = PBXGroup;
+			children = (
+				60CBECEE26A852BA0020703D /* DrawingView.swift */,
+			);
+			path = "Drawing Picker Views REM";
+			sourceTree = "<group>";
+		};
+		6065755026B554E800EA0F4D /* Typing Picker Views REM */ = {
+			isa = PBXGroup;
+			children = (
+				6025514626B30AD500D9F764 /* TypeReminderView.swift */,
+			);
+			path = "Typing Picker Views REM";
+			sourceTree = "<group>";
+		};
+		6065755126B6BE3400EA0F4D /* Recording  REM */ = {
+			isa = PBXGroup;
+			children = (
+				6065755426B6BE7300EA0F4D /* AudioRecorder.swift */,
+				6065755626B6BF0300EA0F4D /* AudioRecorderView.swift */,
+			);
+			path = "Recording  REM";
+			sourceTree = "<group>";
+		};
 		60CBECA226A84E3A0020703D = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +224,9 @@
 		60CBECC226A84FDC0020703D /* Reminder Calendar Type Views */ = {
 			isa = PBXGroup;
 			children = (
+				6065755126B6BE3400EA0F4D /* Recording  REM */,
+				6065755026B554E800EA0F4D /* Typing Picker Views REM */,
+				6065754F26B554D100EA0F4D /* Drawing Picker Views REM */,
 				6025514826B3EFF000D9F764 /* Image Picker Views REM */,
 				6025514526B2DA1900D9F764 /* Initial Views */,
 				6025514426B2D9F900D9F764 /* Adding New Reminder  */,
@@ -204,10 +236,8 @@
 				60CBECDA26A851B50020703D /* View Controller UIKit */,
 				60CBECE626A8525E0020703D /* TodayCanvasView.swift */,
 				60CBECE826A8527E0020703D /* CalendarReminderView.swift */,
-				60CBECEE26A852BA0020703D /* DrawingView.swift */,
 				60689B5726AB24DF00ED426F /* HoursView.swift */,
 				60E5F35826AD8F1100F1E609 /* CalendarView.swift */,
-				6025514626B30AD500D9F764 /* Type Reminder View.swift */,
 			);
 			path = "Reminder Calendar Type Views";
 			sourceTree = "<group>";
@@ -361,6 +391,7 @@
 				60689B5826AB24E000ED426F /* HoursView.swift in Sources */,
 				60CBECB126A84E3A0020703D /* ContentView.swift in Sources */,
 				6025514C26B4088000D9F764 /* ImageReminderView.swift in Sources */,
+				6065755726B6BF0300EA0F4D /* AudioRecorderView.swift in Sources */,
 				60E5F35926AD8F1100F1E609 /* CalendarView.swift in Sources */,
 				60C2DF6826B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift in Sources */,
 				60CBECD426A8510E0020703D /* LottieView.swift in Sources */,
@@ -368,7 +399,7 @@
 				60C2DF6B26B2CC8900347CE8 /* TypeReminder.swift in Sources */,
 				60CBECAF26A84E3A0020703D /* ToDoTodayApp.swift in Sources */,
 				6065754E26B45D0F00EA0F4D /* ImagePicker.swift in Sources */,
-				6025514726B30AD500D9F764 /* Type Reminder View.swift in Sources */,
+				6025514726B30AD500D9F764 /* TypeReminderView.swift in Sources */,
 				60CBECDC26A851CB0020703D /* DrawingCanvasView.swift in Sources */,
 				60D0EC9B26B094D0001E98EE /* HourOfDay.swift in Sources */,
 				60CBECE726A8525E0020703D /* TodayCanvasView.swift in Sources */,
@@ -381,6 +412,7 @@
 				60E2E64B26A85E8E00B1BAA6 /* DisableModalDismiss.swift in Sources */,
 				60CBECED26A852A70020703D /* AddNewCanvasView.swift in Sources */,
 				60D0EC9D26B09559001E98EE /* Array Extension.swift in Sources */,
+				6065755526B6BE7300EA0F4D /* AudioRecorder.swift in Sources */,
 				60CBECE226A852050020703D /* DrawingCanvasCoreDataModel.xcdatamodeld in Sources */,
 				60E2E64926A85E4500B1BAA6 /* undismissableVC.swift in Sources */,
 				60CBECEF26A852BA0020703D /* DrawingView.swift in Sources */,

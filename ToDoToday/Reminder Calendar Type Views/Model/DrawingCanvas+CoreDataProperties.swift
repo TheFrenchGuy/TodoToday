@@ -23,6 +23,8 @@ extension DrawingCanvas {
     
     @NSManaged public var taskDescription: String?
     @NSManaged public var taskColor: String?
+    
+    @NSManaged public var audioREMurl:String?
 
 }
 

@@ -22,6 +22,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>GIVE US YOUR PHOTOS</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Well I need to record how well your voice sounds</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>I NEED ACCESS TO YOUR PHOTOS</string>
 	<key>UIApplicationSceneManifest</key>
