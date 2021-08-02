@@ -288,6 +288,30 @@ struct AddNewCanvasView: View {
                 
                 else if !canvasTitle.isEmpty && typeReminder.rawValue == TypeReminder.audio.rawValue {
                     
+                    let drawing = DrawingCanvas(context: viewContext)
+                    let date: Date = (Calendar.current.date(bySettingHour: 0, minute: 0, second: 0 , of: Date())!)
+                    
+                    let timediff = Int(eventtimeclass.eventDue.timeIntervalSince(date))
+                    print("TIME DIFFERENCE OF \(timediff)")
+                    drawing.title = canvasTitle
+                    drawing.timeEvent = eventtimeclass.eventDue
+                    drawing.id = initialUUID
+                    drawing.typeRem = typeReminder.rawValue
+                   
+                    drawing.audioREMurl = audioRec.newURL
+                    
+                    do {
+                        AddedNewCanvas.toggle()
+                        try viewContext.save()
+                      //  try viewContext.refreshAllObjects()
+                        
+                    }
+                    catch{
+                        print(error)
+                        print("ERROR COULDNT ADD ITEM")
+                    }
+                    
+                    self.presentationMode.wrappedValue.dismiss()
                 }
                     
                     

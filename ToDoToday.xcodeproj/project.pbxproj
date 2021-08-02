@@ -14,6 +14,8 @@
 		6065755526B6BE7300EA0F4D /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6065755426B6BE7300EA0F4D /* AudioRecorder.swift */; };
 		6065755726B6BF0300EA0F4D /* AudioRecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6065755626B6BF0300EA0F4D /* AudioRecorderView.swift */; };
 		60689B5826AB24E000ED426F /* HoursView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60689B5726AB24DF00ED426F /* HoursView.swift */; };
+		60C1E05126B880560040D425 /* Audio Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C1E05026B880560040D425 /* Audio Player.swift */; };
+		60C1E05326B880C90040D425 /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C1E05226B880C90040D425 /* AudioPlayerView.swift */; };
 		60C2DF6826B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2DF6626B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift */; };
 		60C2DF6926B2CACD00347CE8 /* DrawingCanvas+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2DF6726B2CACD00347CE8 /* DrawingCanvas+CoreDataProperties.swift */; };
 		60C2DF6B26B2CC8900347CE8 /* TypeReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2DF6A26B2CC8900347CE8 /* TypeReminder.swift */; };
@@ -57,6 +59,8 @@
 		6065755426B6BE7300EA0F4D /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		6065755626B6BF0300EA0F4D /* AudioRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderView.swift; sourceTree = "<group>"; };
 		60689B5726AB24DF00ED426F /* HoursView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursView.swift; sourceTree = "<group>"; };
+		60C1E05026B880560040D425 /* Audio Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Audio Player.swift"; sourceTree = "<group>"; };
+		60C1E05226B880C90040D425 /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
 		60C2DF6626B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrawingCanvas+CoreDataClass.swift"; sourceTree = "<group>"; };
 		60C2DF6726B2CACD00347CE8 /* DrawingCanvas+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrawingCanvas+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		60C2DF6A26B2CC8900347CE8 /* TypeReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeReminder.swift; sourceTree = "<group>"; };
@@ -154,6 +158,8 @@
 			children = (
 				6065755426B6BE7300EA0F4D /* AudioRecorder.swift */,
 				6065755626B6BF0300EA0F4D /* AudioRecorderView.swift */,
+				60C1E05026B880560040D425 /* Audio Player.swift */,
+				60C1E05226B880C90040D425 /* AudioPlayerView.swift */,
 			);
 			path = "Recording  REM";
 			sourceTree = "<group>";
@@ -395,6 +401,7 @@
 				60E5F35926AD8F1100F1E609 /* CalendarView.swift in Sources */,
 				60C2DF6826B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift in Sources */,
 				60CBECD426A8510E0020703D /* LottieView.swift in Sources */,
+				60C1E05326B880C90040D425 /* AudioPlayerView.swift in Sources */,
 				60CBECC426A8500C0020703D /* SetupCard Screen.swift in Sources */,
 				60C2DF6B26B2CC8900347CE8 /* TypeReminder.swift in Sources */,
 				60CBECAF26A84E3A0020703D /* ToDoTodayApp.swift in Sources */,
@@ -412,6 +419,7 @@
 				60E2E64B26A85E8E00B1BAA6 /* DisableModalDismiss.swift in Sources */,
 				60CBECED26A852A70020703D /* AddNewCanvasView.swift in Sources */,
 				60D0EC9D26B09559001E98EE /* Array Extension.swift in Sources */,
+				60C1E05126B880560040D425 /* Audio Player.swift in Sources */,
 				6065755526B6BE7300EA0F4D /* AudioRecorder.swift in Sources */,
 				60CBECE226A852050020703D /* DrawingCanvasCoreDataModel.xcdatamodeld in Sources */,
 				60E2E64926A85E4500B1BAA6 /* undismissableVC.swift in Sources */,

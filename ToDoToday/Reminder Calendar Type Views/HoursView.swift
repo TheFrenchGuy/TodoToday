@@ -127,7 +127,18 @@ struct HoursView: View {
                                                 }}
                                                 //MARK: To be implemented
                                                 case TypeReminder.audio.rawValue:
-                                                    Text("Audio Reminder")
+                                                AudioPlayerView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID(), audioURL: drawing.audioREMurl ?? "NO URL").contextMenu { Button(action:{
+                                                    viewContext.delete(drawing)
+                                                    deleteAudio(audioURL: drawing.audioREMurl ?? "NO URL")
+                                                    do {
+                                                        try self.viewContext.save()
+                                                        print("DELETED ITEM")
+                                                    } catch {
+                                                        print(error)
+                                                    }
+                                                }) {
+                                                    Text("Delete me")
+                                                }}
                                                 
                                                 default:
                                                     Text("Other type")
@@ -252,6 +263,25 @@ struct HoursView: View {
                 }
         }
             }
+    
+    
+    func deleteAudio(audioURL: String) {
+        let audioPath = documentsPath.appendingPathComponent(audioURL)
+        
+        
+        
+        guard fileManager.fileExists(atPath: audioPath.path) else {
+            print("Audio does not exist at path: \(String(describing: audioPath))")
+            return
+        }
+        
+        do {
+            try fileManager.removeItem(at: audioPath)
+            print("\(String(describing: audioPath)) was deleted")
+        } catch let error as NSError {
+            print("Could not delete \(String(describing: audioPath)): \(error)")
+        }
+    }
         
     }
     

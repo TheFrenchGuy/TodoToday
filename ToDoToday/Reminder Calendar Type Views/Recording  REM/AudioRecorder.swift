@@ -12,7 +12,9 @@ import AVFoundation
 
 
 class updatedTaskAudioClass: ObservableObject {
-    @Published var newURL: URL = URL(string: "http://nshipster.com/")!
+//    @Published var newURL: URL = URL(string: "http://nshipster.com/")!
+    
+    @Published var newURL: String = "NO URL"
     
 }
 
@@ -23,7 +25,8 @@ class AudioRecorder: ObservableObject {
     
     var audioRecorder: AVAudioRecorder!
     
-    @Published var newURL: URL = URL(string: "http://nshipster.com/")!
+//    @Published var newURL: URL = URL(string: "http://nshipster.com/")!
+    @Published var newURL: String = "NO URL"
    // @EnvironmentObject var updatedTaskAudio: updatedTaskAudioClass
     var recording = false {
             didSet {
@@ -57,7 +60,7 @@ class AudioRecorder: ObservableObject {
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
             audioRecorder.record()
             
-            newURL = audioFilename
+            newURL = String("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
             
             print("RECORDING SAVED \(audioFilename)")
 
