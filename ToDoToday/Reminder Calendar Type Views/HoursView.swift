@@ -90,9 +90,11 @@ struct HoursView: View {
                                                         } catch {
                                                             print(error)
                                                         }
+                                                        RefreshList.toggle()
                                                     }) {
                                                         Text("Delete me")
                                                     }
+                                                    
                                                     
                                                 }
                                                 
@@ -106,6 +108,7 @@ struct HoursView: View {
                                                     } catch {
                                                         print(error)
                                                     }
+                                                    RefreshList.toggle()
                                                 }) {
                                                     Text("Delete me")
                                                 }}
@@ -122,10 +125,10 @@ struct HoursView: View {
                                                     } catch {
                                                         print(error)
                                                     }
+                                                    RefreshList.toggle()
                                                 }) {
                                                     Text("Delete me")
                                                 }}
-                                                //MARK: To be implemented
                                                 case TypeReminder.audio.rawValue:
                                                 AudioPlayerView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID(), audioURL: drawing.audioREMurl ?? "NO URL").contextMenu { Button(action:{
                                                     viewContext.delete(drawing)
@@ -133,15 +136,30 @@ struct HoursView: View {
                                                     do {
                                                         try self.viewContext.save()
                                                         print("DELETED ITEM")
+                                                        
                                                     } catch {
                                                         print(error)
                                                     }
+                                                    RefreshList.toggle()
                                                 }) {
                                                     Text("Delete me")
                                                 }}
                                                 
                                                 default:
                                                     Text("Other type")
+                                                    .contextMenu { Button(action:{
+                                                        viewContext.delete(drawing)
+                                                        deleteImage(imageName: String("\(drawing.id)"))
+                                                        do {
+                                                            try self.viewContext.save()
+                                                            print("DELETED ITEM")
+                                                        } catch {
+                                                            print(error)
+                                                        }
+                                                        RefreshList.toggle()
+                                                    }) {
+                                                        Text("Delete me")
+                                                    }}
                                                 
                                             }
                                 

@@ -557,6 +557,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ToDoToday/Preview Content\"";
 				DEVELOPMENT_TEAM = P69D93MRT6;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = ToDoToday/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -582,6 +583,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ToDoToday/Preview Content\"";
 				DEVELOPMENT_TEAM = P69D93MRT6;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = ToDoToday/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
