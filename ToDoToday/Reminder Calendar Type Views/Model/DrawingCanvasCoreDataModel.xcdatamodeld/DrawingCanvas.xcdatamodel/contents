@@ -4,13 +4,14 @@
         <attribute name="audioREMurl" optional="YES" attributeType="String"/>
         <attribute name="canvasData" optional="YES" attributeType="Binary"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="taskColor" optional="YES" attributeType="String"/>
+        <attribute name="tabColor" optional="YES" attributeType="Transformable" valueTransformerName="SerializableColorTransformer" customClassName="SerializableColor" storedInTruthFile="YES"/>
+        <attribute name="taskColorHex" optional="YES" attributeType="String"/>
         <attribute name="taskDescription" optional="YES" attributeType="String"/>
         <attribute name="timeEvent" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String" spotlightIndexingEnabled="YES"/>
         <attribute name="typeRem" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="DrawingCanvas" positionX="-63" positionY="-18" width="128" height="149"/>
+        <element name="DrawingCanvas" positionX="-63" positionY="-18" width="128" height="164"/>
     </elements>
 </model>

@@ -25,7 +25,8 @@ extension DrawingCanvas {
     @NSManaged public var taskColor: String?
     
     @NSManaged public var audioREMurl:String?
-
+    
+    @NSManaged public var tabColor: SerializableColor?
 }
 
 extension DrawingCanvas : Identifiable {
@@ -39,6 +40,14 @@ extension DrawingCanvas : Identifiable {
             TypeReminder(rawValue: typeRem) ?? .drawing
         }
     }
+    
+//    var tabcolorenum: TabColor {
+//        set {
+//            tabColor = newValue.rawValue
+//        } get {
+//            TabColor(rawValue: tabColor) ?? .CClear
+//        }
+//    }
 }
 
 

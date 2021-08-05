@@ -79,7 +79,7 @@ struct HoursView: View {
                                                         
                                                     
                         //                            Text("\(drawing.timeEvent ?? Date())")
-
+                                                        Circle().fill(Color(drawing.tabColor?.uiColor ?? .red))
                                                 }
                                                 .contextMenu { Button(action: {
                                                         viewContext.delete(drawing)

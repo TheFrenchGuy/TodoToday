@@ -80,6 +80,12 @@ struct AddNewCanvasView: View {
     @StateObject private var audioRec = AudioRecorder()
     
     
+    @State private var colorSelected: String = "red"
+    @State private var customColor:Color = Color.green
+    
+  
+    
+    
     var body: some View {
         ZStack {
             
@@ -183,6 +189,12 @@ struct AddNewCanvasView: View {
                     Alert(title: Text("Well if your trying to set a due date in the past you are late"))
                 }
                 
+                Section {
+                 //   InitialColorPicker(selection: $colorSelected, customColor: $customColor)
+                    ColorPicker(selection: $customColor, label: {EmptyView()})
+                    
+                }
+                
                 
                 
                 
@@ -214,6 +226,8 @@ struct AddNewCanvasView: View {
                     drawing.id = UUID()
                     drawing.typeRem = typeReminder.rawValue
                     initialUUID = drawing.id!
+                    drawing.tabColor = SerializableColor.init(from: customColor)
+                    //SerializableColorTransformer().transformedValue(customColor) as! SerializableColor
                     
                     do {
                         AddedNewCanvas.toggle()
@@ -353,6 +367,27 @@ struct AddNewCanvasView: View {
               return nil
           }
       }
+    
+    //MARK: This will conver the hex to string
+    func hexStringToUIColor (hex:String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+        if ((cString.count) != 6) {
+            return UIColor.gray
+        }
+        var rgbValue:UInt64 = 0
+        Scanner(string: cString).scanHexInt64(&rgbValue)
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    
+    
 }
 
 //struct AddNewCanvasView_Previews: PreviewProvider {
