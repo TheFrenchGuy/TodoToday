@@ -12,12 +12,14 @@ struct AudioPlayerView: View {
     var title: String
     var remUUID: UUID
     var audioURL: String
+    var tabColor: UIColor
     
     @ObservedObject var audioPlayer = AudioPlayer()
     
     var body: some View {
         HStack {
 //            Text("\(audioURL.lastPathComponent)")
+            
             Text("\(audioURL)")
             Spacer()
             if audioPlayer.isPlaying == false {
@@ -35,6 +37,7 @@ struct AudioPlayerView: View {
                         .imageScale(.large)
                 }
             }
+            Circle().fill(Color(tabColor))
         }
     }
 }

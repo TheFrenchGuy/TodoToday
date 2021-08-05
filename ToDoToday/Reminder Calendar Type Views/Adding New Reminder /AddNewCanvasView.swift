@@ -190,8 +190,8 @@ struct AddNewCanvasView: View {
                 }
                 
                 Section {
-                 //   InitialColorPicker(selection: $colorSelected, customColor: $customColor)
-                    ColorPicker(selection: $customColor, label: {EmptyView()})
+                      InitialColorPicker(customColor: $customColor)
+//                    ColorPicker(selection: $customColor, label: {EmptyView()})
                     
                 }
                 
@@ -257,6 +257,7 @@ struct AddNewCanvasView: View {
                     drawing.typeRem = typeReminder.rawValue
                     drawing.taskDescription = REMDescription
                     initialUUID = drawing.id!
+                    drawing.tabColor = SerializableColor.init(from: customColor)
                     
                     do {
                         AddedNewCanvas.toggle()
@@ -283,6 +284,7 @@ struct AddNewCanvasView: View {
                     drawing.timeEvent = eventtimeclass.eventDue
                     drawing.id = initialUUID
                     drawing.typeRem = typeReminder.rawValue
+                    drawing.tabColor = SerializableColor.init(from: customColor)
                    
                     print("Image saved as name: \(saveImage(image: self.selectedImage!, id: initialUUID) ?? "IMAGE SAVING ERRROR")") //DEBUG ONLY SINCE IT IS ALREADY PRINTED TO THE CONSOLE WHILE RUING THE FUNCTION
                     
@@ -313,6 +315,7 @@ struct AddNewCanvasView: View {
                     drawing.typeRem = typeReminder.rawValue
                    
                     drawing.audioREMurl = audioRec.newURL
+                    drawing.tabColor = SerializableColor.init(from: customColor)
                     
                     do {
                         AddedNewCanvas.toggle()

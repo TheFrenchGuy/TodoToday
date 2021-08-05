@@ -33,6 +33,7 @@ struct TypeReminderView: View {
      var title: String
      var text: String
      var remUUID: UUID
+     var tabColor: UIColor
     
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -52,6 +53,7 @@ struct TypeReminderView: View {
                 VStack {
                     Text(title)
                     Text(text)
+                    Circle().fill(Color(tabColor))
                 }
             }.sheet(isPresented: $showSheet) {
                 VStack {

@@ -100,7 +100,7 @@ struct HoursView: View {
                                                 
                                                 
                                                 case TypeReminder.typed.rawValue:
-                                                TypeReminderView(title: drawing.title ?? "NO TITLE", text: drawing.taskDescription ?? "NO DESCRIPTION", remUUID: drawing.id ?? UUID()) .contextMenu { Button(action:{
+                                                TypeReminderView(title: drawing.title ?? "NO TITLE", text: drawing.taskDescription ?? "NO DESCRIPTION", remUUID: drawing.id ?? UUID(), tabColor: drawing.tabColor?.uiColor ?? .red) .contextMenu { Button(action:{
                                                     viewContext.delete(drawing)
                                                     do {
                                                         try self.viewContext.save()
@@ -116,7 +116,7 @@ struct HoursView: View {
 //                                                    .onAppear(perform: {currentTitle = drawing.title ?? "NO TITLE"; currentTask = drawing.taskDescription ?? "NO DESCRIPTION"})
                                                 
                                                 case TypeReminder.image.rawValue:
-                                                ImageReminderView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID()).contextMenu { Button(action:{
+                                                ImageReminderView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID(), tabColor: drawing.tabColor?.uiColor ?? .red).contextMenu { Button(action:{
                                                     viewContext.delete(drawing)
                                                     deleteImage(imageName: String("\(drawing.id)"))
                                                     do {
@@ -130,7 +130,7 @@ struct HoursView: View {
                                                     Text("Delete me")
                                                 }}
                                                 case TypeReminder.audio.rawValue:
-                                                AudioPlayerView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID(), audioURL: drawing.audioREMurl ?? "NO URL").contextMenu { Button(action:{
+                                                AudioPlayerView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID(), audioURL: drawing.audioREMurl ?? "NO URL", tabColor: drawing.tabColor?.uiColor ?? .red).contextMenu { Button(action:{
                                                     viewContext.delete(drawing)
                                                     deleteAudio(audioURL: drawing.audioREMurl ?? "NO URL")
                                                     do {

@@ -10,7 +10,7 @@ import SwiftUI
 struct ImageReminderView: View {
     var title: String
     var remUUID: UUID
-    
+    var tabColor: UIColor
     
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -34,6 +34,7 @@ struct ImageReminderView: View {
 
                 
                 }
+                Circle().fill(Color(tabColor))
             }.sheet(isPresented: $showSheet) {
                 Image(uiImage: fetchImage(imageName: String("\(updatedTask.newTaskUUID)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit().frame(width: 150, height: 150)
                     .keyboardShortcut("l", modifiers: .command)

@@ -9,9 +9,9 @@ import SwiftUI
 
 struct InitialColorPicker: View {
     
-    @State private var tabColorInit = TabColor.CRed
+    @State private var tabColorInit = TabColor.Amethyst
     
-    @Binding var selection: String
+    @State var selection: String = "none"
     
     
     @Binding var customColor: Color
@@ -33,6 +33,7 @@ struct InitialColorPicker: View {
                             .frame(width: 25, height: 25)
                             .onTapGesture(perform: {
                                 selection = colorType.rawValue
+                                customColor = Color(colorType.associatedColor)
                             })
                         
                         if selection == colorType.rawValue {

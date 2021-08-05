@@ -11,6 +11,8 @@
 		6025514726B30AD500D9F764 /* TypeReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6025514626B30AD500D9F764 /* TypeReminderView.swift */; };
 		6025514C26B4088000D9F764 /* ImageReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6025514B26B4088000D9F764 /* ImageReminderView.swift */; };
 		6028CAFF26AEEACD0062E189 /* InitialCanvasDrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6028CAFE26AEEACD0062E189 /* InitialCanvasDrawingView.swift */; };
+		6034178126BC11AA00E0F6A3 /* TabColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6034178026BC11AA00E0F6A3 /* TabColor.swift */; };
+		6034178326BC11F500E0F6A3 /* HexToUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6034178226BC11F500E0F6A3 /* HexToUIColor.swift */; };
 		6065754E26B45D0F00EA0F4D /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6065754D26B45D0F00EA0F4D /* ImagePicker.swift */; };
 		6065755526B6BE7300EA0F4D /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6065755426B6BE7300EA0F4D /* AudioRecorder.swift */; };
 		6065755726B6BF0300EA0F4D /* AudioRecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6065755626B6BF0300EA0F4D /* AudioRecorderView.swift */; };
@@ -58,6 +60,8 @@
 		6025514626B30AD500D9F764 /* TypeReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeReminderView.swift; sourceTree = "<group>"; };
 		6025514B26B4088000D9F764 /* ImageReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageReminderView.swift; sourceTree = "<group>"; };
 		6028CAFE26AEEACD0062E189 /* InitialCanvasDrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialCanvasDrawingView.swift; sourceTree = "<group>"; };
+		6034178026BC11AA00E0F6A3 /* TabColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabColor.swift; sourceTree = "<group>"; };
+		6034178226BC11F500E0F6A3 /* HexToUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexToUIColor.swift; sourceTree = "<group>"; };
 		6065754D26B45D0F00EA0F4D /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		6065755426B6BE7300EA0F4D /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		6065755626B6BF0300EA0F4D /* AudioRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderView.swift; sourceTree = "<group>"; };
@@ -269,6 +273,7 @@
 				60CBECD326A8510E0020703D /* LottieView.swift */,
 				60D0EC9C26B09559001E98EE /* Array Extension.swift */,
 				60D0EC9E26B095BA001E98EE /* ForEach with Index Localisations.swift */,
+				6034178226BC11F500E0F6A3 /* HexToUIColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -298,6 +303,7 @@
 				60C2DF6626B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift */,
 				60C2DF6726B2CACD00347CE8 /* DrawingCanvas+CoreDataProperties.swift */,
 				60C2DF6A26B2CC8900347CE8 /* TypeReminder.swift */,
+				6034178026BC11AA00E0F6A3 /* TabColor.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -426,6 +432,7 @@
 				60CBECDC26A851CB0020703D /* DrawingCanvasView.swift in Sources */,
 				60D0EC9B26B094D0001E98EE /* HourOfDay.swift in Sources */,
 				60CBECE726A8525E0020703D /* TodayCanvasView.swift in Sources */,
+				6034178126BC11AA00E0F6A3 /* TabColor.swift in Sources */,
 				60CBECC826A850330020703D /* ListTypeSetupView.swift in Sources */,
 				60D0EC9F26B095BA001E98EE /* ForEach with Index Localisations.swift in Sources */,
 				60C2DF6926B2CACD00347CE8 /* DrawingCanvas+CoreDataProperties.swift in Sources */,
@@ -437,6 +444,7 @@
 				60D0EC9D26B09559001E98EE /* Array Extension.swift in Sources */,
 				60C1E05126B880560040D425 /* Audio Player.swift in Sources */,
 				6065755526B6BE7300EA0F4D /* AudioRecorder.swift in Sources */,
+				6034178326BC11F500E0F6A3 /* HexToUIColor.swift in Sources */,
 				60CBECE226A852050020703D /* DrawingCanvasCoreDataModel.xcdatamodeld in Sources */,
 				60E2E64926A85E4500B1BAA6 /* undismissableVC.swift in Sources */,
 				60CBECEF26A852BA0020703D /* DrawingView.swift in Sources */,
