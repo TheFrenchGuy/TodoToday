@@ -20,10 +20,13 @@ struct ToDoTodayApp: App {
     
     
     let persistenceController = PersistenceController.shared
+    let colorPalettePersistance = ColorPalettePersistance.shared
     var body: some Scene {
         
         WindowGroup {
             ContentView().environment(\.managedObjectContext, persistenceController.container.viewContext) // To initiliase the core data stack on the whole app, from the Content View
+                .environment(\.managedObjectContext, colorPalettePersistance.container.viewContext)
+            
                
         }
     }

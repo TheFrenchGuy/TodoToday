@@ -40,7 +40,9 @@ struct ContentView: View {
                 
             }
         } else {
-            CalendarReminderView() //  Will need to allow to be select between the two of the options and will decide from that
+            CalendarReminderView()
+            
+            //  Will need to allow to be select between the two of the options and will decide from that
             /// To put the drawing view there /// Planning rn!
 //            VStack() { /// This is old and mainly used to show the image signature of the user to keep
 //                Text("Well World")

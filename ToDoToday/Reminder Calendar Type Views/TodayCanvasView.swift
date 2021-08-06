@@ -16,6 +16,9 @@ struct TodayCanvasView: View {
     @FetchRequest(entity: DrawingCanvas.entity(), sortDescriptors: []) var drawings: FetchedResults<DrawingCanvas>
     
     
+//    @FetchRequest(entity: ColorPalette.entity(), sortDescriptors: []) var colorpalette: FetchedResults<ColorPalette>
+    
+    
     @State private var showSheet = false
     @State private var test = false
     
@@ -26,12 +29,14 @@ struct TodayCanvasView: View {
     
     @State var AddedNewCanvas: Bool = false
     
+    @EnvironmentObject var tabViewClass:TabViewClass
+    
 
     var body: some View {
         ZStack {
             GeometryReader { bounds in
                 VStack{
-                        if checkIfDrawingstoday() { //MARK: WILL NEED TO IMPLEMENT WHEN THERE ARE NOT DRAWINGS FOR THAT DAY
+                        if checkIfDrawingstoday() { 
                             PlaceholderView()
 
                             Button(action: {
@@ -43,7 +48,12 @@ struct TodayCanvasView: View {
                                 }
                             })
                             .foregroundColor(.blue)
-                            .sheet(isPresented: $showSheet, content: {
+                            .sheet(isPresented: $showSheet , content: {
+                                AddNewCanvasView(AddedNewCanvas: $AddedNewCanvas).environment(\.managedObjectContext, viewContext)
+
+                            })
+                            
+                            .sheet(isPresented: $tabViewClass.addNewTask , content: {
                                 AddNewCanvasView(AddedNewCanvas: $AddedNewCanvas).environment(\.managedObjectContext, viewContext)
 
                             })
@@ -65,6 +75,14 @@ struct TodayCanvasView: View {
                                     AddNewCanvasView(AddedNewCanvas: $AddedNewCanvas).environment(\.managedObjectContext, viewContext)
                                 
                                 })
+                                
+                                .sheet(isPresented: $tabViewClass.addNewTask , content: {
+                                    AddNewCanvasView(AddedNewCanvas: $AddedNewCanvas).environment(\.managedObjectContext, viewContext)
+
+                                })
+                                
+                                
+                                
                                     }
                                 
 

@@ -329,6 +329,7 @@ struct AddNewCanvasView: View {
                     }
                     
                     self.presentationMode.wrappedValue.dismiss()
+                    
                 }
                     
                     
