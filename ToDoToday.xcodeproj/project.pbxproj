@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		6007607826BD3BE100B27473 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6007607726BD3BE100B27473 /* SideBar.swift */; };
 		600EDE6A26BAE071002F6A6C /* InitialColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600EDE6926BAE071002F6A6C /* InitialColorPicker.swift */; };
+		6010333B26BE992D00D1DA12 /* AppFaceIDTouchID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6010333A26BE992D00D1DA12 /* AppFaceIDTouchID.swift */; };
+		6010333E26BEB26B00D1DA12 /* TabTaskPlusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6010333D26BEB26B00D1DA12 /* TabTaskPlusView.swift */; };
+		6010334026BEB28300D1DA12 /* TodaySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6010333F26BEB28300D1DA12 /* TodaySettingsView.swift */; };
+		6010334226BEB29700D1DA12 /* ShowTodayDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6010334126BEB29700D1DA12 /* ShowTodayDateView.swift */; };
 		6018EC5526BC491600184DB4 /* ColorPaletteCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6018EC5326BC491600184DB4 /* ColorPaletteCoreDataModel.xcdatamodeld */; };
 		6018EC5826BC49C200184DB4 /* ColorPalette+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6018EC5626BC49C200184DB4 /* ColorPalette+CoreDataClass.swift */; };
 		6018EC5926BC49C200184DB4 /* ColorPalette+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6018EC5726BC49C200184DB4 /* ColorPalette+CoreDataProperties.swift */; };
@@ -63,6 +67,10 @@
 /* Begin PBXFileReference section */
 		6007607726BD3BE100B27473 /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		600EDE6926BAE071002F6A6C /* InitialColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialColorPicker.swift; sourceTree = "<group>"; };
+		6010333A26BE992D00D1DA12 /* AppFaceIDTouchID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFaceIDTouchID.swift; sourceTree = "<group>"; };
+		6010333D26BEB26B00D1DA12 /* TabTaskPlusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabTaskPlusView.swift; sourceTree = "<group>"; };
+		6010333F26BEB28300D1DA12 /* TodaySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySettingsView.swift; sourceTree = "<group>"; };
+		6010334126BEB29700D1DA12 /* ShowTodayDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTodayDateView.swift; sourceTree = "<group>"; };
 		6018EC5426BC491600184DB4 /* ColorPaletteCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ColorPaletteCoreData.xcdatamodel; sourceTree = "<group>"; };
 		6018EC5626BC49C200184DB4 /* ColorPalette+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorPalette+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6018EC5726BC49C200184DB4 /* ColorPalette+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorPalette+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -144,6 +152,16 @@
 				60736D6026BBDAAE00FD3E3D /* SerializableColor.swift */,
 			);
 			path = "Color Tab Picker";
+			sourceTree = "<group>";
+		};
+		6010333C26BEB24200D1DA12 /* TopBarViews */ = {
+			isa = PBXGroup;
+			children = (
+				6010333D26BEB26B00D1DA12 /* TabTaskPlusView.swift */,
+				6010333F26BEB28300D1DA12 /* TodaySettingsView.swift */,
+				6010334126BEB29700D1DA12 /* ShowTodayDateView.swift */,
+			);
+			path = TopBarViews;
 			sourceTree = "<group>";
 		};
 		6018EC5226BC48D900184DB4 /* Color Palette */ = {
@@ -246,6 +264,7 @@
 		60CBECAD26A84E3A0020703D /* ToDoToday */ = {
 			isa = PBXGroup;
 			children = (
+				6010333C26BEB24200D1DA12 /* TopBarViews */,
 				6007607626BD3BD400B27473 /* SideBar  */,
 				6018EC5226BC48D900184DB4 /* Color Palette */,
 				60CBECC526A8501E0020703D /* UserPreferenceModel.swift */,
@@ -321,6 +340,7 @@
 				60D0EC9C26B09559001E98EE /* Array Extension.swift */,
 				60D0EC9E26B095BA001E98EE /* ForEach with Index Localisations.swift */,
 				6034178226BC11F500E0F6A3 /* HexToUIColor.swift */,
+				6010333A26BE992D00D1DA12 /* AppFaceIDTouchID.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -461,6 +481,7 @@
 				60CBECE926A8527E0020703D /* CalendarReminderView.swift in Sources */,
 				60CBECE526A852440020703D /* Persistance.swift in Sources */,
 				60CBECDE26A851E20020703D /* DrawingCanvasViewController.swift in Sources */,
+				6010333B26BE992D00D1DA12 /* AppFaceIDTouchID.swift in Sources */,
 				6018EC5826BC49C200184DB4 /* ColorPalette+CoreDataClass.swift in Sources */,
 				60689B5826AB24E000ED426F /* HoursView.swift in Sources */,
 				60CBECB126A84E3A0020703D /* ContentView.swift in Sources */,
@@ -471,6 +492,7 @@
 				60C2DF6826B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift in Sources */,
 				60CBECD426A8510E0020703D /* LottieView.swift in Sources */,
 				6018EC5526BC491600184DB4 /* ColorPaletteCoreDataModel.xcdatamodeld in Sources */,
+				6010334026BEB28300D1DA12 /* TodaySettingsView.swift in Sources */,
 				60C1E05326B880C90040D425 /* AudioPlayerView.swift in Sources */,
 				60CBECC426A8500C0020703D /* SetupCard Screen.swift in Sources */,
 				60736D6126BBDAAE00FD3E3D /* SerializableColor.swift in Sources */,
@@ -490,6 +512,7 @@
 				60C2DF6926B2CACD00347CE8 /* DrawingCanvas+CoreDataProperties.swift in Sources */,
 				60CBECCC26A8506B0020703D /* iCloudSyncView.swift in Sources */,
 				60CBECCE26A850840020703D /* TermsandConditionView.swift in Sources */,
+				6010334226BEB29700D1DA12 /* ShowTodayDateView.swift in Sources */,
 				6028CAFF26AEEACD0062E189 /* InitialCanvasDrawingView.swift in Sources */,
 				60E2E64B26A85E8E00B1BAA6 /* DisableModalDismiss.swift in Sources */,
 				60CBECED26A852A70020703D /* AddNewCanvasView.swift in Sources */,
@@ -500,6 +523,7 @@
 				60CBECE226A852050020703D /* DrawingCanvasCoreDataModel.xcdatamodeld in Sources */,
 				60E2E64926A85E4500B1BAA6 /* undismissableVC.swift in Sources */,
 				60CBECEF26A852BA0020703D /* DrawingView.swift in Sources */,
+				6010333E26BEB26B00D1DA12 /* TabTaskPlusView.swift in Sources */,
 				60CBECEB26A852930020703D /* PlaceholderView.swift in Sources */,
 				60CBECC626A8501E0020703D /* UserPreferenceModel.swift in Sources */,
 			);

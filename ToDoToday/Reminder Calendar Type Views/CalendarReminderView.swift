@@ -26,6 +26,8 @@ struct CalendarReminderView: View {
     
     @State private var AddedNewCanvas: Bool = false
     
+    let colorPalettePersistance = ColorPalettePersistance.shared
+    
     var body: some View {
         
         
@@ -39,14 +41,19 @@ struct CalendarReminderView: View {
                 }
             }
         
-        return NavigationView {
-            GeometryReader { geometry in
+        return GeometryReader { geometry in
+            NavigationView {
                 ZStack {
                     HStack {
                         if self.tabViewClass.showTab == true {
-                            SideBarView()
-                                .frame(width: geometry.size.width/3)
+                            SideBarView().environment(\.managedObjectContext, colorPalettePersistance.container.viewContext)
+                                
+                                .frame(width: geometry.size.width/3, height: geometry.size.height)
+                                .background(Color("lightFormGray").edgesIgnoringSafeArea(.all))
                                 .transition(.move(edge: .leading))
+                                
+                                
+                                
                         }
                         
                         if self.tabViewClass.showTask {
@@ -58,10 +65,14 @@ struct CalendarReminderView: View {
                     }
                 }
                 .gesture(drag)
+                .navigationBarItems(leading: TabTaskPlusView(), trailing: TodaySettingsView())
             }
-                .navigationBarItems(leading: TodaySettingsView())
-        }.navigationViewStyle(StackNavigationViewStyle())
+                .navigationViewStyle(StackNavigationViewStyle())
+                
+        }
         .environmentObject(tabViewClass)
+        
+        
     }
     
 }
@@ -73,84 +84,9 @@ struct CalendarReminderView_Previews: PreviewProvider {
 }
 
 
-struct TodaySettingsView: View {
-    
-    @EnvironmentObject var tabViewClass:TabViewClass
-    
-    
-    
-    
-    
-    
-    
-    var body: some View {
-        
-        HStack {
-            
-            Button(action: {
-                
-                toggleTabView()
-            }) {
-                Image(systemName: "sidebar.left").font(.title2)
-            }
-            
-            Button(action: {
-                toggleTaskView()
-            }) {
-                Image(systemName: "archivebox").font(.title2)
-            }
-            
-            Button(action: {
-                self.tabViewClass.addNewTask.toggle()
-            }) {
-                Image(systemName: "plus").font(.title2)
-            }
-            
-            Button(action: {//MARK: will then implement the settings from there
-                
-            }) {
-                Image(systemName: "umbrella").foregroundColor(.gray).font(.title2).padding()
-            }
-                
-            Divider()
-            ShowTodayDateView()
-        }
-        
-        
-            
-    }
-    
-    func toggleTabView() {
-        self.tabViewClass.showTab.toggle()
-        
-        if self.tabViewClass.showTask == true {
-            self.tabViewClass.showTask.toggle()
-        }
-    }
-    
-    func toggleTaskView() {
-        self.tabViewClass.showTask.toggle()
-        
-        if self.tabViewClass.showTab == true {
-            self.tabViewClass.showTab.toggle()
-        }
-    }
-}
 
-struct ShowTodayDateView: View {
-    let today: Date
-    let datetime: String
-    
-    let formatter: DateFormatter
-    init() {
-        today = Date()
-        formatter = DateFormatter()
-        formatter.setLocalizedDateFormatFromTemplate("EEEE, MMM d") // SHOWs the Weekday in full then month shorttended to 3 Char and the day of it
-                            /// Follow the  http://www.unicode.org/reports/tr35/tr35-31/tr35-dates.html#Date_Format_Patterns Date formatter
-        datetime = formatter.string(from: today)
-    }
-    
-    var body: some View {
-        Text("Today is \(datetime)").font(.title2).bold().foregroundColor(.black)
-    }
-}
+
+
+
+
+
