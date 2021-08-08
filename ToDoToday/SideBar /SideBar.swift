@@ -79,7 +79,7 @@ struct SideBarView: View {
                         Form  {
                             ForEach(colorpalette, id: \.self) { palette in
 
-                                CheckboxField(id: palette.id!.uuidString, label: palette.name!,color: palette.paletteColor!.color, callback: checkboxSelected).contextMenu {
+                                CheckboxField(id: palette.id!.uuidString, label: palette.name!,color: palette.paletteColor!.color, callback: checkboxSelected, isSecure: palette.isSecret).contextMenu {
                                     Button(action: {viewContext.delete(palette)
                                         do {
                                             try self.viewContext.save()

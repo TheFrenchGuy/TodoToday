@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import LocalAuthentication
 
 struct CheckboxField: View {
     let id: String
@@ -13,6 +14,7 @@ struct CheckboxField: View {
     let size: CGFloat
     let color: Color
     let textSize: Int
+    let isSecure: Bool
     let callback: (String, Bool)->()
     
     init(
@@ -21,7 +23,8 @@ struct CheckboxField: View {
         size: CGFloat = 30,
         color: Color = Color.black,
         textSize: Int = 22,
-        callback: @escaping (String, Bool)->()
+        callback: @escaping (String, Bool)->(),
+        isSecure: Bool = false
         ) {
         self.id = id
         self.label = label
@@ -29,13 +32,19 @@ struct CheckboxField: View {
         self.color = color
         self.textSize = textSize
         self.callback = callback
+        self.isSecure = isSecure
     }
     
     @State var isMarked:Bool = false
     
     var body: some View {
         Button(action:{
-            self.isMarked.toggle()
+            if isSecure {
+                authenticate()
+                self.isMarked.toggle()
+            } else {
+                self.isMarked.toggle()
+            }
             self.callback(self.id, self.isMarked)
         }) {
             HStack(alignment: .center, spacing: 10) {
@@ -64,6 +73,30 @@ struct CheckboxField: View {
             }
         }.foregroundColor(Color.black)
         
+    }
+    
+    func authenticate() {
+        let context = LAContext()
+        var error: NSError?
+
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Please authenticate yourself to unlock your places."
+
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+
+                DispatchQueue.main.async {
+                    if success {
+                        isMarked = true
+                    } else {
+                        print("Could not auth")
+                        isMarked = false
+                    }
+                }
+            }
+        } else {
+            // no biometrics
+            isMarked = false
+        }
     }
 }
 
