@@ -23,71 +23,155 @@ struct SideBarView: View {
     
     @State private var toggleID: Bool = false
     
+   
+    
     
     var body: some View {
-        ZStack {
-        if addNewPalette {
-            VStack {
-                Form {
-                    Section(header: Text("Calendar Name")) {
-                        TextField("Calendar Name", text: $newAddCalendarName)
-                        
-                        Toggle(isOn: $toggleID) {
-                            Text("Enable FaceID")
-                        }.onChange(of: toggleID, perform: {newValue in
-                            authenticate()
-                        })
-                    }
-                    
-                    Section {
-                        ColorPicker("Calendar Color", selection: $newAddCalendarColor)
-                    }
-                    
-                    Section {
-                        Button(action: {
-                                let colorPal = ColorPalette(context: viewContext)
-                                colorPal.id = UUID()
-                                colorPal.name = newAddCalendarName
-                                colorPal.paletteColor = SerializableColor.init(from: newAddCalendarColor)
-                                colorPal.isSecret = newAddCalendarIsSecret
-                                addNewPalette.toggle()
+        GeometryReader { bounds in
+            ZStack {
+               
+            if addNewPalette {
+                VStack {
+                    Form {
+                        Section(header: Text("Calendar Name")) {
+                            TextField("Calendar Name", text: $newAddCalendarName)
                             
-                                do {
-                                    try viewContext.save()
-                                }
-                                catch {
-                                    print(error.localizedDescription)
-                                    print("ERROR COULDNT ADD A PALETTE")
-                                }
-                        }) {
-                            Text("Add to new calendar")
+                            Toggle(isOn: $toggleID) {
+                                Text("Enable FaceID")
+                            }.onChange(of: toggleID, perform: {newValue in
+                                authenticate()
+                            })
+                        }
+                        
+                        Section {
+                            ColorPicker("Calendar Color", selection: $newAddCalendarColor)
+                        }
+                        
+                        Section {
+                            Button(action: {
+                                    let colorPal = ColorPalette(context: viewContext)
+                                    colorPal.id = UUID()
+                                    colorPal.name = newAddCalendarName
+                                    colorPal.paletteColor = SerializableColor.init(from: newAddCalendarColor)
+                                    colorPal.isSecret = newAddCalendarIsSecret
+                                    addNewPalette.toggle()
+                                
+                                    do {
+                                        try viewContext.save()
+                                    }
+                                    catch {
+                                        print(error.localizedDescription)
+                                        print("ERROR COULDNT ADD A PALETTE")
+                                    }
+                            }) {
+                                Text("Add to new calendar")
+                            }
                         }
                     }
                 }
-            }
-        } else {
-        
-            VStack{
-                ForEach(colorpalette, id: \.self) { palette in
+            } else {
+            
+                VStack(alignment: .leading) {
                    
-                    CheckboxField(id: palette.id!.uuidString, label: palette.name!,callback: checkboxSelected)
-                }
-                
-                Button(action: {
-    //                let colorPal = ColorPalette(context: viewContext)
-    //                colorPal.id = UUID()
-    //                colorPal.name = "Test Color Pal"
-                    addNewPalette.toggle()
-                    
-                    
-                }) {
-                    HStack {
-                        Text("New Calendar")
-                        Image(systemName: "plus")
+                    Text("Calendars").font(.largeTitle).bold().padding(.leading, 10)
+
+                    VStack {
+                        Form  {
+                            ForEach(colorpalette, id: \.self) { palette in
+
+                                CheckboxField(id: palette.id!.uuidString, label: palette.name!,color: palette.paletteColor!.color, callback: checkboxSelected).contextMenu {
+                                    Button(action: {viewContext.delete(palette)
+                                        do {
+                                            try self.viewContext.save()
+                                            print("Calendar successfully deleted")
+                                        } catch {
+                                            print(error)
+                                        }
+                                    }) {
+                                        Text("Delete me")
+                                    }
+                                }
+                            }.fixedSize(horizontal: true, vertical: true)
+                            
+                            
+
+                        }.frame(height: bounds.size.height * 0.8)
+                        
+                        
                     }
+                    
+                  
+                    
+                    
+                    
+                    Divider()
+                    
+                    HStack {
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                                addNewPalette.toggle()
+                                
+                                
+                            }) {
+                                HStack {
+                                    Text("New Calendar")
+                                    Image(systemName: "plus")
+                                }
+                            }
+                    }
+                    
+                    Spacer()
+                }.frame(width: bounds.size.width,height: bounds.size.height, alignment: .leading)
+                
+                
+               
+                    
+                    
+        
+                    
+                  
+                    
+                    
+                
+                    
+//                VStack() {
+//
+//                    Text("Calendars 123").font(.largeTitle).bold()
+//
+//                    Spacer().opacity(0.0)
+//
+//                    Button(action: {
+//        //                let colorPal = ColorPalette(context: viewContext)
+//        //                colorPal.id = UUID()
+//        //                colorPal.name = "Test Color Pal"
+//                        addNewPalette.toggle()
+//
+//
+//                    }) {
+//                        HStack {
+//                            Text("New Calendar")
+//                            Image(systemName: "plus")
+//                        }
+//                    }
+//
+//                }.frame(width: bounds.size.width,height: bounds.size.height, alignment: .leading)
+//                .padding(.top, 20)
+//                .padding(.leading, 10)
+//                .zIndex(1)
+//
+                    
+                    
+                   
+                    
+               
+                
+                
+                
+                    
                 }
-            }
-            }
+            }.frame(height: bounds.size.height)
         }
           
             
@@ -135,49 +219,3 @@ struct SideBarView: View {
 //    }
 //}
 
-
-struct CheckboxField: View {
-    let id: String
-    let label: String
-    let size: CGFloat
-    let color: Color
-    let textSize: Int
-    let callback: (String, Bool)->()
-    
-    init(
-        id: String,
-        label:String,
-        size: CGFloat = 10,
-        color: Color = Color.black,
-        textSize: Int = 14,
-        callback: @escaping (String, Bool)->()
-        ) {
-        self.id = id
-        self.label = label
-        self.size = size
-        self.color = color
-        self.textSize = textSize
-        self.callback = callback
-    }
-    
-    @State var isMarked:Bool = false
-    
-    var body: some View {
-        Button(action:{
-            self.isMarked.toggle()
-            self.callback(self.id, self.isMarked)
-        }) {
-            HStack(alignment: .center, spacing: 10) {
-                Image(systemName: self.isMarked ? "checkmark.square" : "square")
-                    .renderingMode(.original)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: self.size, height: self.size)
-                Text(label)
-                    .font(Font.system(size: size))
-                Spacer()
-            }.foregroundColor(self.color)
-        }
-        .foregroundColor(Color.white)
-    }
-}
