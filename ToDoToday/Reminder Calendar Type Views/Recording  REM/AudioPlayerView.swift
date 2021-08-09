@@ -16,29 +16,34 @@ struct AudioPlayerView: View {
     
     @ObservedObject var audioPlayer = AudioPlayer()
     
+    var windowSize:CGSize
+    
     var body: some View {
-        HStack {
-//            Text("\(audioURL.lastPathComponent)")
-            
-            Text("\(audioURL)")
-            Spacer()
-            if audioPlayer.isPlaying == false {
-                Button(action: {
-                    self.audioPlayer.startPlayback(audio: self.audioURL)
-                }) {
-                    Image(systemName: "play.circle")
-                        .imageScale(.large)
+        VStack {
+            RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor)).frame(height: windowSize.height / 15)
+            HStack {
+    //            Text("\(audioURL.lastPathComponent)")
+                
+                Text("\(audioURL)")
+                Spacer()
+                if audioPlayer.isPlaying == false {
+                    Button(action: {
+                        self.audioPlayer.startPlayback(audio: self.audioURL)
+                    }) {
+                        Image(systemName: "play.circle")
+                            .imageScale(.large)
+                    }
+                } else {
+                    Button(action: {
+                        self.audioPlayer.stopPlayback()
+                    }) {
+                        Image(systemName: "stop.fill")
+                            .imageScale(.large)
+                    }
                 }
-            } else {
-                Button(action: {
-                    self.audioPlayer.stopPlayback()
-                }) {
-                    Image(systemName: "stop.fill")
-                        .imageScale(.large)
-                }
+               
             }
-            Circle().fill(Color(tabColor))
-        }
+        }.background(RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor).opacity(0.6)))
     }
 }
 

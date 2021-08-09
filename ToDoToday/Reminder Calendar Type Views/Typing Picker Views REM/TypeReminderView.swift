@@ -44,8 +44,10 @@ struct TypeReminderView: View {
     
     @State private var updatedTask = updatedTaskDesClass()
     
+    var windowSize:CGSize
     var body: some View {
         VStack {
+            RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor)).frame(height: windowSize.height / 15)
             
             Button(action: {
                 showSheet.toggle()
@@ -53,7 +55,7 @@ struct TypeReminderView: View {
                 VStack {
                     Text(title)
                     Text(text)
-                    Circle().fill(Color(tabColor))
+                   
                 }
             }.sheet(isPresented: $showSheet) {
                 VStack {
@@ -71,7 +73,7 @@ struct TypeReminderView: View {
                 }.onAppear(perform: {updatedTask.newTaskDesc = text; updatedTask.newTaskTitle = title})
                 
             }
-        }
+        }.background(RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor).opacity(0.6)))
     }
     
     func updateField(canvasUUID: UUID?) {

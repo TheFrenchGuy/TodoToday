@@ -22,9 +22,11 @@ struct ImageReminderView: View {
     let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     
     @State var showSheet: Bool = false
+    var windowSize:CGSize
     
     var body: some View {
         VStack {
+            RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor)).frame(height: windowSize.height / 15)
             
             Button(action: {showSheet.toggle()}) {
                 Text(title)
@@ -34,12 +36,13 @@ struct ImageReminderView: View {
 
                 
                 }
-                Circle().fill(Color(tabColor))
+               
             }.sheet(isPresented: $showSheet) {
                 Image(uiImage: fetchImage(imageName: String("\(updatedTask.newTaskUUID)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit().frame(width: 150, height: 150)
                     .keyboardShortcut("l", modifiers: .command)
             }
         }.onAppear(perform: {updatedTask.newTaskUUID = remUUID; updatedTask.newTaskTitle = title})
+         .background(RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor).opacity(0.6)))
         
     }
     
