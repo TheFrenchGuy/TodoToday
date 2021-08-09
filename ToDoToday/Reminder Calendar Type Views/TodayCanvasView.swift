@@ -31,6 +31,8 @@ struct TodayCanvasView: View {
     
     @EnvironmentObject var tabViewClass:TabViewClass
     
+    @EnvironmentObject var transferColorPalette:TransferColorPalette
+    
 
     var body: some View {
         ZStack {

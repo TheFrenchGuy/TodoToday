@@ -15,6 +15,9 @@ struct ContentView: View {
     @State var firstlaunch = UserDefaults.standard.value(forKey: "firstlaunch") as? Bool ?? true
 
     
+    @StateObject var transferColorPalette = TransferColorPalette()
+    
+    
     var body: some View {
         if firstlaunch {
             Text ("Start it up")
@@ -40,7 +43,7 @@ struct ContentView: View {
                 
             }
         } else {
-            CalendarReminderView().edgesIgnoringSafeArea(.all)
+            CalendarReminderView().edgesIgnoringSafeArea(.all).environmentObject(transferColorPalette)
             //  Will need to allow to be select between the two of the options and will decide from that
             /// To put the drawing view there /// Planning rn!
 //            VStack() { /// This is old and mainly used to show the image signature of the user to keep

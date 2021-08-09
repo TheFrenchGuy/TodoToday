@@ -23,8 +23,8 @@ struct SideBarView: View {
     
     @State private var toggleID: Bool = false
     
-   
-    
+//    @StateObject var transferColorPalette = TransferColorPalette()
+    @EnvironmentObject var transferColorPalette:TransferColorPalette
     
     var body: some View {
         GeometryReader { bounds in
@@ -97,7 +97,9 @@ struct SideBarView: View {
 
                         }.frame(height: bounds.size.height * 0.8)
                         
-                        
+//                        ForEach(transferColorPalette.colorpla, id: \.self) {colorType in
+//                            Text("hey")
+//                        }
                     }
                     
                   
@@ -124,6 +126,9 @@ struct SideBarView: View {
                     
                     Spacer()
                 }.frame(width: bounds.size.width,height: bounds.size.height, alignment: .leading)
+                    .onAppear(perform: {
+                      loadInitialColorPalette()
+                    })
                 
                 
                
@@ -172,15 +177,9 @@ struct SideBarView: View {
                     
                 }
             }.frame(height: bounds.size.height)
+             
         }
           
-            
-//        List {
-//            CheckboxField(id: "Calendar1", label: "Calendar1", callback: checkboxSelected)
-//            CheckboxField(id: "Calendar2", label: "Calendar2", callback: checkboxSelected)
-//            CheckboxField(id: "Calendar3", label: "Calendar3", callback: checkboxSelected)
-//            CheckboxField(id: "Calendar4", label: "Calendar4", callback: checkboxSelected)
-//        }
     }
         
     
@@ -210,6 +209,21 @@ struct SideBarView: View {
             // no biometrics
             toggleID = false
         }
+    }
+    
+    func loadInitialColorPalette() {
+        transferColorPalette.colorpla.removeAll()
+       // transferColorPalette.colorpla.title.removeAll()
+        
+        
+        for color in colorpalette {
+//            transferColorPalette.title.append(color.name!)
+//            transferColorPalette.color.append(color.paletteColor!.color)
+            
+            transferColorPalette.colorpla.append(ColorPaletteTemp(id: UUID(), title: color.name!, color: color.paletteColor!.color))
+        }
+        
+        print("Assigned variables")
     }
 }
 

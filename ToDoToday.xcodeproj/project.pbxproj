@@ -14,6 +14,7 @@
 		6010334026BEB28300D1DA12 /* TodaySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6010333F26BEB28300D1DA12 /* TodaySettingsView.swift */; };
 		6010334226BEB29700D1DA12 /* ShowTodayDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6010334126BEB29700D1DA12 /* ShowTodayDateView.swift */; };
 		6010334426BEB36600D1DA12 /* CheckboxField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6010334326BEB36600D1DA12 /* CheckboxField.swift */; };
+		6010334626C0091900D1DA12 /* TempColorPickerModel .swift in Sources */ = {isa = PBXBuildFile; fileRef = 6010334526C0091900D1DA12 /* TempColorPickerModel .swift */; };
 		6018EC5526BC491600184DB4 /* ColorPaletteCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6018EC5326BC491600184DB4 /* ColorPaletteCoreDataModel.xcdatamodeld */; };
 		6018EC5826BC49C200184DB4 /* ColorPalette+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6018EC5626BC49C200184DB4 /* ColorPalette+CoreDataClass.swift */; };
 		6018EC5926BC49C200184DB4 /* ColorPalette+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6018EC5726BC49C200184DB4 /* ColorPalette+CoreDataProperties.swift */; };
@@ -73,6 +74,7 @@
 		6010333F26BEB28300D1DA12 /* TodaySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySettingsView.swift; sourceTree = "<group>"; };
 		6010334126BEB29700D1DA12 /* ShowTodayDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTodayDateView.swift; sourceTree = "<group>"; };
 		6010334326BEB36600D1DA12 /* CheckboxField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxField.swift; sourceTree = "<group>"; };
+		6010334526C0091900D1DA12 /* TempColorPickerModel .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TempColorPickerModel .swift"; sourceTree = "<group>"; };
 		6018EC5426BC491600184DB4 /* ColorPaletteCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ColorPaletteCoreData.xcdatamodel; sourceTree = "<group>"; };
 		6018EC5626BC49C200184DB4 /* ColorPalette+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorPalette+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6018EC5726BC49C200184DB4 /* ColorPalette+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorPalette+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				6010333D26BEB26B00D1DA12 /* TabTaskPlusView.swift */,
 				6010333F26BEB28300D1DA12 /* TodaySettingsView.swift */,
 				6010334126BEB29700D1DA12 /* ShowTodayDateView.swift */,
+				6010334526C0091900D1DA12 /* TempColorPickerModel .swift */,
 			);
 			path = TopBarViews;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				60CBECCC26A8506B0020703D /* iCloudSyncView.swift in Sources */,
 				60CBECCE26A850840020703D /* TermsandConditionView.swift in Sources */,
 				6010334226BEB29700D1DA12 /* ShowTodayDateView.swift in Sources */,
+				6010334626C0091900D1DA12 /* TempColorPickerModel .swift in Sources */,
 				6028CAFF26AEEACD0062E189 /* InitialCanvasDrawingView.swift in Sources */,
 				60E2E64B26A85E8E00B1BAA6 /* DisableModalDismiss.swift in Sources */,
 				60CBECED26A852A70020703D /* AddNewCanvasView.swift in Sources */,

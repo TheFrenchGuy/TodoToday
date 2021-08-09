@@ -82,10 +82,7 @@ struct AddNewCanvasView: View {
     
     @State private var colorSelected: String = "red"
     @State private var customColor:Color = Color.green
-    
-  
-    
-    
+      
     var body: some View {
         ZStack {
             
