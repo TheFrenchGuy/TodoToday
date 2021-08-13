@@ -47,12 +47,13 @@ struct CheckboxField: View {
     }
     
     @State var isMarked:Bool = false
+    @State private var showFaceIDBioAlert: Bool = false
     
     var body: some View {
         Button(action:{
             if isSecure {
-                authenticate()
-                self.isMarked.toggle()
+                authenticate(id: id)
+                //self.isMarked.toggle()
                
             } else {
                 self.isMarked.toggle()
@@ -85,10 +86,14 @@ struct CheckboxField: View {
                 Spacer()
             }.onAppear(perform: {isPreMarked()})
         }.foregroundColor(Color.black)
+         .alert(isPresented: $showFaceIDBioAlert, content: {
+            Alert(title: Text("You need to enroll some biometric for this option to work"), message: Text("This calendar will be disabled until new biometrics are added to the device"))
+        })
+        
         
     }
     
-    func authenticate() {
+    func authenticate(id: String) {
         let context = LAContext()
         var error: NSError?
 
@@ -99,16 +104,19 @@ struct CheckboxField: View {
 
                 DispatchQueue.main.async {
                     if success {
-                        isMarked = true
+                        isMarked.toggle()
                     } else {
                         print("Could not auth")
-                        isMarked = false
+                      //  isMarked = false
                     }
                 }
             }
         } else {
             // no biometrics
             isMarked = false
+            showFaceIDBioAlert = true
+            missingBiometricTurnOff(id: id)
+            
         }
     }
     
@@ -118,7 +126,18 @@ struct CheckboxField: View {
                 if color.isMarked {
                     isMarked = true
                     
+                    
                 }
+            }
+        }
+    }
+    
+    func missingBiometricTurnOff(id: String) {
+        for color in colorpalette {
+            if color.id?.uuidString == id {
+                color.isMarked = false
+                isMarked = false
+                print("Disabled")
             }
         }
     }

@@ -27,6 +27,7 @@ struct SideBarView: View {
     @State private var newAddCalendarIsSecret: Bool = false
     
     @State private var toggleID: Bool = false
+    @State private var showFaceIDBioAlert: Bool = false
     
 //    @StateObject var transferColorPalette = TransferColorPalette()
     @EnvironmentObject var transferColorPalette:TransferColorPalette
@@ -48,7 +49,9 @@ struct SideBarView: View {
                             }.onChange(of: toggleID, perform: {newValue in
                                 authenticate()
                             })
-                        }
+                        }.alert(isPresented: $showFaceIDBioAlert, content: {
+                            Alert(title: Text("You need to enroll some biometric for this option to work"))
+                        })
                         
                         Section {
                             ColorPicker("Calendar Color", selection: $newAddCalendarColor)
@@ -242,6 +245,7 @@ struct SideBarView: View {
         } else {
             // no biometrics
             toggleID = false
+            showFaceIDBioAlert = true
         }
     }
     
