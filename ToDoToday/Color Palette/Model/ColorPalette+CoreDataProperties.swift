@@ -20,6 +20,7 @@ extension ColorPalette {
     @NSManaged public var id: UUID?
     @NSManaged public var paletteColor: SerializableColor?
     @NSManaged public var isSecret: Bool
+    @NSManaged public var isMarked: Bool
 
 }
 

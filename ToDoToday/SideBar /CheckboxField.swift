@@ -9,6 +9,15 @@ import SwiftUI
 import LocalAuthentication
 
 struct CheckboxField: View {
+    
+    
+        @Environment(\.managedObjectContext) private var viewContext
+    
+    
+        @FetchRequest(entity: ColorPalette.entity(), sortDescriptors: []) var colorpalette: FetchedResults<ColorPalette>
+    
+    
+    
     let id: String
     let label: String
     let size: CGFloat
@@ -70,7 +79,7 @@ struct CheckboxField: View {
                 Text(label)
                     .font(Font.system(size: size))
                 Spacer()
-            }
+            }.onAppear(perform: {isPreMarked()})
         }.foregroundColor(Color.black)
         
     }
@@ -96,6 +105,17 @@ struct CheckboxField: View {
         } else {
             // no biometrics
             isMarked = false
+        }
+    }
+    
+    func isPreMarked() {
+        for color in colorpalette {
+            if color.id?.uuidString == id {
+                if color.isMarked {
+                    isMarked = true
+                    print("Has been marked")
+                }
+            }
         }
     }
 }

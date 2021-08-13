@@ -185,6 +185,19 @@ struct SideBarView: View {
     
     func checkboxSelected(id: String, isMarked: Bool) {
             print("\(id) is marked: \(isMarked)")
+        
+        for color in colorpalette {
+            if id == color.id?.uuidString {
+                color.isMarked = true
+                do {
+                    try viewContext.save()
+                } catch {
+                    print(error.localizedDescription)
+                }
+                print("Is marked")
+            }
+        }
+            
         }
     
     func authenticate() {
@@ -220,7 +233,7 @@ struct SideBarView: View {
 //            transferColorPalette.title.append(color.name!)
 //            transferColorPalette.color.append(color.paletteColor!.color)
             
-            transferColorPalette.colorpla.append(ColorPaletteTemp(id: UUID(), title: color.name!, color: color.paletteColor!.color))
+            transferColorPalette.colorpla.append(ColorPaletteTemp(id: UUID(), title: color.name!, color: color.paletteColor!.color,isMarked: color.isMarked))
         }
         
         print("Assigned variables")

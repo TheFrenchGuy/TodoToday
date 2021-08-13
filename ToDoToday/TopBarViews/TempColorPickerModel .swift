@@ -19,4 +19,5 @@ struct ColorPaletteTemp: Identifiable, Hashable {
     var id: UUID = UUID()
     var title: String = ""
     var color: Color = Color.black
+    var isMarked: Bool = false
 }
