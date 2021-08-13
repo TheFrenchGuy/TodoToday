@@ -16,6 +16,7 @@ struct ContentView: View {
 
     
     @StateObject var transferColorPalette = TransferColorPalette()
+    @StateObject var refreshList = RefreshListClass()
     
     let colorPalettePersistance = ColorPalettePersistance.shared
     
@@ -42,11 +43,12 @@ struct ContentView: View {
                         
                     self.firstlaunch = UserDefaults.standard.value(forKey: "firstlaunch") as? Bool ?? true
                 }
-                
+                 
             }
         } else {
             CalendarReminderView().edgesIgnoringSafeArea(.all).environmentObject(transferColorPalette)
                 .environment(\.managedObjectContext,colorPalettePersistance.container.viewContext)
+                .environmentObject(refreshList)
             //  Will need to allow to be select between the two of the options and will decide from that
             /// To put the drawing view there /// Planning rn!
 //            VStack() { /// This is old and mainly used to show the image signature of the user to keep

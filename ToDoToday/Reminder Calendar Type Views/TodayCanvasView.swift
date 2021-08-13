@@ -32,6 +32,7 @@ struct TodayCanvasView: View {
     @EnvironmentObject var tabViewClass:TabViewClass
     
     @EnvironmentObject var transferColorPalette:TransferColorPalette
+    @EnvironmentObject var refreshListClass:RefreshListClass
     
 
     var body: some View {
@@ -95,12 +96,15 @@ struct TodayCanvasView: View {
                                     print("UPDATED TABLE")
                                         }.onAppear(perform: {self.getHoursByHoursTabs()})
                                 
+                                
                             
                     
                     
                 }
                 }.frame(width: bounds.size.width, height: bounds.size.height)
                     .onAppear(perform: {self.getHoursByHoursTabs()})
+                    .onChange(of: refreshListClass.refresh, perform: {newValue in
+                        getHoursByHoursTabs(); print("NEW FETCH REQUEST")})
         }
         }.environmentObject(hourOfDay)
     

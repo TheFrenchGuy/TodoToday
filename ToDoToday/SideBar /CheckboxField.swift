@@ -17,6 +17,8 @@ struct CheckboxField: View {
         @FetchRequest(entity: ColorPalette.entity(), sortDescriptors: []) var colorpalette: FetchedResults<ColorPalette>
     
     
+    @EnvironmentObject var refreshListClass:RefreshListClass
+    @EnvironmentObject var transferColorPalette:TransferColorPalette
     
     let id: String
     let label: String
@@ -51,8 +53,10 @@ struct CheckboxField: View {
             if isSecure {
                 authenticate()
                 self.isMarked.toggle()
+               
             } else {
                 self.isMarked.toggle()
+                
             }
             self.callback(self.id, self.isMarked)
         }) {
@@ -113,11 +117,12 @@ struct CheckboxField: View {
             if color.id?.uuidString == id {
                 if color.isMarked {
                     isMarked = true
-                    print("Has been marked")
+                    
                 }
             }
         }
     }
+    
 }
 
 

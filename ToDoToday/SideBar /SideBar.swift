@@ -8,6 +8,11 @@
 import SwiftUI
 import LocalAuthentication
 
+
+class RefreshListClass: ObservableObject {
+    @Published var refresh: Bool = false
+}
+
 struct SideBarView: View {
     
         @Environment(\.managedObjectContext) private var viewContext
@@ -25,6 +30,8 @@ struct SideBarView: View {
     
 //    @StateObject var transferColorPalette = TransferColorPalette()
     @EnvironmentObject var transferColorPalette:TransferColorPalette
+    
+    @EnvironmentObject var refreshListClass:RefreshListClass
     
     var body: some View {
         GeometryReader { bounds in
@@ -187,7 +194,7 @@ struct SideBarView: View {
             print("\(id) is marked: \(isMarked)")
         
         for color in colorpalette {
-            if id == color.id?.uuidString {
+            if id == color.id?.uuidString && isMarked{
                 color.isMarked = true
                 do {
                     try viewContext.save()
@@ -195,8 +202,22 @@ struct SideBarView: View {
                     print(error.localizedDescription)
                 }
                 print("Is marked")
+            } else if id == color.id?.uuidString && !isMarked {
+                color.isMarked = false
+                do {
+                    try viewContext.save()
+                } catch {
+                    print(error.localizedDescription)
+                }
+                print("Is NOT marked")
             }
         }
+        
+
+        loadInitialColorPalette()
+//
+//        //refreshList.toggle()
+        refreshListClass.refresh.toggle()
             
         }
     
@@ -233,7 +254,7 @@ struct SideBarView: View {
 //            transferColorPalette.title.append(color.name!)
 //            transferColorPalette.color.append(color.paletteColor!.color)
             
-            transferColorPalette.colorpla.append(ColorPaletteTemp(id: UUID(), title: color.name!, color: color.paletteColor!.color,isMarked: color.isMarked))
+            transferColorPalette.colorpla.append(ColorPaletteTemp(id: color.id!, title: color.name!, color: color.paletteColor!.color,isMarked: color.isMarked))
         }
         
         print("Assigned variables")

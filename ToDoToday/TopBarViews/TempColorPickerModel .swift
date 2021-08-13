@@ -10,8 +10,6 @@ import SwiftUI
 import Combine
 
 class TransferColorPalette: ObservableObject {
-//    @Published var title: [String] = []
-//    @Published var color: [Color] = []
      @Published var colorpla: [ColorPaletteTemp] = []
 }
 

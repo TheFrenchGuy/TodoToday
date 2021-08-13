@@ -35,6 +35,10 @@ struct HoursView: View {
     @State var currentTitle: String = "NOT LOADED"
     @State var currentData: Data?
     @State var currentTask: String = "NO DESCRIPTION"
+    @State var currentCalendar: String = "NO CALENDAR"
+    
+    @EnvironmentObject var transferColorPalette:TransferColorPalette
+    @EnvironmentObject var refreshListClass:RefreshListClass
     
     var body: some View {
         ZStack {
@@ -44,10 +48,11 @@ struct HoursView: View {
                         Text(ShowTime)
                         ForEach(drawings, id: \.self){drawing in
                            EnumeratedForEach(ArrayHourUUID) { index, TimeUUID in
-                                if !ArrayHourUUID.isEmpty {
+                               
+                               if !ArrayHourUUID.isEmpty && shouldShowBasedOnCalendar(calendarName: drawing.calendarNameAdded ?? "No CALENDAR STORED") {
                                         
                                         
-                                        if TimeUUID == drawing.id {
+                                    if TimeUUID == drawing.id {
                                             
                                             
                                             switch(drawing.typeRem) {
@@ -178,6 +183,7 @@ struct HoursView: View {
                                     }
                                    
                                 }
+                               
 
                                 
                                    
@@ -187,7 +193,9 @@ struct HoursView: View {
                             
                             }
                             
+                            
                             .onDelete(perform: deleteItem)
+                            
                             
                             //.foregroundColor(.blue)
                             
@@ -201,6 +209,20 @@ struct HoursView: View {
             
 
         
+    }
+    
+    func shouldShowBasedOnCalendar(calendarName: String) -> Bool {
+        var isMarked = false
+        for transfer in transferColorPalette.colorpla {
+            if transfer.title == calendarName && transfer.isMarked{
+                //print("Calendar name match")
+                isMarked = true
+               
+            }
+            
+        }
+        
+        return isMarked
     }
     func deleteItem(at offset: IndexSet) {
         for index in offset{
@@ -272,6 +294,7 @@ struct HoursView: View {
                     currentUUID = drawing.id!
                     currentTitle = drawing.title!
                     currentData = drawing.canvasData
+                    currentCalendar = drawing.calendarNameAdded!
                 }
             }
 
