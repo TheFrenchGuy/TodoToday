@@ -4,7 +4,7 @@
         <attribute name="audioREMurl" optional="YES" attributeType="String"/>
         <attribute name="canvasData" optional="YES" attributeType="Binary"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="tabColor" optional="YES" attributeType="Transformable" valueTransformerName="SerializableColorTransformer" customClassName="SerializableColor" storedInTruthFile="YES"/>
+        <attribute name="tabColor" optional="YES" attributeType="Transformable" valueTransformerName="SerializableColorTransformer" customClassName="SerializableColor"/>
         <attribute name="taskColorHex" optional="YES" attributeType="String"/>
         <attribute name="taskDescription" optional="YES" attributeType="String"/>
         <attribute name="timeEvent" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

@@ -17,6 +17,8 @@ struct ContentView: View {
     
     @StateObject var transferColorPalette = TransferColorPalette()
     
+    let colorPalettePersistance = ColorPalettePersistance.shared
+    
     
     var body: some View {
         if firstlaunch {
@@ -44,6 +46,7 @@ struct ContentView: View {
             }
         } else {
             CalendarReminderView().edgesIgnoringSafeArea(.all).environmentObject(transferColorPalette)
+                .environment(\.managedObjectContext,colorPalettePersistance.container.viewContext)
             //  Will need to allow to be select between the two of the options and will decide from that
             /// To put the drawing view there /// Planning rn!
 //            VStack() { /// This is old and mainly used to show the image signature of the user to keep

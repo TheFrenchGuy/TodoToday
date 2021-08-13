@@ -24,7 +24,8 @@ struct ToDoTodayApp: App {
     var body: some Scene {
         
         WindowGroup {
-            ContentView().environment(\.managedObjectContext, persistenceController.container.viewContext) // To initiliase the core data stack on the whole app, from the Content View
+            ContentView()
+                //.environment(\.managedObjectContext, persistenceController.container.viewContext) // To initiliase the core data stack on the whole app, from the Content View
                 
             
                
