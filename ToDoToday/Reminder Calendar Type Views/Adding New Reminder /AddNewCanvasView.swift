@@ -82,6 +82,10 @@ struct AddNewCanvasView: View {
     
     @State private var colorSelected: String = "red"
     @State private var customColor:Color = Color.green
+    @State private var calendarName:String = "none"
+    
+    @EnvironmentObject var transferColorPalette:TransferColorPalette
+    
       
     var body: some View {
         ZStack {
@@ -187,10 +191,20 @@ struct AddNewCanvasView: View {
                 }
                 
                 Section {
-                      InitialColorPicker(customColor: $customColor)
+                      
+                    NavigationLink(destination: InitialColorPicker(customColor: $customColor, calendarName: $calendarName)) {
+                        HStack {
+                            Text("Calendar")
+                            Spacer()
+                            Text(calendarName)
+                            Circle().fill(customColor)
+                                .frame(width: 25, height: 25)
+                        }
+                    }
 //                    ColorPicker(selection: $customColor, label: {EmptyView()})
                     
-                }
+                }.onAppear(perform: {if calendarName == "none" {loadFirstCalendar()}}) //So that when it is first being loaded the first entity of the colorpalette is pre loaded
+                
                 
                 
                 
@@ -224,6 +238,7 @@ struct AddNewCanvasView: View {
                     drawing.typeRem = typeReminder.rawValue
                     initialUUID = drawing.id!
                     drawing.tabColor = SerializableColor.init(from: customColor)
+                    drawing.calendarNameAdded = calendarName
                     //SerializableColorTransformer().transformedValue(customColor) as! SerializableColor
                     
                     do {
@@ -255,6 +270,7 @@ struct AddNewCanvasView: View {
                     drawing.taskDescription = REMDescription
                     initialUUID = drawing.id!
                     drawing.tabColor = SerializableColor.init(from: customColor)
+                    drawing.calendarNameAdded = calendarName
                     
                     do {
                         AddedNewCanvas.toggle()
@@ -282,6 +298,7 @@ struct AddNewCanvasView: View {
                     drawing.id = initialUUID
                     drawing.typeRem = typeReminder.rawValue
                     drawing.tabColor = SerializableColor.init(from: customColor)
+                    drawing.calendarNameAdded = calendarName
                    
                     print("Image saved as name: \(saveImage(image: self.selectedImage!, id: initialUUID) ?? "IMAGE SAVING ERRROR")") //DEBUG ONLY SINCE IT IS ALREADY PRINTED TO THE CONSOLE WHILE RUING THE FUNCTION
                     
@@ -313,6 +330,7 @@ struct AddNewCanvasView: View {
                    
                     drawing.audioREMurl = audioRec.newURL
                     drawing.tabColor = SerializableColor.init(from: customColor)
+                    drawing.calendarNameAdded = calendarName
                     
                     do {
                         AddedNewCanvas.toggle()
@@ -338,6 +356,12 @@ struct AddNewCanvasView: View {
         }
         }
         .environmentObject(audioRec)
+    }
+    
+    //MARK: Load the first Index of the ColorPalette so it does not result in a blank error
+    func loadFirstCalendar() {
+        calendarName = transferColorPalette.colorpla.first!.title
+        customColor = transferColorPalette.colorpla.first!.color
     }
     
     //MARK: Save the Canvas as an UIImage

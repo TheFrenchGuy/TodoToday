@@ -15,17 +15,15 @@ struct InitialColorPicker: View {
     
     
     @Binding var customColor: Color
+    @Binding var calendarName: String
     
     @EnvironmentObject var transferColorPalette:TransferColorPalette
     
     
     var body: some View {
         
-        let columns = [
-                    GridItem(.adaptive(minimum: 30))
-                ]
 
-        HStack {
+        Form {
 //        LazyVGrid(columns: columns, spacing: 10) {
 //
 //                ForEach(TabColor.allCases, id: \.self) { colorType in
@@ -43,24 +41,31 @@ struct InitialColorPicker: View {
 //                    }
 //                }
             
-            LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(transferColorPalette.colorpla, id: \.self) { colorType in
-                    ZStack {
-                        Circle().fill(colorType.color)
-                            .frame(width: 25, height: 25)
-                            .onTapGesture(perform: {
-                                selection = colorType.title
-                                customColor = colorType.color
-                            })
+                                ForEach(transferColorPalette.colorpla, id: \.self) { colorType in
+                        
+                        HStack {
+                            
+                            
+                            
+                            ZStack {
+                                Circle().fill(colorType.color)
+                                    .frame(width: 25, height: 25)
+                                    
 
-                        if selection == colorType.title {
-                            Image(systemName: "checkmark").frame(width: 20, height: 20).foregroundColor(Color.white)
-                        }
+                                if selection == colorType.title {
+                                    Image(systemName: "checkmark").frame(width: 20, height: 20).foregroundColor(Color.white)
+                                }
+                            }
+                            
+                            Text(colorType.title)
+                            
+                            
+                        }.onTapGesture(perform: {
+                            selection = colorType.title
+                            customColor = colorType.color
+                            calendarName = colorType.title
+                        })
                     }
-                }
-            }
-        
-            ColorPicker(selection: $customColor, label: {EmptyView()})
             }
     }
 }

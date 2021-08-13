@@ -27,6 +27,7 @@ extension DrawingCanvas {
     @NSManaged public var audioREMurl:String?
     
     @NSManaged public var tabColor: SerializableColor?
+    @NSManaged public var calendarNameAdded:String?
 }
 
 extension DrawingCanvas : Identifiable {
