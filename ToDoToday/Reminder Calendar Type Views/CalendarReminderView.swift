@@ -112,7 +112,7 @@ struct CalendarReminderView: View {
 //            transferColorPalette.title.append(color.name!)
 //            transferColorPalette.color.append(color.paletteColor!.color)
             
-            transferColorPalette.colorpla.append(ColorPaletteTemp(id: UUID(), title: color.name!, color: color.paletteColor!.color))
+            transferColorPalette.colorpla.append(ColorPaletteTemp(id: color.id!, title: color.name!, color: color.paletteColor!.color,isMarked: color.isMarked))
         }
         
         print("Assigned variables")

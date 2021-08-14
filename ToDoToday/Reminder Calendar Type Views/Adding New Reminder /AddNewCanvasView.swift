@@ -360,8 +360,8 @@ struct AddNewCanvasView: View {
     
     //MARK: Load the first Index of the ColorPalette so it does not result in a blank error
     func loadFirstCalendar() {
-        calendarName = transferColorPalette.colorpla.first!.title
-        customColor = transferColorPalette.colorpla.first!.color
+        calendarName = transferColorPalette.colorpla.first?.title ?? "Please register a calendar"
+        customColor = transferColorPalette.colorpla.first? .color ?? Color.clear
     }
     
     //MARK: Save the Canvas as an UIImage

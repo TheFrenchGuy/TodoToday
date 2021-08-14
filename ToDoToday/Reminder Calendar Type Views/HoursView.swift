@@ -17,9 +17,6 @@ struct HoursView: View {
 
     @FetchRequest(entity: DrawingCanvas.entity(), sortDescriptors: []) var drawings: FetchedResults<DrawingCanvas>
 
-   
-    @Binding var ArrayHourUUID: [UUID]
-    var ShowTime: String
     @State private var test = false
     
     @EnvironmentObject var hourOfDay: HourOfDay
@@ -30,6 +27,8 @@ struct HoursView: View {
     
     @State var AddedNewCanvas: Bool = false
     @Binding var RefreshList: Bool
+    
+    var TimeUUID: UUID
     
     @State var currentUUID: UUID? = UUID()
     @State var currentTitle: String = "NOT LOADED"
@@ -43,18 +42,14 @@ struct HoursView: View {
     var body: some View {
         ZStack {
             GeometryReader { bounds in
-                ScrollView(.horizontal) {
+                ZStack {
                     LazyHStack {
-                        Text(ShowTime)
                         ForEach(drawings, id: \.self){drawing in
-                           EnumeratedForEach(ArrayHourUUID) { index, TimeUUID in
                                
-                               if !ArrayHourUUID.isEmpty && shouldShowBasedOnCalendar(calendarName: drawing.calendarNameAdded ?? "No CALENDAR STORED") {
+                               if shouldShowBasedOnCalendar(calendarName: drawing.calendarNameAdded ?? "No CALENDAR STORED") {
                                         
                                         
                                     if TimeUUID == drawing.id {
-                                            
-                                            
                                             switch(drawing.typeRem) {
                                                 case TypeReminder.drawing.rawValue:
                                                 ZStack {
@@ -67,7 +62,7 @@ struct HoursView: View {
                                                 
                                                 
                                                     Button(action: {
-                                                        fetchProperties(canvasUUID: drawing.id ?? UUID(), index: index);
+                                                        fetchProperties(canvasUUID: drawing.id ?? TimeUUID);
                                                         test.toggle();
                                                         print("Keyboard shortcut pressed");
                                                     }) {
@@ -187,7 +182,7 @@ struct HoursView: View {
 
                                 
                                    
-                            }
+                            
                             
                             
                             
@@ -202,8 +197,9 @@ struct HoursView: View {
                     }
                     
                 }.frame(height: 200)
+                .onAppear(perform: {fetchInitialProperties()})
                 
-                Divider()
+                
             }
         }
             
@@ -289,23 +285,23 @@ struct HoursView: View {
     
     func fetchInitialProperties() {
         for drawing in drawings {
-            for ArrayHourUUID in ArrayHourUUID {
-                if ArrayHourUUID == drawing.id {
+           
+                if TimeUUID == drawing.id {
                     currentUUID = drawing.id!
                     currentTitle = drawing.title!
                     currentData = drawing.canvasData
-                    currentCalendar = drawing.calendarNameAdded!
+                    currentCalendar = drawing.calendarNameAdded ?? "No name"
                 }
-            }
+            
 
         }
     }
     
     
-    func fetchProperties(canvasUUID: UUID?, index: Int) {
+    func fetchProperties(canvasUUID: UUID?) {
         for drawing in drawings {
-                if ArrayHourUUID[index] == drawing.id {
-                    currentUUID = ArrayHourUUID[index]
+                if TimeUUID == drawing.id {
+                    currentUUID = TimeUUID
                     currentTitle = drawing.title!
                     currentData = drawing.canvasData
                 } else {
