@@ -38,6 +38,11 @@ struct HoursView: View {
     
     @EnvironmentObject var transferColorPalette:TransferColorPalette
     @EnvironmentObject var refreshListClass:RefreshListClass
+    @EnvironmentObject var taskPerHour:TaskPerHour
+    
+    
+    
+    
     
     var body: some View {
         ZStack {
@@ -86,7 +91,9 @@ struct HoursView: View {
                         //                            Text("\(drawing.timeEvent ?? Date())")
                                                        
                                                     }
+                                                    
                                                 }.background(RoundedRectangle(cornerRadius: 6).foregroundColor(Color(drawing.tabColor?.uiColor ?? .red).opacity(0.6)))
+                                                
                                                     
 //                                                   Circle().fill(Color(drawing.tabColor?.uiColor ?? .red))
                                                 }
@@ -106,6 +113,7 @@ struct HoursView: View {
                                                     
                                                     
                                                 }
+                                                
                                                 
                                                 
                                                 case TypeReminder.typed.rawValue:
@@ -328,8 +336,10 @@ struct HoursView: View {
             print("Could not delete \(String(describing: audioPath)): \(error)")
         }
     }
+
+
         
-    }
+}
     
     
 //struct HoursView_Previews: PreviewProvider {

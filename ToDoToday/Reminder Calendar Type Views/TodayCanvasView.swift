@@ -34,6 +34,7 @@ struct TodayCanvasView: View {
     @EnvironmentObject var transferColorPalette:TransferColorPalette
     @EnvironmentObject var refreshListClass:RefreshListClass
     
+    @EnvironmentObject var taskPerHour:TaskPerHour
 
     var body: some View {
         ZStack {
@@ -173,6 +174,8 @@ struct TodayCanvasView: View {
     
     func getHoursByHoursTabs() {
         self.hourOfDay.objectWillChange.send()
+        self.taskPerHour.objectWillChange.send()
+        
   
             print("RUNNING")
         let date: Date = (Calendar.current.date(bySettingHour: 0, minute: 0, second: 0 , of: Date())!)
@@ -182,7 +185,7 @@ struct TodayCanvasView: View {
         do {
             let result = try viewContext.fetch(req)
             
-            
+            self.taskPerHour.fourpm = 0
             
             
             self.hourOfDay.midnight.removeAll()
@@ -327,13 +330,14 @@ struct TodayCanvasView: View {
                     else if timediff >= 57600 && timediff < 61200 {
                         print("Drank at 4pm")
                         self.hourOfDay.fourpm.append(id)
+                       
                          
                     }
                     
                     else if timediff >= 61200 && timediff < 64800 {
                         print("Drank at 5pm")
                         self.hourOfDay.fivepm.append(id)
-                        hourOfDay.objectWillChange.send()
+                       
                         
                          
                     }

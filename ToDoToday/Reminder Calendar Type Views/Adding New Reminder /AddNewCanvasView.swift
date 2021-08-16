@@ -86,6 +86,10 @@ struct AddNewCanvasView: View {
     
     @EnvironmentObject var transferColorPalette:TransferColorPalette
     
+    @EnvironmentObject var hourOfDay:HourOfDay
+    
+    @EnvironmentObject var taskPerHour:TaskPerHour
+    
       
     var body: some View {
         ZStack {
@@ -239,7 +243,12 @@ struct AddNewCanvasView: View {
                     initialUUID = drawing.id!
                     drawing.tabColor = SerializableColor.init(from: customColor)
                     drawing.calendarNameAdded = calendarName
+                    drawing.horizontalPlacement = getxPlacement(time: eventtimeclass.eventDue)
                     //SerializableColorTransformer().transformedValue(customColor) as! SerializableColor
+                    
+                    
+                    
+                    
                     
                     do {
                         AddedNewCanvas.toggle()
@@ -271,6 +280,7 @@ struct AddNewCanvasView: View {
                     initialUUID = drawing.id!
                     drawing.tabColor = SerializableColor.init(from: customColor)
                     drawing.calendarNameAdded = calendarName
+                    drawing.horizontalPlacement = getxPlacement(time: eventtimeclass.eventDue)
                     
                     do {
                         AddedNewCanvas.toggle()
@@ -299,6 +309,7 @@ struct AddNewCanvasView: View {
                     drawing.typeRem = typeReminder.rawValue
                     drawing.tabColor = SerializableColor.init(from: customColor)
                     drawing.calendarNameAdded = calendarName
+                    drawing.horizontalPlacement = getxPlacement(time: eventtimeclass.eventDue)
                    
                     print("Image saved as name: \(saveImage(image: self.selectedImage!, id: initialUUID) ?? "IMAGE SAVING ERRROR")") //DEBUG ONLY SINCE IT IS ALREADY PRINTED TO THE CONSOLE WHILE RUING THE FUNCTION
                     
@@ -331,6 +342,8 @@ struct AddNewCanvasView: View {
                     drawing.audioREMurl = audioRec.newURL
                     drawing.tabColor = SerializableColor.init(from: customColor)
                     drawing.calendarNameAdded = calendarName
+                    drawing.horizontalPlacement = getxPlacement(time: eventtimeclass.eventDue)
+                    
                     
                     do {
                         AddedNewCanvas.toggle()
@@ -411,6 +424,287 @@ struct AddNewCanvasView: View {
             alpha: CGFloat(1.0)
         )
     }
+    
+    
+    func getxPlacement(time: Date) -> Double {
+        var xlocation: Double = 0.0
+        let date: Date = (Calendar.current.date(bySettingHour: 0, minute: 0, second: 0 , of: Date())!)
+        
+        let timediff = time.timeIntervalSince(date)
+        
+        if timediff < 86400 && timediff >= 0 {
+            if timediff >= 0 && timediff < 3600 {
+               print("Drank at 0am")
+                
+                if self.hourOfDay.midnight.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.midnight.count + 1))
+                    
+                } else {xlocation = 100}
+               
+                
+            }
+            
+            else if timediff >= 3600 && timediff < 7200 {
+                if self.hourOfDay.oneam.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.oneam.count + 1))
+                    
+                } else {xlocation = 100}
+               
+                
+                 
+            }
+            
+            else if timediff >= 7200 && timediff < 10800 {
+                print("Drank at 2am")
+                
+                if self.hourOfDay.twoam.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.twoam.count + 1))
+                    
+                } else {xlocation = 100}
+                
+                
+                
+            }
+            
+            else if timediff >= 10800 && timediff < 14400{
+                print("Drank at 3am")
+                
+                if self.hourOfDay.threeam.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.threeam.count + 1))
+                    
+                } else {xlocation = 100}
+
+            }
+            
+            else if timediff >= 14400 && timediff < 18000 {
+                print("Drank at 4am")
+                
+                if self.hourOfDay.fouram.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.fouram.count + 1))
+                    
+                } else {xlocation = 100}
+                
+            }
+            
+            else if timediff >= 18000 && timediff < 21600 {
+                print("Drank at 5am")
+                
+                if self.hourOfDay.fiveam.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.fiveam.count + 1))
+                    
+                } else {xlocation = 100}
+                
+                 
+            }
+            
+            else if timediff >= 21600 && timediff < 25200 {
+                print("Drank at 6am")
+                
+                if self.hourOfDay.sixam.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.sixam.count + 1))
+                    
+                } else {xlocation = 100}
+                
+                
+            }
+            
+            else if timediff >= 25200 && timediff < 28800 {
+                print("Drank at 7am")
+                
+                if self.hourOfDay.sevenam.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.sevenam.count + 1))
+                    
+                } else {xlocation = 100}
+                
+                
+            }
+            
+            else if timediff >= 28800 && timediff < 32400 {
+                print("Drank at 8am")
+                
+                if self.hourOfDay.eightam.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.eightam.count + 1))
+                    
+                } else {xlocation = 100}
+                
+                
+            }
+            
+            else if timediff >= 32400 && timediff < 36000 {
+                print("Drank at 9am")
+                
+                if self.hourOfDay.nineam.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.nineam.count + 1))
+                    
+                } else {xlocation = 100}
+                
+                
+            }
+            
+            else if timediff >= 36000 && timediff < 39600 {
+                print("Drank at 10am")
+                
+                if self.hourOfDay.tenam.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.tenam.count + 1))
+                    
+                } else {xlocation = 100}
+                
+                 
+            }
+            
+            else if timediff >= 39600 && timediff < 43200 {
+                print("Drank at 11am")
+                
+                if self.hourOfDay.elevenam.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.elevenam.count + 1))
+                    
+                } else {xlocation = 100}
+                                
+            }
+            
+            
+            else if timediff >= 43200 && timediff < 46800 {
+                print("Drank at 12am")
+                
+                if self.hourOfDay.twelveam.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.twelveam.count + 1))
+                    
+                } else {xlocation = 100}
+                
+                
+            }
+            
+            else if timediff >= 46800 && timediff < 50400 {
+                print("Drank at 1pm")
+                
+                if self.hourOfDay.onepm.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.onepm.count + 1))
+                    
+                } else {xlocation = 100}
+                
+                    
+            }
+            
+            else if timediff >= 50400 && timediff < 54000 {
+                print("Drank at 2pm")
+                
+                if self.hourOfDay.twopm.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.twopm.count + 1))
+                    
+                } else {xlocation = 100}
+                
+            }
+            
+            else if timediff >= 54000 && timediff < 57600 {
+                print("Drank at 3pm")
+                
+                if self.hourOfDay.threepm.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.threepm.count + 1))
+                    
+                } else {xlocation = 100}
+                
+                 
+            }
+            
+            else if timediff >= 57600 && timediff < 61200 {
+                print("Drank at 4pm")
+                
+                if self.hourOfDay.fourpm.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.fourpm.count + 1))
+                    
+                } else {xlocation = 100}
+                
+               
+                 
+            }
+            
+            else if timediff >= 61200 && timediff < 64800 {
+                print("Drank at 5pm")
+                if self.hourOfDay.fivepm.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.fivepm.count + 1))
+                    
+                } else {xlocation = 100}
+                
+               
+                
+                 
+            }
+            
+            else if timediff >= 64800 && timediff < 68400 {
+                print("Drank at 6pm")
+                
+                if self.hourOfDay.sixpm.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.sixpm.count + 1))
+                    
+                } else {xlocation = 100}
+                
+            }
+            
+            else if timediff >= 68400 && timediff < 72000 {
+                print("Drank at 7pm")
+                
+                if self.hourOfDay.sevenpm.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.sevenpm.count + 1))
+                    
+                } else {xlocation = 100}
+                
+               
+                
+            }
+            
+            
+            else if timediff >= 72000 && timediff < 75600 {
+                print("Drank at 8pm")
+                
+                if self.hourOfDay.eightpm.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.eightpm.count + 1))
+                    
+                } else {xlocation = 100}
+                
+                
+            }
+            
+            else if timediff >= 75600 && timediff < 79200 {
+                print("Drank at 9pm")
+                
+                if self.hourOfDay.ninepm.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.ninepm.count + 1))
+                    
+                } else {xlocation = 100}
+                
+               
+            }
+            
+            else if timediff >= 79200 && timediff < 82800 {
+                print("Drank at 10pm")
+                
+                if self.hourOfDay.tenpm.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.tenpm.count + 1))
+                    
+                } else {xlocation = 100}
+                
+                
+            }
+            
+            else if timediff >= 82800 && timediff < 86400 {
+                print("Drank at 11pm")
+                
+                if self.hourOfDay.elevenpm.count >= 1 {
+                    xlocation = Double(100 * (self.hourOfDay.elevenpm.count + 1))
+                    
+                } else {xlocation = 100}
+                 
+            }
+        }
+        
+        
+        
+        return xlocation
+    }
+    
+  
+    
+  
     
     
 }

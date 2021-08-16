@@ -7,7 +7,35 @@
 
 import SwiftUI
 
-
+class TaskPerHour: ObservableObject {
+    @Published var midnight: Int = 0
+    @Published var oneam: Int = 0
+    @Published var twoam: Int = 0
+    @Published var threeam: Int = 0
+    @Published var fouram: Int = 0
+    @Published var fiveam: Int = 0
+    @Published var sixam: Int = 0
+    @Published var sevenam: Int = 0
+    @Published var eightam: Int = 0
+    @Published var nineam: Int = 0
+    @Published var tenam: Int = 0
+    @Published var elevenam: Int = 0
+    @Published var twelveam: Int = 0
+    @Published var onepm: Int = 0
+    @Published var twopm: Int = 0
+    @Published var threepm: Int = 0
+    @Published var fourpm: Int = 0
+    @Published var fivepm: Int = 0
+    
+   
+    @Published var sixpm: Int = 0
+    @Published var sevenpm: Int = 0
+    @Published var eightpm: Int = 0
+    @Published var ninepm: Int = 0
+    @Published var tenpm: Int = 0
+    @Published var elevenpm: Int = 0
+    
+}
 
 
 struct CalendarView: View {
@@ -18,8 +46,15 @@ struct CalendarView: View {
     
     @EnvironmentObject var hourOfDay: HourOfDay
     
+    @EnvironmentObject var taskPerHour:TaskPerHour
+    
     //@State private var location: CGPoint = CGPoint(x: 50, y: 50)
     let date: Date = (Calendar.current.date(bySettingHour: 0, minute: 0, second: 0 , of: Date())!)
+    
+    
+    @State private var sixpm: Double = 0.0
+    
+    
     
     var body: some View {
 //        ZStack {
@@ -122,7 +157,6 @@ struct CalendarView: View {
                         CalendarBackGroundView().overlay(
                             GeometryReader { proxy in
                                 Color.clear.onAppear { print("Height: + \(proxy.size.height) ")
-//                                    gettimelocation(height: proxy.size.height , hour: (Calendar.current.date(bySettingHour: 23, minute: 0, second: 0 , of: Date())!))
                                 }
                             }
                         )
@@ -135,17 +169,17 @@ struct CalendarView: View {
                                 HoursView(RefreshList: $RefreshList, TimeUUID: drawing.id ?? UUID())
                                     .foregroundColor(.pink)
                                     .frame(width: 100, height: 100)
-                                    .position(gettimelocation(height: CGFloat(12), hour: drawing.timeEvent ?? Date()))
+                                    .position(gettimelocation(height: CGFloat(12), hour: drawing.timeEvent ?? Date(), xlocation: drawing.horizontalPlacement ))
                             }
                         }
                     }
                 }
-            }
-        }
+            }        }
     }
     
-    func gettimelocation(height: CGFloat, hour: Date) -> CGPoint{
+    func gettimelocation(height: CGFloat, hour: Date, xlocation: Double) -> CGPoint{
         var ylocation = 0.0
+       
         var whichhour = 0.0
 //        ylocation = Double((108 * hour) + 61)
         whichhour = hour.timeIntervalSince(date) / 3600
@@ -153,15 +187,13 @@ struct CalendarView: View {
         if whichhour > 24 {
             return CGPoint(x: 0, y: 0)
         } else {
-        print(whichhour)
         ylocation = Double((108 * whichhour) + 61)
-        print(ylocation)
-        
-        
-//        location.y = CGFloat(ylocation)
-        return CGPoint(x: 100, y: ylocation)
+      //  print(ylocation)
+
+        return CGPoint(x: xlocation, y: ylocation)
         }
     }
+        
 }
 
 //struct CalendarView_Previews: PreviewProvider {
@@ -198,7 +230,7 @@ struct CalendarBackGroundView: View {
                     } else if num == 24 {
                         VStack(spacing: 0) {
                             HStack() {
-                                Text("24:00").padding(.trailing, 10)
+                                Text("00:00").padding(.trailing, 10)
                                 VStack {
                                 Divider()
                                 }
