@@ -226,10 +226,10 @@ struct TodayCanvasView: View {
             
             for i in result as! [NSManagedObject] {
                 let id = i.value(forKey: "id") as! UUID
-                let timeEvent = i.value(forKey: "timeEvent") as? Date ?? Date()
+                let startTime = i.value(forKey: "startTime") as? Date ?? Date()
                 
                // print("UUID OF \(id)")
-                let timediff = Int(timeEvent.timeIntervalSince(date))
+                let timediff = Int(startTime.timeIntervalSince(date))
                 
                 if timediff < 86400 && timediff >= 0 {
                     if timediff >= 0 && timediff < 3600 {
@@ -399,8 +399,8 @@ struct TodayCanvasView: View {
             let result = try viewContext.fetch(req)
             
             for i in result as! [NSManagedObject] {
-                let timeEvent = i.value(forKey: "timeEvent") as? Date ?? Date()
-                let timediff = Int(timeEvent.timeIntervalSince(date))
+                let startTime = i.value(forKey: "startTime") as? Date ?? Date()
+                let timediff = Int(startTime.timeIntervalSince(date))
                 
                 if timediff < 86400 && timediff >= 0 {
                     return false

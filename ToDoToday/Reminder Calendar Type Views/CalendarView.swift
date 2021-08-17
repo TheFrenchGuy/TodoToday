@@ -163,13 +163,13 @@ struct CalendarView: View {
                         
                         ForEach(drawings, id: \.self) {drawing in
                             
-                            if (drawing.timeEvent?.timeIntervalSince(date))! > 86400 {
+                            if (drawing.startTime?.timeIntervalSince(date))! > 86400 {
                                 EmptyView()
                             } else {
                                 HoursView(RefreshList: $RefreshList, TimeUUID: drawing.id ?? UUID())
                                     .foregroundColor(.pink)
                                     .frame(width: 100, height: 100)
-                                    .position(gettimelocation(height: CGFloat(12), hour: drawing.timeEvent ?? Date(), xlocation: drawing.horizontalPlacement ))
+                                    .position(gettimelocation(height: CGFloat(12), hour: drawing.startTime ?? Date(), xlocation: drawing.horizontalPlacement ))
                             }
                         }
                     }

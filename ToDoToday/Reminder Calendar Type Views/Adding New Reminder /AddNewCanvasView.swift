@@ -10,9 +10,11 @@ import PhotosUI
 
 class eventTimeClass {
     var eventDue:Date
+    var completionTime: Date
     
     init() {
         self.eventDue = Date()
+        self.completionTime = Date().addingTimeInterval(3600) // so that the time is at least an hour apart from the start time
         
     }
 }
@@ -48,8 +50,9 @@ struct AddNewCanvasView: View {
     
     @State private var eventtimeclass = eventTimeClass()
     
-    @State var showPopupAlert: Bool = false
-    
+    @State var showPastTimeAlert: Bool = false
+    @State var showTooLateTimeAlert: Bool = false
+    @State var showTooLittleTimeAlert: Bool = false
     @Binding var AddedNewCanvas: Bool
     
     
@@ -183,16 +186,37 @@ struct AddNewCanvasView: View {
                 }
                 
                 Section {
-                    DatePicker("Time of event", selection: $eventtimeclass.eventDue, displayedComponents: .hourAndMinute).onChange(of: eventtimeclass.eventDue, perform: {value in
+                    DatePicker("Start time: ", selection: $eventtimeclass.eventDue, displayedComponents: .hourAndMinute).onChange(of: eventtimeclass.eventDue, perform: {value in
                         if eventtimeclass.eventDue.timeIntervalSince(Date()) < 0 {
                             print("Event due is trying to be put in the past")
                             eventtimeclass.eventDue = Date().addingTimeInterval(3600)
-                            showPopupAlert.toggle()
+                            showPastTimeAlert.toggle()
                         }
                     })
-                }.alert(isPresented: $showPopupAlert) {
+                    
+                    DatePicker("Expected Completion time: ", selection: $eventtimeclass.completionTime, displayedComponents: .hourAndMinute).onChange(of: eventtimeclass.completionTime, perform: {value in
+                        if eventtimeclass.completionTime.timeIntervalSince(Date()) > 86400 {
+                            print("Event your trying to work one has more than a full rotation of the earth")
+                            eventtimeclass.completionTime = Date().addingTimeInterval(3600)
+                            showTooLateTimeAlert.toggle()
+                        }
+                        else if eventtimeclass.completionTime.timeIntervalSince(eventtimeclass.eventDue) < 900 {
+                            eventtimeclass.completionTime = Date().addingTimeInterval(900)
+                            showTooLittleTimeAlert.toggle()
+                        }
+                    })
+                }.alert(isPresented: $showTooLateTimeAlert) {
+                    Alert(title: Text("Your task is taking too long, the earth is already able to rotate on itself at least once"))
+                }
+                
+                .alert(isPresented: $showPastTimeAlert) {
                     Alert(title: Text("Well if your trying to set a due date in the past you are late"))
                 }
+                
+                .alert(isPresented: $showTooLittleTimeAlert) {
+                    Alert(title: Text("Each of your task needs to be at least 15min long"))
+                }
+                
                 
                 Section {
                       
@@ -237,7 +261,8 @@ struct AddNewCanvasView: View {
                     let timediff = Int(eventtimeclass.eventDue.timeIntervalSince(date))
                     print("TIME DIFFERENCE OF \(timediff)")
                     drawing.title = canvasTitle
-                    drawing.timeEvent = eventtimeclass.eventDue
+                    drawing.startTime = eventtimeclass.eventDue
+                    drawing.endTime = eventtimeclass.completionTime
                     drawing.id = UUID()
                     drawing.typeRem = typeReminder.rawValue
                     initialUUID = drawing.id!
@@ -273,7 +298,8 @@ struct AddNewCanvasView: View {
                     let timediff = Int(eventtimeclass.eventDue.timeIntervalSince(date))
                     print("TIME DIFFERENCE OF \(timediff)")
                     drawing.title = canvasTitle
-                    drawing.timeEvent = eventtimeclass.eventDue
+                    drawing.startTime = eventtimeclass.eventDue
+                    drawing.endTime = eventtimeclass.completionTime
                     drawing.id = UUID()
                     drawing.typeRem = typeReminder.rawValue
                     drawing.taskDescription = REMDescription
@@ -304,7 +330,8 @@ struct AddNewCanvasView: View {
                     let timediff = Int(eventtimeclass.eventDue.timeIntervalSince(date))
                     print("TIME DIFFERENCE OF \(timediff)")
                     drawing.title = canvasTitle
-                    drawing.timeEvent = eventtimeclass.eventDue
+                    drawing.startTime = eventtimeclass.eventDue
+                    drawing.endTime = eventtimeclass.completionTime
                     drawing.id = initialUUID
                     drawing.typeRem = typeReminder.rawValue
                     drawing.tabColor = SerializableColor.init(from: customColor)
@@ -335,7 +362,8 @@ struct AddNewCanvasView: View {
                     let timediff = Int(eventtimeclass.eventDue.timeIntervalSince(date))
                     print("TIME DIFFERENCE OF \(timediff)")
                     drawing.title = canvasTitle
-                    drawing.timeEvent = eventtimeclass.eventDue
+                    drawing.startTime = eventtimeclass.eventDue
+                    drawing.endTime = eventtimeclass.completionTime
                     drawing.id = initialUUID
                     drawing.typeRem = typeReminder.rawValue
                    
