@@ -10,6 +10,13 @@ import SwiftUI
 import PencilKit
 import UIKit
 struct TermsandConditionView: View {
+    
+    @Environment(\.managedObjectContext) private var viewContext
+
+
+    @FetchRequest(entity: ColorPalette.entity(), sortDescriptors: []) var colorpalette: FetchedResults<ColorPalette>
+    
+    
     @Environment(\.undoManager) private var undoManager
     @State private var canvasView = PKCanvasView()
     @ObservedObject var userPreference = UserPreference()
@@ -62,7 +69,7 @@ struct TermsandConditionView: View {
                                     }
                             } else {
                                 Button(action: {
-                                    if userPreference.reminderlist != -1 {
+                                    if userPreference.reminderlist != -1 && !colorpalette.isEmpty{
                                         SaveSignature()
                                         completion.toggle()
                                     } else {

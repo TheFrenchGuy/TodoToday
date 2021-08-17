@@ -25,7 +25,10 @@ struct ContentView: View {
     
     var body: some View {
         if firstlaunch {
-            Text ("Start it up")
+            CalendarReminderView().edgesIgnoringSafeArea(.all).environmentObject(transferColorPalette)
+                .environment(\.managedObjectContext,colorPalettePersistance.container.viewContext)
+                .environmentObject(refreshList)
+                .environmentObject(taskPerHour)
                 .sheet(isPresented: self.$firstlaunch) {
 //                if #available(iOS 15.0, *) {
 //                    if #available(macOS 12.0, *) {

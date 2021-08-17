@@ -64,6 +64,7 @@ struct SideBarView: View {
                                     colorPal.name = newAddCalendarName
                                     colorPal.paletteColor = SerializableColor.init(from: newAddCalendarColor)
                                     colorPal.isSecret = newAddCalendarIsSecret
+                                    colorPal.isMarked = true //So that newly created calendar are automatically assigned
                                     addNewPalette.toggle()
                                 
                                     do {

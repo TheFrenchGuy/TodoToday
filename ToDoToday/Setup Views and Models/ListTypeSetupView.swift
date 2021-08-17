@@ -12,6 +12,8 @@ struct ListTypeSetupView: View {
     @State private var showcheck2 = false
     @State private var completed = false
     @ObservedObject var userPreference = UserPreference()
+    
+    let colorPalettePersistance = ColorPalettePersistance.shared
     var body: some View {
         if !completed {
         TabView() {
@@ -95,9 +97,11 @@ struct ListTypeSetupView: View {
             
             NotificationPermessionView()
             
+            CreateIntialCalendarView().environment(\.managedObjectContext, colorPalettePersistance.container.viewContext)
+            
             iCloudSyncView()
             
-            TermsandConditionView(completion: $completed)
+            TermsandConditionView(completion: $completed).environment(\.managedObjectContext, colorPalettePersistance.container.viewContext)
             
         
             
