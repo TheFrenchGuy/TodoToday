@@ -163,12 +163,12 @@ struct CalendarView: View {
                         
                         ForEach(drawings, id: \.self) {drawing in
                             
-                            if (drawing.startTime?.timeIntervalSince(date))! > 86400 {
+                            if (drawing.startTime?.timeIntervalSince(date) ?? 86401) > 86400 {
                                 EmptyView()
                             } else {
-                                HoursView(RefreshList: $RefreshList, TimeUUID: drawing.id ?? UUID())
+                                HoursView(RefreshList: $RefreshList, TimeUUID: drawing.id ?? UUID(), heightTime: getheight(startDate: drawing.startTime ?? Date(), endDate: drawing.endTime ?? Date().addingTimeInterval(3600)))
                                     .foregroundColor(.pink)
-                                    .frame(width: 100, height: 100)
+                                    .frame(width: 100, height: getheight(startDate: drawing.startTime ?? Date(), endDate: drawing.endTime ?? Date().addingTimeInterval(3600)))
                                     .position(gettimelocation(height: CGFloat(12), hour: drawing.startTime ?? Date(), xlocation: drawing.horizontalPlacement ))
                             }
                         }
@@ -192,6 +192,17 @@ struct CalendarView: View {
 
         return CGPoint(x: xlocation, y: ylocation)
         }
+    }
+    
+    func getheight(startDate: Date, endDate: Date) -> CGFloat{
+        let timediff = endDate.timeIntervalSince(startDate)
+        let numHour: Double = timediff / 3600
+
+        var height = 0.0
+        height = numHour * 108
+        return CGFloat(height)
+        
+        
     }
         
 }

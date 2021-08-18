@@ -4,6 +4,7 @@
         <attribute name="audioREMurl" optional="YES" attributeType="String"/>
         <attribute name="calendarNameAdded" optional="YES" attributeType="String"/>
         <attribute name="canvasData" optional="YES" attributeType="Binary"/>
+        <attribute name="completedTask" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="horizontalPlacement" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -15,6 +16,6 @@
         <attribute name="typeRem" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="DrawingCanvas" positionX="-63" positionY="-18" width="128" height="209"/>
+        <element name="DrawingCanvas" positionX="-63" positionY="-18" width="128" height="224"/>
     </elements>
 </model>

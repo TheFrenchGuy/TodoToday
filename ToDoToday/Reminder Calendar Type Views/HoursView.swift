@@ -40,6 +40,7 @@ struct HoursView: View {
     @EnvironmentObject var refreshListClass:RefreshListClass
     @EnvironmentObject var taskPerHour:TaskPerHour
     
+     var heightTime: CGFloat
     
     
     
@@ -72,7 +73,7 @@ struct HoursView: View {
                                                         print("Keyboard shortcut pressed");
                                                     }) {
                                                         if getWallpaperFromUserDefaults() != nil {
-                                                            Image(uiImage: fetchImage(imageName: String("\(drawing.id)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit().frame(width: 150, height: 150)
+                                                            Image(uiImage: fetchImage(imageName: String("\(drawing.id)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit().frame(width: 150, height: heightTime - 20)
                                                                 .keyboardShortcut("l", modifiers: .command)
 
                                                         
@@ -204,7 +205,7 @@ struct HoursView: View {
                             
                     }
                     
-                }.frame(height: 200)
+                }.frame(height: heightTime)
                 .onAppear(perform: {fetchInitialProperties()})
                 
                 

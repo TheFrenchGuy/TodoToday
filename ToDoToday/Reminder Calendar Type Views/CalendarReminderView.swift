@@ -72,8 +72,11 @@ struct CalendarReminderView: View {
                                 }
                                 
                                 if self.tabViewClass.showTask {
-                                    Text("TO BE IMPLEMENT TO SHOW THE TASK FROM THE PAST DAYS")
-                                        .frame(width: geometry.size.width/3, height: geometry.size.height)
+                                    TaskNotDoneFromPreviousDayView().environment(\.managedObjectContext, persistenceController.container.viewContext)
+//                                    Text("TO BE IMPLEMENT TO SHOW THE TASK FROM THE PAST")
+                                        .frame(width: geometry.size.width/3, height: geometry.size.height - childSize.width)
+                                        .background(Color("lightFormGray").edgesIgnoringSafeArea(.all))
+                                        .transition(.move(edge: .leading))
                                 }
                                 
                                 

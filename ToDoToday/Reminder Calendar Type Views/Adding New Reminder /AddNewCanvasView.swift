@@ -269,6 +269,7 @@ struct AddNewCanvasView: View {
                     drawing.tabColor = SerializableColor.init(from: customColor)
                     drawing.calendarNameAdded = calendarName
                     drawing.horizontalPlacement = getxPlacement(time: eventtimeclass.eventDue)
+                    drawing.completedTask = false
                     //SerializableColorTransformer().transformedValue(customColor) as! SerializableColor
                     
                     
@@ -307,6 +308,7 @@ struct AddNewCanvasView: View {
                     drawing.tabColor = SerializableColor.init(from: customColor)
                     drawing.calendarNameAdded = calendarName
                     drawing.horizontalPlacement = getxPlacement(time: eventtimeclass.eventDue)
+                    drawing.completedTask = false
                     
                     do {
                         AddedNewCanvas.toggle()
@@ -337,6 +339,7 @@ struct AddNewCanvasView: View {
                     drawing.tabColor = SerializableColor.init(from: customColor)
                     drawing.calendarNameAdded = calendarName
                     drawing.horizontalPlacement = getxPlacement(time: eventtimeclass.eventDue)
+                    drawing.completedTask = false
                    
                     print("Image saved as name: \(saveImage(image: self.selectedImage!, id: initialUUID) ?? "IMAGE SAVING ERRROR")") //DEBUG ONLY SINCE IT IS ALREADY PRINTED TO THE CONSOLE WHILE RUING THE FUNCTION
                     
@@ -371,6 +374,7 @@ struct AddNewCanvasView: View {
                     drawing.tabColor = SerializableColor.init(from: customColor)
                     drawing.calendarNameAdded = calendarName
                     drawing.horizontalPlacement = getxPlacement(time: eventtimeclass.eventDue)
+                    drawing.completedTask = false
                     
                     
                     do {

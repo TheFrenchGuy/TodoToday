@@ -30,6 +30,7 @@ extension DrawingCanvas {
     @NSManaged public var tabColor: SerializableColor?
     @NSManaged public var calendarNameAdded:String?
     @NSManaged public var horizontalPlacement: Double
+    @NSManaged public var completedTask: Bool
     
 }
 

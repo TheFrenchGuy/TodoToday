@@ -21,7 +21,7 @@ struct ShowTodayDateView: View {
     }
     
     var body: some View {
-        Text("Today is \(datetime)").font(.title2).bold().foregroundColor(.black)
+        Text("\(datetime)").font(.title2).bold().foregroundColor(.black)
     }
 }
 
