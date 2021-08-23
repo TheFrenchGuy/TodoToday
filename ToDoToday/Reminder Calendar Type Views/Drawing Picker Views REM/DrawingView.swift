@@ -17,12 +17,14 @@ struct DrawingView: View {
     @State var id:UUID?
     @State var data:Data?
     @State var title:String?
+    @State var startTime: Date?
     var body: some View {
         VStack{
             if id?.uuidString == "" {
             Text("NO UUID STRING ASSIGNED \(title ?? "NO TITLE")")
             } else {
-                Text("\(id ?? UUID()), \(title ?? "NO TITLE")")
+//                Text("\(id ?? UUID()), \(title ?? "NO TITLE")")
+                Text("\((startTime?.toString(dateFormat: "d, hha, mm"))!)")
                 DrawingCanvasView(data: data ?? Data(), id: id ?? UUID())
                     .environment(\.managedObjectContext, viewContext)
                     .navigationBarTitle(title ?? "Untitled",displayMode: .inline)

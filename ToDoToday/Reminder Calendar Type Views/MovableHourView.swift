@@ -23,6 +23,7 @@ struct MovableHourView: View {
     var TimeUUID: UUID
     var heightTime: CGFloat
     var startTime: Date
+    var timeIntervalSinceStartTimeandEndTime: Double
     var horizontalPlacement: Double
     
     
@@ -106,6 +107,9 @@ struct MovableHourView: View {
         for drawing in drawings {
             if drawing.id == currentUUID {
                 drawing.xLocation = Double(newLocation.x)
+                drawing.yLocation = Double(newLocation.y)
+                drawing.startTime = getNewStartTimeLocation(yAxis: newLocation.y)
+                drawing.endTime = drawing.startTime?.addingTimeInterval(timeIntervalSinceStartTimeandEndTime)
                 
                 do {
                     try viewContext.save()
@@ -118,6 +122,21 @@ struct MovableHourView: View {
                 }
             }
         }
+    }
+    
+    func getNewStartTimeLocation(yAxis: CGFloat) -> Date {
+        let dayConversion = ((yAxis -  61) / 2592)
+        let numOfSeconds: Double = Double(dayConversion) * 86400
+        
+        let hours = Int(numOfSeconds / 3600)
+        let minutes = Int(Int(numOfSeconds) - (hours * 3600)) / 60
+        let seconds = Int(Double(numOfSeconds) - Double(hours * 3600) - Double(minutes * 60))
+        
+        
+        
+        let newStartTime: Date = (Calendar.current.date(bySettingHour: hours, minute: minutes, second: seconds, of: Date())!)
+        
+        return newStartTime
     }
     
     func getHeightFromTop(height: CGFloat) -> CGFloat {
