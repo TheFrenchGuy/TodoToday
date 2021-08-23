@@ -28,7 +28,7 @@ struct ImageReminderView: View {
         VStack {
             RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor)).frame(height: windowSize.height / 15)
             
-            Button(action: {showSheet.toggle()}) {
+            Button(action: {showSheet.toggle()}, label: {
                // Text(title)
                 if getWallpaperFromUserDefaults() != nil {
                     Image(uiImage: fetchImage(imageName: String("\(updatedTask.newTaskUUID)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit().frame(width: 150, height: 150)
@@ -37,10 +37,21 @@ struct ImageReminderView: View {
                 
                 }
                
-            }.sheet(isPresented: $showSheet) {
-                Image(uiImage: fetchImage(imageName: String("\(updatedTask.newTaskUUID)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit().frame(width: 150, height: 150)
-                    .keyboardShortcut("l", modifiers: .command)
-            }
+            }).fullScreenCover(isPresented: $showSheet, content:  {
+                
+                VStack {
+                    Image(uiImage: fetchImage(imageName: String("\(updatedTask.newTaskUUID)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit()
+                    
+                    HStack {
+                        Spacer()
+                        Button(action: {showSheet.toggle()}) {
+                            Text("Dismiss me")
+                            
+                        }.padding(.trailing, 40)
+                    }.frame(height: 30, alignment: .bottomTrailing)
+                }
+                
+            })
         }.onAppear(perform: {updatedTask.newTaskUUID = remUUID; updatedTask.newTaskTitle = title})
          .background(RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor).opacity(0.6)))
         
