@@ -9,6 +9,12 @@ import SwiftUI
 
 struct MovableHourView: View {
     
+    @Environment(\.managedObjectContext) private var viewContext
+
+    @FetchRequest(entity: DrawingCanvas.entity(), sortDescriptors: []) var drawings: FetchedResults<DrawingCanvas>
+    
+    
+    
     @State private var location: CGPoint = CGPoint(x: 100, y: 250)
     @GestureState private var fingerLocation: CGPoint? = nil
     @GestureState private var startLocation: CGPoint? = nil // 1
@@ -27,7 +33,7 @@ struct MovableHourView: View {
                    var newLocation = startLocation ?? location // 3
                    newLocation.x += value.translation.width
                    newLocation.y += value.translation.height
-                   print(value.translation.height)
+                   print(getHeightFromTop(height: value.translation.height))
                 if value.translation.height == 27.0 {
                         print("15min")
                     }
@@ -35,6 +41,9 @@ struct MovableHourView: View {
                }.updating($startLocation) { (value, startLocation, transaction) in
                    startLocation = startLocation ?? location // 2
                }
+            .onEnded() {value in
+                newStoredLocation(currentUUID: TimeUUID, newLocation: location)
+            }
        }
        
        var fingerDrag: some Gesture {
@@ -55,7 +64,11 @@ struct MovableHourView: View {
                 .position(location)
                 .gesture(
                     simpleDrag.simultaneously(with: fingerDrag)
+                    
                 )
+//                .onChange(of: location, perform: { value in
+//                    newStoredLocation(currentUUID: TimeUUID, newLocation: location)
+//                })
                 
                 if let fingerLocation = fingerLocation {
                     Circle()
@@ -89,6 +102,28 @@ struct MovableHourView: View {
     
     func newStoredLocation(currentUUID: UUID, newLocation: CGPoint) {
         print("To be implemented later ")
+        
+        for drawing in drawings {
+            if drawing.id == currentUUID {
+                drawing.xLocation = Double(newLocation.x)
+                
+                do {
+                    try viewContext.save()
+                  //  try viewContext.refreshAllObjects()
+                    
+                }
+                catch{
+                    print(error)
+                    print("ERROR COULDNT ADD ITEM")
+                }
+            }
+        }
+    }
+    
+    func getHeightFromTop(height: CGFloat) -> CGFloat {
+        let offset = location.y + height
+        
+        return (offset)
     }
     
 }
