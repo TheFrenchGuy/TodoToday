@@ -29,7 +29,7 @@ struct ImageReminderView: View {
             RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor)).frame(height: windowSize.height / 15)
             
             Button(action: {showSheet.toggle()}) {
-                Text(title)
+               // Text(title)
                 if getWallpaperFromUserDefaults() != nil {
                     Image(uiImage: fetchImage(imageName: String("\(updatedTask.newTaskUUID)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit().frame(width: 150, height: 150)
                         .keyboardShortcut("l", modifiers: .command)

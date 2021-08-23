@@ -78,7 +78,7 @@ struct HoursView: View {
 
                                                         
                                                     }
-                                                        Text("Drawing \(drawing.title ?? "NO TITLE")")
+                                                      //  Text("Drawing \(drawing.title ?? "NO TITLE")")
                                                        
 
                                                     }
