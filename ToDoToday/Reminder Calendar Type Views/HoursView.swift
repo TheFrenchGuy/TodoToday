@@ -211,6 +211,7 @@ struct HoursView: View {
                                     }.contextMenu { Button(action: {
                                         viewContext.delete(drawing)
                                         deleteImage(imageName: String("\(drawing.id)"))
+                                        deleteAudio(audioURL: drawing.audioREMurl ?? "NO URL")
                                         do {
                                             try self.viewContext.save()
                                             print("DELETED ITEM")
