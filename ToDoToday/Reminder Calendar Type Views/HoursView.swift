@@ -40,6 +40,10 @@ struct HoursView: View {
     @EnvironmentObject var refreshListClass:RefreshListClass
     @EnvironmentObject var taskPerHour:TaskPerHour
     
+    
+    @StateObject var showActivitySelector = showActivityShareSelector()
+    @State var sendToShareAll: Bool = false
+    
      var heightTime: CGFloat
     
     
@@ -56,6 +60,7 @@ struct HoursView: View {
                                         
                                         
                                     if TimeUUID == drawing.id {
+                                        ZStack() {
                                             switch(drawing.typeRem) {
                                                 case TypeReminder.drawing.rawValue:
                                                 ZStack {
@@ -95,91 +100,154 @@ struct HoursView: View {
                                                     
                                                 }.background(RoundedRectangle(cornerRadius: 6).foregroundColor(Color(drawing.tabColor?.uiColor ?? .red).opacity(0.6)))
                                                 
-                                                    
+                                                .sheet(isPresented: $sendToShareAll, content: { ShareREMAll(imageName: drawing.id ?? UUID())})
 //                                                   Circle().fill(Color(drawing.tabColor?.uiColor ?? .red))
                                                 }
-                                                .contextMenu { Button(action: {
-                                                        viewContext.delete(drawing)
-                                                        deleteImage(imageName: String("\(drawing.id)"))
-                                                        do {
-                                                            try self.viewContext.save()
-                                                            print("DELETED ITEM")
-                                                        } catch {
-                                                            print(error)
-                                                        }
-                                                        RefreshList.toggle()
-                                                    }) {
-                                                        Text("Delete me")
-                                                    }
+                                                
                                                     
-                                                    
-                                                }
+                                                
                                                 
                                                 
                                                 
                                                 case TypeReminder.typed.rawValue:
-                                                TypeReminderView(title: drawing.title ?? "NO TITLE", text: drawing.taskDescription ?? "NO DESCRIPTION", remUUID: drawing.id ?? UUID(), tabColor: drawing.tabColor?.uiColor ?? .red, windowSize: bounds.size) .contextMenu { Button(action:{
-                                                    viewContext.delete(drawing)
-                                                    do {
-                                                        try self.viewContext.save()
-                                                        print("DELETED ITEM")
-                                                    } catch {
-                                                        print(error)
-                                                    }
-                                                    RefreshList.toggle()
-                                                }) {
-                                                    Text("Delete me")
-                                                }}
+                                                    TypeReminderView(title: drawing.title ?? "NO TITLE", text: drawing.taskDescription ?? "NO DESCRIPTION", remUUID: drawing.id ?? UUID(), tabColor: drawing.tabColor?.uiColor ?? .red, windowSize: bounds.size).sheet(isPresented: $sendToShareAll, content: { ShareREMAll(title: drawing.title ?? "NO title", taskDesc: drawing.taskDescription ?? "NO TaskDesc")})
+//                                                    .contextMenu { Button(action:{
+//                                                    viewContext.delete(drawing)
+//                                                    do {
+//                                                        try self.viewContext.save()
+//                                                        print("DELETED ITEM")
+//                                                    } catch {
+//                                                        print(error)
+//                                                    }
+//                                                    RefreshList.toggle()
+//                                                }) {
+//                                                    Text("Delete me")
+//                                                }
+//
+////                                                    Button(action: {
+////                                                        showActivitySelector.text = true
+////                                                        sendToShareAll = true
+////                                                    }) {
+////
+////                                                        HStack {
+////                                                            Image(systemName: "square.and.arrow.up")
+////                                                            Text("Share it")
+////                                                        }
+////                                                    }
+//                                                }
+                                                    
+                                                
                                                 
 //                                                    .onAppear(perform: {currentTitle = drawing.title ?? "NO TITLE"; currentTask = drawing.taskDescription ?? "NO DESCRIPTION"})
                                                 
                                                 case TypeReminder.image.rawValue:
-                                                ImageReminderView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID(), tabColor: drawing.tabColor?.uiColor ?? .red, windowSize: bounds.size).contextMenu { Button(action:{
-                                                    viewContext.delete(drawing)
-                                                    deleteImage(imageName: String("\(drawing.id)"))
-                                                    do {
-                                                        try self.viewContext.save()
-                                                        print("DELETED ITEM")
-                                                    } catch {
-                                                        print(error)
-                                                    }
-                                                    RefreshList.toggle()
-                                                }) {
-                                                    Text("Delete me")
-                                                }}
+                                                    ImageReminderView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID(), tabColor: drawing.tabColor?.uiColor ?? .red, windowSize: bounds.size)
+                                                        .sheet(isPresented: $sendToShareAll, content: { ShareREMAll(imageName: drawing.id ?? UUID())})
+//                                                        .contextMenu { Button(action:{
+//                                                        viewContext.delete(drawing)
+//                                                        deleteImage(imageName: String("\(drawing.id)"))
+//                                                        do {
+//                                                            try self.viewContext.save()
+//                                                            print("DELETED ITEM")
+//                                                        } catch {
+//                                                            print(error)
+//                                                        }
+//                                                        RefreshList.toggle()
+//                                                    }) {
+//                                                        Text("Delete me")
+//                                                    }
+//
+////                                                    Button(action: {
+////                                                        showActivitySelector.image = true
+////                                                        sendToShareAll = true
+////                                                    }) {
+////
+////                                                        HStack {
+////                                                            Image(systemName: "square.and.arrow.up")
+////                                                            Text("Share it")
+////                                                        }
+////                                                    }
+//                                                }
+                                                    
+                                                   
                                                 case TypeReminder.audio.rawValue:
-                                                AudioPlayerView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID(), audioURL: drawing.audioREMurl ?? "NO URL", tabColor: drawing.tabColor?.uiColor ?? .red, windowSize: bounds.size).contextMenu { Button(action:{
-                                                    viewContext.delete(drawing)
-                                                    deleteAudio(audioURL: drawing.audioREMurl ?? "NO URL")
-                                                    do {
-                                                        try self.viewContext.save()
-                                                        print("DELETED ITEM")
-                                                        
-                                                    } catch {
-                                                        print(error)
-                                                    }
-                                                    RefreshList.toggle()
-                                                }) {
-                                                    Text("Delete me")
-                                                }}
+                                                    AudioPlayerView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID(), audioURL: drawing.audioREMurl ?? "NO URL", tabColor: drawing.tabColor?.uiColor ?? .red, windowSize: bounds.size).sheet(isPresented: $sendToShareAll, content: { ShareREMAll( audioURL: drawing.audioREMurl ?? "NO URL")})
+//                                                    .contextMenu { Button(action:{
+//                                                    viewContext.delete(drawing)
+//                                                    deleteAudio(audioURL: drawing.audioREMurl ?? "NO URL")
+//                                                    do {
+//                                                        try self.viewContext.save()
+//                                                        print("DELETED ITEM")
+//
+//                                                    } catch {
+//                                                        print(error)
+//                                                    }
+//                                                    RefreshList.toggle()
+//                                                }) {
+//                                                    Text("Delete me")
+//                                                }}
                                                 
                                                 default:
                                                     Text("Other type")
-                                                    .contextMenu { Button(action:{
-                                                        viewContext.delete(drawing)
-                                                        deleteImage(imageName: String("\(drawing.id)"))
-                                                        do {
-                                                            try self.viewContext.save()
-                                                            print("DELETED ITEM")
-                                                        } catch {
-                                                            print(error)
-                                                        }
-                                                        RefreshList.toggle()
-                                                    }) {
-                                                        Text("Delete me")
-                                                    }}
+                                                        .sheet(isPresented: $sendToShareAll, content: { ShareREMAll()})
+//                                                        .contextMenu { Button(action:{
+//                                                            viewContext.delete(drawing)
+//                                                            deleteImage(imageName: String("\(drawing.id)"))
+//                                                            do {
+//                                                                try self.viewContext.save()
+//                                                                print("DELETED ITEM")
+//                                                            } catch {
+//                                                                print(error)
+//                                                            }
+//                                                            RefreshList.toggle()
+//                                                        }) {
+//                                                            Text("Delete me")
+//                                                        }
+//                                                    }
+                                                    
+                                                        
                                                 
                                             }
+                                    }.contextMenu { Button(action: {
+                                        viewContext.delete(drawing)
+                                        deleteImage(imageName: String("\(drawing.id)"))
+                                        do {
+                                            try self.viewContext.save()
+                                            print("DELETED ITEM")
+                                        } catch {
+                                            print(error)
+                                        }
+                                        RefreshList.toggle()
+                                    }) {
+                                        Text("Delete me")
+                                    }
+                                
+                                        Button(action: {
+                                            switch(drawing.typeRem) {
+                                                case TypeReminder.drawing.rawValue:
+                                                    showActivitySelector.drawing = true
+                                                
+                                                case TypeReminder.typed.rawValue :
+                                                    showActivitySelector.text = true
+                                                case TypeReminder.image.rawValue:
+                                                    showActivitySelector.image = true
+                                                case TypeReminder.audio.rawValue:
+                                                    showActivitySelector.audio = true
+                                                    
+                                                default:
+                                                    showActivitySelector.text = true
+                                            }
+                                            sendToShareAll = true
+                                        }) {
+
+                                            HStack {
+                                                Image(systemName: "square.and.arrow.up")
+                                                Text("Share it")
+                                            }
+                                        }
+                                        
+                                        
+                                    }
                                 
                                             
                                             
@@ -199,6 +267,7 @@ struct HoursView: View {
                             
                             
                             .onDelete(perform: deleteItem)
+                        
                             
                             
                             //.foregroundColor(.blue)
@@ -210,7 +279,7 @@ struct HoursView: View {
                 
                 
             }
-        }
+        }.environmentObject(showActivitySelector)
             
 
         
