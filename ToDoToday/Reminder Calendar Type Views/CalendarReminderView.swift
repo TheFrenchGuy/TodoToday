@@ -17,6 +17,8 @@ class TabViewClass: ObservableObject{
 
 struct CalendarReminderView: View {
     
+    
+    
     @Environment (\.managedObjectContext) var viewContext
    
     @FetchRequest(entity: ColorPalette.entity(), sortDescriptors: []) var colorpalette: FetchedResults<ColorPalette>

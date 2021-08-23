@@ -24,7 +24,7 @@ struct AudioPlayerView: View {
             HStack {
     //            Text("\(audioURL.lastPathComponent)")
                 
-                Text("\(audioURL)")
+                Text("\(title)")
                 Spacer()
                 if audioPlayer.isPlaying == false {
                     Button(action: {

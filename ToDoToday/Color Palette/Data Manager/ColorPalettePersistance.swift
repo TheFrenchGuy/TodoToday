@@ -26,10 +26,10 @@ struct ColorPalettePersistance {
         return result
     }()
 
-    let container: NSPersistentContainer
+    let container: NSPersistentCloudKitContainer
 
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "ColorPaletteCoreDataModel")
+        container =  NSPersistentCloudKitContainer(name: "ColorPaletteCoreDataModel")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }

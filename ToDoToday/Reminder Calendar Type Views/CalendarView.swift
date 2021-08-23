@@ -52,104 +52,40 @@ struct CalendarView: View {
     let date: Date = (Calendar.current.date(bySettingHour: 0, minute: 0, second: 0 , of: Date())!)
     
     
-    @State private var sixpm: Double = 0.0
+    
+    @State private var location: CGPoint = CGPoint(x: 100, y: 0)
+    @GestureState private var fingerLocation: CGPoint? = nil
+    @GestureState private var startLocation: CGPoint? = nil // 1
+    
+    
+    
+    
+    var simpleDrag: some Gesture {
+           DragGesture()
+               .onChanged { value in
+                   var newLocation = startLocation ?? location // 3
+                   newLocation.x += value.translation.width
+                   newLocation.y += value.translation.height
+                   print(value.translation.height)
+                if value.translation.height == 27.0 {
+                        print("15min")
+                    }
+                   self.location = newLocation
+               }.updating($startLocation) { (value, startLocation, transaction) in
+                   startLocation = startLocation ?? location // 2
+               }
+       }
+       
+       var fingerDrag: some Gesture {
+           DragGesture()
+               .updating($fingerLocation) { (value, fingerLocation, transaction) in
+                   fingerLocation = value.location
+               }
+       }
     
     
     
     var body: some View {
-//        ZStack {
-//            GeometryReader { bounds in
-//                ScrollView {
-//                    ForEach(1...24, id: \.self) {number in
-//
-//                        if number == 1 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.sevenam, ShowTime: "7am", RefreshList: $RefreshList).frame(height: 200)
-//
-//
-//
-//                        }
-//
-//
-//                        else if number == 2 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.eightam, ShowTime: "8am", RefreshList: $RefreshList).frame(height: 200)
-//                        }
-//                        else if number == 3{
-//                            HoursView(ArrayHourUUID: $hourOfDay.nineam, ShowTime: "9am", RefreshList: $RefreshList).frame(height: 200)
-//                        }
-//                        else if number == 4 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.tenam, ShowTime: "10am", RefreshList: $RefreshList).frame(height: 200)
-//                        }
-//                        else if number == 5 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.elevenam, ShowTime: "11am", RefreshList: $RefreshList).frame(height: 200)
-//                        }
-//                        else if number == 6 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.twelveam, ShowTime: "12am", RefreshList: $RefreshList).frame(height: 200)
-//                        }
-//                        else if number == 7 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.onepm, ShowTime: "1pm", RefreshList: $RefreshList).frame(height: 200)
-//                        }
-//                        else if number == 8 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.twopm, ShowTime: "2pm", RefreshList: $RefreshList).frame(height: 200)
-//
-//                        }
-//                        else if number == 9 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.threepm, ShowTime: "3pm", RefreshList: $RefreshList).frame(height: 200)
-//                        }
-//                        else if number == 10 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.fourpm, ShowTime: "4pm", RefreshList: $RefreshList).frame(height: 200)
-//                        }else if number == 11 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.fivepm, ShowTime: "5pm", RefreshList: $RefreshList).frame(height: 200)
-//                        }
-//                        else if number == 12 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.sixpm, ShowTime: "6pm", RefreshList: $RefreshList).frame(height: 200)
-//
-//
-//                        }
-//                        else if number == 13 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.sevenpm, ShowTime: "7pm", RefreshList: $RefreshList).frame(height: 200)
-//                        }
-//                        else if number == 14 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.eightpm, ShowTime: "8pm", RefreshList: $RefreshList).frame(height: 200)
-//                        }
-//                        else if number == 15 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.ninepm, ShowTime: "9pm", RefreshList: $RefreshList).frame(height: 200)
-//                        }
-//                        else if number == 16 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.tenpm, ShowTime: "10pm", RefreshList: $RefreshList).frame(height: 200)
-//
-//                        }
-//                        else if number == 17 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.elevenpm, ShowTime: "11pm", RefreshList: $RefreshList).frame(height: 200)
-//                        }
-//                        else if number == 18 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.midnight, ShowTime: "12am", RefreshList: $RefreshList).frame(height: 200)
-//                        }
-//                        else if number == 19 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.oneam, ShowTime: "1am", RefreshList: $RefreshList).frame(height: 200)
-//                        }
-//                        else if number == 20 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.twoam, ShowTime: "2am", RefreshList: $RefreshList).frame(height: 200)
-//                        }
-//                        else if number == 21 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.threeam, ShowTime: "3am", RefreshList: $RefreshList).frame(height: 200)
-//                        }
-//                        else if number == 22 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.fouram, ShowTime: "4am", RefreshList: $RefreshList).frame(height: 200)
-//                        }
-//                        else if number == 23 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.fiveam, ShowTime: "5am", RefreshList: $RefreshList).frame(height: 200)
-//                        }
-//                        else if number == 24 {
-//                            HoursView(ArrayHourUUID: $hourOfDay.sixam, ShowTime: "6am", RefreshList: $RefreshList).frame(height: 200)
-//                        }
-//
-//
-//
-//
-//                    }
-//                }
-//            }
-//        }
         GeometryReader {bounds in
             ZStack {
                 ScrollView(.vertical) {
@@ -166,10 +102,23 @@ struct CalendarView: View {
                             if (drawing.startTime?.timeIntervalSince(date) ?? 86401) > 86400 {
                                 EmptyView()
                             } else {
-                                HoursView(RefreshList: $RefreshList, TimeUUID: drawing.id ?? UUID(), heightTime: getheight(startDate: drawing.startTime ?? Date(), endDate: drawing.endTime ?? Date().addingTimeInterval(3600)))
-                                    .foregroundColor(.pink)
-                                    .frame(width: 100, height: getheight(startDate: drawing.startTime ?? Date(), endDate: drawing.endTime ?? Date().addingTimeInterval(3600)))
-                                    .position(gettimelocation(height: CGFloat(12), hour: drawing.startTime ?? Date(), xlocation: drawing.horizontalPlacement ))
+                                
+//                                ZStack {
+//                                HoursView(RefreshList: $RefreshList, TimeUUID: drawing.id ?? UUID(), heightTime: getheight(startDate: drawing.startTime ?? Date(), endDate: drawing.endTime ?? Date().addingTimeInterval(3600)))
+//                                    .frame(width: 100, height: getheight(startDate: drawing.startTime ?? Date(), endDate: drawing.endTime ?? Date().addingTimeInterval(3600)))
+//                                    .position(gettimelocation(height: CGFloat(12), hour: drawing.startTime ?? Date(), xlocation: drawing.horizontalPlacement ))
+//                                    .gesture(
+//                                        simpleDrag.simultaneously(with: fingerDrag)
+//                                    )
+//
+//                                    if let fingerLocation = fingerLocation {
+//                                        Circle()
+//                                            .stroke(Color.green, lineWidth: 2)
+//                                            .frame(width: 44, height: 44)
+//                                            .position(fingerLocation)
+//                                    }
+//                                }
+                                MovableHourView(refreshList: $RefreshList, TimeUUID: drawing.id ?? UUID(), heightTime: getheight(startDate: drawing.startTime ?? Date(), endDate: drawing.endTime ?? Date().addingTimeInterval(3600)), startTime: drawing.startTime ?? Date(), horizontalPlacement: drawing.xLocation )
                             }
                         }
                     }

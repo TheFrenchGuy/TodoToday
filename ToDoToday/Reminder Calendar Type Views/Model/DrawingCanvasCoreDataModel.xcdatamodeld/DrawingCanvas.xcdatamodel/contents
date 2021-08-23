@@ -6,7 +6,6 @@
         <attribute name="canvasData" optional="YES" attributeType="Binary"/>
         <attribute name="completedTask" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="horizontalPlacement" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="tabColor" optional="YES" attributeType="Transformable" valueTransformerName="SerializableColorTransformer" customClassName="SerializableColor"/>
@@ -14,8 +13,10 @@
         <attribute name="taskDescription" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String" spotlightIndexingEnabled="YES"/>
         <attribute name="typeRem" optional="YES" attributeType="String"/>
+        <attribute name="xLocation" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="yLocation" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="DrawingCanvas" positionX="-63" positionY="-18" width="128" height="224"/>
+        <element name="DrawingCanvas" positionX="-63" positionY="-18" width="128" height="239"/>
     </elements>
 </model>
