@@ -54,47 +54,54 @@ struct CalendarReminderView: View {
         
         return GeometryReader { geometry in
             
-            ZStack(alignment: .topLeading) {
-                
-                NavigationView {
-                        ZStack {
-                            HStack {
-                                if self.tabViewClass.showTab == true {
-                                    SideBarView().environment(\.managedObjectContext, colorPalettePersistance.container.viewContext)
-                                        
-                                        .frame(width: geometry.size.width/3, height: geometry.size.height - childSize.width)
-                                        .background(Color("lightFormGray").edgesIgnoringSafeArea(.all))
-                                        .transition(.move(edge: .leading))
-                                        .onAppear(perform: {
-                                            print("SIZE OF CHILD \(self.childSize.width)")
-                                        })
-                                        
-                                        
-                                        
-                                }
-                                
-                                if self.tabViewClass.showTask {
-                                    TaskNotDoneFromPreviousDayView().environment(\.managedObjectContext, persistenceController.container.viewContext)
-//                                    Text("TO BE IMPLEMENT TO SHOW THE TASK FROM THE PAST")
-                                        .frame(width: geometry.size.width/3, height: geometry.size.height - childSize.width)
-                                        .background(Color("lightFormGray").edgesIgnoringSafeArea(.all))
-                                        .transition(.move(edge: .leading))
-                                }
-                                
-                                
-                                TodayCanvasView().environment(\.managedObjectContext, persistenceController.container.viewContext)
-                            }
-                        }
-                        .gesture(drag)
-                        .navigationBarItems(leading: TabTaskPlusView().frame(height: 60), trailing: TodaySettingsView())
-                    }
-                        .navigationViewStyle(StackNavigationViewStyle())
-                        .onAppear{loadInitialColorPalette()}
-                
             
+            if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
+                ZStack(alignment: .topLeading) {
+                    
+                    NavigationView {
+                            ZStack {
+                                HStack {
+                                    if self.tabViewClass.showTab == true {
+                                        SideBarView().environment(\.managedObjectContext, colorPalettePersistance.container.viewContext)
+                                            
+                                            .frame(width: geometry.size.width/3, height: geometry.size.height - childSize.width)
+                                            .background(Color("lightFormGray").edgesIgnoringSafeArea(.all))
+                                            .transition(.move(edge: .leading))
+                                            .onAppear(perform: {
+                                                print("SIZE OF CHILD \(self.childSize.width)")
+                                            })
+                                            
+                                            
+                                            
+                                    }
+                                    
+                                    if self.tabViewClass.showTask {
+                                        TaskNotDoneFromPreviousDayView().environment(\.managedObjectContext, persistenceController.container.viewContext)
+    //                                    Text("TO BE IMPLEMENT TO SHOW THE TASK FROM THE PAST")
+                                            .frame(width: geometry.size.width/3, height: geometry.size.height - childSize.width)
+                                            .background(Color("lightFormGray").edgesIgnoringSafeArea(.all))
+                                            .transition(.move(edge: .leading))
+                                    }
+                                    
+                                    
+                                    TodayCanvasView().environment(\.managedObjectContext, persistenceController.container.viewContext)
+                                }
+                            }
+                            .gesture(drag)
+                            .navigationBarItems(leading: TabTaskPlusView().frame(height: 60), trailing: TodaySettingsView())
+                        }
+                            .navigationViewStyle(StackNavigationViewStyle())
+                            .onAppear{loadInitialColorPalette()}
+                    
                 
-                
-                
+                    
+                    
+                    
+                }
+            } else if UIDevice.current.userInterfaceIdiom == .phone {
+                VStack {
+                    Text("Hey world")
+                }
             }
         }.onPreferenceChange(SizePreferenceKey.self) { preferences in
             if preferences == CGSize(width: 0, height: 0){
