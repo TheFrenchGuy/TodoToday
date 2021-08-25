@@ -141,7 +141,7 @@ struct HoursView: View {
 //                                                    .onAppear(perform: {currentTitle = drawing.title ?? "NO TITLE"; currentTask = drawing.taskDescription ?? "NO DESCRIPTION"})
                                                 
                                                 case TypeReminder.image.rawValue:
-                                                    ImageReminderView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID(), tabColor: drawing.tabColor?.uiColor ?? .red, windowSize: bounds.size)
+                                                    ImageReminderView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID(), tabColor: drawing.tabColor?.uiColor ?? .red,startTime: drawing.startTime ?? Date(), endTime: drawing.endTime ?? Date(), windowSize: bounds.size)
                                                         .sheet(isPresented: $sendToShareAll, content: { ShareREMAll(imageName: drawing.id ?? UUID())})
 //                                                        .contextMenu { Button(action:{
 //                                                        viewContext.delete(drawing)

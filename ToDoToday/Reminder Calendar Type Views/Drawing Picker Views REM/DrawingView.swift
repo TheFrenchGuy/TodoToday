@@ -53,6 +53,7 @@ struct DrawingView: View {
         } else {
             
             VStack(alignment: .leading) {
+                
                 Button(action: {
                     
                     withAnimation() {
@@ -71,23 +72,44 @@ struct DrawingView: View {
                 Text("What would you like to modifiy about your task?").font(.title2).bold().padding()
                 
                 
-                TextField("Title of Task", text: $title)
                 
-                DatePicker("Start of Event", selection: $startTime)
-                DatePicker("Completion Time of Event", selection: $endTime )
-                
-                Spacer()
-                
-                
-                Button(action: {
-                       updateFields()
-                }) {
-                    HStack(alignment: .center) {
-                        Image(systemName: "externaldrive.badge.icloud")
-                        Text("Save update")
+                Form {
+                    
+                    
+                    Section(header: Text("Title")) {
+                    
+                    
+                        VStack(alignment: .leading) {
+                            Text("Title of your task:")
+                            HStack() {
+                                Spacer()
+                                TextField("Title of Task", text: $title)
+                            }
+                        }.padding()
                         
                     }
-                }.padding()
+                    
+                    
+                    Section(header: Text("Timings")) {
+                    
+                        DatePicker("Start of Event", selection: $startTime).padding()
+                        DatePicker("Completion Time of Event", selection: $endTime ).padding()
+                    }
+                    
+                                        
+                    Section(header: Text("Make sure you delayed the tasks being done")) {
+                    Button(action: {
+                           updateFields()
+                    }) {
+                        HStack(alignment: .center) {
+                            Image(systemName: "externaldrive.badge.icloud")
+                            Text("Save update")
+                            
+                        }
+                    }.padding()
+                        
+                    }
+                }
             }
             
         }

@@ -30,10 +30,15 @@ extension updatedTaskDesClass: Equatable {
 }
 
 struct TypeReminderView: View {
-     var title: String
+     @State var title: String = "NO TITLE"
      var text: String
      var remUUID: UUID
      var tabColor: UIColor
+    
+    @State var startTime: Date = Date()
+    @State var endTime: Date = Date().addingTimeInterval(3600)
+    
+    @State var showSettings: Bool = false
     
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -58,6 +63,8 @@ struct TypeReminderView: View {
                    
                 }
             }.sheet(isPresented: $showSheet) {
+                
+                if !showSettings {
                 VStack {
                     Text("Title:")
                     TextEditor(text: $updatedTask.newTaskTitle)
@@ -70,7 +77,90 @@ struct TypeReminderView: View {
                         .onChange(of:updatedTask.newTaskTitle, perform: { value in
                             updateField(canvasUUID: remUUID)
                         })
+                    
+                    Spacer()
+                    
+                    HStack {
+                        Button(action: {showSheet.toggle()}) {
+                            Text("Dismiss me")
+                            
+                        }.padding(.leading, 50)
+                        
+                        
+                        Spacer()
+                        Button(action: {
+                            withAnimation() {
+                                self.showSettings = true
+                                
+                            }
+                            
+                        }) { Image(systemName: "slider.horizontal.3")}.padding(.trailing, 50)
+                        
+                        
+                    }.frame(height: 50)
+                    
                 }.onAppear(perform: {updatedTask.newTaskDesc = text; updatedTask.newTaskTitle = title})
+                } else {
+                    VStack(alignment: .leading) {
+                        
+                        Button(action: {
+                            
+                            withAnimation() {
+                                self.showSettings = false
+                            }
+                        
+                        }) {
+                            HStack{
+                                Image(systemName: "chevron.backward")
+                                Text("Back to drawing")
+                                Spacer()
+                            }
+                        }.padding()
+                       // .padding(.bottom, 40)
+                        
+                        Text("What would you like to modifiy about your task?").font(.title2).bold().padding()
+                        
+                        
+                        
+                        Form {
+                            
+                            
+                            Section(header: Text("Title")) {
+                            
+                            
+                                VStack(alignment: .leading) {
+                                    Text("Title of your task:")
+                                    HStack() {
+                                        Spacer()
+                                        TextField("Title of Task", text: $title)
+                                    }
+                                }.padding()
+                                
+                            }
+                            
+                            
+                            Section(header: Text("Timings")) {
+                            
+                                DatePicker("Start of Event", selection: $startTime).padding()
+                                DatePicker("Completion Time of Event", selection: $endTime ).padding()
+                            }
+                            
+                                                
+                            Section(header: Text("Make sure you delayed the tasks being done")) {
+                            Button(action: {
+                                   updateFields()
+                            }) {
+                                HStack(alignment: .center) {
+                                    Image(systemName: "externaldrive.badge.icloud")
+                                    Text("Save update")
+                                    
+                                }
+                            }.padding()
+                                
+                            }
+                        }
+                    }
+                }
                 
             }
         }.background(RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor).opacity(0.6)))
@@ -89,6 +179,28 @@ struct TypeReminderView: View {
                 }
                 
                 
+            }
+        }
+    }
+    
+    
+    func updateFields() {
+        for drawing in drawings {
+            if drawing.id == remUUID {
+                drawing.title = title
+                drawing.startTime = startTime
+                drawing.endTime = endTime
+                
+                do {
+                    try viewContext.save()
+                  //  try viewContext.refreshAllObjects()
+                    print("Saved")
+                    
+                }
+                catch{
+                    print(error)
+                    print("ERROR COULDNT ADD ITEM")
+                }
             }
         }
     }

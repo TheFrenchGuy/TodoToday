@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct ImageReminderView: View {
-    var title: String
+    @State var title: String = "NO TITLE"
     var remUUID: UUID
     var tabColor: UIColor
+    @State var startTime: Date = Date()
+    @State var endTime: Date = Date().addingTimeInterval(3600)
+    
+    @State var showSettings: Bool = false
+    
     
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -25,6 +30,8 @@ struct ImageReminderView: View {
     var windowSize:CGSize
     
     var body: some View {
+        
+       
         VStack {
             RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor)).frame(height: windowSize.height / 15)
             
@@ -38,22 +45,98 @@ struct ImageReminderView: View {
                 }
                
             }).fullScreenCover(isPresented: $showSheet, content:  {
-                
-                VStack {
-                    Image(uiImage: fetchImage(imageName: String("\(updatedTask.newTaskUUID)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit()
-                    
-                    HStack {
-                        Spacer()
-                        Button(action: {showSheet.toggle()}) {
-                            Text("Dismiss me")
+                if !showSettings {
+                    VStack {
+                        Image(uiImage: fetchImage(imageName: String("\(updatedTask.newTaskUUID)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit()
+                        
+                        HStack {
                             
-                        }.padding(.trailing, 40)
-                    }.frame(height: 30, alignment: .bottomTrailing)
+                            Button(action: {showSheet.toggle()}) {
+                                Text("Dismiss me")
+                                
+                            }.padding(.leading, 50)
+                            
+                            
+                            Spacer()
+                            Button(action: {
+                                withAnimation() {
+                                    self.showSettings = true
+                                    
+                                }
+                                
+                            }) { Image(systemName: "slider.horizontal.3")}.padding(.trailing, 50)
+                            
+                            
+                        }.frame(height: 50, alignment: .bottom)
+                        
+                        
+                    }
+                } else {
+                    VStack(alignment: .leading) {
+                        
+                        Button(action: {
+                            
+                            withAnimation() {
+                                self.showSettings = false
+                            }
+                        
+                        }) {
+                            HStack{
+                                Image(systemName: "chevron.backward")
+                                Text("Back to drawing")
+                                Spacer()
+                            }
+                        }.padding()
+                       // .padding(.bottom, 40)
+                        
+                        Text("What would you like to modifiy about your task?").font(.title2).bold().padding()
+                        
+                        
+                        
+                        Form {
+                            
+                            
+                            Section(header: Text("Title")) {
+                            
+                            
+                                VStack(alignment: .leading) {
+                                    Text("Title of your task:")
+                                    HStack() {
+                                        Spacer()
+                                        TextField("Title of Task", text: $title)
+                                    }
+                                }.padding()
+                                
+                            }
+                            
+                            
+                            Section(header: Text("Timings")) {
+                            
+                                DatePicker("Start of Event", selection: $startTime).padding()
+                                DatePicker("Completion Time of Event", selection: $endTime ).padding()
+                            }
+                            
+                                                
+                            Section(header: Text("Make sure you delayed the tasks being done")) {
+                            Button(action: {
+                                   updateFields()
+                            }) {
+                                HStack(alignment: .center) {
+                                    Image(systemName: "externaldrive.badge.icloud")
+                                    Text("Save update")
+                                    
+                                }
+                            }.padding()
+                                
+                            }
+                        }
+                    }
                 }
                 
             })
         }.onAppear(perform: {updatedTask.newTaskUUID = remUUID; updatedTask.newTaskTitle = title})
          .background(RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor).opacity(0.6)))
+         
         
     }
     
@@ -80,6 +163,28 @@ struct ImageReminderView: View {
     func getWallpaperFromUserDefaults() -> Data? {
       let defaults = UserDefaults.standard
         return defaults.object(forKey: "signatureImage") as? Data
+    }
+    
+    
+    func updateFields() {
+        for drawing in drawings {
+            if drawing.id == remUUID {
+                drawing.title = title
+                drawing.startTime = startTime
+                drawing.endTime = endTime
+                
+                do {
+                    try viewContext.save()
+                  //  try viewContext.refreshAllObjects()
+                    print("Saved")
+                    
+                }
+                catch{
+                    print(error)
+                    print("ERROR COULDNT ADD ITEM")
+                }
+            }
+        }
     }
     
     
