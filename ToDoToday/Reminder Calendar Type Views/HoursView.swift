@@ -88,7 +88,7 @@ struct HoursView: View {
 
                                                     }
                                                         .sheet(isPresented: self.$test) {
-                                                            DrawingView(isVisible: $test, id: currentUUID ?? UUID(), data: currentData, title: currentTitle, startTime: drawing.startTime ?? Date())
+                                                            DrawingView(isVisible: $test, id: currentUUID ?? UUID(), data: currentData, title: currentTitle, startTime: drawing.startTime ?? Date(), endTime: drawing.endTime ?? Date())
                                                                 .onDisappear() { print("DISMISS"); RefreshList.toggle()}
                                                             
                                                         }

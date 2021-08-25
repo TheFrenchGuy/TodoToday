@@ -162,13 +162,25 @@ struct TaskNotDoneFromPreviousDayView: View {
     }
     
     func checkIfOverDue(dueTime: Date, isCompleted: Bool) -> Bool  {
-        var isOverDue: Bool = false
-        let date: Date = Date()
-        let timediff = Int(date.timeIntervalSince(dueTime))
+        var isOverDue: Bool = true
         
-        if timediff > 86400 && timediff < 172800 && !isCompleted {
-            isOverDue = true
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .none
+        let todayDate = formatter.string(from: Date())
+        let dueDate = formatter.string(from: dueTime)
+        print("Today Date: \(todayDate) + \(dueDate)")
+        
+        
+        if todayDate == dueDate{
+            isOverDue = false
         }
+        
+        
+        
+//        if timediff > 86400 && timediff < 172800 && !isCompleted {
+//            isOverDue = true
+//        }
         return isOverDue
         
     }
