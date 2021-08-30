@@ -24,6 +24,7 @@
 		6028CAFF26AEEACD0062E189 /* InitialCanvasDrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6028CAFE26AEEACD0062E189 /* InitialCanvasDrawingView.swift */; };
 		6034178126BC11AA00E0F6A3 /* TabColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6034178026BC11AA00E0F6A3 /* TabColor.swift */; };
 		6034178326BC11F500E0F6A3 /* HexToUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6034178226BC11F500E0F6A3 /* HexToUIColor.swift */; };
+		604FC52C26D6E75100738A89 /* TodayCanvasIphoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604FC52B26D6E75100738A89 /* TodayCanvasIphoneView.swift */; };
 		6065754E26B45D0F00EA0F4D /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6065754D26B45D0F00EA0F4D /* ImagePicker.swift */; };
 		6065755526B6BE7300EA0F4D /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6065755426B6BE7300EA0F4D /* AudioRecorder.swift */; };
 		6065755726B6BF0300EA0F4D /* AudioRecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6065755626B6BF0300EA0F4D /* AudioRecorderView.swift */; };
@@ -94,6 +95,7 @@
 		6028CAFE26AEEACD0062E189 /* InitialCanvasDrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialCanvasDrawingView.swift; sourceTree = "<group>"; };
 		6034178026BC11AA00E0F6A3 /* TabColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabColor.swift; sourceTree = "<group>"; };
 		6034178226BC11F500E0F6A3 /* HexToUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexToUIColor.swift; sourceTree = "<group>"; };
+		604FC52B26D6E75100738A89 /* TodayCanvasIphoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCanvasIphoneView.swift; sourceTree = "<group>"; };
 		6065754D26B45D0F00EA0F4D /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		6065755426B6BE7300EA0F4D /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		6065755626B6BF0300EA0F4D /* AudioRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderView.swift; sourceTree = "<group>"; };
@@ -245,6 +247,14 @@
 			path = "Image Picker Views REM";
 			sourceTree = "<group>";
 		};
+		604FC52A26D6E6D600738A89 /* Iphone Specific views */ = {
+			isa = PBXGroup;
+			children = (
+				604FC52B26D6E75100738A89 /* TodayCanvasIphoneView.swift */,
+			);
+			path = "Iphone Specific views";
+			sourceTree = "<group>";
+		};
 		6065754F26B554D100EA0F4D /* Drawing Picker Views REM */ = {
 			isa = PBXGroup;
 			children = (
@@ -352,6 +362,7 @@
 		60CBECC226A84FDC0020703D /* Reminder Calendar Type Views */ = {
 			isa = PBXGroup;
 			children = (
+				604FC52A26D6E6D600738A89 /* Iphone Specific views */,
 				6085359D26D4451400450502 /* Sharing Reminders */,
 				600EDE6826BAE03F002F6A6C /* Color Tab Picker */,
 				6065755126B6BE3400EA0F4D /* Recording  REM */,
@@ -540,6 +551,7 @@
 				60D0054426CC5CBB009E68EA /* TaskNotDoneFromPreviousDay.swift in Sources */,
 				6085359C26D43D3800450502 /* SharingSelectorClass.swift in Sources */,
 				6018EC5826BC49C200184DB4 /* ColorPalette+CoreDataClass.swift in Sources */,
+				604FC52C26D6E75100738A89 /* TodayCanvasIphoneView.swift in Sources */,
 				60689B5826AB24E000ED426F /* HoursView.swift in Sources */,
 				60CBECB126A84E3A0020703D /* ContentView.swift in Sources */,
 				6025514C26B4088000D9F764 /* ImageReminderView.swift in Sources */,

@@ -164,27 +164,13 @@ struct CalendarView: View {
 struct CalendarBackGroundView: View {
    
     var body: some View {
-        
-        
             VStack {
                 ForEach(0...24, id: \.self) { num in
                     
                     ZStack {
                     if num < 10{
                         
-                        VStack(spacing: 0) {
-                            HStack() {
-                                Text("0\(num):00").padding(.trailing, 10)
-                                
-                                VStack {
-                                    Divider()
-                                }
-                               
-                            }
-                            Spacer()
-                            
-                                
-                            }.frame(height: 100)
+                        AMCalendarBackgroundView(num: num)
                             
                         
                     } else if num == 24 {
@@ -198,26 +184,53 @@ struct CalendarBackGroundView: View {
                                 Spacer()
                         }.frame(height: 30)
                     } else if num > 9 && num < 24 {
-                        VStack(spacing: 0) {
-                            HStack() {
-                                Text("\(num):00").padding(.trailing, 10)
-                                
-                                VStack {
-                                    Divider()
-                                }
-                               
-                            }
-                            Spacer()
-                            
-                                
-                            }.frame(height: 100)
+                        PMCalendarBackgroundView(num: num)
                     }
                                     
                     }
                 }
             }
-            
         
     }
 }
 
+
+
+struct AMCalendarBackgroundView: View {
+    
+    var num: Int
+    var body: some View {
+        VStack(spacing: 0) {
+            HStack() {
+                Text("0\(num):00").padding(.trailing, 10)
+                
+                VStack {
+                    Divider()
+                }
+               
+            }
+            Spacer()
+            
+                
+            }.frame(height: 100)
+    }
+}
+
+struct PMCalendarBackgroundView: View {
+    var num: Int
+    var body: some View {
+        VStack(spacing: 0) {
+            HStack() {
+                Text("\(num):00").padding(.trailing, 10)
+                
+                VStack {
+                    Divider()
+                }
+               
+            }
+            Spacer()
+            
+                
+            }.frame(height: 100)
+    }
+}

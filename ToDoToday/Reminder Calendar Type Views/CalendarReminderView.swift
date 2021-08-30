@@ -53,9 +53,6 @@ struct CalendarReminderView: View {
             }
         
         return GeometryReader { geometry in
-            
-            
-            if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
                 ZStack(alignment: .topLeading) {
                     
                     NavigationView {
@@ -98,11 +95,7 @@ struct CalendarReminderView: View {
                     
                     
                 }
-            } else if UIDevice.current.userInterfaceIdiom == .phone {
-                VStack {
-                    Text("Hey world")
-                }
-            }
+            
         }.onPreferenceChange(SizePreferenceKey.self) { preferences in
             if preferences == CGSize(width: 0, height: 0){
                 self.childSize = CGSize(width: 54.0, height: 54.0)

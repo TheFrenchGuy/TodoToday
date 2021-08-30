@@ -25,36 +25,83 @@ struct ContentView: View {
     
     var body: some View {
         if firstlaunch {
-            CalendarReminderView().edgesIgnoringSafeArea(.all).environmentObject(transferColorPalette)
-                .environment(\.managedObjectContext,colorPalettePersistance.container.viewContext)
-                .environmentObject(refreshList)
-                .environmentObject(taskPerHour)
-                .sheet(isPresented: self.$firstlaunch) {
-//                if #available(iOS 15.0, *) {
-//                    if #available(macOS 12.0, *) {
-//                        SetupCard_Screen()
-//                            .interactiveDismissDisabled(true)
-//                    }
-//
-//                } else {
-                    SetupCard_Screen()
-                    .modifier(DisableModalDismiss(disabled: true))
-                    
-               // }
+            
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                Text("Start it up").sheet(isPresented: self.$firstlaunch) {
+                    //                if #available(iOS 15.0, *) {
+                    //                    if #available(macOS 12.0, *) {
+                    //                        SetupCard_Screen()
+                    //                            .interactiveDismissDisabled(true)
+                    //                    }
+                    //
+                    //                } else {
+                                        SetupCard_Screen()
+                                        .modifier(DisableModalDismiss(disabled: true))
+                                        
+                                   // }
+                                            
+                                }.onAppear{
+                                    
+                                    print("USER TYPE \(UIDevice.current.model) ")
+                                    
+                                    
+                                    NotificationCenter.default.addObserver(forName: NSNotification.Name("firstlaunch"), object: nil, queue: .main) { (_) in
+                                            
+                                        self.firstlaunch = UserDefaults.standard.value(forKey: "firstlaunch") as? Bool ?? true
+                                       
+                                    }
+                                     
+                                }
+            }
+
+            if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac  {
+                CalendarReminderView().edgesIgnoringSafeArea(.all).environmentObject(transferColorPalette)
+                    .environment(\.managedObjectContext,colorPalettePersistance.container.viewContext)
+                    .environmentObject(refreshList)
+                    .environmentObject(taskPerHour)
+                    .sheet(isPresented: self.$firstlaunch) {
+    //                if #available(iOS 15.0, *) {
+    //                    if #available(macOS 12.0, *) {
+    //                        SetupCard_Screen()
+    //                            .interactiveDismissDisabled(true)
+    //                    }
+    //
+    //                } else {
+                        SetupCard_Screen()
+                        .modifier(DisableModalDismiss(disabled: true))
+                        
+                   // }
+                            
+                }
+                
+                    .onAppear{
+                        NotificationCenter.default.addObserver(forName: NSNotification.Name("firstlaunch"), object: nil, queue: .main) { (_) in
+                                
+                            self.firstlaunch = UserDefaults.standard.value(forKey: "firstlaunch") as? Bool ?? true
+                            print("\(UIDevice.current.userInterfaceIdiom) USER TYPE")
+                        }
+                         
+                    }
             }
             
-            .onAppear{
-                NotificationCenter.default.addObserver(forName: NSNotification.Name("firstlaunch"), object: nil, queue: .main) { (_) in
-                        
-                    self.firstlaunch = UserDefaults.standard.value(forKey: "firstlaunch") as? Bool ?? true
-                }
-                 
-            }
+            
+            
         } else {
+            
+            if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac{
+            
             CalendarReminderView().edgesIgnoringSafeArea(.all).environmentObject(transferColorPalette)
                 .environment(\.managedObjectContext,colorPalettePersistance.container.viewContext)
                 .environmentObject(refreshList)
                 .environmentObject(taskPerHour)
+            }
+            if UIDevice.current.userInterfaceIdiom == .phone{
+                TodayCanvasIphoneView()
+//                CalendarReminderView().edgesIgnoringSafeArea(.all).environmentObject(transferColorPalette)
+//                    .environment(\.managedObjectContext,colorPalettePersistance.container.viewContext)
+//                    .environmentObject(refreshList)
+//                    .environmentObject(taskPerHour)
+            }
             //  Will need to allow to be select between the two of the options and will decide from that
             /// To put the drawing view there /// Planning rn!
 //            VStack() { /// This is old and mainly used to show the image signature of the user to keep
