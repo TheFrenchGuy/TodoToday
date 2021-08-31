@@ -90,7 +90,7 @@ struct CalendarView: View {
             ZStack {
                 ScrollView(.vertical) {
                     ZStack {
-                        CalendarBackGroundView().overlay(
+                        CalendarBackGroundView(width: bounds.size.width).overlay(
                             GeometryReader { proxy in
                                 Color.clear.onAppear { print("Height: + \(proxy.size.height) ")
                                 }
@@ -163,8 +163,31 @@ struct CalendarView: View {
 //    }
 //}
 struct CalendarBackGroundView: View {
+    
+    let nowToday: Date = Date()
+    let date: Date = (Calendar.current.date(bySettingHour: 0, minute: 0, second: 0 , of: Date())!)
+    let width: CGFloat
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @State private var ylocationbar: CGFloat = 0
+    
    
     var body: some View {
+        
+        ZStack(alignment: .top) {
+            
+            ZStack(alignment: .leading) {
+                Circle().foregroundColor(.red).frame(width: 7, height: 7).padding(.leading, 10)
+                VStack {
+                   // Divider()
+                    RoundedRectangle(cornerRadius: 10).foregroundColor(.red).opacity(0.6).frame(height: 3)
+                }
+            }.position(x: width / 2, y: ylocationbar)
+                .onAppear(perform: {gettimelocation(hour: nowToday)})
+                .onReceive(timer, perform: {input in
+                    gettimelocation(hour: nowToday)
+                })
+               
+                .zIndex(1)
             VStack {
                 ForEach(0...24, id: \.self) { num in
                     
@@ -191,8 +214,27 @@ struct CalendarBackGroundView: View {
                     }
                 }
             }
-        
+        }
     }
+    
+    func gettimelocation(hour: Date) {
+        var ylocation = 0.0
+       
+        var whichhour = 0.0
+//        ylocation = Double((108 * hour) + 61)
+        whichhour = hour.timeIntervalSince(date) / 3600
+        
+        if whichhour > 24 {
+            ylocationbar = CGFloat(0)
+        } else {
+        ylocation = Double((108 * whichhour) + 10)
+      //  print(ylocation)
+
+        ylocationbar = CGFloat(ylocation)
+        }
+    }
+    
+    
 }
 
 
