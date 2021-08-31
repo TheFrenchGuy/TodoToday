@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct iCloudSyncView: View {
-    @State private var enableiCloudSync = true
+//    @State private var enableiCloudSync = true
+    @Binding var enableiCloudSync: Bool
     var body: some View {
         ZStack {
             GeometryReader { bounds in
                 VStack() {
                     Image(systemName: "icloud").resizable().scaledToFit()
-                        .frame(width: bounds.size.width * 0.2).padding(.top, bounds.size.height * 0.1)
+                        .frame(width: bounds.size.width * 0.2)
+                        .padding()
+                        .padding(.top, 70)
                     Spacer()
                     VStack {
                     Toggle("Do you want to enable iCloud sync so that your todo list is shared to all of your devices?", isOn: $enableiCloudSync)

@@ -6,110 +6,54 @@
 //
 
 import SwiftUI
-
+import UIKit
+import Introspect
 struct ListTypeSetupView: View {
+    
     @State private var showcheck1 = false
     @State private var showcheck2 = false
     @State private var completed = false
+    @State private var storeInICLOUD = true
     @ObservedObject var userPreference = UserPreference()
     
     let colorPalettePersistance = ColorPalettePersistance.shared
+    
+    
     var body: some View {
         if !completed {
         TabView() {
-            ZStack(alignment: .center){
-               
-                GeometryReader { bounds in
-                    VStack(alignment: .center) {
-                        Text("What type of todo list you want to have").fontWeight(.bold)
-                            .padding(bounds.size.width * 0.05)
-                        VStack {
-                            
-                            HStack(alignment: .center) {
-                            Button(action: {
-                                self.showcheck1 = true
-                                self.showcheck2 = false
-                                self.userPreference.reminderlist = 1
-                            }) {
-                                Text("Bullet Point").padding(.horizontal)
-                                    .padding(.leading, bounds.size.width * 0.03)
-                                Image(systemName: "checkmark")
-                                    .foregroundColor(.blue)
-                                    .opacity(self.showcheck1 ? 1 : 0 )
-                                
-                            }.foregroundColor(.black)
-                            .padding()
-                                
-                            }
-                            
-                            Divider()
-                            HStack(alignment: .center) {
-                                Button(action: {
-                                    self.showcheck1 = false
-                                    self.showcheck2 = true
-                                    self.userPreference.reminderlist = 0
-                                }) {
-                                    Text("Calendar Type").padding(.horizontal)
-                                        .padding(.leading, bounds.size.width * 0.03)
-                                        
-                                    
-                                    Image(systemName: "checkmark")
-                                        .foregroundColor(.blue)
-                                        .opacity(self.showcheck2 ? 1 : 0 )
-                                }.foregroundColor(.black)
-                                .padding()
-                                
-                                
-                            }
-                        }.background(RoundedRectangle(cornerRadius: 15).opacity(0.15))
-                        .frame(width: bounds.size.width * 0.5)
-                        .shadow(color: .black.opacity(0.5), radius: 15, x: 10, y: 10)
-                        .padding()
-                            ZStack() {
-                                
-                                HStack(alignment: .center) {
-                                    
-                                    Toggle("Do you want it to always remeber that setting", isOn: $userPreference.alwaysSameList)
-                                        
-                                }.padding()
-                                    .zIndex(1)
-                                RoundedRectangle(cornerRadius: 15).opacity(0.15)
-                                    .shadow(color: .black.opacity(0.5), radius: 15, x: 10, y: 10)
-                                    .zIndex(0)
-                                
-                                    .frame(height: bounds.size.height * 0.1)
-                            }   .frame(width: bounds.size.width * 0.5)
-                                .padding()
-                        
-                        Text("* You will be able to change it later").foregroundColor(.gray).font(.subheadline).padding(.trailing, bounds.size.width * 0.3)
-                            .padding(.bottom, 70)
-                        
-                        
-                        
-                        
-                        Image("ToDoTodaySetupCardImage").resizable().scaledToFit().frame(width: bounds.size.width * 0.15)
-                            .padding(.bottom, bounds.size.height * 0.05)
-                        
-                        
-                    }.frame(width: bounds.size.width, height: bounds.size.height)
-                }
-            }
+            
+                
+            CreateIntialCalendarView().environment(\.managedObjectContext, colorPalettePersistance.container.viewContext)
             
             NotificationPermessionView()
             
-            CreateIntialCalendarView().environment(\.managedObjectContext, colorPalettePersistance.container.viewContext)
             
-            iCloudSyncView()
             
-            TermsandConditionView(completion: $completed).environment(\.managedObjectContext, colorPalettePersistance.container.viewContext)
+            iCloudSyncView(enableiCloudSync: $storeInICLOUD)
+            
+            TermsandConditionView()
+            
+            SignandCompleteView(completion: $completed, storeInIC: $storeInICLOUD).environment(\.managedObjectContext, colorPalettePersistance.container.viewContext)
+            
             
         
             
             
-        }.tabViewStyle(PageTabViewStyle()) //Page scrolling view
+        }
+        
+        .introspectViewController { viewController in
+                    // Get called
+                    // viewController is PresentationHostingController
+                    // viewController.view is UIHostingView
+                    if let collectionView = viewController.view.find(for: UICollectionView.self) {
+                        collectionView.alwaysBounceVertical = false
+                    }
+                }
+        .tabViewStyle(PageTabViewStyle()) //Page scrolling view
         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always)) //Show the number of tabs there is
         } else {
-            CompletionView()
+            CompletionView(storeInIC: $storeInICLOUD)
         }
     }
 }
@@ -126,3 +70,23 @@ struct ListTypeSetupView: View {
 //    }
 //}
 
+
+extension UIView {
+    func find<T: UIView>(for type: T.Type, maxLevel: Int = 3) -> T? {
+        guard maxLevel >= 0 else {
+            return nil
+        }
+
+        if let view = self as? T {
+            return view
+        } else {
+            for view in subviews {
+                if let found = view.find(for: type, maxLevel: maxLevel - 1) {
+                    return found
+                }
+            }
+        }
+
+        return nil
+    }
+}

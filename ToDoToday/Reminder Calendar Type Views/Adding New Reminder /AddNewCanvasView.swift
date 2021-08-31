@@ -7,6 +7,8 @@
 
 import SwiftUI
 import PhotosUI
+import Combine
+import CoreData
 
 class eventTimeClass {
     var eventDue:Date
@@ -472,10 +474,49 @@ struct AddNewCanvasView: View {
     
     
     func getxPlacement(time: Date) -> Double {
-        var xposition: Double = 0.0
+        var xposition: Double = 100.0
         let date: Date = (Calendar.current.date(bySettingHour: 0, minute: 0, second: 0 , of: Date())!)
+        print(date)
         
         let timediff = time.timeIntervalSince(date)
+        
+        self.hourOfDay.midnight.removeAll()
+        self.hourOfDay.oneam.removeAll()
+        self.hourOfDay.twoam.removeAll()
+        self.hourOfDay.threeam.removeAll()
+        self.hourOfDay.fouram.removeAll()
+
+        self.hourOfDay.fiveam.removeAll()
+
+        self.hourOfDay.sixam.removeAll()
+        self.hourOfDay.sevenam.removeAll()
+        self.hourOfDay.eightam.removeAll()
+
+        self.hourOfDay.nineam.removeAll()
+
+        self.hourOfDay.tenam.removeAll()
+        self.hourOfDay.elevenam.removeAll()
+
+        self.hourOfDay.twelveam.removeAll()
+
+        self.hourOfDay.onepm.removeAll()
+        self.hourOfDay.twopm.removeAll()
+
+        self.hourOfDay.threepm.removeAll()
+        self.hourOfDay.fourpm.removeAll()
+
+        self.hourOfDay.fivepm.removeAll()
+
+        self.hourOfDay.sixpm.removeAll()
+        self.hourOfDay.sevenpm.removeAll()
+        self.hourOfDay.eightpm.removeAll()
+
+        self.hourOfDay.ninepm.removeAll()
+
+        self.hourOfDay.tenpm.removeAll()
+        self.hourOfDay.elevenpm.removeAll()
+        
+        getHoursByHoursTabs()
         
         if timediff < 86400 && timediff >= 0 {
             if timediff >= 0 && timediff < 3600 {
@@ -725,6 +766,7 @@ struct AddNewCanvasView: View {
                 
                 if self.hourOfDay.tenpm.count >= 1 {
                     xposition = Double(100 * (self.hourOfDay.tenpm.count + 1))
+                    print("XPOSITION: \(xposition), COUNT: \(self.hourOfDay.tenpm.count)")
                     
                 } else {xposition = 100}
                 
@@ -743,7 +785,9 @@ struct AddNewCanvasView: View {
         }
         
         
-        
+        if xposition > 400 {
+            xposition = 100
+        }
         return xposition
     }
     
@@ -751,7 +795,222 @@ struct AddNewCanvasView: View {
     
   
     
-    
+    func getHoursByHoursTabs() {
+        self.hourOfDay.objectWillChange.send()
+        self.taskPerHour.objectWillChange.send()
+        
+  
+            print("RUNNING")
+        let date: Date = (Calendar.current.date(bySettingHour: 0, minute: 0, second: 0 , of: Date())!)
+        var viewContext: NSManagedObjectContext { PersistenceController.shared.container.viewContext } //remove error from '+entityForName: nil is not a legal NSManagedObjectContext parameter searching for entity name
+        let req = NSFetchRequest<NSFetchRequestResult>(entityName: "DrawingCanvas")
+        
+        do {
+            let result = try viewContext.fetch(req)
+            
+            self.taskPerHour.fourpm = 0
+            
+            
+            self.hourOfDay.midnight.removeAll()
+            self.hourOfDay.oneam.removeAll()
+            self.hourOfDay.twoam.removeAll()
+            self.hourOfDay.threeam.removeAll()
+            self.hourOfDay.fouram.removeAll()
+
+            self.hourOfDay.fiveam.removeAll()
+
+            self.hourOfDay.sixam.removeAll()
+            self.hourOfDay.sevenam.removeAll()
+            self.hourOfDay.eightam.removeAll()
+
+            self.hourOfDay.nineam.removeAll()
+
+            self.hourOfDay.tenam.removeAll()
+            self.hourOfDay.elevenam.removeAll()
+
+            self.hourOfDay.twelveam.removeAll()
+
+            self.hourOfDay.onepm.removeAll()
+            self.hourOfDay.twopm.removeAll()
+
+            self.hourOfDay.threepm.removeAll()
+            self.hourOfDay.fourpm.removeAll()
+
+            self.hourOfDay.fivepm.removeAll()
+
+            self.hourOfDay.sixpm.removeAll()
+            self.hourOfDay.sevenpm.removeAll()
+            self.hourOfDay.eightpm.removeAll()
+
+            self.hourOfDay.ninepm.removeAll()
+
+            self.hourOfDay.tenpm.removeAll()
+            self.hourOfDay.elevenpm.removeAll()
+            
+            for i in result as! [NSManagedObject] {
+                let id = i.value(forKey: "id") as! UUID
+                let startTime = i.value(forKey: "startTime") as? Date ?? Date()
+                
+               // print("UUID OF \(id)")
+                let timediff = Int(startTime.timeIntervalSince(date))
+                
+                if timediff < 86400 && timediff >= 0 {
+                    if timediff >= 0 && timediff < 3600 {
+                       print("Drank at 0am")
+                        self.hourOfDay.midnight.append(id)
+                        
+                    }
+                    
+                    else if timediff >= 3600 && timediff < 7200 {
+                       
+                        self.hourOfDay.oneam.append(id)
+                         
+                    }
+                    
+                    else if timediff >= 7200 && timediff < 10800 {
+                        print("Drank at 2am")
+                        
+                        self.hourOfDay.twoam.append(id)
+                        
+                    }
+                    
+                    else if timediff >= 10800 && timediff < 14400{
+                        print("Drank at 3am")
+                        self.hourOfDay.threeam.append(id)
+                    }
+                    
+                    else if timediff >= 14400 && timediff < 18000 {
+                        print("Drank at 4am")
+                        self.hourOfDay.fouram.append(id)
+                    }
+                    
+                    else if timediff >= 18000 && timediff < 21600 {
+                        print("Drank at 5am")
+                        self.hourOfDay.fiveam.append(id)
+                         
+                    }
+                    
+                    else if timediff >= 21600 && timediff < 25200 {
+                        print("Drank at 6am")
+                        self.hourOfDay.sixam.append(id)
+                        
+                    }
+                    
+                    else if timediff >= 25200 && timediff < 28800 {
+                        print("Drank at 7am")
+                        self.hourOfDay.sevenam.append(id)
+                        
+                    }
+                    
+                    else if timediff >= 28800 && timediff < 32400 {
+                        print("Drank at 8am")
+                        self.hourOfDay.eightam.append(id)
+                        
+                    }
+                    
+                    else if timediff >= 32400 && timediff < 36000 {
+                        print("Drank at 9am")
+                        self.hourOfDay.nineam.append(id)
+                        
+                    }
+                    
+                    else if timediff >= 36000 && timediff < 39600 {
+                        print("Drank at 10am")
+                        self.hourOfDay.tenam.append(id)
+                         
+                    }
+                    
+                    else if timediff >= 39600 && timediff < 43200 {
+                        print("Drank at 11am")
+                        self.hourOfDay.elevenam.append(id)
+                        
+                    }
+                    
+                    
+                    else if timediff >= 43200 && timediff < 46800 {
+                        print("Drank at 12am")
+                        self.hourOfDay.twelveam.append(id)
+                        
+                    }
+                    
+                    else if timediff >= 46800 && timediff < 50400 {
+                        print("Drank at 1pm")
+                        self.hourOfDay.onepm.append(id)
+                            
+                    }
+                    
+                    else if timediff >= 50400 && timediff < 54000 {
+                        print("Drank at 2pm")
+                        self.hourOfDay.twopm.append(id)
+                    }
+                    
+                    else if timediff >= 54000 && timediff < 57600 {
+                        print("Drank at 3pm")
+                        self.hourOfDay.threepm.append(id)
+                         
+                    }
+                    
+                    else if timediff >= 57600 && timediff < 61200 {
+                        print("Drank at 4pm")
+                        self.hourOfDay.fourpm.append(id)
+                       
+                         
+                    }
+                    
+                    else if timediff >= 61200 && timediff < 64800 {
+                        print("Drank at 5pm")
+                        self.hourOfDay.fivepm.append(id)
+                       
+                        
+                         
+                    }
+                    
+                    else if timediff >= 64800 && timediff < 68400 {
+                        print("Drank at 6pm")
+                        self.hourOfDay.sixpm.append(id)
+                    }
+                    
+                    else if timediff >= 68400 && timediff < 72000 {
+                        print("Drank at 7pm")
+                        self.hourOfDay.sevenpm.append(id)
+                       
+                        
+                    }
+                    
+                    
+                    else if timediff >= 72000 && timediff < 75600 {
+                        print("Drank at 8pm")
+                        self.hourOfDay.eightpm.append(id)
+                        
+                    }
+                    
+                    else if timediff >= 75600 && timediff < 79200 {
+                        print("Drank at 9pm")
+                        self.hourOfDay.ninepm.append(id)
+                       
+                    }
+                    
+                    else if timediff >= 79200 && timediff < 82800 {
+                        print("Drank at 10pm")
+                        self.hourOfDay.tenpm.append(id)
+                        
+                    }
+                    
+                    else if timediff >= 82800 && timediff < 86400 {
+                        print("Drank at 11pm")
+                        self.hourOfDay.elevenpm.append(id)
+                        
+                         
+                    }
+                }
+                
+                
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+    }
 }
 
 //struct AddNewCanvasView_Previews: PreviewProvider {

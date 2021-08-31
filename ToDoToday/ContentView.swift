@@ -35,7 +35,7 @@ struct ContentView: View {
                     //                    }
                     //
                     //                } else {
-                                        SetupCard_Screen()
+                                        SetupCard_Screen_Iphone()
                                         .modifier(DisableModalDismiss(disabled: true))
                                         
                                    // }

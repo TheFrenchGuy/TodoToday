@@ -77,10 +77,10 @@ struct MovableHourView: View {
                         .frame(width: 44, height: 44)
                         .position(fingerLocation)
                 }
-            }.onAppear(perform: {location = gettimelocation(height: CGFloat(12), hour: startTime, xlocation: horizontalPlacement)})
+            }.onAppear(perform: {location = gettimelocation(hour: startTime, xlocation: horizontalPlacement)})
     }
     
-    func gettimelocation(height: CGFloat, hour: Date, xlocation: Double) -> CGPoint{
+    func gettimelocation(hour: Date, xlocation: Double) -> CGPoint{
         
         let date: Date = (Calendar.current.date(bySettingHour: 0, minute: 0, second: 0 , of: Date())!)
         

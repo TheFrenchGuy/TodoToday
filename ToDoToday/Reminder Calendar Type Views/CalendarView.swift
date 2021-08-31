@@ -95,11 +95,12 @@ struct CalendarView: View {
                                 Color.clear.onAppear { print("Height: + \(proxy.size.height) ")
                                 }
                             }
+                            
                         )
                         
                         ForEach(drawings, id: \.self) {drawing in
                             
-                            if (drawing.startTime?.timeIntervalSince(date) ?? 86401) > 86400 {
+                            if (drawing.startTime?.timeIntervalSince(date) ?? 60) > 86400 {
                                 EmptyView()
                             } else {
                                 
@@ -118,7 +119,7 @@ struct CalendarView: View {
 //                                            .position(fingerLocation)
 //                                    }
 //                                }
-                                MovableHourView(refreshList: $RefreshList, TimeUUID: drawing.id ?? UUID(), heightTime: getheight(startDate: drawing.startTime ?? Date(), endDate: drawing.endTime ?? Date().addingTimeInterval(3600)), startTime: drawing.startTime ?? Date(),timeIntervalSinceStartTimeandEndTime: drawing.endTime?.timeIntervalSince(drawing.startTime ?? Date()) ?? 3600 ,horizontalPlacement: drawing.xLocation )
+                                MovableHourView(refreshList: $RefreshList, TimeUUID: drawing.id ?? UUID(), heightTime: getheight(startDate: drawing.startTime ?? Date(), endDate: drawing.endTime ?? Date().addingTimeInterval(3600)), startTime: drawing.startTime ?? Date(),timeIntervalSinceStartTimeandEndTime: drawing.endTime?.timeIntervalSince(drawing.startTime ?? Date()) ?? 3600 ,horizontalPlacement: drawing.xLocation ).zIndex(1)
                             }
                         }
                     }

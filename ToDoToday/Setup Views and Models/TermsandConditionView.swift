@@ -11,30 +11,20 @@ import PencilKit
 import UIKit
 struct TermsandConditionView: View {
     
-    @Environment(\.managedObjectContext) private var viewContext
-
-
-    @FetchRequest(entity: ColorPalette.entity(), sortDescriptors: []) var colorpalette: FetchedResults<ColorPalette>
     
-    
-    @Environment(\.undoManager) private var undoManager
-    @State private var canvasView = PKCanvasView()
-    @ObservedObject var userPreference = UserPreference()
-    @Binding var completion: Bool
-    @State var showingAlert = false
+   
     var body: some View {
         ZStack() {
             GeometryReader {bounds in
                 
-                if completion {
-                    CompletionView()
-                } else {
+                
                     VStack {
                         VStack() {
-                            Text("Boring legal stuff").font(.largeTitle).bold()
-                            Image(systemName: "signature").font(.largeTitle)
+                            Text("Boring legal stuff").font(.title).bold()
+                            Image(systemName: "book.closed").font(.title)
                             
-                        }
+                        }.padding()
+                            .padding(.top, 70)
                         
                         Divider().frame(width: bounds.size.width * 0.8)
                         
@@ -44,61 +34,17 @@ struct TermsandConditionView: View {
                         
                         Divider().frame(width: bounds.size.width * 0.8)
                         
-                        HStack(alignment: .top){
-                            Button(action: { undoManager?.undo()}) { Text("Undo").foregroundColor(.gray)
-                                .padding(10).background(RoundedRectangle(cornerRadius: 20).stroke(Color.gray, lineWidth: 2))}
-                            ZStack() {
-                                SignCanvas(canvasView: $canvasView).frame(width:bounds.size.width * 0.5, height: bounds.size.height * 0.2)
-                                Text("Sign here").font(.title).foregroundColor(.gray)
-                            }.background(Rectangle().stroke(Color.gray, lineWidth: 6))
-                            if #available(iOS 15.0, *) {
-                                Button(action: {
-                                    if userPreference.reminderlist != -1 {
-                                        SaveSignature()
-                                        completion.toggle()
-                                    } else {
-                                        showingAlert.toggle()
-                                    }
-                                    
-                                }) {
-                                    Image(systemName: "arrow.forward.circle").foregroundColor(.black).font(.largeTitle)
-                                }.padding()
-                                    .frame(height: bounds.size.height * 0.2)
-                                    .alert(isPresented: $showingAlert) {
-                                        Alert(title: Text("Please fill in all the necessary fields"))
-                                    }
-                            } else {
-                                Button(action: {
-                                    if userPreference.reminderlist != -1 && !colorpalette.isEmpty{
-                                        SaveSignature()
-                                        completion.toggle()
-                                    } else {
-                                        showingAlert.toggle()
-                                    }
-                                    
-                                }) {
-                                    Image(systemName: "arrow.forward.circle").foregroundColor(.black).font(.largeTitle)
-                                }.padding()
-                                    .frame(height: bounds.size.height * 0.2)
-                                    .alert(isPresented: $showingAlert, content: {
-                                        Alert(title: Text ("Not filled all in"), message: Text("Please fill all the fields in"), dismissButton: .default(Text("Okay")))
-                                    })
-                            }
-                        }.padding()
+
+                        
+                        Spacer()
                     }.frame(width: bounds.size.width, height: bounds.size.height)
                     
-                }
             }
         }
         
     }
     
-    func SaveSignature() {
-        let image = canvasView.drawing.image(from: canvasView.drawing.bounds, scale: 1)
-        let imageData = image.jpegData(compressionQuality: 1.0)
-        UserDefaults().set(imageData, forKey: "signatureImage")
-        
-    }
+    
 }
 
 var termsandcondition = """
@@ -176,7 +122,7 @@ struct SignCanvas: UIViewRepresentable {
     @Binding var canvasView: PKCanvasView
 
     func makeUIView(context: Context) -> PKCanvasView {
-        canvasView.drawingPolicy = .anyInput
+        canvasView.drawingPolicy = .pencilOnly
         canvasView.tool = PKInkingTool(.pen, color: .black, width: 15)
         return canvasView
     }
@@ -185,8 +131,15 @@ struct SignCanvas: UIViewRepresentable {
 }
 
 struct CompletionView: View {
+    @Binding var storeInIC: Bool
     var body: some View {
         Text ("Completed").onAppear(perform: {
+            
+            
+            UserDefaults.standard.set(storeInIC, forKey: "storeCoreDataIcloud")
+            NotificationCenter.default.post(name: NSNotification.Name("storeCoreDataIcloud"), object: nil)
+            
+            
             UserDefaults.standard.set(false, forKey: "firstlaunch") // This means that the user is logging in the first time so he must complete the daily intake calculator
             NotificationCenter.default.post(name: NSNotification.Name("firstlaunch"), object: nil) //Put a backend notification to inform app the data has been written
         })

@@ -91,12 +91,15 @@ struct SideBarView: View {
                             ForEach(colorpalette, id: \.self) { palette in
 
                                 CheckboxField(id: palette.id!.uuidString, label: palette.name!,color: palette.paletteColor!.color, callback: checkboxSelected, isSecure: palette.isSecret).contextMenu {
-                                    Button(action: {viewContext.delete(palette)
+                                    Button(action: {
+                                        viewContext.delete(palette)
+                                        loadInitialColorPalette()
                                         do {
                                             try self.viewContext.save()
                                             print("Calendar successfully deleted")
                                         } catch {
                                             print(error)
+                                            print("ERROR THERE")
                                         }
                                     }) {
                                         Text("Delete me")

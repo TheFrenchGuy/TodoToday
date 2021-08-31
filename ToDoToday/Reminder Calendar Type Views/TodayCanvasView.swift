@@ -383,7 +383,7 @@ struct TodayCanvasView: View {
                 
                 
             }
-            print("ARRAY SIZE: \(hourOfDay.fivepm.count)")
+            print("ARRAY SIZE: \(hourOfDay.tenpm.count)")
         } catch {
             print(error.localizedDescription)
         }

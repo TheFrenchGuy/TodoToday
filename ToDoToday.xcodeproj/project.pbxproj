@@ -35,6 +35,11 @@
 		6085359F26D4452800450502 /* ShareREMAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6085359E26D4452800450502 /* ShareREMAll.swift */; };
 		608535A126D4462000450502 /* DrawingReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608535A026D4462000450502 /* DrawingReminderView.swift */; };
 		608E248926D3EE7F004754F0 /* MovableHourView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608E248826D3EE7F004754F0 /* MovableHourView.swift */; };
+		60A17A4826DD79410014A86E /* SetupCard_Screen_Iphone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A17A4726DD79410014A86E /* SetupCard_Screen_Iphone.swift */; };
+		60A17A4A26DD7A1F0014A86E /* ListTypeSetupView_iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A17A4926DD7A1F0014A86E /* ListTypeSetupView_iPhone.swift */; };
+		60A17A4C26DD7C350014A86E /* CreateInitialCalendarView_iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A17A4B26DD7C350014A86E /* CreateInitialCalendarView_iPhone.swift */; };
+		60A17A4E26DD8AA80014A86E /* SignandCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A17A4D26DD8AA80014A86E /* SignandCompleteView.swift */; };
+		60A17A5126DD928D0014A86E /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 60A17A5026DD928D0014A86E /* Introspect */; };
 		60C1E05126B880560040D425 /* Audio Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C1E05026B880560040D425 /* Audio Player.swift */; };
 		60C1E05326B880C90040D425 /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C1E05226B880C90040D425 /* AudioPlayerView.swift */; };
 		60C2DF6826B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C2DF6626B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift */; };
@@ -106,6 +111,10 @@
 		6085359E26D4452800450502 /* ShareREMAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareREMAll.swift; sourceTree = "<group>"; };
 		608535A026D4462000450502 /* DrawingReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingReminderView.swift; sourceTree = "<group>"; };
 		608E248826D3EE7F004754F0 /* MovableHourView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableHourView.swift; sourceTree = "<group>"; };
+		60A17A4726DD79410014A86E /* SetupCard_Screen_Iphone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCard_Screen_Iphone.swift; sourceTree = "<group>"; };
+		60A17A4926DD7A1F0014A86E /* ListTypeSetupView_iPhone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTypeSetupView_iPhone.swift; sourceTree = "<group>"; };
+		60A17A4B26DD7C350014A86E /* CreateInitialCalendarView_iPhone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInitialCalendarView_iPhone.swift; sourceTree = "<group>"; };
+		60A17A4D26DD8AA80014A86E /* SignandCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignandCompleteView.swift; sourceTree = "<group>"; };
 		60C1E05026B880560040D425 /* Audio Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Audio Player.swift"; sourceTree = "<group>"; };
 		60C1E05226B880C90040D425 /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
 		60C2DF6626B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrawingCanvas+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -156,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				60CBECC026A84F730020703D /* CloudKit.framework in Frameworks */,
+				60A17A5126DD928D0014A86E /* Introspect in Frameworks */,
 				60CBECD126A850E70020703D /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,6 +302,16 @@
 			path = "Sharing Reminders";
 			sourceTree = "<group>";
 		};
+		60A17A4626DD78E00014A86E /* Iphone Setup Screen */ = {
+			isa = PBXGroup;
+			children = (
+				60A17A4726DD79410014A86E /* SetupCard_Screen_Iphone.swift */,
+				60A17A4926DD7A1F0014A86E /* ListTypeSetupView_iPhone.swift */,
+				60A17A4B26DD7C350014A86E /* CreateInitialCalendarView_iPhone.swift */,
+			);
+			path = "Iphone Setup Screen";
+			sourceTree = "<group>";
+		};
 		60CBECA226A84E3A0020703D = {
 			isa = PBXGroup;
 			children = (
@@ -348,6 +368,7 @@
 		60CBECC126A84FD70020703D /* Setup Views and Models */ = {
 			isa = PBXGroup;
 			children = (
+				60A17A4626DD78E00014A86E /* Iphone Setup Screen */,
 				60F0489E26CBB41F003FE055 /* CreateInitialCalendarView.swift */,
 				60CBECD526A8516C0020703D /* Lottie Animations */,
 				60CBECC326A8500C0020703D /* SetupCard Screen.swift */,
@@ -355,6 +376,7 @@
 				60CBECC926A850570020703D /* NotificationPermessionView.swift */,
 				60CBECCB26A8506B0020703D /* iCloudSyncView.swift */,
 				60CBECCD26A850840020703D /* TermsandConditionView.swift */,
+				60A17A4D26DD8AA80014A86E /* SignandCompleteView.swift */,
 			);
 			path = "Setup Views and Models";
 			sourceTree = "<group>";
@@ -481,6 +503,7 @@
 			name = ToDoToday;
 			packageProductDependencies = (
 				60CBECD026A850E70020703D /* Lottie */,
+				60A17A5026DD928D0014A86E /* Introspect */,
 			);
 			productName = ToDoToday;
 			productReference = 60CBECAB26A84E3A0020703D /* ToDoToday.app */;
@@ -511,6 +534,7 @@
 			mainGroup = 60CBECA226A84E3A0020703D;
 			packageReferences = (
 				60CBECCF26A850E70020703D /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				60A17A4F26DD928D0014A86E /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 60CBECAC26A84E3A0020703D /* Products */;
 			projectDirPath = "";
@@ -559,6 +583,7 @@
 				600EDE6A26BAE071002F6A6C /* InitialColorPicker.swift in Sources */,
 				60E5F35926AD8F1100F1E609 /* CalendarView.swift in Sources */,
 				60C2DF6826B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift in Sources */,
+				60A17A4C26DD7C350014A86E /* CreateInitialCalendarView_iPhone.swift in Sources */,
 				60CBECD426A8510E0020703D /* LottieView.swift in Sources */,
 				60D0054726CC720B009E68EA /* OutDatedTypedREM.swift in Sources */,
 				6018EC5526BC491600184DB4 /* ColorPaletteCoreDataModel.xcdatamodeld in Sources */,
@@ -577,6 +602,7 @@
 				6007607826BD3BE100B27473 /* SideBar.swift in Sources */,
 				6085359A26D4396E00450502 /* ActivityViewController.swift in Sources */,
 				6034178126BC11AA00E0F6A3 /* TabColor.swift in Sources */,
+				60A17A4A26DD7A1F0014A86E /* ListTypeSetupView_iPhone.swift in Sources */,
 				608E248926D3EE7F004754F0 /* MovableHourView.swift in Sources */,
 				6018EC5926BC49C200184DB4 /* ColorPalette+CoreDataProperties.swift in Sources */,
 				60CBECC826A850330020703D /* ListTypeSetupView.swift in Sources */,
@@ -584,7 +610,9 @@
 				60C2DF6926B2CACD00347CE8 /* DrawingCanvas+CoreDataProperties.swift in Sources */,
 				60CBECCC26A8506B0020703D /* iCloudSyncView.swift in Sources */,
 				60D0054926CC7247009E68EA /* OutDatedImageREMView.swift in Sources */,
+				60A17A4E26DD8AA80014A86E /* SignandCompleteView.swift in Sources */,
 				60CBECCE26A850840020703D /* TermsandConditionView.swift in Sources */,
+				60A17A4826DD79410014A86E /* SetupCard_Screen_Iphone.swift in Sources */,
 				6010334226BEB29700D1DA12 /* ShowTodayDateView.swift in Sources */,
 				6010334626C0091900D1DA12 /* TempColorPickerModel .swift in Sources */,
 				6028CAFF26AEEACD0062E189 /* InitialCanvasDrawingView.swift in Sources */,
@@ -800,6 +828,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		60A17A4F26DD928D0014A86E /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.3;
+			};
+		};
 		60CBECCF26A850E70020703D /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios";
@@ -811,6 +847,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		60A17A5026DD928D0014A86E /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 60A17A4F26DD928D0014A86E /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
 		60CBECD026A850E70020703D /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 60CBECCF26A850E70020703D /* XCRemoteSwiftPackageReference "lottie-ios" */;

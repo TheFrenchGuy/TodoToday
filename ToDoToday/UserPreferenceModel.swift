@@ -46,6 +46,12 @@ class UserPreference: ObservableObject {
         }
     }
     
+    @Published var storeCoreDataIcloud: Bool {
+        didSet {
+            UserDefaults.standard.set(storeCoreDataIcloud, forKey: "storeCoreDataIcloud")
+        }
+    }
+    
     init() {
         self.firstlaunch = UserDefaults.standard.object(forKey: "firstlaunch") as? Bool ?? true
         self.reminderlist = UserDefaults.standard.object(forKey: "reminderlist") as? Int ?? -1
@@ -53,6 +59,7 @@ class UserPreference: ObservableObject {
         self.notificationTime = UserDefaults.standard.object(forKey: "notificationTime") as? Date ?? Date()
         self.daystoDND = UserDefaults.standard.object(forKey: "daystoDND") as? [String] ?? []
         self.startWeekDay = UserDefaults.standard.object(forKey: "startWeekDay") as? String ?? "Mon"
+        self.storeCoreDataIcloud = UserDefaults.standard.object(forKey: "storeCoreDataIcloud") as? Bool ?? true
        
     }
 }

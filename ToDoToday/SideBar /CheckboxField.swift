@@ -51,15 +51,19 @@ struct CheckboxField: View {
     
     var body: some View {
         Button(action:{
-            if isSecure {
-                authenticate(id: id)
-                //self.isMarked.toggle()
-               
-            } else {
-                self.isMarked.toggle()
-                
+            
+            DispatchQueue.main.async {
+                if isSecure {
+                    authenticate(id: id)
+                    //self.isMarked.toggle()
+                   
+                } else {
+                    self.isMarked.toggle()
+                    
+                }
+                self.callback(self.id, self.isMarked)
             }
-            self.callback(self.id, self.isMarked)
+            
         }) {
             HStack(alignment: .center, spacing: 10) {
                 if self.isMarked {
@@ -113,7 +117,7 @@ struct CheckboxField: View {
             }
         } else {
             // no biometrics
-            isMarked = false
+//            isMarked = false
             showFaceIDBioAlert = true
             missingBiometricTurnOff(id: id)
             

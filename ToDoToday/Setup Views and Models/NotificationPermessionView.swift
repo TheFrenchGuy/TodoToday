@@ -67,8 +67,14 @@ struct NotificationPermessionView: View {
             GeometryReader { bounds in
                 VStack(alignment: .center) {
                     
-                    Text("Notification Settings, gotta be productive 😎").fontWeight(.bold)
-                        .padding(bounds.size.width * 0.05)
+                    
+                    VStack {
+                        Text("Notification Settings").font(.title).bold()
+                        Image(systemName: "bell.badge").font(.title)
+                    }
+//                        .padding(bounds.size.width * 0.05)
+                        .padding()
+                         .padding(.top, 70)
                     VStack(alignment: .leading) {
                         HStack {
                             Text("What time would you want to be reminded to add task to your to do list?")
@@ -159,7 +165,9 @@ struct NotificationPermessionView: View {
                        .background(RoundedRectangle(cornerRadius: 15).opacity(0.15)
                                        .shadow(color: .black.opacity(0.5), radius: 15, x: 10, y: 10))
                     
-                }.frame(width: bounds.size.width, height: bounds.size.height)
+                    Spacer()
+                    
+                }.frame(width: bounds.size.width, height: bounds.size.height, alignment: .center)
                  
                  
             }

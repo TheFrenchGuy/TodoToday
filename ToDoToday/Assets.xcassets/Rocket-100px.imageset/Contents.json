@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Rocket-100px.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct ToDoTodayApp: App {
-    init() {
+    init() { 
         ValueTransformer.setValueTransformer(
               SerializableColorTransformer(),
               forName: NSValueTransformerName(
