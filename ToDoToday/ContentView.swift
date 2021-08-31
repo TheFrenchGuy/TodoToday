@@ -20,6 +20,7 @@ struct ContentView: View {
     
     @StateObject var taskPerHour = TaskPerHour()
     
+    
     let colorPalettePersistance = ColorPalettePersistance.shared
     
     
@@ -94,6 +95,7 @@ struct ContentView: View {
                 .environment(\.managedObjectContext,colorPalettePersistance.container.viewContext)
                 .environmentObject(refreshList)
                 .environmentObject(taskPerHour)
+
             }
             if UIDevice.current.userInterfaceIdiom == .phone{
                 TodayCanvasIphoneView()

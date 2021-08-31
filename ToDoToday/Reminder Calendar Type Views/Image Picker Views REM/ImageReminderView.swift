@@ -33,7 +33,7 @@ struct ImageReminderView: View {
         
        
         VStack {
-            RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor)).frame(height: windowSize.height / 15)
+            RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor)).frame(height: 7)
             
             Button(action: {showSheet.toggle()}, label: {
                // Text(title)

@@ -32,7 +32,7 @@ struct DrawingReminderView: View {
         ZStack{
         VStack() {
             
-            RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor)).frame(height: height / 15)
+            RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor)).frame(height: 7)
                 
             LazyHStack (){
         

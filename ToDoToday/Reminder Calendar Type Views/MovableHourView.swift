@@ -25,7 +25,7 @@ struct MovableHourView: View {
     var startTime: Date
     var timeIntervalSinceStartTimeandEndTime: Double
     var horizontalPlacement: Double
-    
+    var typeREM: String
     
     
     var simpleDrag: some Gesture {
@@ -77,14 +77,16 @@ struct MovableHourView: View {
                         .frame(width: 44, height: 44)
                         .position(fingerLocation)
                 }
-            }.onAppear(perform: {location = gettimelocation(hour: startTime, xlocation: horizontalPlacement)})
+            }.onAppear(perform: {location = gettimelocation(hour: startTime, xlocation: horizontalPlacement, type: typeREM)})
     }
     
-    func gettimelocation(hour: Date, xlocation: Double) -> CGPoint{
+    func gettimelocation(hour: Date, xlocation: Double, type: String) -> CGPoint{
         
         let date: Date = (Calendar.current.date(bySettingHour: 0, minute: 0, second: 0 , of: Date())!)
         
         var ylocation = 0.0
+        var locationHorizontal = 0.0
+        locationHorizontal = xlocation
        
         var whichhour = 0.0
 //        ylocation = Double((108 * hour) + 61)
@@ -93,10 +95,16 @@ struct MovableHourView: View {
         if whichhour > 24 {
             return CGPoint(x: 0, y: 0)
         } else {
-        ylocation = Double((108 * whichhour) + 61)
-      //  print(ylocation)
+            
+         
+            ylocation = Double((108 * whichhour) + 61)
 
-        return CGPoint(x: xlocation, y: ylocation)
+
+            
+        if locationHorizontal < 0 || locationHorizontal > 500 {
+            locationHorizontal = 100
+        }
+            return CGPoint(x: locationHorizontal, y: ylocation)
         }
     }
     

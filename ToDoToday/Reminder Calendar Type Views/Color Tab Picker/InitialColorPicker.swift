@@ -52,7 +52,7 @@ struct InitialColorPicker: View {
                                     .frame(width: 25, height: 25)
                                     
 
-                                if selection == colorType.title {
+                                if calendarName == colorType.title {
                                     Image(systemName: "checkmark").frame(width: 20, height: 20).foregroundColor(Color.white)
                                 }
                             }

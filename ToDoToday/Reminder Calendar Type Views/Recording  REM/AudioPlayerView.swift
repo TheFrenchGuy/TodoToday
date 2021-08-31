@@ -15,35 +15,58 @@ struct AudioPlayerView: View {
     var tabColor: UIColor
     
     @ObservedObject var audioPlayer = AudioPlayer()
+    @EnvironmentObject var tabViewClass: TabViewClass
     
     var windowSize:CGSize
     
+    var heightTime: CGFloat
+    
     var body: some View {
         VStack {
-            RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor)).frame(height: windowSize.height / 15)
+            RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor)).frame(height: 7)
+            Spacer()
             HStack {
     //            Text("\(audioURL.lastPathComponent)")
                 
-                Text("\(title)")
-                Spacer()
+                
+                
+                Button(action: {
+                    tabViewClass.editTask.toggle()
+                    tabViewClass.editTaskUUID = remUUID
+                    tabViewClass.taskType = TypeReminder.audio.rawValue
+                }) {
+                    HStack {
+                        Text("\(title)").foregroundColor(.black)
+                    Spacer()
+                    }
+                }
                 if audioPlayer.isPlaying == false {
                     Button(action: {
                         self.audioPlayer.startPlayback(audio: self.audioURL)
                     }) {
+                        Spacer()
                         Image(systemName: "play.circle")
                             .imageScale(.large)
+                        Spacer()
                     }
                 } else {
                     Button(action: {
                         self.audioPlayer.stopPlayback()
                     }) {
+                        Spacer()
                         Image(systemName: "stop.fill")
                             .imageScale(.large)
+                        Spacer()
                     }
                 }
+                
+                
                
             }
-        }.background(RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor).opacity(0.6)))
+            
+            Spacer()
+        }.frame(height: heightTime)
+        .background(RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor).opacity(0.6)))
     }
 }
 

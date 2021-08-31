@@ -66,7 +66,7 @@ struct HoursView: View {
                                                 ZStack {
                                                 VStack() {
                                                     
-                                                    RoundedRectangle(cornerRadius: 6).foregroundColor(Color(drawing.tabColor?.uiColor ?? .red)).frame(height: bounds.size.height / 15)
+                                                    RoundedRectangle(cornerRadius: 6).foregroundColor(Color(drawing.tabColor?.uiColor ?? .red)).frame(height: 7)
                                                         
                                                     LazyHStack (){
                                                 
@@ -110,7 +110,7 @@ struct HoursView: View {
                                                 
                                                 
                                                 case TypeReminder.typed.rawValue:
-                                                    TypeReminderView(title: drawing.title ?? "NO TITLE", text: drawing.taskDescription ?? "NO DESCRIPTION", remUUID: drawing.id ?? UUID(), tabColor: drawing.tabColor?.uiColor ?? .red,startTime: drawing.startTime ?? Date(),endTime: drawing.endTime ?? Date(), windowSize: bounds.size).sheet(isPresented: $sendToShareAll, content: { ShareREMAll(title: drawing.title ?? "NO title", taskDesc: drawing.taskDescription ?? "NO TaskDesc")})
+                                                TypeReminderView(title: drawing.title ?? "NO TITLE", text: drawing.taskDescription ?? "NO DESCRIPTION", remUUID: drawing.id ?? UUID(), tabColor: drawing.tabColor?.uiColor ?? .red,startTime: drawing.startTime ?? Date(),endTime: drawing.endTime ?? Date(), heightTime: heightTime, windowSize: bounds.size).sheet(isPresented: $sendToShareAll, content: { ShareREMAll(title: drawing.title ?? "NO title", taskDesc: drawing.taskDescription ?? "NO TaskDesc")})
 //                                                    .contextMenu { Button(action:{
 //                                                    viewContext.delete(drawing)
 //                                                    do {
@@ -171,7 +171,7 @@ struct HoursView: View {
                                                     
                                                    
                                                 case TypeReminder.audio.rawValue:
-                                                    AudioPlayerView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID(), audioURL: drawing.audioREMurl ?? "NO URL", tabColor: drawing.tabColor?.uiColor ?? .red, windowSize: bounds.size).sheet(isPresented: $sendToShareAll, content: { ShareREMAll( audioURL: drawing.audioREMurl ?? "NO URL")})
+                                                AudioPlayerView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID(), audioURL: drawing.audioREMurl ?? "NO URL", tabColor: drawing.tabColor?.uiColor ?? .red, windowSize: bounds.size, heightTime: heightTime).sheet(isPresented: $sendToShareAll, content: { ShareREMAll( audioURL: drawing.audioREMurl ?? "NO URL")})
 //                                                    .contextMenu { Button(action:{
 //                                                    viewContext.delete(drawing)
 //                                                    deleteAudio(audioURL: drawing.audioREMurl ?? "NO URL")

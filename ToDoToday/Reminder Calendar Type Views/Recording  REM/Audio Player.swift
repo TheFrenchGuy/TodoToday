@@ -30,6 +30,7 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
         let playbackSession = AVAudioSession.sharedInstance()
         
         let audioPath = URL(string: documentsPath.appendingPathComponent(audio).path)!
+        print("audioPath: \(audioPath)")
         
         
         do {

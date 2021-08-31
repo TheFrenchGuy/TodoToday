@@ -30,7 +30,7 @@ extension updatedTaskDesClass: Equatable {
 }
 
 struct TypeReminderView: View {
-     @State var title: String = "NO TITLE"
+     var title: String
      var text: String
      var remUUID: UUID
      var tabColor: UIColor
@@ -43,127 +43,141 @@ struct TypeReminderView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(entity: DrawingCanvas.entity(), sortDescriptors: []) var drawings: FetchedResults<DrawingCanvas>
-
+    @EnvironmentObject var tabViewClass: TabViewClass
     
     @State private var showSheet: Bool = false
     
     @State private var updatedTask = updatedTaskDesClass()
     
+    var heightTime: CGFloat
+    
     var windowSize:CGSize
     var body: some View {
         VStack {
-            RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor)).frame(height: windowSize.height / 15)
+            RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor)).frame(height: 7)
             
             Button(action: {
-                showSheet.toggle()
+//                showSheet.toggle()
+                tabViewClass.editTask.toggle()
+                tabViewClass.editTaskUUID = remUUID
+                tabViewClass.taskType = TypeReminder.typed.rawValue
             }) {
                 VStack {
-                    Text(title)
-                    Text(text)
-                   
-                }
-            }.sheet(isPresented: $showSheet) {
-                
-                if !showSettings {
-                VStack {
-                    Text("Title:")
-                    TextEditor(text: $updatedTask.newTaskTitle)
-                    Text("Task Description:")
-                    TextEditor(text: $updatedTask.newTaskDesc)
-                        .onChange(of:updatedTask.newTaskDesc, perform: { value in
-                            updateField(canvasUUID: remUUID)
-                        })
-                    
-                        .onChange(of:updatedTask.newTaskTitle, perform: { value in
-                            updateField(canvasUUID: remUUID)
-                        })
-                    
                     Spacer()
-                    
-                    HStack {
-                        Button(action: {showSheet.toggle()}) {
-                            Text("Dismiss me")
-                            
-                        }.padding(.leading, 50)
-                        
-                        
-                        Spacer()
-                        Button(action: {
-                            withAnimation() {
-                                self.showSettings = true
-                                
-                            }
-                            
-                        }) { Image(systemName: "slider.horizontal.3")}.padding(.trailing, 50)
-                        
-                        
-                    }.frame(height: 50)
-                    
-                }.onAppear(perform: {updatedTask.newTaskDesc = text; updatedTask.newTaskTitle = title})
-                } else {
-                    VStack(alignment: .leading) {
-                        
-                        Button(action: {
-                            
-                            withAnimation() {
-                                self.showSettings = false
-                            }
-                        
-                        }) {
-                            HStack{
-                                Image(systemName: "chevron.backward")
-                                Text("Back to drawing")
-                                Spacer()
-                            }
-                        }.padding()
-                       // .padding(.bottom, 40)
-                        
-                        Text("What would you like to modifiy about your task?").font(.title2).bold().padding()
-                        
-                        
-                        
-                        Form {
-                            
-                            
-                            Section(header: Text("Title")) {
-                            
-                            
-                                VStack(alignment: .leading) {
-                                    Text("Title of your task:")
-                                    HStack() {
-                                        Spacer()
-                                        TextField("Title of Task", text: $title)
-                                    }
-                                }.padding()
-                                
-                            }
-                            
-                            
-                            Section(header: Text("Timings")) {
-                            
-                                DatePicker("Start of Event", selection: $startTime).padding()
-                                DatePicker("Completion Time of Event", selection: $endTime ).padding()
-                            }
-                            
-                                                
-                            Section(header: Text("Make sure you delayed the tasks being done")) {
-                            Button(action: {
-                                   updateFields()
-                            }) {
-                                HStack(alignment: .center) {
-                                    Image(systemName: "externaldrive.badge.icloud")
-                                    Text("Save update")
-                                    
-                                }
-                            }.padding()
-                                
-                            }
-                        }
-                    }
-                }
+                    Text(title).bold()
+                    Text(text)
+                    Spacer()
+                   
+                }.foregroundColor(.black )
                 
+                
+            
             }
-        }.background(RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor).opacity(0.6)))
+//            .sheet(isPresented: $showSheet) {
+//
+//                if !showSettings {
+//                VStack {
+//                    Text("Title:")
+//                    TextEditor(text: $updatedTask.newTaskTitle)
+//                    Text("Task Description:")
+//                    TextEditor(text: $updatedTask.newTaskDesc)
+//                        .onChange(of:updatedTask.newTaskDesc, perform: { value in
+//                            updateField(canvasUUID: remUUID)
+//                        })
+//
+//                        .onChange(of:updatedTask.newTaskTitle, perform: { value in
+//                            updateField(canvasUUID: remUUID)
+//                        })
+//
+//                    Spacer()
+//
+//                    HStack {
+//                        Button(action: {showSheet.toggle()}) {
+//                            Text("Dismiss me")
+//
+//                        }.padding(.leading, 50)
+//
+//
+//                        Spacer()
+//                        Button(action: {
+//                            withAnimation() {
+//                                self.showSettings = true
+//
+//                            }
+//
+//                        }) { Image(systemName: "slider.horizontal.3")}.padding(.trailing, 50)
+//
+//
+//                    }.frame(height: 50)
+//
+//                }.onAppear(perform: {updatedTask.newTaskDesc = text; updatedTask.newTaskTitle = title})
+//                } else {
+//                    VStack(alignment: .leading) {
+//
+//                        Button(action: {
+//
+//                            withAnimation() {
+//                                self.showSettings = false
+//                            }
+//
+//                        }) {
+//                            HStack{
+//                                Image(systemName: "chevron.backward")
+//                                Text("Back to drawing")
+//                                Spacer()
+//                            }
+//                        }.padding()
+//                       // .padding(.bottom, 40)
+//
+//                        Text("What would you like to modifiy about your task?").font(.title2).bold().padding()
+//
+//
+//
+//                        Form {
+//
+//
+//                            Section(header: Text("Title")) {
+//
+//
+//                                VStack(alignment: .leading) {
+//                                    Text("Title of your task:")
+//                                    HStack() {
+//                                        Spacer()
+//                                        TextField("Title of Task", text: $title)
+//                                    }
+//                                }.padding()
+//
+//                            }
+//
+//
+//                            Section(header: Text("Timings")) {
+//
+//                                DatePicker("Start of Event", selection: $startTime).padding()
+//                                DatePicker("Completion Time of Event", selection: $endTime ).padding()
+//                            }
+//
+//
+//                            Section(header: Text("Make sure you delayed the tasks being done")) {
+//                            Button(action: {
+//                                   updateFields()
+//                            }) {
+//                                HStack(alignment: .center) {
+//                                    Image(systemName: "externaldrive.badge.icloud")
+//                                    Text("Save update")
+//
+//                                }
+//                            }.padding()
+//
+//                            }
+//                        }
+//                    }
+//                }
+//
+//            }
+        }.frame(height: heightTime)
+        .background(RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor).opacity(0.6)).frame(height: heightTime))
+           
+        
     }
     
     func updateField(canvasUUID: UUID?) {

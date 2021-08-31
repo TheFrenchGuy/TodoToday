@@ -119,7 +119,7 @@ struct CalendarView: View {
 //                                            .position(fingerLocation)
 //                                    }
 //                                }
-                                MovableHourView(refreshList: $RefreshList, TimeUUID: drawing.id ?? UUID(), heightTime: getheight(startDate: drawing.startTime ?? Date(), endDate: drawing.endTime ?? Date().addingTimeInterval(3600)), startTime: drawing.startTime ?? Date(),timeIntervalSinceStartTimeandEndTime: drawing.endTime?.timeIntervalSince(drawing.startTime ?? Date()) ?? 3600 ,horizontalPlacement: drawing.xLocation ).zIndex(1)
+                                MovableHourView(refreshList: $RefreshList, TimeUUID: drawing.id ?? UUID(), heightTime: getheight(startDate: drawing.startTime ?? Date(), endDate: drawing.endTime ?? Date().addingTimeInterval(3600)), startTime: drawing.startTime ?? Date(),timeIntervalSinceStartTimeandEndTime: drawing.endTime?.timeIntervalSince(drawing.startTime ?? Date()) ?? 3600 ,horizontalPlacement: drawing.xLocation , typeREM: drawing.typeRem ).zIndex(1)
                             }
                         }
                     }
@@ -127,11 +127,11 @@ struct CalendarView: View {
             }        }
     }
     
-    func gettimelocation(height: CGFloat, hour: Date, xlocation: Double) -> CGPoint{
+    func gettimelocation(height: CGFloat, hour: Date, xlocation: Double, type: String) -> CGPoint{
         var ylocation = 0.0
        
         var whichhour = 0.0
-//        ylocation = Double((108 * hour) + 61)
+//        ylocation = Double((108 * hour) + 61) That is the orignal location, only works so far for drawings
         whichhour = hour.timeIntervalSince(date) / 3600
         
         if whichhour > 24 {

@@ -40,7 +40,7 @@ struct TodayCanvasView: View {
         ZStack {
             GeometryReader { bounds in
                 VStack{
-                        if checkIfDrawingstoday() { 
+                        if !checkIfDrawingstoday() {
                             PlaceholderView()
 
                             Button(action: {
@@ -391,7 +391,7 @@ struct TodayCanvasView: View {
     }
     
     func checkIfDrawingstoday() -> Bool {
-        let date: Date = (Calendar.current.date(bySettingHour: 0, minute: 0, second: 0 , of: Date())!)
+        let date: Date = (Calendar.current.date(bySettingHour: 0, minute: 0, second: 1 , of: Date())!)
         var viewContext: NSManagedObjectContext { PersistenceController.shared.container.viewContext } //remove error from '+entityForName: nil is not a legal NSManagedObjectContext parameter searching for entity name
         let req = NSFetchRequest<NSFetchRequestResult>(entityName: "DrawingCanvas")
         
@@ -399,11 +399,13 @@ struct TodayCanvasView: View {
             let result = try viewContext.fetch(req)
             
             for i in result as! [NSManagedObject] {
-                let startTime = i.value(forKey: "startTime") as? Date ?? Date()
+                let startTime = i.value(forKey: "startTime") as? Date ?? (Calendar.current.date(bySettingHour: 0, minute: 0, second: 1 , of: Date().addingTimeInterval(-86500))!)
                 let timediff = Int(startTime.timeIntervalSince(date))
                 
                 if timediff < 86400 && timediff >= 0 {
-                    return false
+                    print("Start Time: \(startTime)")
+                    return true
+                    
                     
                 }
             }
@@ -411,7 +413,7 @@ struct TodayCanvasView: View {
             print(error.localizedDescription)
         }
         
-        return true
+        return false
     }
     
 }

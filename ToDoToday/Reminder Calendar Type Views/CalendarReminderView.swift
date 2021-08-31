@@ -8,11 +8,15 @@
 import SwiftUI
 import Combine
 import Foundation
+import SwiftUINavigationBarColor
 
 class TabViewClass: ObservableObject{
     @Published var showTab = false
     @Published var showTask = false
     @Published var addNewTask = false
+    @Published var editTask = false
+    @Published var editTaskUUID = UUID()
+    @Published var taskType: String = ""
 }
 
 struct CalendarReminderView: View {
@@ -39,6 +43,13 @@ struct CalendarReminderView: View {
     
     let persistenceController = PersistenceController.shared
     
+    
+    
+    init() { //Required to make the top bar to be gray
+        UINavigationBar.appearance().backgroundColor = UIColor(named: "lightFormGray")
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().barTintColor = UIColor(named: "lightFormGray")
+    }
     var body: some View {
         
         
@@ -52,6 +63,9 @@ struct CalendarReminderView: View {
                 }
             }
         
+        
+        
+        
         return GeometryReader { geometry in
                 ZStack(alignment: .topLeading) {
                     
@@ -61,7 +75,8 @@ struct CalendarReminderView: View {
                                     if self.tabViewClass.showTab == true {
                                         SideBarView().environment(\.managedObjectContext, colorPalettePersistance.container.viewContext)
                                             
-                                            .frame(width: geometry.size.width/3, height: geometry.size.height - childSize.width)
+                                            .frame(width: geometry.size.width/3, height: geometry.size.height - childSize.height)
+                                            .padding(.top, childSize.height)
                                             .background(Color("lightFormGray").edgesIgnoringSafeArea(.all))
                                             .transition(.move(edge: .leading))
                                             .onAppear(perform: {
@@ -76,18 +91,54 @@ struct CalendarReminderView: View {
                                         TaskNotDoneFromPreviousDayView().environment(\.managedObjectContext, persistenceController.container.viewContext)
     //                                    Text("TO BE IMPLEMENT TO SHOW THE TASK FROM THE PAST")
                                             .frame(width: geometry.size.width/3, height: geometry.size.height - childSize.width)
+                                            .padding(.top, childSize.height)
                                             .background(Color("lightFormGray").edgesIgnoringSafeArea(.all))
                                             .transition(.move(edge: .leading))
                                     }
                                     
                                     
                                     TodayCanvasView().environment(\.managedObjectContext, persistenceController.container.viewContext)
+//                                        .frame(height: geometry.size.height - childSize.height)
+//                                        .padding(.top, childSize.height)
+                                        .zIndex(1)
+                                    
+                                    
+                                    if self.tabViewClass.editTask {
+                                        
+                                        if self.tabViewClass.taskType == TypeReminder.typed.rawValue {
+                                        EditTaskViewSideBarTyped().frame(width: geometry.size.width/3, height: geometry.size.height - childSize.height)
+                                            .padding(.top, childSize.height)
+                                        
+                                            .transition(.move(edge: .leading))
+                                            .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                                        }
+                                        
+                                        if self.tabViewClass.taskType == TypeReminder.audio.rawValue {
+                                            EditTaskViewSideBarAudio().frame(width: geometry.size.width/3, height: geometry.size.height - childSize.height)
+                                                .padding(.top, childSize.height)
+                                            
+                                                .transition(.move(edge: .leading))
+                                                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                                        }
+                                    }
                                 }
                             }
                             .gesture(drag)
-                            .navigationBarItems(leading: TabTaskPlusView().frame(height: 60), trailing: TodaySettingsView())
+                            
+                        
+                            
+                            .navigationBarTitleDisplayMode(.inline) //So that it doesnt show the title and doesnt take more space than needed
+                            .navigationBarItems(leading: TabTaskPlusView(), trailing: TodaySettingsView())
+                            
+//                            .navigationTitle("NO TITLE")
+//                            .navigationBarHidden(true)
+                            
+                            
                         }
                             .navigationViewStyle(StackNavigationViewStyle())
+//                            .navigationBarBackground {
+//                                Color("lightFormGray").shadow(radius: 1) // don't forget the shadow under the opaque navigation bar
+//                            }
                             .onAppear{loadInitialColorPalette()}
                     
                 
