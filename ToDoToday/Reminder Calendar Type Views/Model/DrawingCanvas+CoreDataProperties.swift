@@ -35,6 +35,8 @@ extension DrawingCanvas {
     @NSManaged public var xLocation: Double
     @NSManaged public var yLocation: Double
     
+    
+    @NSManaged public var alertNotificationTimeBefore: String?
 }
 
 extension DrawingCanvas : Identifiable {

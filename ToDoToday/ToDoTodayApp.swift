@@ -18,7 +18,7 @@ struct ToDoTodayApp: App {
        
     }
     
-    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     let persistenceController = PersistenceController.shared
     let colorPalettePersistance = ColorPalettePersistance.shared
     var body: some Scene {
@@ -31,4 +31,27 @@ struct ToDoTodayApp: App {
                
         }
     }
+    
+   
+}
+
+class AppDelegate:NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate{ //refers to https://stackoverflow.com/questions/30852870/displaying-a-stock-ios-notification-banner-when-your-app-is-open-and-in-the-fore
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+           
+           // Set UNUserNotificationCenterDelegate
+           UNUserNotificationCenter.current().delegate = self
+           
+           return true
+       }
+}
+
+extension AppDelegate  {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+           willPresent notification: UNNotification,
+           withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
+    {
+        completionHandler(.alert)
+    }
+    
 }

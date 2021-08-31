@@ -25,6 +25,9 @@ struct ContentView: View {
     
     
     var body: some View {
+        
+        
+        
         if firstlaunch {
             
             if UIDevice.current.userInterfaceIdiom == .phone {
@@ -90,15 +93,19 @@ struct ContentView: View {
         } else {
             
             if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac{
+                
+                
             
-            CalendarReminderView().edgesIgnoringSafeArea(.all).environmentObject(transferColorPalette)
+                 CalendarReminderView().edgesIgnoringSafeArea(.all).environmentObject(transferColorPalette)
                 .environment(\.managedObjectContext,colorPalettePersistance.container.viewContext)
                 .environmentObject(refreshList)
                 .environmentObject(taskPerHour)
+                
 
             }
             if UIDevice.current.userInterfaceIdiom == .phone{
                 TodayCanvasIphoneView()
+//                    .onAppear() {sendNotification()}
 //                CalendarReminderView().edgesIgnoringSafeArea(.all).environmentObject(transferColorPalette)
 //                    .environment(\.managedObjectContext,colorPalettePersistance.container.viewContext)
 //                    .environmentObject(refreshList)
@@ -118,6 +125,52 @@ struct ContentView: View {
 //            }
         }
     }
+    
+//    func sendNotification() {
+//        let notificationContent = UNMutableNotificationContent()
+//        let userNotificationCenter = UNUserNotificationCenter.current()
+//        notificationContent.title = "Test"
+//        notificationContent.body = "Test body"
+//        notificationContent.badge = NSNumber(value: 3)
+//
+//        if let url = Bundle.main.url(forResource: "dune",
+//                                    withExtension: "png") {
+//            if let attachment = try? UNNotificationAttachment(identifier: "dune",
+//                                                            url: url,
+//                                                            options: nil) {
+//                notificationContent.attachments = [attachment]
+//            }
+//        }
+//
+//
+//
+//
+//
+//
+//
+//
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5,
+//                                                        repeats: false)
+//
+//
+//        let request = UNNotificationRequest(identifier: "testNotification",
+//                                            content: notificationContent,
+//                                            trigger: trigger)
+//
+//        userNotificationCenter.add(request) { (error) in
+//            if let error = error {
+//                print("Notification Error: ", error)
+//            }
+//        }
+//
+//
+//
+//
+//
+//
+//    }
+    
+    
     
     func getWallpaperFromUserDefaults() -> Data? {
       let defaults = UserDefaults.standard

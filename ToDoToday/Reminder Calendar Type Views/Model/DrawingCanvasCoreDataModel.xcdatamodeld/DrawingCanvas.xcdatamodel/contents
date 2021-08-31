@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="DrawingCanvas" representedClassName="DrawingCanvas" syncable="YES">
+        <attribute name="alertNotificationTimeBefore" optional="YES" attributeType="String"/>
         <attribute name="audioREMurl" optional="YES" attributeType="String"/>
         <attribute name="calendarNameAdded" optional="YES" attributeType="String"/>
         <attribute name="canvasData" optional="YES" attributeType="Binary"/>
@@ -17,6 +18,6 @@
         <attribute name="yLocation" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="DrawingCanvas" positionX="-63" positionY="-18" width="128" height="239"/>
+        <element name="DrawingCanvas" positionX="-63" positionY="-18" width="128" height="254"/>
     </elements>
 </model>
