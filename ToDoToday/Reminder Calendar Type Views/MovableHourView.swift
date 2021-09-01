@@ -166,7 +166,7 @@ struct MovableHourView: View {
         
         
         
-        let newStartTime: Date = (Calendar.current.date(bySettingHour: hours, minute: minutes, second: seconds, of: Date())!)
+        let newStartTime: Date = (Calendar.current.date(bySettingHour: hours, minute: minutes, second: seconds, of: Date()) ?? Date())
         
         return newStartTime
     }

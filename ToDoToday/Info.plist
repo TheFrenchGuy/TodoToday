@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>GADApplicationIdentifier</key>
@@ -32,6 +32,18 @@
 	<string>Well I need to record how well your voice sounds</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>I NEED ACCESS TO YOUR PHOTOS</string>
+	<key>NSUbiquitousContainers</key>
+	<dict>
+		<key>iCloud.TodoTodayIC</key>
+		<dict>
+			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
+			<true/>
+			<key>NSUbiquitousContainerName</key>
+			<string>.toDoToday</string>
+			<key>NSUbiquitousContainerSupportedFolderLevels</key>
+			<string>Any</string>
+		</dict>
+	</dict>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>This identifier will be used to deliver personalized ads to you</string>
 	<key>SKAdNetworkItems</key>

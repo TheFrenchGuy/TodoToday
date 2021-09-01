@@ -12,8 +12,10 @@ import AVFoundation
 
 class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
-    let fileManager = FileManager.default
-    let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+//    let fileManager = FileManager.default
+//    let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    
+    let documentsPath = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents")
     
     let objectWillChange = PassthroughSubject<AudioPlayer, Never>()
     
@@ -29,7 +31,8 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
         
         let playbackSession = AVAudioSession.sharedInstance()
         
-        let audioPath = URL(string: documentsPath.appendingPathComponent(audio).path)!
+        let audioPath = documentsPath!.appendingPathComponent(audio)
+//            URL(string: documentsPath!.appendingPathComponent(audio)) ?? URL(string: "google.com")
         print("audioPath: \(audioPath)")
         
         

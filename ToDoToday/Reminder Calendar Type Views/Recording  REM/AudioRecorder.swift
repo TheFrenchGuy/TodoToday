@@ -45,8 +45,20 @@ class AudioRecorder: ObservableObject {
             print("Failed to set up recording session")
         }
         
-        let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let audioFilename = documentPath.appendingPathComponent("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
+        
+        
+        
+        
+        
+        let documentPath = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents")
+
+        let audioFilename =  documentPath?.appendingPathComponent("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
+        
+        
+       
+        
+        
+        
         
         newURL = String("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
         
@@ -58,13 +70,18 @@ class AudioRecorder: ObservableObject {
             AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
         ]
         
+//        let fileURL = documentPath!.appendingPathComponent("test.txt")
+//
+//        try? "Hello word".data(using: .utf8)?.write(to: fileURL)
+        
         do {
-            audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
+            audioRecorder = try AVAudioRecorder(url: audioFilename!, settings: settings)
             audioRecorder.record()
+            
             
            
             
-            print("RECORDING SAVED \(audioFilename)")
+//            print("RECORDING SAVED \(fileURL)")
 
             recording = true
         } catch {
@@ -74,7 +91,7 @@ class AudioRecorder: ObservableObject {
 
     
     func stopRecording() {
-           audioRecorder.stop()
+//           audioRecorder.stop()
            recording = false
        }
     

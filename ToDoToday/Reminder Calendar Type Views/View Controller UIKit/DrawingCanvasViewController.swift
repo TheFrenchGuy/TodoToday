@@ -39,8 +39,11 @@ class DrawingCanvasViewController: UIViewController {
             canvas.topAnchor.constraint(equalTo: view.topAnchor),
             canvas.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
-        toolPicker.setVisible(true, forFirstResponder: canvas)
-        toolPicker.addObserver(canvas)
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            toolPicker.setVisible(true, forFirstResponder: canvas)
+            toolPicker.addObserver(canvas)
+        }
         canvas.delegate = self
         canvas.becomeFirstResponder()
         if let drawing = try? PKDrawing(data: drawingData){

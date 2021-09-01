@@ -28,16 +28,7 @@ struct DrawingView: View {
         
         if !showSettings {
             VStack{
-                if id?.uuidString == "" {
-                    Text("NO UUID STRING ASSIGNED \(title)")
-                } else {
-    //                Text("\(id ?? UUID()), \(title ?? "NO TITLE")")
-//                    Text("\((startTime.toString(dateFormat: "d, hha, mm")))")
-                    Text("Title: \(title)").font(.largeTitle).bold()
-                    DrawingCanvasView(data: data ?? Data(), id: id ?? UUID())
-                        .environment(\.managedObjectContext, viewContext)
-                        .navigationBarTitle(title ,displayMode: .inline)
-                }
+                
                 HStack {
                     Button(action: {self.isVisible = false}) { Text("Dismiss me")}.padding(.leading, 50)
                     Spacer()
@@ -49,6 +40,19 @@ struct DrawingView: View {
                         
                     }) { Image(systemName: "slider.horizontal.3")}.padding(.trailing, 50)
                 }.frame(height: 50)
+                
+                
+                if id?.uuidString == "" {
+                    Text("NO UUID STRING ASSIGNED \(title)")
+                } else {
+    //                Text("\(id ?? UUID()), \(title ?? "NO TITLE")")
+//                    Text("\((startTime.toString(dateFormat: "d, hha, mm")))")
+                    Text("Title: \(title)").font(.largeTitle).bold()
+                    DrawingCanvasView(data: data ?? Data(), id: id ?? UUID())
+                        .environment(\.managedObjectContext, viewContext)
+                        .navigationBarTitle(title ,displayMode: .inline)
+                }
+                
             }
         } else {
             

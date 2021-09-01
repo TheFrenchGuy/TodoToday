@@ -2,9 +2,10 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="DrawingCanvas" representedClassName="DrawingCanvas" syncable="YES">
         <attribute name="alertNotificationTimeBefore" optional="YES" attributeType="String"/>
+        <attribute name="audioData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="audioREMurl" optional="YES" attributeType="String"/>
         <attribute name="calendarNameAdded" optional="YES" attributeType="String"/>
-        <attribute name="canvasData" optional="YES" attributeType="Binary"/>
+        <attribute name="canvasData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="completedTask" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -19,6 +20,6 @@
         <attribute name="yLocation" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="DrawingCanvas" positionX="-63" positionY="-18" width="128" height="269"/>
+        <element name="DrawingCanvas" positionX="-63" positionY="-18" width="128" height="284"/>
     </elements>
 </model>

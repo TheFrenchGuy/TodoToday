@@ -84,13 +84,13 @@ struct HoursView: View {
 //
 //                                                    }
                                                         
-                                                        Image(uiImage: UIImage.init(data: drawing.imageData ?? Data())!).resizable().scaledToFit().frame(width: 150, height: heightTime - 20)
+                                                        Image(uiImage: UIImage.init(data: drawing.imageData ?? Data()) ?? UIImage()).resizable().scaledToFit().frame(width: 150, height: heightTime - 20)
                                                       //  Text("Drawing \(drawing.title ?? "NO TITLE")")
                                                        
 
                                                     }
                                                         .sheet(isPresented: self.$test) {
-                                                            DrawingView(isVisible: $test, id: currentUUID ?? UUID(), data: currentData, title: currentTitle, startTime: drawing.startTime ?? Date(), endTime: drawing.endTime ?? Date())
+                                                            DrawingView(isVisible: $test, id: currentUUID ?? UUID(), data: currentData, title: currentTitle, startTime: drawing.startTime ?? Date(), endTime: drawing.endTime ?? Date()) .environment(\.managedObjectContext, viewContext) // Fixed the error that came saying there is no coordinate store attached to it
                                                                 .onDisappear() { print("DISMISS"); RefreshList.toggle()}
                                                             
                                                         }
@@ -213,6 +213,9 @@ struct HoursView: View {
                                     }.contextMenu { Button(action: {
                                         viewContext.delete(drawing)
                                         deleteImage(imageName: String("\(drawing.id)"))
+                                        
+                                        
+                                        
                                         deleteAudio(audioURL: drawing.audioREMurl ?? "NO URL")
                                         do {
                                             try self.viewContext.save()
@@ -421,8 +424,8 @@ struct HoursView: View {
     
     
     func deleteAudio(audioURL: String) {
-        let audioPath = documentsPath.appendingPathComponent(audioURL)
-        
+        let docPath = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents")
+        let audioPath = docPath!.appendingPathComponent(audioURL)
         
         
         guard fileManager.fileExists(atPath: audioPath.path) else {

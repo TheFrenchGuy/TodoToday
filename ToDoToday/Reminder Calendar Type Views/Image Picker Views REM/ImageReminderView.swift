@@ -50,7 +50,7 @@ struct ImageReminderView: View {
             }).fullScreenCover(isPresented: $showSheet, content:  {
                 if !showSettings {
                     VStack {
-                        Image(uiImage: fetchImage(imageName: String("\(updatedTask.newTaskUUID)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit()
+                        Image(uiImage: UIImage.init(data: imageData)!).resizable().scaledToFit()
                         
                         HStack {
                             
