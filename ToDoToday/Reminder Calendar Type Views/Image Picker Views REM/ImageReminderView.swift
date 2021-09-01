@@ -11,6 +11,7 @@ struct ImageReminderView: View {
     @State var title: String = "NO TITLE"
     var remUUID: UUID
     var tabColor: UIColor
+    var imageData: Data
     @State var startTime: Date = Date()
     @State var endTime: Date = Date().addingTimeInterval(3600)
     
@@ -37,12 +38,14 @@ struct ImageReminderView: View {
             
             Button(action: {showSheet.toggle()}, label: {
                // Text(title)
-                if getWallpaperFromUserDefaults() != nil {
-                    Image(uiImage: fetchImage(imageName: String("\(updatedTask.newTaskUUID)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit().frame(width: 150, height: 150)
-                        .keyboardShortcut("l", modifiers: .command)
-
+//                if getWallpaperFromUserDefaults() != nil {
+//                    Image(uiImage: fetchImage(imageName: String("\(updatedTask.newTaskUUID)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit().frame(width: 150, height: 150)
+//                        .keyboardShortcut("l", modifiers: .command)
+//
+//
+//                }
                 
-                }
+                Image(uiImage: UIImage.init(data: imageData)!).resizable().scaledToFit().frame(width: 150, height: 150)
                
             }).fullScreenCover(isPresented: $showSheet, content:  {
                 if !showSettings {

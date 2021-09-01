@@ -39,9 +39,12 @@ struct DrawingCanvasView: UIViewControllerRepresentable {
             do{
                 let result = try viewContext.fetch(request)
                 let obj = result.first
+                let image = viewController.canvas.drawing.image(from: viewController.canvas.drawing.bounds, scale: 1)
+                let imageData = image.pngData()
                 obj?.setValue(data, forKey: "canvasData")
+                obj?.setValue(imageData, forKey: "imageData")
                 do{
-                    SaveSignature()
+//                    SaveSignature()
                     try viewContext.save() //Save the canvas to the stack each time a new upadte is made
                 }
                 catch{
@@ -55,13 +58,13 @@ struct DrawingCanvasView: UIViewControllerRepresentable {
             }
         }
         
-        func SaveSignature() {
-            let image = viewController.canvas.drawing.image(from: viewController.canvas.drawing.bounds, scale: 1)
-            //let imageData = image.jpegData(compressionQuality: 1.0)
-            print("Image saved as name: \(saveImage(image: image) ?? "IMAGE SAVING ERRROR")") //DEBUG ONLY SINCE IT IS ALREADY PRINTED TO THE CONSOLE WHILE RUING THE FUNCTION
-            
-            
-        }
+//        func SaveSignature() {
+//            let image = viewController.canvas.drawing.image(from: viewController.canvas.drawing.bounds, scale: 1)
+//            //let imageData = image.jpegData(compressionQuality: 1.0)
+//            print("Image saved as name: \(saveImage(image: image) ?? "IMAGE SAVING ERRROR")") //DEBUG ONLY SINCE IT IS ALREADY PRINTED TO THE CONSOLE WHILE RUING THE FUNCTION
+//
+//
+//        }
         
         return viewController
         

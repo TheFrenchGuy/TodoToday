@@ -77,12 +77,14 @@ struct HoursView: View {
                                                         test.toggle();
                                                         print("Keyboard shortcut pressed");
                                                     }) {
-                                                        if getWallpaperFromUserDefaults() != nil {
-                                                            Image(uiImage: fetchImage(imageName: String("\(drawing.id)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit().frame(width: 150, height: heightTime - 20)
-                                                                .keyboardShortcut("l", modifiers: .command)
-
+//                                                        if getWallpaperFromUserDefaults() != nil {
+//                                                            Image(uiImage: fetchImage(imageName: String("\(drawing.id)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit().frame(width: 150, height: heightTime - 20)
+//                                                                .keyboardShortcut("l", modifiers: .command)
+//
+//
+//                                                    }
                                                         
-                                                    }
+                                                        Image(uiImage: UIImage.init(data: drawing.imageData ?? Data())!).resizable().scaledToFit().frame(width: 150, height: heightTime - 20)
                                                       //  Text("Drawing \(drawing.title ?? "NO TITLE")")
                                                        
 
@@ -141,7 +143,7 @@ struct HoursView: View {
 //                                                    .onAppear(perform: {currentTitle = drawing.title ?? "NO TITLE"; currentTask = drawing.taskDescription ?? "NO DESCRIPTION"})
                                                 
                                                 case TypeReminder.image.rawValue:
-                                                    ImageReminderView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID(), tabColor: drawing.tabColor?.uiColor ?? .red,startTime: drawing.startTime ?? Date(), endTime: drawing.endTime ?? Date(), windowSize: bounds.size)
+                                                    ImageReminderView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID(), tabColor: drawing.tabColor?.uiColor ?? .red,imageData: drawing.imageData ?? Data(),startTime: drawing.startTime ?? Date(), endTime: drawing.endTime ?? Date(), windowSize: bounds.size)
                                                         .sheet(isPresented: $sendToShareAll, content: { ShareREMAll(imageName: drawing.id ?? UUID())})
 //                                                        .contextMenu { Button(action:{
 //                                                        viewContext.delete(drawing)

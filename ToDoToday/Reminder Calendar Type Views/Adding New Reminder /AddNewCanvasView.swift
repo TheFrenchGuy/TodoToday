@@ -284,7 +284,8 @@ struct AddNewCanvasView: View {
                     drawing.tabColor = SerializableColor.init(from: customColor)
                     drawing.calendarNameAdded = calendarName
                     drawing.xLocation = getxPlacement(time: eventtimeclass.eventDue)
-                    drawing.yLocation = 100 // This is temp until it is assigned somewhere later 
+                    drawing.yLocation = 100 // This is temp until it is assigned somewhere later
+                    drawing.imageData = UIImage(systemName: "externaldrive.badge.xmark")!.pngData()
                     drawing.completedTask = false
                     //SerializableColorTransformer().transformedValue(customColor) as! SerializableColor
                     
@@ -360,6 +361,7 @@ struct AddNewCanvasView: View {
                     drawing.calendarNameAdded = calendarName
                     drawing.xLocation = getxPlacement(time: eventtimeclass.eventDue)
                     drawing.yLocation = 100 // This is temp until it is assigned somewhere later
+                    drawing.imageData = selectedImage?.pngData()
                     drawing.completedTask = false
                    
                     print("Image saved as name: \(saveImage(image: self.selectedImage!, id: initialUUID) ?? "IMAGE SAVING ERRROR")") //DEBUG ONLY SINCE IT IS ALREADY PRINTED TO THE CONSOLE WHILE RUING THE FUNCTION
