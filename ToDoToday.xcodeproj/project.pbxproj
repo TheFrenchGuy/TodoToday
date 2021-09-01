@@ -16,7 +16,6 @@
 		6010334226BEB29700D1DA12 /* ShowTodayDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6010334126BEB29700D1DA12 /* ShowTodayDateView.swift */; };
 		6010334426BEB36600D1DA12 /* CheckboxField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6010334326BEB36600D1DA12 /* CheckboxField.swift */; };
 		6010334626C0091900D1DA12 /* TempColorPickerModel .swift in Sources */ = {isa = PBXBuildFile; fileRef = 6010334526C0091900D1DA12 /* TempColorPickerModel .swift */; };
-		6018EC5526BC491600184DB4 /* ColorPaletteCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6018EC5326BC491600184DB4 /* ColorPaletteCoreDataModel.xcdatamodeld */; };
 		6018EC5826BC49C200184DB4 /* ColorPalette+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6018EC5626BC49C200184DB4 /* ColorPalette+CoreDataClass.swift */; };
 		6018EC5926BC49C200184DB4 /* ColorPalette+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6018EC5726BC49C200184DB4 /* ColorPalette+CoreDataProperties.swift */; };
 		6018EC5D26BC4A6300184DB4 /* ColorPalettePersistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6018EC5C26BC4A6300184DB4 /* ColorPalettePersistance.swift */; };
@@ -80,6 +79,8 @@
 		60D0EC9B26B094D0001E98EE /* HourOfDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D0EC9A26B094D0001E98EE /* HourOfDay.swift */; };
 		60D0EC9D26B09559001E98EE /* Array Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D0EC9C26B09559001E98EE /* Array Extension.swift */; };
 		60D0EC9F26B095BA001E98EE /* ForEach with Index Localisations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D0EC9E26B095BA001E98EE /* ForEach with Index Localisations.swift */; };
+		60D2FA1426E009CA003E5548 /* ColorPaletteCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6018EC5326BC491600184DB4 /* ColorPaletteCoreDataModel.xcdatamodeld */; };
+		60D2FA1626E00E7B003E5548 /* DeviceRotationWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D2FA1526E00E7B003E5548 /* DeviceRotationWatcher.swift */; };
 		60D8079726DEEE5E00B325D0 /* Interstitial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D8079626DEEE5E00B325D0 /* Interstitial.swift */; };
 		60E2E64926A85E4500B1BAA6 /* undismissableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E2E64826A85E4500B1BAA6 /* undismissableVC.swift */; };
 		60E2E64B26A85E8E00B1BAA6 /* DisableModalDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E2E64A26A85E8E00B1BAA6 /* DisableModalDismiss.swift */; };
@@ -164,6 +165,7 @@
 		60D0EC9A26B094D0001E98EE /* HourOfDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourOfDay.swift; sourceTree = "<group>"; };
 		60D0EC9C26B09559001E98EE /* Array Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array Extension.swift"; sourceTree = "<group>"; };
 		60D0EC9E26B095BA001E98EE /* ForEach with Index Localisations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ForEach with Index Localisations.swift"; sourceTree = "<group>"; };
+		60D2FA1526E00E7B003E5548 /* DeviceRotationWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRotationWatcher.swift; sourceTree = "<group>"; };
 		60D8079626DEEE5E00B325D0 /* Interstitial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interstitial.swift; sourceTree = "<group>"; };
 		60E2E64826A85E4500B1BAA6 /* undismissableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = undismissableVC.swift; sourceTree = "<group>"; };
 		60E2E64A26A85E8E00B1BAA6 /* DisableModalDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisableModalDismiss.swift; sourceTree = "<group>"; };
@@ -451,6 +453,7 @@
 				6034178226BC11F500E0F6A3 /* HexToUIColor.swift */,
 				6010333A26BE992D00D1DA12 /* AppFaceIDTouchID.swift */,
 				6085359926D4396E00450502 /* ActivityViewController.swift */,
+				60D2FA1526E00E7B003E5548 /* DeviceRotationWatcher.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -682,15 +685,16 @@
 				600EDE6A26BAE071002F6A6C /* InitialColorPicker.swift in Sources */,
 				60E5F35926AD8F1100F1E609 /* CalendarView.swift in Sources */,
 				60C2DF6826B2CACD00347CE8 /* DrawingCanvas+CoreDataClass.swift in Sources */,
+				60D2FA1426E009CA003E5548 /* ColorPaletteCoreDataModel.xcdatamodeld in Sources */,
 				60A17A4C26DD7C350014A86E /* CreateInitialCalendarView_iPhone.swift in Sources */,
 				60CBECD426A8510E0020703D /* LottieView.swift in Sources */,
 				60D0054726CC720B009E68EA /* OutDatedTypedREM.swift in Sources */,
-				6018EC5526BC491600184DB4 /* ColorPaletteCoreDataModel.xcdatamodeld in Sources */,
 				6010334026BEB28300D1DA12 /* TodaySettingsView.swift in Sources */,
 				60C1E05326B880C90040D425 /* AudioPlayerView.swift in Sources */,
 				60CBECC426A8500C0020703D /* SetupCard Screen.swift in Sources */,
 				60736D6126BBDAAE00FD3E3D /* SerializableColor.swift in Sources */,
 				60C2DF6B26B2CC8900347CE8 /* TypeReminder.swift in Sources */,
+				60D2FA1626E00E7B003E5548 /* DeviceRotationWatcher.swift in Sources */,
 				60CBECAF26A84E3A0020703D /* ToDoTodayApp.swift in Sources */,
 				6065754E26B45D0F00EA0F4D /* ImagePicker.swift in Sources */,
 				6025514726B30AD500D9F764 /* TypeReminderView.swift in Sources */,

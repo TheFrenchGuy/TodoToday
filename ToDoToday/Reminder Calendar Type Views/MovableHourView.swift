@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct MovableHourView: View {
     
@@ -26,6 +27,7 @@ struct MovableHourView: View {
     var timeIntervalSinceStartTimeandEndTime: Double
     var horizontalPlacement: Double
     var typeREM: String
+    @Binding var windowSize: CGSize
     
     
     var simpleDrag: some Gesture {
@@ -78,8 +80,17 @@ struct MovableHourView: View {
                         .frame(width: 44, height: 44)
                         .position(fingerLocation)
                 }
-            }.onAppear(perform: {location = gettimelocation(hour: startTime, xlocation: horizontalPlacement, type: typeREM, size: bounds.size)})
+            }.onAppear(perform: {location = gettimelocation(hour: startTime, xlocation: horizontalPlacement, type: typeREM, size: windowSize)})
+//            .onRotate(perform: {newOrientation in
+//                location = gettimelocation(hour: startTime, xlocation: horizontalPlacement, type: typeREM, size: windowSize)
+//
+//            })
+            .onChange(of: UIDevice.current.orientation, perform: { value in
+                location = gettimelocation(hour: startTime, xlocation: horizontalPlacement, type: typeREM, size: UIScreen.main.bounds.size)
+            })
         }
+        
+        
     }
     
     func gettimelocation(hour: Date, xlocation: Double, type: String, size: CGSize) -> CGPoint{
@@ -103,22 +114,27 @@ struct MovableHourView: View {
 
 
             
-        if locationHorizontal < 0 || locationHorizontal > 500 {
-            locationHorizontal = 100
-        }
+            
+            print("Size width: \(size.width), \(locationHorizontal)")
             
             
-            if size.width < CGFloat(locationHorizontal){
-                locationHorizontal = 100
+            if size.width <= CGFloat(locationHorizontal) {
+                locationHorizontal = Double(size.width - 100)
+//                print("Size w after \(locationHorizontal)")
+        
+            }
             
-        }
+             
+            
+            
+            
+            
             return CGPoint(x: locationHorizontal, y: ylocation)
         }
     }
     
     
     func newStoredLocation(currentUUID: UUID, newLocation: CGPoint) {
-        print("To be implemented later ")
         
         for drawing in drawings {
             if drawing.id == currentUUID {

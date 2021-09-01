@@ -100,6 +100,7 @@ struct TodayCanvasView_iPhone: View {
                 .onAppear(perform: {self.getHoursByHoursTabs()})
                 .onChange(of: refreshListClass.refresh, perform: {newValue in
                     getHoursByHoursTabs(); print("NEW FETCH REQUEST")})
+                
             }
         }.environmentObject(hourOfDay)
     }

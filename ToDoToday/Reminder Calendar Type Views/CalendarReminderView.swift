@@ -111,6 +111,11 @@ struct CalendarReminderView: View {
                                             
 
                                         .zIndex(1)
+                                        .onTapGesture(perform: {
+                                            if self.tabViewClass.editTask { //So that you can click out at any time
+                                                self.tabViewClass.editTask = false
+                                            }
+                                        })
                                     
                                     
                                     if self.tabViewClass.editTask {

@@ -58,6 +58,11 @@ struct CalendarView: View {
     @GestureState private var startLocation: CGPoint? = nil // 1
     
     
+    @State private var SizeofWindow: CGSize = CGSize(width: UIScreen.main.bounds.width, height: 100)
+    
+    
+   
+    
     
     
     var simpleDrag: some Gesture {
@@ -119,10 +124,23 @@ struct CalendarView: View {
 //                                            .position(fingerLocation)
 //                                    }
 //                                }
-                                MovableHourView(refreshList: $RefreshList, TimeUUID: drawing.id ?? UUID(), heightTime: getheight(startDate: drawing.startTime ?? Date(), endDate: drawing.endTime ?? Date().addingTimeInterval(3600)), startTime: drawing.startTime ?? Date(),timeIntervalSinceStartTimeandEndTime: drawing.endTime?.timeIntervalSince(drawing.startTime ?? Date()) ?? 3600 ,horizontalPlacement: drawing.xLocation , typeREM: drawing.typeRem ).zIndex(1)
+                                
+                                
+                                MovableHourView(refreshList: $RefreshList, TimeUUID: drawing.id ?? UUID(), heightTime: getheight(startDate: drawing.startTime ?? Date(), endDate: drawing.endTime ?? Date().addingTimeInterval(3600)), startTime: drawing.startTime ?? Date(),timeIntervalSinceStartTimeandEndTime: drawing.endTime?.timeIntervalSince(drawing.startTime ?? Date()) ?? 3600 ,horizontalPlacement: drawing.xLocation , typeREM: drawing.typeRem, windowSize: $SizeofWindow ).zIndex(1)
+                                
+                                
                             }
                         }
-                    }
+                    }.onRotate(perform:  { value in
+                        
+                        SizeofWindow.width = bounds.size.width
+                        SizeofWindow.height = bounds.size.height
+                       
+                    print("Windowsize : width\(SizeofWindow.width), height: \(SizeofWindow.height)")
+                        
+                        
+                })
+                    
                 }
             }        }
     }

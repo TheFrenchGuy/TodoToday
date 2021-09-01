@@ -28,8 +28,8 @@ struct ToDoTodayApp: App {
     }
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    let persistenceController = PersistenceController.shared
-    let colorPalettePersistance = ColorPalettePersistance.shared
+//    let persistenceController = PersistenceController.shared
+//    let colorPalettePersistance = ColorPalettePersistance.shared
     var body: some Scene {
         
         WindowGroup {
