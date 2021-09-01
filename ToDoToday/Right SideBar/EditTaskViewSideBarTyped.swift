@@ -498,7 +498,11 @@ struct CalendarCompletedTaskSideBar: View {
             
             Spacer()
             
+            
+            #if targetEnvironment(macCatalyst)
+            #else
             BannerView().frame(height: 50, alignment: .center).padding(.horizontal)
+            #endif
         }
     }
 }

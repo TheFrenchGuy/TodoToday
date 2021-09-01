@@ -94,6 +94,10 @@ struct AddNewCanvasView: View {
     @EnvironmentObject var hourOfDay:HourOfDay
     
     @EnvironmentObject var taskPerHour:TaskPerHour
+    @EnvironmentObject var showInterstitialAd: ShowInterstitialAdClass
+    
+    
+   
     
       
     var body: some View {
@@ -302,6 +306,7 @@ struct AddNewCanvasView: View {
                     //self.presentationMode.wrappedValue.dismiss()
                     
                     showingCanvas.toggle()
+                    showInterstitialAd.InterstitialAdShow.toggle()
                 }
                 
                 else if !canvasTitle.isEmpty && typeReminder.rawValue == TypeReminder.typed.rawValue && !REMDescription.isEmpty{
@@ -335,6 +340,8 @@ struct AddNewCanvasView: View {
                     }
                     
                     self.presentationMode.wrappedValue.dismiss()
+                    showInterstitialAd.InterstitialAdShow.toggle()
+                    
                     
 //                    showingTypeInterface.toggle()
                 }
@@ -368,7 +375,10 @@ struct AddNewCanvasView: View {
                         print("ERROR COULDNT ADD ITEM")
                     }
                     
-                    self.presentationMode.wrappedValue.dismiss()}
+                    self.presentationMode.wrappedValue.dismiss()
+                   
+                }
+                
                 
                 
                 else if !canvasTitle.isEmpty && typeReminder.rawValue == TypeReminder.audio.rawValue {

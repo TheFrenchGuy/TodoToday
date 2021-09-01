@@ -14,20 +14,37 @@ import AdSupport
 
 
 
+class ShowInterstitialAdClass: ObservableObject {
+    @Published var InterstitialAdShow: Bool = false
+}
+
 
 struct ContentView: View {
     @ObservedObject var userPreference = UserPreference()
-    @State var test = "Test"
+    @State var test = "Test"                                     
     @State var firstlaunch = UserDefaults.standard.value(forKey: "firstlaunch") as? Bool ?? true
 
     
     @StateObject var transferColorPalette = TransferColorPalette()
     @StateObject var refreshList = RefreshListClass()
+    @StateObject var showInterstitialAd = ShowInterstitialAdClass()
     
     @StateObject var taskPerHour = TaskPerHour()
     
     
     let colorPalettePersistance = ColorPalettePersistance.shared
+    
+    
+    #if !targetEnvironment(macCatalyst)
+    
+   
+    
+    private var fullScreenAd: Interstitial?
+       init() {
+           fullScreenAd = Interstitial()
+       }
+    #endif
+
     
     
     
@@ -99,7 +116,7 @@ struct ContentView: View {
             
             
         } else {
-            
+                        
             if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac{
                 
                 
@@ -108,12 +125,44 @@ struct ContentView: View {
                 .environment(\.managedObjectContext,colorPalettePersistance.container.viewContext)
                 .environmentObject(refreshList)
                 .environmentObject(taskPerHour)
+                .environmentObject(showInterstitialAd)
                 .onAppear() {requestIDFA()}
+                
+                
+   
+                .onTapGesture(perform: {
+                    if self.showInterstitialAd.InterstitialAdShow {
+                        
+                    #if !targetEnvironment(macCatalyst)
+                        self.fullScreenAd?.showAd()
+                        #endif
+                        self.showInterstitialAd.InterstitialAdShow = false
+                    }
+                })
+          
+                
                 
 
             }
             if UIDevice.current.userInterfaceIdiom == .phone{
-                TodayCanvasIphoneView().onAppear() {requestIDFA()}
+                CalendarReminderView_iPhone().edgesIgnoringSafeArea(.all).environmentObject(transferColorPalette)
+                    .environment(\.managedObjectContext,colorPalettePersistance.container.viewContext)
+                    .environmentObject(refreshList)
+                    .environmentObject(taskPerHour)
+                    .environmentObject(showInterstitialAd)
+                    .onAppear() {requestIDFA()}
+                
+         
+                    .onTapGesture(perform: {
+                        if self.showInterstitialAd.InterstitialAdShow {
+                            
+                        #if !targetEnvironment(macCatalyst)
+                            self.fullScreenAd?.showAd()
+                        #endif
+                            self.showInterstitialAd.InterstitialAdShow = false
+                        }
+                    })
+           
 //                    .onAppear() {sendNotification()}
 //                CalendarReminderView().edgesIgnoringSafeArea(.all).environmentObject(transferColorPalette)
 //                    .environment(\.managedObjectContext,colorPalettePersistance.container.viewContext)

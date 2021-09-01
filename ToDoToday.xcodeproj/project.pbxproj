@@ -25,12 +25,12 @@
 		6028CAFF26AEEACD0062E189 /* InitialCanvasDrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6028CAFE26AEEACD0062E189 /* InitialCanvasDrawingView.swift */; };
 		6034178126BC11AA00E0F6A3 /* TabColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6034178026BC11AA00E0F6A3 /* TabColor.swift */; };
 		6034178326BC11F500E0F6A3 /* HexToUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6034178226BC11F500E0F6A3 /* HexToUIColor.swift */; };
-		604FC52C26D6E75100738A89 /* TodayCanvasIphoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604FC52B26D6E75100738A89 /* TodayCanvasIphoneView.swift */; };
 		6065754E26B45D0F00EA0F4D /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6065754D26B45D0F00EA0F4D /* ImagePicker.swift */; };
 		6065755526B6BE7300EA0F4D /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6065755426B6BE7300EA0F4D /* AudioRecorder.swift */; };
 		6065755726B6BF0300EA0F4D /* AudioRecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6065755626B6BF0300EA0F4D /* AudioRecorderView.swift */; };
 		60689B5826AB24E000ED426F /* HoursView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60689B5726AB24DF00ED426F /* HoursView.swift */; };
 		60736D6126BBDAAE00FD3E3D /* SerializableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60736D6026BBDAAE00FD3E3D /* SerializableColor.swift */; };
+		607D65D526DFA6EC005733D9 /* CalendarReminderView_iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607D65D426DFA6EC005733D9 /* CalendarReminderView_iPhone.swift */; };
 		6085359A26D4396E00450502 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6085359926D4396E00450502 /* ActivityViewController.swift */; };
 		6085359C26D43D3800450502 /* SharingSelectorClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6085359B26D43D3800450502 /* SharingSelectorClass.swift */; };
 		6085359F26D4452800450502 /* ShareREMAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6085359E26D4452800450502 /* ShareREMAll.swift */; };
@@ -85,6 +85,8 @@
 		60E2E64B26A85E8E00B1BAA6 /* DisableModalDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E2E64A26A85E8E00B1BAA6 /* DisableModalDismiss.swift */; };
 		60E5F35926AD8F1100F1E609 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E5F35826AD8F1100F1E609 /* CalendarView.swift */; };
 		60F0489F26CBB41F003FE055 /* CreateInitialCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F0489E26CBB41F003FE055 /* CreateInitialCalendarView.swift */; };
+		60FE78A326DFBC9000CABB4C /* TodayCanvasView_iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FE78A226DFBC9000CABB4C /* TodayCanvasView_iPhone.swift */; };
+		60FE78A526DFBD4600CABB4C /* CalendarView_iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FE78A426DFBD4600CABB4C /* CalendarView_iPhone.swift */; };
 		CB0EE5533094017F9EF2ED6D /* Pods_ToDoToday.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64C0CE93685B6070F9FE429D /* Pods_ToDoToday.framework */; };
 /* End PBXBuildFile section */
 
@@ -107,12 +109,12 @@
 		6028CAFE26AEEACD0062E189 /* InitialCanvasDrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialCanvasDrawingView.swift; sourceTree = "<group>"; };
 		6034178026BC11AA00E0F6A3 /* TabColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabColor.swift; sourceTree = "<group>"; };
 		6034178226BC11F500E0F6A3 /* HexToUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexToUIColor.swift; sourceTree = "<group>"; };
-		604FC52B26D6E75100738A89 /* TodayCanvasIphoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCanvasIphoneView.swift; sourceTree = "<group>"; };
 		6065754D26B45D0F00EA0F4D /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		6065755426B6BE7300EA0F4D /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		6065755626B6BF0300EA0F4D /* AudioRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderView.swift; sourceTree = "<group>"; };
 		60689B5726AB24DF00ED426F /* HoursView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursView.swift; sourceTree = "<group>"; };
 		60736D6026BBDAAE00FD3E3D /* SerializableColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerializableColor.swift; sourceTree = "<group>"; };
+		607D65D426DFA6EC005733D9 /* CalendarReminderView_iPhone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarReminderView_iPhone.swift; sourceTree = "<group>"; };
 		6085359926D4396E00450502 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		6085359B26D43D3800450502 /* SharingSelectorClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingSelectorClass.swift; sourceTree = "<group>"; };
 		6085359E26D4452800450502 /* ShareREMAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareREMAll.swift; sourceTree = "<group>"; };
@@ -167,6 +169,8 @@
 		60E2E64A26A85E8E00B1BAA6 /* DisableModalDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisableModalDismiss.swift; sourceTree = "<group>"; };
 		60E5F35826AD8F1100F1E609 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		60F0489E26CBB41F003FE055 /* CreateInitialCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInitialCalendarView.swift; sourceTree = "<group>"; };
+		60FE78A226DFBC9000CABB4C /* TodayCanvasView_iPhone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCanvasView_iPhone.swift; sourceTree = "<group>"; };
+		60FE78A426DFBD4600CABB4C /* CalendarView_iPhone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView_iPhone.swift; sourceTree = "<group>"; };
 		64C0CE93685B6070F9FE429D /* Pods_ToDoToday.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToDoToday.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3C8E7F4E3D504B195EBD063 /* Pods-ToDoToday.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoToday.release.xcconfig"; path = "Target Support Files/Pods-ToDoToday/Pods-ToDoToday.release.xcconfig"; sourceTree = "<group>"; };
 		E513C160B0932CA96CCC34DE /* Pods-ToDoToday.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoToday.debug.xcconfig"; path = "Target Support Files/Pods-ToDoToday/Pods-ToDoToday.debug.xcconfig"; sourceTree = "<group>"; };
@@ -275,7 +279,9 @@
 		604FC52A26D6E6D600738A89 /* Iphone Specific views */ = {
 			isa = PBXGroup;
 			children = (
-				604FC52B26D6E75100738A89 /* TodayCanvasIphoneView.swift */,
+				607D65D426DFA6EC005733D9 /* CalendarReminderView_iPhone.swift */,
+				60FE78A226DFBC9000CABB4C /* TodayCanvasView_iPhone.swift */,
+				60FE78A426DFBD4600CABB4C /* CalendarView_iPhone.swift */,
 			);
 			path = "Iphone Specific views";
 			sourceTree = "<group>";
@@ -583,7 +589,7 @@
 			mainGroup = 60CBECA226A84E3A0020703D;
 			packageReferences = (
 				60CBECCF26A850E70020703D /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				60A17A4F26DD928D0014A86E /* XCRemoteSwiftPackageReference "SwiftUI-Introspect.git" */,
+				60A17A4F26DD928D0014A86E /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				60A17A5526DE4C0B0014A86E /* XCRemoteSwiftPackageReference "SwiftUI-Navigation-Bar-Color" */,
 			);
 			productRefGroup = 60CBECAC26A84E3A0020703D /* Products */;
@@ -662,13 +668,13 @@
 				60CBECE926A8527E0020703D /* CalendarReminderView.swift in Sources */,
 				60CBECE526A852440020703D /* Persistance.swift in Sources */,
 				60CBECDE26A851E20020703D /* DrawingCanvasViewController.swift in Sources */,
+				60FE78A326DFBC9000CABB4C /* TodayCanvasView_iPhone.swift in Sources */,
 				6010333B26BE992D00D1DA12 /* AppFaceIDTouchID.swift in Sources */,
 				60F0489F26CBB41F003FE055 /* CreateInitialCalendarView.swift in Sources */,
 				6010334426BEB36600D1DA12 /* CheckboxField.swift in Sources */,
 				60D0054426CC5CBB009E68EA /* TaskNotDoneFromPreviousDay.swift in Sources */,
 				6085359C26D43D3800450502 /* SharingSelectorClass.swift in Sources */,
 				6018EC5826BC49C200184DB4 /* ColorPalette+CoreDataClass.swift in Sources */,
-				604FC52C26D6E75100738A89 /* TodayCanvasIphoneView.swift in Sources */,
 				60689B5826AB24E000ED426F /* HoursView.swift in Sources */,
 				60CBECB126A84E3A0020703D /* ContentView.swift in Sources */,
 				6025514C26B4088000D9F764 /* ImageReminderView.swift in Sources */,
@@ -710,6 +716,7 @@
 				6010334226BEB29700D1DA12 /* ShowTodayDateView.swift in Sources */,
 				6010334626C0091900D1DA12 /* TempColorPickerModel .swift in Sources */,
 				6028CAFF26AEEACD0062E189 /* InitialCanvasDrawingView.swift in Sources */,
+				607D65D526DFA6EC005733D9 /* CalendarReminderView_iPhone.swift in Sources */,
 				60E2E64B26A85E8E00B1BAA6 /* DisableModalDismiss.swift in Sources */,
 				60CBECED26A852A70020703D /* AddNewCanvasView.swift in Sources */,
 				60D0EC9D26B09559001E98EE /* Array Extension.swift in Sources */,
@@ -722,6 +729,7 @@
 				60A17A5926DE7D280014A86E /* EditTaskViewSideBarAudio.swift in Sources */,
 				60CBECEF26A852BA0020703D /* DrawingView.swift in Sources */,
 				6085359F26D4452800450502 /* ShareREMAll.swift in Sources */,
+				60FE78A526DFBD4600CABB4C /* CalendarView_iPhone.swift in Sources */,
 				6010333E26BEB26B00D1DA12 /* TabTaskPlusView.swift in Sources */,
 				60A17A5426DE39180014A86E /* EditTaskViewSideBarTyped.swift in Sources */,
 				60CBECEB26A852930020703D /* PlaceholderView.swift in Sources */,
@@ -928,7 +936,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		60A17A4F26DD928D0014A86E /* XCRemoteSwiftPackageReference "SwiftUI-Introspect.git" */ = {
+		60A17A4F26DD928D0014A86E /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
 			requirement = {
@@ -957,7 +965,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		60A17A5026DD928D0014A86E /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 60A17A4F26DD928D0014A86E /* XCRemoteSwiftPackageReference "SwiftUI-Introspect.git" */;
+			package = 60A17A4F26DD928D0014A86E /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
 		};
 		60A17A5626DE4C0B0014A86E /* SwiftUINavigationBarColor */ = {

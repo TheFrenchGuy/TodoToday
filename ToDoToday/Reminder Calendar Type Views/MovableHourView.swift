@@ -59,6 +59,7 @@ struct MovableHourView: View {
     
     
     var body: some View {
+        GeometryReader { bounds in
             ZStack {
                 HoursView(RefreshList: $refreshList, TimeUUID: TimeUUID, heightTime: heightTime)
                 .frame(width: 100, height: heightTime)
@@ -77,10 +78,11 @@ struct MovableHourView: View {
                         .frame(width: 44, height: 44)
                         .position(fingerLocation)
                 }
-            }.onAppear(perform: {location = gettimelocation(hour: startTime, xlocation: horizontalPlacement, type: typeREM)})
+            }.onAppear(perform: {location = gettimelocation(hour: startTime, xlocation: horizontalPlacement, type: typeREM, size: bounds.size)})
+        }
     }
     
-    func gettimelocation(hour: Date, xlocation: Double, type: String) -> CGPoint{
+    func gettimelocation(hour: Date, xlocation: Double, type: String, size: CGSize) -> CGPoint{
         
         let date: Date = (Calendar.current.date(bySettingHour: 0, minute: 0, second: 0 , of: Date())!)
         
@@ -103,6 +105,12 @@ struct MovableHourView: View {
             
         if locationHorizontal < 0 || locationHorizontal > 500 {
             locationHorizontal = 100
+        }
+            
+            
+            if size.width < CGFloat(locationHorizontal){
+                locationHorizontal = 100
+            
         }
             return CGPoint(x: locationHorizontal, y: ylocation)
         }

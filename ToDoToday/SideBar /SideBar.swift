@@ -40,6 +40,13 @@ struct SideBarView: View {
                
             if addNewPalette {
                 VStack {
+                    
+                    Button(action: {addNewPalette.toggle()}) {
+                        HStack {
+                            Image(systemName: "chevron.left").font(.headline)
+                            Text("Calendar").font(.headline)
+                        }.padding()
+                    }.frame(width: bounds.size.width, alignment: .leading)
                     Form {
                         Section(header: Text("Calendar Name")) {
                             TextField("Calendar Name", text: $newAddCalendarName)

@@ -5,9 +5,16 @@
 //  Created by Noe De La Croix on 21/07/2021.
 //
 
-import SwiftUI
-import Firebase
-import GoogleMobileAds
+
+
+#if targetEnvironment(macCatalyst)
+    import SwiftUI
+#else
+    import SwiftUI
+    import Firebase
+    import GoogleMobileAds
+#endif
+
 
 @main
 struct ToDoTodayApp: App {
@@ -42,8 +49,13 @@ class AppDelegate:NSObject, UIApplicationDelegate, UNUserNotificationCenterDeleg
            
            // Set UNUserNotificationCenterDelegate
            UNUserNotificationCenter.current().delegate = self
+        
+        
+            #if targetEnvironment(macCatalyst)
+            #else
             GADMobileAds.sharedInstance().start(completionHandler: nil)
             FirebaseApp.configure()
+            #endif
         
             
            

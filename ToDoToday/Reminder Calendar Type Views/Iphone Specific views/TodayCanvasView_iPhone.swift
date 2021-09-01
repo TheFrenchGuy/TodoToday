@@ -1,15 +1,16 @@
 //
-//  TodayCanvasView.swift
+//  TodayCanvasView_iPhone.swift
 //  ToDoToday
 //
-//  Created by Noe De La Croix on 21/07/2021.
+//  Created by Noe De La Croix on 01/09/2021.
 //
 
 import SwiftUI
 import CoreData
 import Combine
 
-struct TodayCanvasView: View {
+struct TodayCanvasView_iPhone: View {
+    
     
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -36,87 +37,72 @@ struct TodayCanvasView: View {
     
     @EnvironmentObject var taskPerHour:TaskPerHour
     
-   
     
-    
-
     var body: some View {
         ZStack {
-            GeometryReader { bounds in
-                VStack{
-                        if !checkIfDrawingstoday() {
-                            PlaceholderView()
+            GeometryReader {bounds in
+                VStack {
+                    if !checkIfDrawingstoday() {
+                        PlaceholderView()
 
+                        Button(action: {
+                            self.showSheet.toggle()
+                        }, label: {
+                            HStack{
+                                Image(systemName: "plus")
+                                Text("Add Canvas !!!")
+                            }
+                        })
+                        .foregroundColor(.blue)
+                        .sheet(isPresented: $showSheet , content: {
+                            AddNewCanvasView(AddedNewCanvas: $AddedNewCanvas).environment(\.managedObjectContext, viewContext)
+
+                        })
+                        
+                        .sheet(isPresented: $tabViewClass.addNewTask , content: {
+                            AddNewCanvasView(AddedNewCanvas: $AddedNewCanvas).environment(\.managedObjectContext, viewContext)
+
+                        })
+                    } else {
+                        VStack {
                             Button(action: {
                                 self.showSheet.toggle()
                             }, label: {
                                 HStack{
                                     Image(systemName: "plus")
-                                    Text("Add Canvas !!!")
+                                    Text("Add Canvas")
                                 }
                             })
                             .foregroundColor(.blue)
-                            .sheet(isPresented: $showSheet , content: {
+                            .sheet(isPresented: $showSheet, content: {
                                 AddNewCanvasView(AddedNewCanvas: $AddedNewCanvas).environment(\.managedObjectContext, viewContext)
-
+                            
                             })
                             
                             .sheet(isPresented: $tabViewClass.addNewTask , content: {
                                 AddNewCanvasView(AddedNewCanvas: $AddedNewCanvas).environment(\.managedObjectContext, viewContext)
 
                             })
-
-
-                        } else {
                             
-                            VStack {
-                                Button(action: {
-                                    self.showSheet.toggle()
-                                }, label: {
-                                    HStack{
-                                        Image(systemName: "plus")
-                                        Text("Add Canvas")
-                                    }
-                                })
-                                .foregroundColor(.blue)
-                                .sheet(isPresented: $showSheet, content: {
-                                    AddNewCanvasView(AddedNewCanvas: $AddedNewCanvas).environment(\.managedObjectContext, viewContext)
-                                
-                                })
-                                
-                                .sheet(isPresented: $tabViewClass.addNewTask , content: {
-                                    AddNewCanvasView(AddedNewCanvas: $AddedNewCanvas).environment(\.managedObjectContext, viewContext)
-
-                                })
-                                
-                                
-                                
-                                    }
-                                
-
-                            CalendarView(RefreshList: $AddedNewCanvas)
-                                
-                                    
-                                    .onChange(of: AddedNewCanvas) {newValue in getHoursByHoursTabs()
-                                    print("UPDATED TABLE")
-                                        }.onAppear(perform: {self.getHoursByHoursTabs()})
-                                
-                                
                             
-                    
-                    
-                }
+                            
+                                }
+                            
+
+                        CalendarView(RefreshList: $AddedNewCanvas)
+                            
+                                
+                                .onChange(of: AddedNewCanvas) {newValue in getHoursByHoursTabs()
+                                print("UPDATED TABLE")
+                                    }.onAppear(perform: {self.getHoursByHoursTabs()})
+                    }
                 }.frame(width: bounds.size.width, height: bounds.size.height)
-                    .onAppear(perform: {self.getHoursByHoursTabs()})
-                    .onChange(of: refreshListClass.refresh, perform: {newValue in
-                        getHoursByHoursTabs(); print("NEW FETCH REQUEST")})
-        }
+                .onAppear(perform: {self.getHoursByHoursTabs()})
+                .onChange(of: refreshListClass.refresh, perform: {newValue in
+                    getHoursByHoursTabs(); print("NEW FETCH REQUEST")})
+            }
         }.environmentObject(hourOfDay)
-          
-    
-        
     }
-    // MARK: ERROR Handling in case of there is something loading the file, it will show the signature given by the user hwne signing the terms and conditions
     func getWallpaperFromUserDefaults() -> Data? {
       let defaults = UserDefaults.standard
         return defaults.object(forKey: "signatureImage") as? Data
@@ -420,65 +406,10 @@ struct TodayCanvasView: View {
         
         return false
     }
-    
 }
 
-
-//struct TodayCanvas_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TodayCanvasView()
-//    }
-//}
-
-
-
-
-//                                List {
-//                                    ForEach(drawings){drawing in
-//                                      //  if !sixpm.isEmpty {
-//                                          //  if drawing.id == dataHoursUUID.twopm[0] {
-//                                            HStack () {
-//                                                if getWallpaperFromUserDefaults() != nil {
-//                                                    Image(uiImage: fetchImage(imageName: String("\(drawing.id)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit().frame(width: 100, height: 100)
-//
-//                                                }
-//
-//                                                Button(action: { test.toggle(); print("Keyboard shortcut pressed")}) { Text("Tap here")}.keyboardShortcut("l", modifiers: .command)
-//                                                Text("Canvas, \(drawing.id ?? UUID()), \(drawing.title ?? "NO TITLE ")").sheet(isPresented: self.$test) {
-//                                                    DrawingView(isVisible: $test, id: drawing.id, data: drawing.canvasData, title: drawing.title)
-//                                                }
-//
-//                                                Text("\(drawing.timeEvent ?? Date())")
-//
-//                                            }.contextMenu { Button(action: {
-//                                                viewContext.delete(drawing)
-//                                                deleteImage(imageName: String("\(drawing.id)"))
-//                                                do {
-//                                                    try self.viewContext.save()
-//                                                } catch {
-//                                                    print(error)
-//                                                }
-//                                            }) {
-//                                                Text("Delete me")
-//                                            }
-//
-//                                            }
-//                                          //  }
-//                                      //  }
-//
-//                                    }
-//                                    .onDelete(perform: deleteItem)
-//
-////                                    Button(action: {
-////                                        self.showSheet.toggle()
-////                                    }, label: {
-////                                        HStack{
-////                                            Image(systemName: "plus")
-////                                            Text("Add Canvas")
-////                                        }
-////                                    })
-////                                    .foregroundColor(.blue)
-////                                    .sheet(isPresented: $showSheet, content: {
-////                                        AddNewCanvasView().environment(\.managedObjectContext, viewContext)
-////                                    })
-//                                }
+struct TodayCanvasView_iPhone_Previews: PreviewProvider {
+    static var previews: some View {
+        TodayCanvasView_iPhone()
+    }
+}
