@@ -37,6 +37,8 @@ extension DrawingCanvas {
     
     
     @NSManaged public var alertNotificationTimeBefore: String?
+    
+    @NSManaged public var imageData: Data?
 }
 
 extension DrawingCanvas : Identifiable {

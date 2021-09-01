@@ -26,6 +26,7 @@ struct CalendarReminderView_iPhone: View {
     
     let colorPalettePersistance = ColorPalettePersistance.shared
     @EnvironmentObject var transferColorPalette:TransferColorPalette
+    @EnvironmentObject var showInterstitialAd:ShowInterstitialAdClass
     
     let persistenceController = PersistenceController.shared
     
@@ -33,14 +34,27 @@ struct CalendarReminderView_iPhone: View {
    
 
         
-//
-    init() { //Required to make the top bar to be gray
-        UINavigationBar.appearance().backgroundColor = UIColor(named: "lightFormGray")
-        UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().barTintColor = UIColor(named: "lightFormGray")
-
-
-    }
+    #if !targetEnvironment(macCatalyst)
+    
+   
+    
+    private var fullScreenAd: Interstitial?
+       init() {
+           fullScreenAd = Interstitial()
+            UINavigationBar.appearance().backgroundColor = UIColor(named: "lightFormGray")
+            UINavigationBar.appearance().isTranslucent = false
+            UINavigationBar.appearance().barTintColor = UIColor(named: "lightFormGray")
+       }
+    
+    #else
+        init() { //Required to make the top bar to be gray
+            UINavigationBar.appearance().backgroundColor = UIColor(named: "lightFormGray")
+            UINavigationBar.appearance().isTranslucent = false
+            UINavigationBar.appearance().barTintColor = UIColor(named: "lightFormGray")
+           
+            
+        }
+    #endif
     
     
     var body: some View {
@@ -98,6 +112,19 @@ struct CalendarReminderView_iPhone: View {
                     }
                     
                     TodayCanvasView_iPhone().environment(\.managedObjectContext, persistenceController.container.viewContext).zIndex(0)
+                        .onTapGesture(perform: {
+                            if self.tabViewClass.editTask { //So that you can click out at any time
+                                self.tabViewClass.editTask = false
+                            }
+                            
+                            if self.showInterstitialAd.InterstitialAdShow {
+                           
+                                               #if !targetEnvironment(macCatalyst)
+                                                   self.fullScreenAd?.showAd()
+                                                   #endif
+                                                   self.showInterstitialAd.InterstitialAdShow = false
+                                               }
+                        })
 
                     
                 

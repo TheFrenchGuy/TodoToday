@@ -40,20 +40,37 @@ struct CalendarReminderView: View {
     
     let colorPalettePersistance = ColorPalettePersistance.shared
     @EnvironmentObject var transferColorPalette:TransferColorPalette
+    @EnvironmentObject var showInterstitialAd:ShowInterstitialAdClass
     
     let persistenceController = PersistenceController.shared
     
+    
+    #if !targetEnvironment(macCatalyst)
+    
+   
+    
+    private var fullScreenAd: Interstitial?
+       init() {
+           fullScreenAd = Interstitial()
+            UINavigationBar.appearance().backgroundColor = UIColor(named: "lightFormGray")
+            UINavigationBar.appearance().isTranslucent = false
+            UINavigationBar.appearance().barTintColor = UIColor(named: "lightFormGray")
+       }
+    
+    #else
+        init() { //Required to make the top bar to be gray
+            UINavigationBar.appearance().backgroundColor = UIColor(named: "lightFormGray")
+            UINavigationBar.appearance().isTranslucent = false
+            UINavigationBar.appearance().barTintColor = UIColor(named: "lightFormGray")
+           
+            
+        }
+    #endif
    
         
         
     
-    init() { //Required to make the top bar to be gray
-        UINavigationBar.appearance().backgroundColor = UIColor(named: "lightFormGray")
-        UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().barTintColor = UIColor(named: "lightFormGray")
-       
-        
-    }
+    
     
   
     
@@ -83,13 +100,14 @@ struct CalendarReminderView: View {
                                     if self.tabViewClass.showTab == true {
                                         SideBarView().environment(\.managedObjectContext, colorPalettePersistance.container.viewContext)
                                             
-                                            .frame(width: geometry.size.width/3, height: geometry.size.height - childSize.height)
+                                            .frame(width: (geometry.size.width / 3), height: (geometry.size.height - childSize.height))
                                             .padding(.top, childSize.height)
                                             .background(Color("lightFormGray").edgesIgnoringSafeArea(.all))
                                             .transition(.move(edge: .leading))
                                             .onAppear(perform: {
                                                 print("SIZE OF CHILD \(self.childSize.width)")
                                             })
+                                            .zIndex(1)
                                             
                                             
                                             
@@ -110,11 +128,19 @@ struct CalendarReminderView: View {
 //                                        .padding(.top, childSize.height)
                                             
 
-                                        .zIndex(1)
+                                        
                                         .onTapGesture(perform: {
                                             if self.tabViewClass.editTask { //So that you can click out at any time
                                                 self.tabViewClass.editTask = false
                                             }
+                                            
+                                            if self.showInterstitialAd.InterstitialAdShow {
+                                           
+                                                               #if !targetEnvironment(macCatalyst)
+                                                                   self.fullScreenAd?.showAd()
+                                                                   #endif
+                                                                   self.showInterstitialAd.InterstitialAdShow = false
+                                                               }
                                         })
                                     
                                     

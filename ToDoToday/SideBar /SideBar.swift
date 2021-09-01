@@ -49,7 +49,7 @@ struct SideBarView: View {
                     }.frame(width: bounds.size.width, alignment: .leading)
                     Form {
                         Section(header: Text("Calendar Name")) {
-                            TextField("Calendar Name", text: $newAddCalendarName)
+                            TextField("Calendar Name", text: $newAddCalendarName).frame(width: bounds.size.width)
                             
                             Toggle(isOn: $toggleID) {
                                 Text("Enable FaceID")
@@ -86,7 +86,7 @@ struct SideBarView: View {
                             }
                         }
                     }
-                }
+                }.frame(width: bounds.size.width, height: bounds.size.height)
             } else {
             
                 VStack(alignment: .leading) {
@@ -197,7 +197,7 @@ struct SideBarView: View {
                 
                     
                 }
-            }.frame(height: bounds.size.height)
+            }.frame(width: bounds.size.width ,height: bounds.size.height)
              
         }
           

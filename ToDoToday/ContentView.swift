@@ -130,15 +130,15 @@ struct ContentView: View {
                 
                 
    
-                .onTapGesture(perform: {
-                    if self.showInterstitialAd.InterstitialAdShow {
-                        
-                    #if !targetEnvironment(macCatalyst)
-                        self.fullScreenAd?.showAd()
-                        #endif
-                        self.showInterstitialAd.InterstitialAdShow = false
-                    }
-                })
+//                .onTapGesture(perform: {
+//                    if self.showInterstitialAd.InterstitialAdShow {
+//
+//                    #if !targetEnvironment(macCatalyst)
+//                        self.fullScreenAd?.showAd()
+//                        #endif
+//                        self.showInterstitialAd.InterstitialAdShow = false
+//                    }
+//                })
           
                 
                 
@@ -153,15 +153,7 @@ struct ContentView: View {
                     .onAppear() {requestIDFA()}
                 
          
-                    .onTapGesture(perform: {
-                        if self.showInterstitialAd.InterstitialAdShow {
-                            
-                        #if !targetEnvironment(macCatalyst)
-                            self.fullScreenAd?.showAd()
-                        #endif
-                            self.showInterstitialAd.InterstitialAdShow = false
-                        }
-                    })
+                   
            
 //                    .onAppear() {sendNotification()}
 //                CalendarReminderView().edgesIgnoringSafeArea(.all).environmentObject(transferColorPalette)
