@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Firebase
+import GoogleMobileAds
 
 @main
 struct ToDoTodayApp: App {
@@ -40,6 +42,10 @@ class AppDelegate:NSObject, UIApplicationDelegate, UNUserNotificationCenterDeleg
            
            // Set UNUserNotificationCenterDelegate
            UNUserNotificationCenter.current().delegate = self
+            GADMobileAds.sharedInstance().start(completionHandler: nil)
+            FirebaseApp.configure()
+        
+            
            
            return true
        }

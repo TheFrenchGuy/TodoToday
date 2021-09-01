@@ -37,6 +37,7 @@ struct EditTaskViewSideBarTyped: View {
     @State private var newTaskDescription: String = ""
     @State private var newColor: Color = Color.green
     @State private var newCalendarName: String = "none"
+    @State private var newCompletedTask: Bool = false
     @State private var action: String = "Normal" // View should have state either of normal, alert or calendar
     
     
@@ -152,9 +153,8 @@ struct EditTaskViewSideBarTyped: View {
                                     
                                         
                                         
-                                        
-                                        Spacer()
-                                        
+                                        CalendarCompletedTaskSideBar(newCompletedTask: $newCompletedTask).frame(width: bounds.size.width, alignment: .center)
+//                                                                               
                                         
                                         Divider()
                                         
@@ -252,6 +252,7 @@ struct EditTaskViewSideBarTyped: View {
                                     newStartTime = drawing.startTime ?? Date()
                                     newEndTime = drawing.endTime ?? Date().addingTimeInterval(3600)
                                     newTaskDescription = drawing.taskDescription ?? "NO TASK DESC"
+                                    newCompletedTask = drawing.completedTask
                                     alertTimeSelected = drawing.alertNotificationTimeBefore ?? ""
                                 })
                         }
@@ -271,6 +272,7 @@ struct EditTaskViewSideBarTyped: View {
                 drawing.endTime = newEndTime
                 drawing.tabColor = SerializableColor.init(from: newColor)
                 drawing.calendarNameAdded = newCalendarName
+                drawing.completedTask = newCompletedTask
                 drawing.alertNotificationTimeBefore = alertTimeSelected
                 registerNotificationAlert(title: newTaskTitle, body: "Check your task", startTime: newStartTime, offset: getOffset(nameDesc: alertTimeSelected), id: drawing.id ?? UUID())
                 do {
@@ -347,7 +349,7 @@ struct EditTaskViewSideBarTyped: View {
             }
         }
         
-        print("Added Notification \(dateInfo.hour), \(dateInfo.minute)")
+//        print("Added Notification \(dateInfo.hour), \(dateInfo.minute)")
     }
     
     func registerUserNotification() {
@@ -444,3 +446,60 @@ struct CalendarAlertButtonView: View {
         
     }
 }
+
+struct CalendarEditTimeView: View {
+    
+    
+    var startTime: Date
+    var endTime: Date
+    @Binding var editTask: Bool
+    @Binding var newStartTime: Date
+    @Binding var newEndTime: Date
+    
+    var body: some View {
+        HStack {
+
+            Text("\(startTime.toString(dateFormat: "EEEE, MMM d") )")
+            
+            
+            Spacer()
+            
+            
+            if editTask {
+                DatePicker("", selection: $newStartTime, displayedComponents: .hourAndMinute)
+                Text("to")
+                DatePicker("", selection: $newEndTime, displayedComponents: .hourAndMinute)
+                
+            } else {
+                Text("\(startTime.toString(dateFormat: "HH:mm") )")
+                Text("to")
+                Text("\(endTime.toString(dateFormat: "HH:mm") )")
+            }
+        }.padding()
+            .font(.callout)
+            .opacity(0.5)
+        
+        Divider()
+    }
+}
+
+
+struct CalendarCompletedTaskSideBar: View {
+    
+    @Binding var newCompletedTask: Bool
+    var body: some View {
+        VStack(alignment: .center) {
+            Toggle(isOn: $newCompletedTask) {
+                Text("Task is completed")
+            }.padding(.horizontal)
+             .padding(.vertical, 5)
+            
+            Divider()
+            
+            Spacer()
+            
+            BannerView().frame(height: 50, alignment: .center).padding(.horizontal)
+        }
+    }
+}
+

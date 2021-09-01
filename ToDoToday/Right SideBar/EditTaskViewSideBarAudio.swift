@@ -30,6 +30,7 @@ struct EditTaskViewSideBarAudio: View {
     @State private var newEndTime: Date = Date().addingTimeInterval(3600)
     @State private var newColor: Color = Color.green
     @State private var newCalendarName: String = "none"
+    @State private var newCompletedTask: Bool = false
     @State private var action: String = "Normal" // View should have state either of normal, alert or calendar
     
     
@@ -96,64 +97,37 @@ struct EditTaskViewSideBarAudio: View {
                                         
                                         
                                         
-                                        HStack {
-                    
-                                            Text("\(drawing.startTime?.toString(dateFormat: "EEEE, MMM d") ?? "NO VALUE")")
-                                            
-                                            
-                                            Spacer()
-                                            
-                                            
-                                            if editTask {
-                                                DatePicker("", selection: $newStartTime, displayedComponents: .hourAndMinute)
-                                                Text("to")
-                                                DatePicker("", selection: $newEndTime, displayedComponents: .hourAndMinute)
-                                                
-                                            } else {
-                                                Text("\(drawing.startTime?.toString(dateFormat: "HH:mm") ?? "NO VALUE")")
-                                                Text("to")
-                                                Text("\(drawing.endTime?.toString(dateFormat: "HH:mm") ?? "NO VALUE")")
-                                            }
-                                        }.padding()
-                                            .font(.callout)
-                                            .opacity(0.5)
+//                                        HStack {
+//
+//                                            Text("\(drawing.startTime?.toString(dateFormat: "EEEE, MMM d") ?? "NO VALUE")")
+//
+//
+//                                            Spacer()
+//
+//
+//                                            if editTask {
+//                                                DatePicker("", selection: $newStartTime, displayedComponents: .hourAndMinute)
+//                                                Text("to")
+//                                                DatePicker("", selection: $newEndTime, displayedComponents: .hourAndMinute)
+//
+//                                            } else {
+//                                                Text("\(drawing.startTime?.toString(dateFormat: "HH:mm") ?? "NO VALUE")")
+//                                                Text("to")
+//                                                Text("\(drawing.endTime?.toString(dateFormat: "HH:mm") ?? "NO VALUE")")
+//                                            }
+//                                        }.padding()
+//                                            .font(.callout)
+//                                            .opacity(0.5)
+//
+//                                        Divider()
                                         
-                                        Divider()
+                                        CalendarEditTimeView(startTime: drawing.startTime ?? Date(), endTime: drawing.endTime ?? Date().addingTimeInterval(3600), editTask: $editTask, newStartTime: $newStartTime, newEndTime: $newEndTime)
+//
                                         
                                         
+
                                         
-                                        VStack(alignment: .leading) {
-                                            
-                                            
-                                                Text("Task Description:").font(.footnote).opacity(0.5).padding(.horizontal)
-                                                
-                                            
-                                            VStack {
-                                            
-                                                if audioPlayer.isPlaying == false {
-                                                    Button(action: {
-                                                        self.audioPlayer.startPlayback(audio: drawing.audioREMurl ?? "NO URL")
-                                                    }) {
-                                                        Image(systemName: "play.circle")   .resizable()
-                                                            .scaledToFit()
-                                                            
-                                                    }.padding(.horizontal)
-                                                        .frame(width: 100, height: 100)
-                                                } else {
-                                                    Button(action: {
-                                                        self.audioPlayer.stopPlayback()
-                                                    }) {
-                                                        Image(systemName: "stop.fill")
-                                                            .resizable()
-                                                            .scaledToFit()
-                                                    }.padding(.horizontal)
-                                                        .frame(width: 100, height: 100)
-                                                }
-                                            }.frame(width: bounds.size.width * 0.95, alignment: .center)
-                                            
-                                            
-                                            
-                                        }
+                                        AudioPlayerSidebarView(audioREMurl: drawing.audioREMurl ?? "NO URL", width: bounds.size.width)
                                         
                                         Divider()
                                         
@@ -162,11 +136,16 @@ struct EditTaskViewSideBarAudio: View {
                                         
                                         CalendarEditButtonView(calendarNameAdded: $newCalendarName, tabColor: $newColor, calendarMove: $action)
                                     
+                                        CalendarCompletedTaskSideBar(newCompletedTask: $newCompletedTask).frame(width: bounds.size.width, alignment: .center)
                                         
                                         
                                         
-                                        Spacer()
+
                                         
+                                        
+                                        
+                                       
+                                            
                                         
                                         Divider()
                                         
@@ -261,6 +240,8 @@ struct EditTaskViewSideBarAudio: View {
                                     newTaskTitle = drawing.title ?? "NO TITLE"
                                     newStartTime = drawing.startTime ?? Date()
                                     newEndTime = drawing.endTime ?? Date().addingTimeInterval(3600)
+                                    newCompletedTask = drawing.completedTask
+                                    alertTimeSelected = drawing.alertNotificationTimeBefore ?? ""
                                     
                                 })
                         }
@@ -279,6 +260,8 @@ struct EditTaskViewSideBarAudio: View {
                 drawing.endTime = newEndTime
                 drawing.tabColor = SerializableColor.init(from: newColor)
                 drawing.calendarNameAdded = newCalendarName
+                drawing.completedTask = newCompletedTask
+                drawing.alertNotificationTimeBefore = alertTimeSelected
                 registerNotificationAlert(title: newTaskTitle, body: "Check your task", startTime: newStartTime, offset: getOffset(nameDesc: alertTimeSelected), id: drawing.id ?? UUID())
                 do {
                     try viewContext.save()
@@ -356,7 +339,7 @@ struct EditTaskViewSideBarAudio: View {
             }
         }
         
-        print("Added Notification \(dateInfo.hour), \(dateInfo.minute)")
+//        print("Added Notification \(dateInfo.hour), \(dateInfo.minute)")
     }
     
     
@@ -382,5 +365,48 @@ struct EditTaskViewSideBarAudio: View {
 struct EditTaskViewSideBarAudio_Previews: PreviewProvider {
     static var previews: some View {
         EditTaskViewSideBarAudio()
+    }
+}
+
+
+struct AudioPlayerSidebarView:  View {
+    
+    @ObservedObject var audioPlayer = AudioPlayer()
+    
+    var audioREMurl: String
+    var width: CGFloat
+    var body: some View {
+        VStack(alignment: .leading) {
+            
+            
+                Text("Task Description:").font(.footnote).opacity(0.5).padding(.horizontal)
+                
+            
+            VStack {
+            
+                if audioPlayer.isPlaying == false {
+                    Button(action: {
+                        self.audioPlayer.startPlayback(audio: audioREMurl)
+                    }) {
+                        Image(systemName: "play.circle")   .resizable()
+                            .scaledToFit()
+                            
+                    }.padding(.horizontal)
+                        .frame(width: 100, height: 100)
+                } else {
+                    Button(action: {
+                        self.audioPlayer.stopPlayback()
+                    }) {
+                        Image(systemName: "stop.fill")
+                            .resizable()
+                            .scaledToFit()
+                    }.padding(.horizontal)
+                        .frame(width: 100, height: 100)
+                }
+            }.frame(width: width * 0.95, alignment: .center)
+            
+            
+            
+        }
     }
 }

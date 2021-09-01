@@ -43,13 +43,21 @@ struct CalendarReminderView: View {
     
     let persistenceController = PersistenceController.shared
     
-    
+   
+        
+        
     
     init() { //Required to make the top bar to be gray
         UINavigationBar.appearance().backgroundColor = UIColor(named: "lightFormGray")
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().barTintColor = UIColor(named: "lightFormGray")
+       
+        
     }
+    
+  
+    
+    
     var body: some View {
         
         
@@ -100,6 +108,8 @@ struct CalendarReminderView: View {
                                     TodayCanvasView().environment(\.managedObjectContext, persistenceController.container.viewContext)
 //                                        .frame(height: geometry.size.height - childSize.height)
 //                                        .padding(.top, childSize.height)
+                                            
+
                                         .zIndex(1)
                                     
                                     
@@ -146,7 +156,6 @@ struct CalendarReminderView: View {
                     
                     
                 }
-            
         }.onPreferenceChange(SizePreferenceKey.self) { preferences in
             if preferences == CGSize(width: 0, height: 0){
                 self.childSize = CGSize(width: 54.0, height: 54.0)

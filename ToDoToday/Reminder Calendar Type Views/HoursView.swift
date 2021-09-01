@@ -110,7 +110,7 @@ struct HoursView: View {
                                                 
                                                 
                                                 case TypeReminder.typed.rawValue:
-                                                TypeReminderView(title: drawing.title ?? "NO TITLE", text: drawing.taskDescription ?? "NO DESCRIPTION", remUUID: drawing.id ?? UUID(), tabColor: drawing.tabColor?.uiColor ?? .red,startTime: drawing.startTime ?? Date(),endTime: drawing.endTime ?? Date(), heightTime: heightTime, windowSize: bounds.size).sheet(isPresented: $sendToShareAll, content: { ShareREMAll(title: drawing.title ?? "NO title", taskDesc: drawing.taskDescription ?? "NO TaskDesc")})
+                                                TypeReminderView(title: drawing.title ?? "NO TITLE", text: drawing.taskDescription ?? "NO DESCRIPTION", remUUID: drawing.id ?? UUID(), tabColor: drawing.tabColor?.uiColor ?? .red, completedTask: drawing.completedTask,startTime: drawing.startTime ?? Date(),endTime: drawing.endTime ?? Date(), heightTime: heightTime, windowSize: bounds.size).sheet(isPresented: $sendToShareAll, content: { ShareREMAll(title: drawing.title ?? "NO title", taskDesc: drawing.taskDescription ?? "NO TaskDesc")})
 //                                                    .contextMenu { Button(action:{
 //                                                    viewContext.delete(drawing)
 //                                                    do {
@@ -171,7 +171,7 @@ struct HoursView: View {
                                                     
                                                    
                                                 case TypeReminder.audio.rawValue:
-                                                AudioPlayerView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID(), audioURL: drawing.audioREMurl ?? "NO URL", tabColor: drawing.tabColor?.uiColor ?? .red, windowSize: bounds.size, heightTime: heightTime).sheet(isPresented: $sendToShareAll, content: { ShareREMAll( audioURL: drawing.audioREMurl ?? "NO URL")})
+                                                AudioPlayerView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID(), audioURL: drawing.audioREMurl ?? "NO URL", tabColor: drawing.tabColor?.uiColor ?? .red, completedTask: drawing.completedTask, windowSize: bounds.size, heightTime: heightTime).sheet(isPresented: $sendToShareAll, content: { ShareREMAll( audioURL: drawing.audioREMurl ?? "NO URL")})
 //                                                    .contextMenu { Button(action:{
 //                                                    viewContext.delete(drawing)
 //                                                    deleteAudio(audioURL: drawing.audioREMurl ?? "NO URL")
@@ -220,7 +220,10 @@ struct HoursView: View {
                                         }
                                         RefreshList.toggle()
                                     }) {
-                                        Text("Delete me")
+                                        HStack {
+                                            Image(systemName: "trash")
+                                            Text("Delete me")
+                                        }.foregroundColor(.red)
                                     }
                                 
                                         Button(action: {
@@ -244,6 +247,31 @@ struct HoursView: View {
                                             HStack {
                                                 Image(systemName: "square.and.arrow.up")
                                                 Text("Share it")
+                                            }
+                                        }
+                                        
+                                        Button(action: {
+                                            drawing.completedTask.toggle()
+                                            do {
+                                                try self.viewContext.save()
+                                                print("Completed item")
+                                            } catch {
+                                                print(error)
+                                            }
+                                            
+                                            RefreshList.toggle()
+                                        }) {
+                                            
+                                            if drawing.completedTask {
+                                                HStack {
+                                                    Image(systemName: "studentdesk")
+                                                    Text("Wasn't finished")
+                                                }
+                                            } else {
+                                                HStack {
+                                                    Image(systemName: "studentdesk")
+                                                    Text("Completed")
+                                                }
                                             }
                                         }
                                         

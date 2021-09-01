@@ -6,10 +6,25 @@
 //
 
 import SwiftUI
+import UIKit
+
 
 struct TodayCanvasIphoneView: View {
+    
+//    var interstitial:Interstitial
+//
+//    init(){
+//        self.interstitial = Interstitial()
+//    }
+
+    
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        HStack {
+            Text("Hey")
+            BannerVC().frame(width: 320, height: 50, alignment: .center)
+        }
     }
 }
 

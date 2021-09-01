@@ -9,6 +9,12 @@ import SwiftUI
 import UIKit
 import PencilKit
 
+import AppTrackingTransparency
+import AdSupport
+
+
+
+
 struct ContentView: View {
     @ObservedObject var userPreference = UserPreference()
     @State var test = "Test"
@@ -22,6 +28,8 @@ struct ContentView: View {
     
     
     let colorPalettePersistance = ColorPalettePersistance.shared
+    
+    
     
     
     var body: some View {
@@ -100,11 +108,12 @@ struct ContentView: View {
                 .environment(\.managedObjectContext,colorPalettePersistance.container.viewContext)
                 .environmentObject(refreshList)
                 .environmentObject(taskPerHour)
+                .onAppear() {requestIDFA()}
                 
 
             }
             if UIDevice.current.userInterfaceIdiom == .phone{
-                TodayCanvasIphoneView()
+                TodayCanvasIphoneView().onAppear() {requestIDFA()}
 //                    .onAppear() {sendNotification()}
 //                CalendarReminderView().edgesIgnoringSafeArea(.all).environmentObject(transferColorPalette)
 //                    .environment(\.managedObjectContext,colorPalettePersistance.container.viewContext)
@@ -175,6 +184,13 @@ struct ContentView: View {
     func getWallpaperFromUserDefaults() -> Data? {
       let defaults = UserDefaults.standard
         return defaults.object(forKey: "signatureImage") as? Data
+    }
+    
+    func requestIDFA() {
+      ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+        // Tracking authorization completed. Start loading ads here.
+        // loadAd()
+      })
     }
     
     func scheduleNotification() {

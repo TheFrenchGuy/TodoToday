@@ -13,6 +13,7 @@ struct AudioPlayerView: View {
     var remUUID: UUID
     var audioURL: String
     var tabColor: UIColor
+    var completedTask: Bool
     
     @ObservedObject var audioPlayer = AudioPlayer()
     @EnvironmentObject var tabViewClass: TabViewClass
@@ -36,7 +37,11 @@ struct AudioPlayerView: View {
                     tabViewClass.taskType = TypeReminder.audio.rawValue
                 }) {
                     HStack {
-                        Text("\(title)").foregroundColor(.black)
+                        if self.completedTask {
+                            Text("\(title)").foregroundColor(.black).strikethrough()
+                        } else {
+                            Text("\(title)").foregroundColor(.black)
+                        }
                     Spacer()
                     }
                 }

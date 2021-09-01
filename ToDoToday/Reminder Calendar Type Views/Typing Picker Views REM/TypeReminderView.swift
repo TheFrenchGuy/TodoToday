@@ -34,6 +34,7 @@ struct TypeReminderView: View {
      var text: String
      var remUUID: UUID
      var tabColor: UIColor
+     var completedTask: Bool
     
     @State var startTime: Date = Date()
     @State var endTime: Date = Date().addingTimeInterval(3600)
@@ -64,8 +65,14 @@ struct TypeReminderView: View {
             }) {
                 VStack {
                     Spacer()
-                    Text(title).bold()
-                    Text(text)
+                    
+                    if self.completedTask {
+                        Text(title).bold().strikethrough()
+                        Text(text).strikethrough()
+                    } else {
+                        Text(title).bold()
+                        Text(text)
+                    }
                     Spacer()
                    
                 }.foregroundColor(.black )
