@@ -10,6 +10,7 @@ import SwiftUI
 struct OutDatedAudioREMView: View {
     
     let audioURL: String
+    let audioData: Data
     let title: String
     let dateOverDue: Date
     let width: CGFloat

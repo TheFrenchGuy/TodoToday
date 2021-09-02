@@ -93,54 +93,64 @@ struct CalendarView: View {
     var body: some View {
         GeometryReader {bounds in
             ZStack {
+                
+            
                 ScrollView(.vertical) {
-                    ZStack {
-                        CalendarBackGroundView(width: bounds.size.width).overlay(
-                            GeometryReader { proxy in
-                                Color.clear.onAppear { print("Height: + \(proxy.size.height) ")
+                    ScrollViewReader { scrollView in
+                        
+                        ZStack {
+                            
+                            
+                            
+                            CalendarBackGroundView(width: bounds.size.width).overlay(
+                                GeometryReader { proxy in
+                                    Color.clear.onAppear { print("Height: + \(proxy.size.height) ")
+                                    }
+                                }
+                                
+                            )
+                            
+                            ForEach(drawings, id: \.self) {drawing in
+                                
+                                if (drawing.startTime?.timeIntervalSince(date) ?? 60) > 86400 {
+                                    EmptyView()
+                                } else {
+                                    
+    //                                ZStack {
+    //                                HoursView(RefreshList: $RefreshList, TimeUUID: drawing.id ?? UUID(), heightTime: getheight(startDate: drawing.startTime ?? Date(), endDate: drawing.endTime ?? Date().addingTimeInterval(3600)))
+    //                                    .frame(width: 100, height: getheight(startDate: drawing.startTime ?? Date(), endDate: drawing.endTime ?? Date().addingTimeInterval(3600)))
+    //                                    .position(gettimelocation(height: CGFloat(12), hour: drawing.startTime ?? Date(), xlocation: drawing.horizontalPlacement ))
+    //                                    .gesture(
+    //                                        simpleDrag.simultaneously(with: fingerDrag)
+    //                                    )
+    //
+    //                                    if let fingerLocation = fingerLocation {
+    //                                        Circle()
+    //                                            .stroke(Color.green, lineWidth: 2)
+    //                                            .frame(width: 44, height: 44)
+    //                                            .position(fingerLocation)
+    //                                    }
+    //                                }
+                                    
+                                    
+                                    MovableHourView(refreshList: $RefreshList, TimeUUID: drawing.id ?? UUID(), heightTime: getheight(startDate: drawing.startTime ?? Date(), endDate: drawing.endTime ?? Date().addingTimeInterval(3600)), startTime: drawing.startTime ?? Date(),timeIntervalSinceStartTimeandEndTime: drawing.endTime?.timeIntervalSince(drawing.startTime ?? Date()) ?? 3600 ,horizontalPlacement: drawing.xLocation , typeREM: drawing.typeRem, windowSize: $SizeofWindow ).zIndex(1)
+                                    
+                                    
                                 }
                             }
+                        }.onRotate(perform:  { value in
                             
-                        )
-                        
-                        ForEach(drawings, id: \.self) {drawing in
+                            SizeofWindow.width = bounds.size.width
+                            SizeofWindow.height = bounds.size.height
+                           
+                        print("Windowsize : width\(SizeofWindow.width), height: \(SizeofWindow.height)")
                             
-                            if (drawing.startTime?.timeIntervalSince(date) ?? 60) > 86400 {
-                                EmptyView()
-                            } else {
-                                
-//                                ZStack {
-//                                HoursView(RefreshList: $RefreshList, TimeUUID: drawing.id ?? UUID(), heightTime: getheight(startDate: drawing.startTime ?? Date(), endDate: drawing.endTime ?? Date().addingTimeInterval(3600)))
-//                                    .frame(width: 100, height: getheight(startDate: drawing.startTime ?? Date(), endDate: drawing.endTime ?? Date().addingTimeInterval(3600)))
-//                                    .position(gettimelocation(height: CGFloat(12), hour: drawing.startTime ?? Date(), xlocation: drawing.horizontalPlacement ))
-//                                    .gesture(
-//                                        simpleDrag.simultaneously(with: fingerDrag)
-//                                    )
-//
-//                                    if let fingerLocation = fingerLocation {
-//                                        Circle()
-//                                            .stroke(Color.green, lineWidth: 2)
-//                                            .frame(width: 44, height: 44)
-//                                            .position(fingerLocation)
-//                                    }
-//                                }
-                                
-                                
-                                MovableHourView(refreshList: $RefreshList, TimeUUID: drawing.id ?? UUID(), heightTime: getheight(startDate: drawing.startTime ?? Date(), endDate: drawing.endTime ?? Date().addingTimeInterval(3600)), startTime: drawing.startTime ?? Date(),timeIntervalSinceStartTimeandEndTime: drawing.endTime?.timeIntervalSince(drawing.startTime ?? Date()) ?? 3600 ,horizontalPlacement: drawing.xLocation , typeREM: drawing.typeRem, windowSize: $SizeofWindow ).zIndex(1)
-                                
-                                
-                            }
-                        }
-                    }.onRotate(perform:  { value in
-                        
-                        SizeofWindow.width = bounds.size.width
-                        SizeofWindow.height = bounds.size.height
-                       
-                    print("Windowsize : width\(SizeofWindow.width), height: \(SizeofWindow.height)")
-                        
-                        
-                })
+                            
+                    })
+                        .onAppear(perform: {scrollView.scrollTo(getScrollToPos(hour: Date()), anchor: .top)})
+                    }
                     
+                   
                 }
             }        }
     }
@@ -160,6 +170,15 @@ struct CalendarView: View {
 
         return CGPoint(x: xlocation, y: ylocation)
         }
+    }
+    
+    
+    func getScrollToPos(hour: Date) -> Int {
+        let hourString = hour.toString(dateFormat: "HH")
+        let hourInt = (Int(hourString) ?? 0) - 2
+        
+        return hourInt
+        
     }
     
     func getheight(startDate: Date, endDate: Date) -> CGFloat{

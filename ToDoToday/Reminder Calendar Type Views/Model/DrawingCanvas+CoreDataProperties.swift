@@ -39,6 +39,7 @@ extension DrawingCanvas {
     @NSManaged public var alertNotificationTimeBefore: String?
     
     @NSManaged public var imageData: Data?
+    @NSManaged public var audioData: Data?
 }
 
 extension DrawingCanvas : Identifiable {

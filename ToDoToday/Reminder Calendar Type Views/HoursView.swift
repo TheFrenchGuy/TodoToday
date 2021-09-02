@@ -173,7 +173,7 @@ struct HoursView: View {
                                                     
                                                    
                                                 case TypeReminder.audio.rawValue:
-                                                AudioPlayerView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID(), audioURL: drawing.audioREMurl ?? "NO URL", tabColor: drawing.tabColor?.uiColor ?? .red, completedTask: drawing.completedTask, windowSize: bounds.size, heightTime: heightTime).sheet(isPresented: $sendToShareAll, content: { ShareREMAll( audioURL: drawing.audioREMurl ?? "NO URL")})
+                                                    AudioPlayerView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID(), audioURL: drawing.audioREMurl ?? "NO URL",audioData: drawing.audioData ?? Data(), tabColor: drawing.tabColor?.uiColor ?? .red, completedTask: drawing.completedTask, windowSize: bounds.size, heightTime: heightTime).sheet(isPresented: $sendToShareAll, content: { ShareREMAll( audioURL: drawing.audioREMurl ?? "NO URL")})
 //                                                    .contextMenu { Button(action:{
 //                                                    viewContext.delete(drawing)
 //                                                    deleteAudio(audioURL: drawing.audioREMurl ?? "NO URL")
@@ -424,9 +424,9 @@ struct HoursView: View {
     
     
     func deleteAudio(audioURL: String) {
-        let docPath = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents")
-        let audioPath = docPath!.appendingPathComponent(audioURL)
-        
+//        let docPath = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents")
+//        let audioPath = docPath!.appendingPathComponent(audioURL)
+        let audioPath = documentsPath.appendingPathComponent(audioURL)
         
         guard fileManager.fileExists(atPath: audioPath.path) else {
             print("Audio does not exist at path: \(String(describing: audioPath))")

@@ -12,6 +12,7 @@ struct AudioPlayerView: View {
     var title: String
     var remUUID: UUID
     var audioURL: String
+    var audioData: Data
     var tabColor: UIColor
     var completedTask: Bool
     
@@ -48,6 +49,7 @@ struct AudioPlayerView: View {
                 if audioPlayer.isPlaying == false {
                     Button(action: {
                         self.audioPlayer.startPlayback(audio: self.audioURL)
+//                        self.audioPlayer.startPlaybackData(audio: self.audioData)
                     }) {
                         Spacer()
                         Image(systemName: "play.circle")

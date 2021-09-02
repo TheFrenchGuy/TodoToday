@@ -125,7 +125,7 @@ struct TaskNotDoneFromPreviousDayView: View {
                                         }))
                                 }
                                  if drawing.typeRem == TypeReminder.audio.rawValue {
-                                    OutDatedAudioREMView(audioURL: drawing.audioREMurl ?? "NO audio URL", title: drawing.title ?? "NO TITLE", dateOverDue: drawing.endTime ?? Date(), width: bounds.size.width)
+                                    OutDatedAudioREMView(audioURL: drawing.audioREMurl ?? "NO audio URL",audioData: drawing.audioData ?? Data(), title: drawing.title ?? "NO TITLE", dateOverDue: drawing.endTime ?? Date(), width: bounds.size.width)
                                     
                                         .contextMenu(ContextMenu(menuItems: {
                                             Button(action: {

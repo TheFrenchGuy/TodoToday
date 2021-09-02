@@ -127,7 +127,7 @@ struct EditTaskViewSideBarAudio: View {
                                         
 
                                         
-                                        AudioPlayerSidebarView(audioREMurl: drawing.audioREMurl ?? "NO URL", width: bounds.size.width)
+                                        AudioPlayerSidebarView(audioREMurl: drawing.audioREMurl ?? "NO URL",audioData: drawing.audioData ?? Data(), width: bounds.size.width)
                                         
                                         Divider()
                                         
@@ -374,6 +374,7 @@ struct AudioPlayerSidebarView:  View {
     @ObservedObject var audioPlayer = AudioPlayer()
     
     var audioREMurl: String
+    var audioData: Data
     var width: CGFloat
     var body: some View {
         VStack(alignment: .leading) {

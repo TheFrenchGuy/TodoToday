@@ -61,6 +61,7 @@ struct MovableHourView: View {
     
     
     var body: some View {
+        
         GeometryReader { bounds in
             ZStack {
                 HoursView(RefreshList: $refreshList, TimeUUID: TimeUUID, heightTime: heightTime)
@@ -142,7 +143,7 @@ struct MovableHourView: View {
                 drawing.yLocation = Double(newLocation.y)
                 drawing.startTime = getNewStartTimeLocation(yAxis: newLocation.y)
                 drawing.endTime = drawing.startTime?.addingTimeInterval(timeIntervalSinceStartTimeandEndTime)
-                
+                registerNotificationAlert(title: drawing.title ?? "NO TITLE", body: "Check your task", startTime: getNewStartTimeLocation(yAxis: newLocation.y) , offset: getOffset(nameDesc: drawing.alertNotificationTimeBefore ?? "At time of event"), id: drawing.id ?? UUID())
                 do {
                     try viewContext.save()
                   //  try viewContext.refreshAllObjects()
@@ -175,6 +176,74 @@ struct MovableHourView: View {
         let offset = location.y + height
         
         return (offset)
+    }
+    
+    
+    
+    func getOffset(nameDesc: String) -> Int {
+        if nameDesc == "At time of event" {
+            return 0
+        }
+        if nameDesc == "5 minutes before" {
+            return 300
+        }
+        
+        if nameDesc == "10 minutes before" {
+            return 600
+        }
+        
+        if nameDesc == "15 minutes before" {
+            return 900
+        }
+        if nameDesc == "30 minutes before" {
+            return 1800
+        }
+        
+        if nameDesc == "1 hour before" {
+            return 3600
+        }
+        
+        if nameDesc == "2 hours before" {
+            return 7200
+        }
+        
+        return 0
+    }
+    
+    func registerNotificationAlert(title: String, body: String, startTime: Date, offset: Int, id: UUID) {
+        let content = UNMutableNotificationContent()
+        let userNotificationCenter = UNUserNotificationCenter.current()
+        var offsethour = 0
+        var offsetminutes = 0
+        content.title = title
+        content.body = body
+        content.sound = UNNotificationSound.default
+        
+        var dateInfo = DateComponents()
+        
+        if offset >= 3600 {
+            offsethour = Int(offset / 3600)
+            offsetminutes = offset - (offsethour * 3600)
+        } else {
+            offsetminutes = offset
+        }
+        dateInfo.hour = (Int(startTime.toString(dateFormat: "HH")) ?? 0) - (offsethour)
+        dateInfo.minute = (Int(startTime.toString(dateFormat: "mm")) ?? 0) - (offsetminutes / 60)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateInfo, repeats: false)
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let request = UNNotificationRequest(identifier: id.uuidString, content: content, trigger: trigger)
+//        let request = UNNotificationRequest(identifier: "testNotification",
+//                                            content: content,
+//                                                trigger: trigger)
+        
+        userNotificationCenter.add(request) { (error) in
+            if let error = error {
+                print("Notification Error: ", error)
+            }
+        }
+        
+//        print("Added Notification \(dateInfo.hour), \(dateInfo.minute)")
     }
     
 }

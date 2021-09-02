@@ -98,6 +98,21 @@ struct AddNewCanvasView: View {
     
     @State var numberOfTasksAds = UserPreference().numberOfTasksBeforeAds
     
+    
+    @State var alertTimeSelected: String = ""
+    
+    
+    @State var alertTimes = [
+        AlertNotificationTimes(nameDesc: "At time of event", timeofNotification: 0),
+        AlertNotificationTimes(nameDesc: "5 minutes before", timeofNotification: 300),
+        AlertNotificationTimes(nameDesc: "10 minutes before", timeofNotification: 600),
+        AlertNotificationTimes(nameDesc: "15 minutes before", timeofNotification: 900),
+        AlertNotificationTimes(nameDesc: "30 minutes before", timeofNotification: 1800),
+        AlertNotificationTimes(nameDesc: "1 hour before", timeofNotification: 3600),
+        AlertNotificationTimes(nameDesc: "2 hours before", timeofNotification: 7200),
+        
+    ]
+    
    
     
       
@@ -250,6 +265,20 @@ struct AddNewCanvasView: View {
                 }.onAppear(perform: {if calendarName == "none" {loadFirstCalendar()}}) //So that when it is first being loaded the first entity of the colorpalette is pre loaded
                 
                 
+                Section(header: Text("Alert you when?")){
+                    NavigationLink(destination: NotificationAddNewTaskSelectionView(alertTimes: $alertTimes, alertTimeSelected: $alertTimeSelected)) {
+                        HStack {
+                            Text("Alert")
+                            Image(systemName: "clock")
+                            
+                            Spacer()
+                            
+                            Text(alertTimeSelected)
+                        }
+                    }
+                }
+                
+                
                 
                 
                 
@@ -288,6 +317,10 @@ struct AddNewCanvasView: View {
                     drawing.yLocation = 100 // This is temp until it is assigned somewhere later
                     drawing.imageData = UIImage(systemName: "externaldrive.badge.xmark")!.pngData()
                     drawing.completedTask = false
+                    
+                    drawing.alertNotificationTimeBefore = alertTimeSelected
+                    registerNotificationAlert(title: canvasTitle, body: "Check your task", startTime: eventtimeclass.eventDue, offset: getOffset(nameDesc: alertTimeSelected), id: drawing.id ?? UUID())
+                    
                     //SerializableColorTransformer().transformedValue(customColor) as! SerializableColor
                     
                     
@@ -331,6 +364,8 @@ struct AddNewCanvasView: View {
                     drawing.xLocation = getxPlacement(time: eventtimeclass.eventDue)
                     drawing.yLocation = 100 // This is temp until it is assigned somewhere later
                     drawing.completedTask = false
+                    drawing.alertNotificationTimeBefore = alertTimeSelected
+                    registerNotificationAlert(title: canvasTitle, body: "Check your task", startTime: eventtimeclass.eventDue, offset: getOffset(nameDesc: alertTimeSelected), id: drawing.id ?? UUID())
                     
                     do {
                         AddedNewCanvas.toggle()
@@ -366,6 +401,11 @@ struct AddNewCanvasView: View {
                     drawing.yLocation = 100 // This is temp until it is assigned somewhere later
                     drawing.imageData = selectedImage?.pngData()
                     drawing.completedTask = false
+                    
+                    drawing.alertNotificationTimeBefore = alertTimeSelected
+                    registerNotificationAlert(title: canvasTitle, body: "Check your task", startTime: eventtimeclass.eventDue, offset: getOffset(nameDesc: alertTimeSelected), id: drawing.id ?? UUID())
+                    
+                    
                    
                     print("Image saved as name: \(saveImage(image: self.selectedImage!, id: initialUUID) ?? "IMAGE SAVING ERRROR")") //DEBUG ONLY SINCE IT IS ALREADY PRINTED TO THE CONSOLE WHILE RUING THE FUNCTION
                     
@@ -393,18 +433,35 @@ struct AddNewCanvasView: View {
                     
                     let timediff = Int(eventtimeclass.eventDue.timeIntervalSince(date))
                     print("TIME DIFFERENCE OF \(timediff)")
+                    
+                    
+                    var audioTrack:Data?
+
+//                    let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                    
+                    do {
+                        audioTrack = try Data(contentsOf: audioRec.fullURL)
+//                        print("Audio Size: \(audioTrack?.count)")
+                    } catch {
+                        print("Couldn't add the data")
+                        print(error)
+                    }
+                    
                     drawing.title = canvasTitle
                     drawing.startTime = eventtimeclass.eventDue
                     drawing.endTime = eventtimeclass.completionTime
                     drawing.id = initialUUID
                     drawing.typeRem = typeReminder.rawValue
-                   
+                    drawing.audioData = audioTrack
                     drawing.audioREMurl = audioRec.newURL
                     drawing.tabColor = SerializableColor.init(from: customColor)
                     drawing.calendarNameAdded = calendarName
                     drawing.xLocation = getxPlacement(time: eventtimeclass.eventDue)
                     drawing.yLocation = 100 // This is temp until it is assigned somewhere later
                     drawing.completedTask = false
+                    
+                    drawing.alertNotificationTimeBefore = alertTimeSelected
+                    registerNotificationAlert(title: canvasTitle, body: "Check your task", startTime: eventtimeclass.eventDue, offset: getOffset(nameDesc: alertTimeSelected), id: drawing.id ?? UUID())
                     
                     
                     do {
@@ -1026,6 +1083,73 @@ struct AddNewCanvasView: View {
         }
         
     }
+    
+    
+    func getOffset(nameDesc: String) -> Int {
+        if nameDesc == "At time of event" {
+            return 0
+        }
+        if nameDesc == "5 minutes before" {
+            return 300
+        }
+        
+        if nameDesc == "10 minutes before" {
+            return 600
+        }
+        
+        if nameDesc == "15 minutes before" {
+            return 900
+        }
+        if nameDesc == "30 minutes before" {
+            return 1800
+        }
+        
+        if nameDesc == "1 hour before" {
+            return 3600
+        }
+        
+        if nameDesc == "2 hours before" {
+            return 7200
+        }
+        
+        return 0
+    }
+    
+    func registerNotificationAlert(title: String, body: String, startTime: Date, offset: Int, id: UUID) {
+        let content = UNMutableNotificationContent()
+        let userNotificationCenter = UNUserNotificationCenter.current()
+        var offsethour = 0
+        var offsetminutes = 0
+        content.title = title
+        content.body = body
+        content.sound = UNNotificationSound.default
+        
+        var dateInfo = DateComponents()
+        
+        if offset >= 3600 {
+            offsethour = Int(offset / 3600)
+            offsetminutes = offset - (offsethour * 3600)
+        } else {
+            offsetminutes = offset
+        }
+        dateInfo.hour = (Int(startTime.toString(dateFormat: "HH")) ?? 0) - (offsethour)
+        dateInfo.minute = (Int(startTime.toString(dateFormat: "mm")) ?? 0) - (offsetminutes / 60)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateInfo, repeats: false)
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let request = UNNotificationRequest(identifier: id.uuidString, content: content, trigger: trigger)
+//        let request = UNNotificationRequest(identifier: "testNotification",
+//                                            content: content,
+//                                                trigger: trigger)
+        
+        userNotificationCenter.add(request) { (error) in
+            if let error = error {
+                print("Notification Error: ", error)
+            }
+        }
+        
+//        print("Added Notification \(dateInfo.hour), \(dateInfo.minute)")
+    }
 }
 
 //struct AddNewCanvasView_Previews: PreviewProvider {
@@ -1035,3 +1159,32 @@ struct AddNewCanvasView: View {
 //}
 
 
+struct NotificationAddNewTaskSelectionView: View {
+    
+  
+    @Binding var alertTimes: [AlertNotificationTimes]
+    @Binding var alertTimeSelected: String
+    var body: some View {
+        VStack(alignment: .leading) {
+            
+            List(alertTimes, id: \.id) {alertTime in
+                
+                Button(action: {
+                    alertTimeSelected = alertTime.nameDesc
+                }) {
+                    
+                    HStack {
+                    Text(alertTime.nameDesc).font(.body).foregroundColor(.black)
+                    Spacer()
+                    
+                        if alertTimeSelected == alertTime.nameDesc {
+                        Image(systemName: "checkmark").font(.body).foregroundColor(.blue)
+                    }
+                    }
+                }
+                    
+               
+            }
+        }
+    }
+}

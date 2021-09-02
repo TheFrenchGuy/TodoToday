@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import Combine
 import AVFoundation
+import CoreData
 
 
 class updatedTaskAudioClass: ObservableObject {
@@ -25,8 +26,16 @@ class AudioRecorder: ObservableObject {
     
     var audioRecorder: AVAudioRecorder!
     
+    
+    @Environment(\.managedObjectContext) private var viewContext
+
+    @FetchRequest(entity: DrawingCanvas.entity(), sortDescriptors: []) var drawings: FetchedResults<DrawingCanvas>
+    
 //    @Published var newURL: URL = URL(string: "http://nshipster.com/")!
+//    @Published var newURL: URL = URL(string: "nourl.com")!
     @Published var newURL: String = "NO URL"
+    @Published var fullURL: URL = URL(string: "nourl.com")!
+    
    // @EnvironmentObject var updatedTaskAudio: updatedTaskAudioClass
     var recording = false {
             didSet {
@@ -50,9 +59,13 @@ class AudioRecorder: ObservableObject {
         
         
         
-        let documentPath = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents")
-
-        let audioFilename =  documentPath?.appendingPathComponent("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
+//        let documentPath = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents")
+//
+//        let audioFilename =  documentPath?.appendingPathComponent("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
+        
+        let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let audioFilename = documentPath.appendingPathComponent("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
+//        let soundURL = documentPath.appendingPathComponent("capturedAudio.m4a")
         
         
        
@@ -61,9 +74,12 @@ class AudioRecorder: ObservableObject {
         
         
         newURL = String("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
+        fullURL = audioFilename
         
+        print(fullURL.absoluteString)
         
         let settings = [
+        
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
             AVSampleRateKey: 12000,
             AVNumberOfChannelsKey: 1,
@@ -75,7 +91,7 @@ class AudioRecorder: ObservableObject {
 //        try? "Hello word".data(using: .utf8)?.write(to: fileURL)
         
         do {
-            audioRecorder = try AVAudioRecorder(url: audioFilename!, settings: settings)
+            audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
             audioRecorder.record()
             
             
@@ -93,11 +109,8 @@ class AudioRecorder: ObservableObject {
     func stopRecording() {
 //           audioRecorder.stop()
            recording = false
+            
        }
-    
-    
-
-
 }
 
 extension Date
