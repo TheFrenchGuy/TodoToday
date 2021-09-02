@@ -36,6 +36,7 @@ struct EditTaskViewSideBarImage: View {
     
     
     @State var alertTimes = [
+        AlertNotificationTimes(nameDesc: "Dont tell me", timeofNotification: -1),
         AlertNotificationTimes(nameDesc: "At time of event", timeofNotification: 0),
         AlertNotificationTimes(nameDesc: "5 minutes before", timeofNotification: 300),
         AlertNotificationTimes(nameDesc: "10 minutes before", timeofNotification: 600),
@@ -48,7 +49,7 @@ struct EditTaskViewSideBarImage: View {
     
     
     @State var alertTimeSelected: String = ""
-    
+    @State var newShouldBeReminder: Bool = false
     
     
     var body: some View {
@@ -128,7 +129,11 @@ struct EditTaskViewSideBarImage: View {
                                         Divider()
 
 
-                                        CalendarAlertButtonView(alertMove: $action, alertTime: alertTimeSelected)
+                                        CalendarAlertButtonView(alertMove: $action, alertTime: alertTimeSelected).onChange(of: alertTimeSelected, perform: {newValue in
+                                            if alertTimeSelected == "Dont tell me" {
+                                                newShouldBeReminder = false
+                                            }
+                                        })
 
                                         CalendarEditButtonView(calendarNameAdded: $newCalendarName, tabColor: $newColor, calendarMove: $action)
 
@@ -255,6 +260,7 @@ struct EditTaskViewSideBarImage: View {
                                     newEndTime = drawing.endTime ?? Date().addingTimeInterval(3600)
                                     newTaskDescription = drawing.taskDescription ?? "NO TASK DESC"
                                     newCompletedTask = drawing.completedTask
+                                    newShouldBeReminder = drawing.isNotificationAlert
                                     alertTimeSelected = drawing.alertNotificationTimeBefore ?? ""
                                 })
                         }
@@ -276,7 +282,13 @@ struct EditTaskViewSideBarImage: View {
                 drawing.calendarNameAdded = newCalendarName
                 drawing.completedTask = newCompletedTask
                 drawing.alertNotificationTimeBefore = alertTimeSelected
-                registerNotificationAlert(title: newTaskTitle, body: "Check your task", startTime: newStartTime, offset: getOffset(nameDesc: alertTimeSelected), id: drawing.id ?? UUID())
+                drawing.isNotificationAlert = newShouldBeReminder
+                
+                if newShouldBeReminder {
+                    registerNotificationAlert(title: newTaskTitle, body: "Check your task", startTime: newStartTime, offset: getOffset(nameDesc: alertTimeSelected), id: drawing.id ?? UUID())
+                } else {
+                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [drawing.id?.uuidString ?? ""])
+                }
                 do {
                     try viewContext.save()
                 } catch {

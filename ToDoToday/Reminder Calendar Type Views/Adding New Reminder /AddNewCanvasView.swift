@@ -113,6 +113,8 @@ struct AddNewCanvasView: View {
         
     ]
     
+    @State var shouldbeAlerted: Bool = false
+    
    
     
       
@@ -274,7 +276,11 @@ struct AddNewCanvasView: View {
                             Spacer()
                             
                             Text(alertTimeSelected)
-                        }
+                        }.onChange(of: alertTimeSelected, perform: {newValue in
+                            if alertTimeSelected != "" {
+                                shouldbeAlerted = true
+                            }
+                        })
                     }
                 }
                 
@@ -319,7 +325,11 @@ struct AddNewCanvasView: View {
                     drawing.completedTask = false
                     
                     drawing.alertNotificationTimeBefore = alertTimeSelected
-                    registerNotificationAlert(title: canvasTitle, body: "Check your task", startTime: eventtimeclass.eventDue, offset: getOffset(nameDesc: alertTimeSelected), id: drawing.id ?? UUID())
+                    drawing.isNotificationAlert = shouldbeAlerted
+                        
+                    if shouldbeAlerted {
+                        registerNotificationAlert(title: canvasTitle, body: "Check your task", startTime: eventtimeclass.eventDue, offset: getOffset(nameDesc: alertTimeSelected), id: drawing.id ?? UUID())
+                    }
                     
                     //SerializableColorTransformer().transformedValue(customColor) as! SerializableColor
                     
@@ -365,7 +375,11 @@ struct AddNewCanvasView: View {
                     drawing.yLocation = 100 // This is temp until it is assigned somewhere later
                     drawing.completedTask = false
                     drawing.alertNotificationTimeBefore = alertTimeSelected
-                    registerNotificationAlert(title: canvasTitle, body: "Check your task", startTime: eventtimeclass.eventDue, offset: getOffset(nameDesc: alertTimeSelected), id: drawing.id ?? UUID())
+                    drawing.isNotificationAlert = shouldbeAlerted
+                        
+                    if shouldbeAlerted {
+                        registerNotificationAlert(title: canvasTitle, body: "Check your task", startTime: eventtimeclass.eventDue, offset: getOffset(nameDesc: alertTimeSelected), id: drawing.id ?? UUID())
+                    }
                     
                     do {
                         AddedNewCanvas.toggle()
@@ -403,7 +417,11 @@ struct AddNewCanvasView: View {
                     drawing.completedTask = false
                     
                     drawing.alertNotificationTimeBefore = alertTimeSelected
-                    registerNotificationAlert(title: canvasTitle, body: "Check your task", startTime: eventtimeclass.eventDue, offset: getOffset(nameDesc: alertTimeSelected), id: drawing.id ?? UUID())
+                    drawing.isNotificationAlert = shouldbeAlerted
+                        
+                    if shouldbeAlerted {
+                        registerNotificationAlert(title: canvasTitle, body: "Check your task", startTime: eventtimeclass.eventDue, offset: getOffset(nameDesc: alertTimeSelected), id: drawing.id ?? UUID())
+                    }
                     
                     
                    
@@ -461,7 +479,11 @@ struct AddNewCanvasView: View {
                     drawing.completedTask = false
                     
                     drawing.alertNotificationTimeBefore = alertTimeSelected
-                    registerNotificationAlert(title: canvasTitle, body: "Check your task", startTime: eventtimeclass.eventDue, offset: getOffset(nameDesc: alertTimeSelected), id: drawing.id ?? UUID())
+                    drawing.isNotificationAlert = shouldbeAlerted
+                        
+                    if shouldbeAlerted {
+                        registerNotificationAlert(title: canvasTitle, body: "Check your task", startTime: eventtimeclass.eventDue, offset: getOffset(nameDesc: alertTimeSelected), id: drawing.id ?? UUID())
+                    }
                     
                     
                     do {

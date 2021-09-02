@@ -40,6 +40,8 @@ extension DrawingCanvas {
     
     @NSManaged public var imageData: Data?
     @NSManaged public var audioData: Data?
+    
+    @NSManaged public var isNotificationAlert: Bool
 }
 
 extension DrawingCanvas : Identifiable {
