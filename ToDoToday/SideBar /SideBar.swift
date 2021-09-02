@@ -34,6 +34,9 @@ struct SideBarView: View {
     
     @EnvironmentObject var refreshListClass:RefreshListClass
     
+    
+    @State private var isEmptyCalendarAlert: Bool = false
+    
     var body: some View {
         GeometryReader { bounds in
             ZStack {
@@ -66,6 +69,8 @@ struct SideBarView: View {
                         
                         Section {
                             Button(action: {
+                                
+                                if !newAddCalendarName.isEmpty {
                                     let colorPal = ColorPalette(context: viewContext)
                                     colorPal.id = UUID()
                                     colorPal.name = newAddCalendarName
@@ -81,8 +86,15 @@ struct SideBarView: View {
                                         print(error.localizedDescription)
                                         print("ERROR COULDNT ADD A PALETTE")
                                     }
+                                } else {
+                                    isEmptyCalendarAlert = true
+                                }
+                                
                             }) {
                                 Text("Add to new calendar")
+                            }.alert(isPresented: $isEmptyCalendarAlert) {
+                                Alert(title: Text("Empty Calendar"),
+                                      message: Text("Well obviously you cant add an empty calendar🙄"))
                             }
                         }
                     }

@@ -27,6 +27,8 @@ struct CreateIntialCalendarView: View {
     
     @State private var addedInitalCalendar: Bool = false
     
+    @State private var showAlertEmptyTitle: Bool = false
+    
     
     var body: some View {
         
@@ -85,6 +87,10 @@ struct CreateIntialCalendarView: View {
                             
                             VStack {
                                 Button(action: {
+                                    
+                                    
+                                    if newAddCalendarName != "" {
+                                    
                                         let colorPal = ColorPalette(context: viewContext)
                                         colorPal.id = UUID()
                                         colorPal.name = newAddCalendarName
@@ -101,12 +107,18 @@ struct CreateIntialCalendarView: View {
                                             print(error.localizedDescription)
                                             print("ERROR COULDNT ADD A PALETTE")
                                         }
+                                    } else {
+                                        showAlertEmptyTitle = true
+                                    }
                                 }) {
                                     
                                     HStack {
                                         Text("Add your first Calendar")
                                         Image(systemName: "plus")
                                     }
+                                }.alert(isPresented: $showAlertEmptyTitle) {
+                                    Alert(title: Text("Empty Calendar"),
+                                          message: Text("Well obviously you cant add an empty calendar🙄"))
                                 }
                             
                         }.frame(width: bounds.size.width * 0.8)
