@@ -52,6 +52,12 @@ class UserPreference: ObservableObject {
         }
     }
     
+    @Published var numberOfTasksBeforeAds: Int {
+        didSet {
+            UserDefaults.standard.set(numberOfTasksBeforeAds, forKey: "numberOfTasksBeforeAds")
+        }
+    }
+    
     init() {
         self.firstlaunch = UserDefaults.standard.object(forKey: "firstlaunch") as? Bool ?? true
         self.reminderlist = UserDefaults.standard.object(forKey: "reminderlist") as? Int ?? -1
@@ -60,6 +66,7 @@ class UserPreference: ObservableObject {
         self.daystoDND = UserDefaults.standard.object(forKey: "daystoDND") as? [String] ?? []
         self.startWeekDay = UserDefaults.standard.object(forKey: "startWeekDay") as? String ?? "Mon"
         self.storeCoreDataIcloud = UserDefaults.standard.object(forKey: "storeCoreDataIcloud") as? Bool ?? true
+        self.numberOfTasksBeforeAds = UserDefaults.standard.object(forKey: "numberOfTasksBeforeAds") as? Int ?? 0
        
     }
 }

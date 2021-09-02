@@ -38,6 +38,8 @@ struct CalendarReminderView: View {
     
     @State var childSize: CGSize = .zero
     
+    @State var numberOfTasksAds = UserPreference().numberOfTasksBeforeAds
+    
     let colorPalettePersistance = ColorPalettePersistance.shared
     @EnvironmentObject var transferColorPalette:TransferColorPalette
     @EnvironmentObject var showInterstitialAd:ShowInterstitialAdClass
@@ -134,14 +136,18 @@ struct CalendarReminderView: View {
                                                 self.tabViewClass.editTask = false
                                             }
                                             
-                                            if self.showInterstitialAd.InterstitialAdShow {
+                                            if self.numberOfTasksAds >= 3 {
                                            
                                                                #if !targetEnvironment(macCatalyst)
                                                                    self.fullScreenAd?.showAd()
                                                                    #endif
                                                                    self.showInterstitialAd.InterstitialAdShow = false
+                                                
+                                                UserDefaults.standard.set(0, forKey: "numberOfTasksBeforeAds")
+                                                self.numberOfTasksAds = 0
                                                                }
                                         })
+                                        .onAppear(perform: {print("Number of Tasks before ads \(numberOfTasksAds)")})
                                     
                                     
                                     if self.tabViewClass.editTask {

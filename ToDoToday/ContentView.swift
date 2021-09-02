@@ -35,15 +35,6 @@ struct ContentView: View {
     let colorPalettePersistance = ColorPalettePersistance.shared
     
     
-    #if !targetEnvironment(macCatalyst)
-    
-   
-    
-    private var fullScreenAd: Interstitial?
-       init() {
-           fullScreenAd = Interstitial()
-       }
-    #endif
 
     
     

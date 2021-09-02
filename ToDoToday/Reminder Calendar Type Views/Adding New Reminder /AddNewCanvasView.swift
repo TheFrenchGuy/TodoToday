@@ -96,6 +96,7 @@ struct AddNewCanvasView: View {
     @EnvironmentObject var taskPerHour:TaskPerHour
     @EnvironmentObject var showInterstitialAd: ShowInterstitialAdClass
     
+    @State var numberOfTasksAds = UserPreference().numberOfTasksBeforeAds
     
    
     
@@ -305,9 +306,11 @@ struct AddNewCanvasView: View {
                     }
                     
                     //self.presentationMode.wrappedValue.dismiss()
-                    
+                    UserDefaults.standard.set(self.numberOfTasksAds + 1, forKey: "numberOfTasksBeforeAds")
                     showingCanvas.toggle()
-                    showInterstitialAd.InterstitialAdShow.toggle()
+                    
+//                    showInterstitialAd.InterstitialAdShow.toggle()
+                    
                 }
                 
                 else if !canvasTitle.isEmpty && typeReminder.rawValue == TypeReminder.typed.rawValue && !REMDescription.isEmpty{
@@ -339,9 +342,9 @@ struct AddNewCanvasView: View {
                         print(error)
                         print("ERROR COULDNT ADD ITEM")
                     }
-                    
+                    UserDefaults.standard.set(self.numberOfTasksAds + 1, forKey: "numberOfTasksBeforeAds")
                     self.presentationMode.wrappedValue.dismiss()
-                    showInterstitialAd.InterstitialAdShow.toggle()
+                    
                     
                     
 //                    showingTypeInterface.toggle()
@@ -376,7 +379,7 @@ struct AddNewCanvasView: View {
                         print(error)
                         print("ERROR COULDNT ADD ITEM")
                     }
-                    
+                    UserDefaults.standard.set(self.numberOfTasksAds + 1, forKey: "numberOfTasksBeforeAds")
                     self.presentationMode.wrappedValue.dismiss()
                    
                 }
@@ -414,7 +417,7 @@ struct AddNewCanvasView: View {
                         print(error)
                         print("ERROR COULDNT ADD ITEM")
                     }
-                    
+                    UserDefaults.standard.set(self.numberOfTasksAds + 1, forKey: "numberOfTasksBeforeAds")
                     self.presentationMode.wrappedValue.dismiss()
                     
                 }
