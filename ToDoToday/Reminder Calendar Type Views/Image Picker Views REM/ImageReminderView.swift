@@ -12,6 +12,7 @@ struct ImageReminderView: View {
     var remUUID: UUID
     var tabColor: UIColor
     var imageData: Data
+    var heightTime: CGFloat
     @State var startTime: Date = Date()
     @State var endTime: Date = Date().addingTimeInterval(3600)
     
@@ -23,6 +24,8 @@ struct ImageReminderView: View {
     @FetchRequest(entity: DrawingCanvas.entity(), sortDescriptors: []) var drawings: FetchedResults<DrawingCanvas>
     
     @State private var updatedTask = updatedTaskDesClass()
+    
+    @EnvironmentObject var tabViewClass: TabViewClass
     
     let fileManager = FileManager.default
     let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -36,7 +39,12 @@ struct ImageReminderView: View {
         VStack {
             RoundedRectangle(cornerRadius: 6).foregroundColor(Color(tabColor)).frame(height: 7)
             
-            Button(action: {showSheet.toggle()}, label: {
+            Button(action: {
+//                    showSheet.toggle()
+                tabViewClass.editTask.toggle()
+                tabViewClass.editTaskUUID = remUUID
+                tabViewClass.taskType = TypeReminder.image.rawValue
+            }, label: {
                // Text(title)
 //                if getWallpaperFromUserDefaults() != nil {
 //                    Image(uiImage: fetchImage(imageName: String("\(updatedTask.newTaskUUID)")) ?? UIImage(data: getWallpaperFromUserDefaults()!)! ).resizable().scaledToFit().frame(width: 150, height: 150)
@@ -45,7 +53,7 @@ struct ImageReminderView: View {
 //
 //                }
                 
-                Image(uiImage: UIImage.init(data: imageData)!).resizable().scaledToFit().frame(width: 150, height: 150)
+                Image(uiImage: UIImage.init(data: imageData)!).resizable().scaledToFit().frame(width: 150, height: heightTime - 20)
                
             }).fullScreenCover(isPresented: $showSheet, content:  {
                 if !showSettings {

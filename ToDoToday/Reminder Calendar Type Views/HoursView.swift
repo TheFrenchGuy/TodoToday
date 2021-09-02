@@ -39,6 +39,7 @@ struct HoursView: View {
     @EnvironmentObject var transferColorPalette:TransferColorPalette
     @EnvironmentObject var refreshListClass:RefreshListClass
     @EnvironmentObject var taskPerHour:TaskPerHour
+    @EnvironmentObject var tabViewClass: TabViewClass
     
     
     @StateObject var showActivitySelector = showActivityShareSelector()
@@ -74,7 +75,11 @@ struct HoursView: View {
                                                 
                                                     Button(action: {
                                                         fetchProperties(canvasUUID: drawing.id ?? TimeUUID);
-                                                        test.toggle();
+                                                        
+                                                        tabViewClass.editTask.toggle()
+                                                        tabViewClass.editTaskUUID = drawing.id ?? TimeUUID
+                                                        tabViewClass.taskType = TypeReminder.drawing.rawValue
+//                                                        test.toggle();
                                                         print("Keyboard shortcut pressed");
                                                     }) {
 //                                                        if getWallpaperFromUserDefaults() != nil {
@@ -84,16 +89,16 @@ struct HoursView: View {
 //
 //                                                    }
                                                         
-                                                        Image(uiImage: UIImage.init(data: drawing.imageData ?? Data()) ?? UIImage()).resizable().scaledToFit().frame(width: 150, height: heightTime - 20)
+                                                        Image(uiImage: UIImage.init(data: drawing.imageData ?? Data()) ?? UIImage()).resizable().scaledToFit().frame(width: 300, height: heightTime - 20)
                                                       //  Text("Drawing \(drawing.title ?? "NO TITLE")")
                                                        
 
                                                     }
-                                                        .sheet(isPresented: self.$test) {
-                                                            DrawingView(isVisible: $test, id: currentUUID ?? UUID(), data: currentData, title: currentTitle, startTime: drawing.startTime ?? Date(), endTime: drawing.endTime ?? Date()) .environment(\.managedObjectContext, viewContext) // Fixed the error that came saying there is no coordinate store attached to it
-                                                                .onDisappear() { print("DISMISS"); RefreshList.toggle()}
-                                                            
-                                                        }
+//                                                        .sheet(isPresented: self.$test) {
+//                                                            DrawingView(isVisible: $test, id: currentUUID ?? UUID(), data: currentData, title: currentTitle, startTime: drawing.startTime ?? Date(), endTime: drawing.endTime ?? Date()) .environment(\.managedObjectContext, viewContext) // Fixed the error that came saying there is no coordinate store attached to it
+//                                                                .onDisappear() { print("DISMISS"); RefreshList.toggle()}
+//
+//                                                        }
                                                         
                                                     
                         //                            Text("\(drawing.timeEvent ?? Date())")
@@ -102,7 +107,7 @@ struct HoursView: View {
                                                     
                                                 }.background(RoundedRectangle(cornerRadius: 6).foregroundColor(Color(drawing.tabColor?.uiColor ?? .red).opacity(0.6)))
                                                 
-                                                .sheet(isPresented: $sendToShareAll, content: { ShareREMAll(imageName: drawing.id ?? UUID())})
+                                                .sheet(isPresented: $sendToShareAll, content: { ShareREMAll(imageData: drawing.imageData! )})
 //                                                   Circle().fill(Color(drawing.tabColor?.uiColor ?? .red))
                                                 }
                                                 
@@ -143,8 +148,8 @@ struct HoursView: View {
 //                                                    .onAppear(perform: {currentTitle = drawing.title ?? "NO TITLE"; currentTask = drawing.taskDescription ?? "NO DESCRIPTION"})
                                                 
                                                 case TypeReminder.image.rawValue:
-                                                    ImageReminderView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID(), tabColor: drawing.tabColor?.uiColor ?? .red,imageData: drawing.imageData ?? Data(),startTime: drawing.startTime ?? Date(), endTime: drawing.endTime ?? Date(), windowSize: bounds.size)
-                                                        .sheet(isPresented: $sendToShareAll, content: { ShareREMAll(imageName: drawing.id ?? UUID())})
+                                                    ImageReminderView(title: drawing.title ?? "NO TITLE", remUUID: drawing.id ?? UUID(), tabColor: drawing.tabColor?.uiColor ?? .red,imageData: drawing.imageData ?? Data(),heightTime: heightTime,startTime: drawing.startTime ?? Date(), endTime: drawing.endTime ?? Date(), windowSize: bounds.size)
+                                                        .sheet(isPresented: $sendToShareAll, content: { ShareREMAll(imageData: drawing.imageData ?? Data())})
 //                                                        .contextMenu { Button(action:{
 //                                                        viewContext.delete(drawing)
 //                                                        deleteImage(imageName: String("\(drawing.id)"))

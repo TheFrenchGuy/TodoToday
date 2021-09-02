@@ -297,7 +297,7 @@ struct AddNewCanvasView: View {
                 presentationMode.wrappedValue.dismiss()
             }, label: {
                 Image(systemName: "xmark")
-            }), trailing:
+            }).keyboardShortcut("e"), trailing:
                                     Button(action: {
                 if !canvasTitle.isEmpty && typeReminder.rawValue == TypeReminder.drawing.rawValue{
                     let drawing = DrawingCanvas(context: viewContext)

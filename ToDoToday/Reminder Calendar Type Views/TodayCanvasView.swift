@@ -54,7 +54,7 @@ struct TodayCanvasView: View {
                                     Image(systemName: "plus")
                                     Text("Add Canvas !!!")
                                 }
-                            })
+                            }).keyboardShortcut("n")
                             .foregroundColor(.blue)
                             .sheet(isPresented: $showSheet , content: {
                                 AddNewCanvasView(AddedNewCanvas: $AddedNewCanvas).environment(\.managedObjectContext, viewContext)
@@ -77,7 +77,7 @@ struct TodayCanvasView: View {
                                         Image(systemName: "plus")
                                         Text("Add Canvas")
                                     }
-                                })
+                                }).keyboardShortcut("n")
                                 .foregroundColor(.blue)
                                 .sheet(isPresented: $showSheet, content: {
                                     AddNewCanvasView(AddedNewCanvas: $AddedNewCanvas).environment(\.managedObjectContext, viewContext)

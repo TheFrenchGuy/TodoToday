@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ShareREMAll: View {
     @EnvironmentObject var showActivityShare: showActivityShareSelector
-    var imageName: UUID?
+    var imageData: Data?
     var title: String?
     var taskDesc: String?
     var audioURL: String?
@@ -21,7 +21,7 @@ struct ShareREMAll: View {
     
     var body: some View {
         if showActivityShare.drawing == true  || showActivityShare.image == true{
-            ActivityViewController(activityItems: [fetchImage(imageName: String("\(imageName)")) ?? UIImage(systemName: "xmark.octagon")!, "Shared to you by ToDoToday"])
+            ActivityViewController(activityItems: [UIImage.init(data: imageData ?? Data()) ?? UIImage(systemName: "xmark") as Any , "Shared to you by ToDoToday"])
             
         }
         

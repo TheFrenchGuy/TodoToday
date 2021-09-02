@@ -167,7 +167,26 @@ struct CalendarReminderView: View {
                                                 .transition(.move(edge: .leading))
                                                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                                         }
+                                        
+                                        if self.tabViewClass.taskType == TypeReminder.image.rawValue {
+                                            EditTaskViewSideBarImage().frame(width: geometry.size.width/3, height: geometry.size.height - childSize.height)
+                                                .padding(.top, childSize.height)
+                                            
+                                                .transition(.move(edge: .leading))
+                                                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                                        }
+                                        
+                                        
+                                        if self.tabViewClass.taskType == TypeReminder.drawing.rawValue {
+                                            EditTaskViewSideBarDrawing().frame(width: geometry.size.width/3, height: geometry.size.height - childSize.height)
+                                                .padding(.top, childSize.height)
+                                            
+                                                .transition(.move(edge: .leading))
+                                                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                                        }
                                     }
+                                    
+                                    
                                 }
                             }
                             .gesture(drag)

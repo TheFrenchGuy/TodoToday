@@ -109,6 +109,28 @@ struct CalendarReminderView_iPhone: View {
                                 .zIndex(1)
                                 
                         }
+                        
+                        if self.tabViewClass.taskType == TypeReminder.image.rawValue {
+                            EditTaskViewSideBarImage().frame(width: geometry.size.width, height: geometry.size.height - childSize.height)
+                                .padding(.top, childSize.height)
+                            
+                                .transition(.move(edge: .leading))
+                                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                                .background(Color(.white).edgesIgnoringSafeArea(.all))
+                                .zIndex(1)
+                                
+                        }
+                        
+                        if self.tabViewClass.taskType == TypeReminder.drawing.rawValue {
+                            EditTaskViewSideBarDrawing().frame(width: geometry.size.width, height: geometry.size.height - childSize.height)
+                                .padding(.top, childSize.height)
+                            
+                                .transition(.move(edge: .leading))
+                                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                                .background(Color(.white).edgesIgnoringSafeArea(.all))
+                                .zIndex(1)
+                                
+                        }
                     }
                     
                     TodayCanvasView_iPhone().environment(\.managedObjectContext, persistenceController.container.viewContext).zIndex(0)
