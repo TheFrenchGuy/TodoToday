@@ -24,6 +24,9 @@
 		6028CAFF26AEEACD0062E189 /* InitialCanvasDrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6028CAFE26AEEACD0062E189 /* InitialCanvasDrawingView.swift */; };
 		602FB2A526E1175B00AED38F /* EditTaskViewSideBarImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602FB2A426E1175B00AED38F /* EditTaskViewSideBarImage.swift */; };
 		602FB2A726E122CB00AED38F /* EditTaskViewSideBarDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602FB2A626E122CB00AED38F /* EditTaskViewSideBarDrawing.swift */; };
+		602FB2A926E17B7E00AED38F /* NotificationDayPersistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602FB2A826E17B7E00AED38F /* NotificationDayPersistance.swift */; };
+		602FB2AC26E218DC00AED38F /* NotificationsDaysCoreModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 602FB2AA26E218DC00AED38F /* NotificationsDaysCoreModel.xcdatamodeld */; };
+		602FB2AE26E21F7700AED38F /* NotificationViewRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602FB2AD26E21F7700AED38F /* NotificationViewRegister.swift */; };
 		6034178126BC11AA00E0F6A3 /* TabColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6034178026BC11AA00E0F6A3 /* TabColor.swift */; };
 		6034178326BC11F500E0F6A3 /* HexToUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6034178226BC11F500E0F6A3 /* HexToUIColor.swift */; };
 		6065754E26B45D0F00EA0F4D /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6065754D26B45D0F00EA0F4D /* ImagePicker.swift */; };
@@ -112,6 +115,9 @@
 		6028CAFE26AEEACD0062E189 /* InitialCanvasDrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialCanvasDrawingView.swift; sourceTree = "<group>"; };
 		602FB2A426E1175B00AED38F /* EditTaskViewSideBarImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskViewSideBarImage.swift; sourceTree = "<group>"; };
 		602FB2A626E122CB00AED38F /* EditTaskViewSideBarDrawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskViewSideBarDrawing.swift; sourceTree = "<group>"; };
+		602FB2A826E17B7E00AED38F /* NotificationDayPersistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDayPersistance.swift; sourceTree = "<group>"; };
+		602FB2AB26E218DC00AED38F /* NotificationsDaysCoreModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NotificationsDaysCoreModel.xcdatamodel; sourceTree = "<group>"; };
+		602FB2AD26E21F7700AED38F /* NotificationViewRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewRegister.swift; sourceTree = "<group>"; };
 		6034178026BC11AA00E0F6A3 /* TabColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabColor.swift; sourceTree = "<group>"; };
 		6034178226BC11F500E0F6A3 /* HexToUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexToUIColor.swift; sourceTree = "<group>"; };
 		6065754D26B45D0F00EA0F4D /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -445,6 +451,7 @@
 				60689B5726AB24DF00ED426F /* HoursView.swift */,
 				60E5F35826AD8F1100F1E609 /* CalendarView.swift */,
 				608E248826D3EE7F004754F0 /* MovableHourView.swift */,
+				602FB2AD26E21F7700AED38F /* NotificationViewRegister.swift */,
 			);
 			path = "Reminder Calendar Type Views";
 			sourceTree = "<group>";
@@ -490,6 +497,7 @@
 				60C2DF6726B2CACD00347CE8 /* DrawingCanvas+CoreDataProperties.swift */,
 				60C2DF6A26B2CC8900347CE8 /* TypeReminder.swift */,
 				6034178026BC11AA00E0F6A3 /* TabColor.swift */,
+				602FB2AA26E218DC00AED38F /* NotificationsDaysCoreModel.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -498,6 +506,7 @@
 			isa = PBXGroup;
 			children = (
 				60CBECE426A852440020703D /* Persistance.swift */,
+				602FB2A826E17B7E00AED38F /* NotificationDayPersistance.swift */,
 			);
 			path = "Data Manager";
 			sourceTree = "<group>";
@@ -680,6 +689,8 @@
 				60FE78A326DFBC9000CABB4C /* TodayCanvasView_iPhone.swift in Sources */,
 				6010333B26BE992D00D1DA12 /* AppFaceIDTouchID.swift in Sources */,
 				60F0489F26CBB41F003FE055 /* CreateInitialCalendarView.swift in Sources */,
+				602FB2A926E17B7E00AED38F /* NotificationDayPersistance.swift in Sources */,
+				602FB2AE26E21F7700AED38F /* NotificationViewRegister.swift in Sources */,
 				6010334426BEB36600D1DA12 /* CheckboxField.swift in Sources */,
 				60D0054426CC5CBB009E68EA /* TaskNotDoneFromPreviousDay.swift in Sources */,
 				6085359C26D43D3800450502 /* SharingSelectorClass.swift in Sources */,
@@ -723,6 +734,7 @@
 				60CBECCC26A8506B0020703D /* iCloudSyncView.swift in Sources */,
 				60D0054926CC7247009E68EA /* OutDatedImageREMView.swift in Sources */,
 				60A17A4E26DD8AA80014A86E /* SignandCompleteView.swift in Sources */,
+				602FB2AC26E218DC00AED38F /* NotificationsDaysCoreModel.xcdatamodeld in Sources */,
 				60CBECCE26A850840020703D /* TermsandConditionView.swift in Sources */,
 				60A17A4826DD79410014A86E /* SetupCard_Screen_Iphone.swift in Sources */,
 				6010334226BEB29700D1DA12 /* ShowTodayDateView.swift in Sources */,
@@ -1002,6 +1014,16 @@
 			);
 			currentVersion = 6018EC5426BC491600184DB4 /* ColorPaletteCoreData.xcdatamodel */;
 			path = ColorPaletteCoreDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		602FB2AA26E218DC00AED38F /* NotificationsDaysCoreModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				602FB2AB26E218DC00AED38F /* NotificationsDaysCoreModel.xcdatamodel */,
+			);
+			currentVersion = 602FB2AB26E218DC00AED38F /* NotificationsDaysCoreModel.xcdatamodel */;
+			path = NotificationsDaysCoreModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

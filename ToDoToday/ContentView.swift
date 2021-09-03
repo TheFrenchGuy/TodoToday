@@ -34,7 +34,7 @@ struct ContentView: View {
     
     let colorPalettePersistance = ColorPalettePersistance.shared
     
-    
+    let notificationController = NotificationDayPersistence.shared
 
     
     
@@ -75,22 +75,25 @@ struct ContentView: View {
             }
 
             if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac  {
-                CalendarReminderView().edgesIgnoringSafeArea(.all).environmentObject(transferColorPalette)
-                    .environment(\.managedObjectContext,colorPalettePersistance.container.viewContext)
-                    .environmentObject(refreshList)
-                    .environmentObject(taskPerHour)
-                    .sheet(isPresented: self.$firstlaunch) {
-    //                if #available(iOS 15.0, *) {
-    //                    if #available(macOS 12.0, *) {
-    //                        SetupCard_Screen()
-    //                            .interactiveDismissDisabled(true)
-    //                    }
-    //
-    //                } else {
-                        SetupCard_Screen()
-                        .modifier(DisableModalDismiss(disabled: true))
-                        
-                   // }
+                
+                ZStack {
+                    CalendarReminderView().edgesIgnoringSafeArea(.all).environmentObject(transferColorPalette)
+                        .environment(\.managedObjectContext,colorPalettePersistance.container.viewContext)
+                        .environmentObject(refreshList)
+                        .environmentObject(taskPerHour)
+                        .sheet(isPresented: self.$firstlaunch) {
+        //                if #available(iOS 15.0, *) {
+        //                    if #available(macOS 12.0, *) {
+        //                        SetupCard_Screen()
+        //                            .interactiveDismissDisabled(true)
+        //                    }
+        //
+        //                } else {
+                            SetupCard_Screen()
+                            .modifier(DisableModalDismiss(disabled: true))
+                            
+                       // }
+                    }
                             
                 }
                 
@@ -111,13 +114,14 @@ struct ContentView: View {
             if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac{
                 
                 
-            
+                ZStack {
                  CalendarReminderView().edgesIgnoringSafeArea(.all).environmentObject(transferColorPalette)
                 .environment(\.managedObjectContext,colorPalettePersistance.container.viewContext)
                 .environmentObject(refreshList)
                 .environmentObject(taskPerHour)
                 .environmentObject(showInterstitialAd)
                 .onAppear() {requestIDFA()}
+                    .zIndex(1)
                 
                 
    
@@ -130,19 +134,28 @@ struct ContentView: View {
 //                        self.showInterstitialAd.InterstitialAdShow = false
 //                    }
 //                })
-          
+                    
+                    NotificationViewRegister().environment(\.managedObjectContext,notificationController.container.viewContext)
+                }
                 
                 
 
             }
             if UIDevice.current.userInterfaceIdiom == .phone{
+                
+                
+                ZStack {
                 CalendarReminderView_iPhone().edgesIgnoringSafeArea(.all).environmentObject(transferColorPalette)
                     .environment(\.managedObjectContext,colorPalettePersistance.container.viewContext)
                     .environmentObject(refreshList)
                     .environmentObject(taskPerHour)
                     .environmentObject(showInterstitialAd)
                     .onAppear() {requestIDFA()}
-                
+                    .zIndex(1)
+                    
+                    
+                    NotificationViewRegister().environment(\.managedObjectContext,notificationController.container.viewContext)
+                }
          
                    
            

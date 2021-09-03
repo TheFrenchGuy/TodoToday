@@ -7,6 +7,8 @@
 
 import SwiftUI
 import UserNotifications
+import CoreData
+import Combine
 
 enum DaysOfWeek: Int, CaseIterable, Identifiable {
     case Monday = 0
@@ -21,12 +23,12 @@ enum DaysOfWeek: Int, CaseIterable, Identifiable {
         self
     }
     
-    var literal: String {
+    var literal: String{
         switch self {
         case .Monday: return "Monday"
         case .Tuesday: return "Tuesday"
         case .Wednesday: return "Wednesday"
-        case .Thrusday: return "Thrusday"
+        case .Thrusday: return "Thursday"
         case .Friday: return "Friday"
         case .Saturday: return "Saturday"
         case .Sunday: return "Sunday"
@@ -55,6 +57,10 @@ class DaysDND: ObservableObject {
 
 struct NotificationPermessionView: View {
     
+    @Environment(\.managedObjectContext) private var viewContext
+
+
+    @FetchRequest(entity: NotificationsDays.entity(), sortDescriptors: []) var notificationsDays: FetchedResults<NotificationsDays>
     
     @State private var date: Date = (Calendar.current.date(bySettingHour: 7, minute: 0, second: 0 , of: Date())!)
     
@@ -85,6 +91,7 @@ struct NotificationPermessionView: View {
                         DatePicker("Time", selection: $date, displayedComponents: .hourAndMinute).onChange(of: date) { newValue in
                             userPreference.notificationTime = date
                             print(userPreference.notificationTime)
+                            editStartNotificationsDays()
                             
                         }
                         
@@ -128,10 +135,13 @@ struct NotificationPermessionView: View {
                                 userPreference.daystoDND.removeAll()
                                 for day in daysDND.daysDND {
                                     userPreference.daystoDND.append("\(day)" as String)
+                                    editDNDNotificationsDays()
+                                    print("RUNNED")
                                 }
                                 
                                 
                             }
+//                            
                             .frame(width: bounds.size.width * 0.7, alignment: .leading)
                                 .padding()
                                 
@@ -160,6 +170,7 @@ struct NotificationPermessionView: View {
                         }.pickerStyle(SegmentedPickerStyle())
                             .onChange(of: selectedStartDay) { newValue in  self.userPreference.startWeekDay = self.selectedStartDay.rawValue
                                 print("The start of the week is set to be \(self.userPreference.startWeekDay)")
+                                editStartWeekNotificationDay()
                             }
                     }.frame(width: bounds.size.width * 0.8, alignment: .leading)
                         .padding()
@@ -173,7 +184,140 @@ struct NotificationPermessionView: View {
                  
             }
         }
-            .onAppear(perform: requestNotification)
+        
+        .onAppear(perform: {
+            requestNotification()
+            
+            
+            
+            
+            if notificationsDays.isEmpty {
+                for day in DaysOfWeek.allCases {
+                    let notification = NotificationsDays(context: viewContext)
+                    
+                    if day.literal == "Monday" {
+                        notification.startOfWeek = true
+                    } else {
+                        notification.startOfWeek = false
+                    }
+                    notification.day = day.literal
+                    notification.id = UUID()
+                    
+                    
+                    
+                    notification.shouldBeAlerted = true
+                    
+//                    for dayDND in daysDND.daysDND {
+//                        if dayDND.literal == day.literal { notification.shouldBeAlerted = false
+                    //
+//                        } else {
+//                            notification.shouldBeAlerted = true
+//                        }
+//                    }
+                    
+                    print("Should be alerted: \(notification.shouldBeAlerted)")
+                    
+                    
+                    
+                    var dateInfo = DateComponents()
+                    
+//                    (Calendar.current.date(bySettingHour: 7, minute: 0, second: 0 , of: Date())!)
+                    switch notification.day {
+                        case "Monday":
+                            notification.time = date
+                        case "Tuesday":
+                            notification.time = date
+                        case "Wednesday":
+                            notification.time = date
+                        case "Thursday":
+                            notification.time = date
+                        case "Friday":
+                            notification.time = date
+                        case "Saturday":
+                            notification.time = date
+                        case "Sunday":
+                            notification.time = date
+                        default:
+                            dateInfo.weekday = -1
+                    }
+                    
+                    
+                    do {
+                        try viewContext.save()
+                        print("Saved \(day.literal)")
+                    }
+                    catch {
+                        print(error)
+                        print("ERROR COULDN'T ADD DAY")
+                    }
+                    
+                }
+            } else {
+                for day in DaysOfWeek.allCases{
+                    for notification in notificationsDays {
+                        print("count \(day)")
+                
+                
+                        if day.literal == notification.day! {
+                            print("Value found")
+                        }
+                        
+                    }
+                }
+            }
+        })
+    }
+    
+    
+    func editDNDNotificationsDays() {
+        for day in DaysOfWeek.allCases {
+            for notification in notificationsDays {
+                if day.literal == notification.day {
+                    for dayDND in daysDND.daysDND {
+                        if dayDND.literal == notification.day {
+                            notification.shouldBeAlerted = false
+                            do {
+                                try viewContext.save()
+                                print("On \(notification.day) you will be distrubed \(notification.shouldBeAlerted)")
+                            } catch {
+                                print("Error")
+                            }
+                        }
+                    }
+                }
+                    
+            }
+        }
+    }
+    
+    
+    func editStartWeekNotificationDay() {
+        for notification in notificationsDays {
+            if selectedStartDay.rawValue == notification.day {
+                notification.startOfWeek = true
+            } else {
+                notification.startOfWeek = false
+            }
+            
+            do {
+                try viewContext.save()
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    func editStartNotificationsDays() {
+        for notification in notificationsDays {
+            notification.time = date
+            do {
+                try viewContext.save()
+                print("Start of time : \(date)")
+            } catch {
+                print(error)
+                print("ERROR")
+            }
+        }
     }
     
     func requestNotification() {

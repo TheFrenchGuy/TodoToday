@@ -17,6 +17,7 @@ struct ListTypeSetupView: View {
     @ObservedObject var userPreference = UserPreference()
     
     let colorPalettePersistance = ColorPalettePersistance.shared
+    let notificationPersistance = NotificationDayPersistence.shared
     
     
     var body: some View {
@@ -26,7 +27,7 @@ struct ListTypeSetupView: View {
                 
             CreateIntialCalendarView().environment(\.managedObjectContext, colorPalettePersistance.container.viewContext)
             
-            NotificationPermessionView()
+            NotificationPermessionView().environment(\.managedObjectContext, notificationPersistance.container.viewContext)
             
             
             
