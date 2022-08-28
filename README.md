@@ -1,7 +1,4 @@
 # TodoToday
-## ⚠ **ALPHA STAGE** ⚠
-### New commits comming everyday with new features
-
 
 
 <img src="https://github.com/TheFrenchGuy/TodoToday/blob/main/ToDoToday/Assets.xcassets/AppIcon.appiconset/1024pt_App_Store_1x.png" alt="image text" title="imae Title" />
